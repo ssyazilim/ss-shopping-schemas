@@ -72,3 +72,38 @@ jobs:
       - name: Skip (already published)
         if: steps.version_check.outputs.exists == 'true'
         run: echo "Version ${{ steps.version_check.outputs.version }} already exists, skipping publish."
+
+  deploy-docs:
+    name: Deploy Swagger Docs
+    runs-on: ubuntu-latest
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate docs/swagger.json
+        run: npm run generate:openapi
+
+      - name: Commit and push if changed
+        run: |
+          cp openapi.json docs/swagger.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/swagger.json
+          if git diff --cached --quiet; then
+            echo "No changes in swagger.json, skipping."
+          else
+            VERSION=$(node -p "require('./package.json').version")
+            git commit -m "docs: update swagger.json v${VERSION} [skip ci]"
+            git push
+          fi
