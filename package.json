@@ -22,6 +22,16 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./forms": {
+      "import": {
+        "types": "./dist/forms/index.d.ts",
+        "default": "./dist/forms/index.js"
+      },
+      "require": {
+        "types": "./dist/forms/index.d.cts",
+        "default": "./dist/forms/index.cjs"
+      }
     }
   },
   "files": [
