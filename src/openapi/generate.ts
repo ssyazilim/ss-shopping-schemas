@@ -27,7 +27,7 @@ const document = generator.generateDocument({
 writeFileSync(
   new URL('../../openapi.json', import.meta.url),
   JSON.stringify(document, null, 2),
-  'utf-8'
+  'utf-8',
 );
 
 console.log('✓ openapi.json oluşturuldu');

@@ -7,10 +7,7 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export function createLoginFormSchema(locale: Locale = 'tr') {
   const m = messages[locale];
   return z.object({
-    email: z
-      .string({ message: m.emailRequired })
-      .min(1, m.emailRequired)
-      .email(m.emailInvalid),
+    email: z.string({ message: m.emailRequired }).min(1, m.emailRequired).email(m.emailInvalid),
     password: z
       .string({ message: m.passwordRequired })
       .min(8, m.passwordMin)
@@ -22,10 +19,7 @@ export function createRegisterFormSchema(locale: Locale = 'tr') {
   const m = messages[locale];
   return z
     .object({
-      email: z
-        .string({ message: m.emailRequired })
-        .min(1, m.emailRequired)
-        .email(m.emailInvalid),
+      email: z.string({ message: m.emailRequired }).min(1, m.emailRequired).email(m.emailInvalid),
       password: z
         .string({ message: m.passwordRequired })
         .min(8, m.passwordMin)

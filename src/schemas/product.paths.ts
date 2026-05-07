@@ -1,10 +1,6 @@
 import { z } from 'zod';
 import { registry } from './registry.js';
-import {
-  ProductSchema,
-  CreateProductSchema,
-  UpdateProductSchema,
-} from './product.js';
+import { ProductSchema, CreateProductSchema, UpdateProductSchema } from './product.js';
 import { PaginationQuerySchema, ApiErrorSchema, UuidSchema } from './common.js';
 
 const ProductIdParam = z.object({
