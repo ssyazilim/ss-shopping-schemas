@@ -3,3 +3,5 @@ dist/
 openapi.json
 *.log
 .env
+.idea/
+.vscode/
