@@ -1,6 +1,6 @@
-export type { Locale, AuthMessages } from './types.js';
-export { auth as tr } from './tr.js';
-export { auth as en } from './en.js';
-export { auth as ru } from './ru.js';
-export { auth as ar } from './ar.js';
-export { auth as fa } from './fa.js';
+export type { ILocale, INotifications } from './types.js';
+export { notifications as tr } from './tr.js';
+export { notifications as en } from './en.js';
+export { notifications as ru } from './ru.js';
+export { notifications as ar } from './ar.js';
+export { notifications as fa } from './fa.js';

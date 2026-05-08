@@ -1,2 +1,3 @@
 export * from './auth.js';
-export type { Locale } from './locales/index.js';
+export * from './brand.js';
+export type { ILocale } from './locales/index.js';
