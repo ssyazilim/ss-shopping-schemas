@@ -7,18 +7,18 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const loginSchema = (locale: Locale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    email: z.email({ message: m.emailRequired }),
+    email: z.email({ message: m.public_forms_validations_email }),
     password: z
-      .string({ message: m.passwordRequired })
-      .min(8, m.passwordMin)
-      .max(64, m.passwordMax),
+      .string()
+      .min(8, m.minLength(8))
+      .max(64, m.maxLength(64)),
   });
 };
 
 export const forgetPasswordSchema = (locale: Locale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    email: z.email({ message: m.emailRequired }),
+    email: z.email({ message: m.public_forms_validations_email }),
   });
 };
 
@@ -27,18 +27,18 @@ export const resetPasswordSchema = (locale: Locale = 'tr') => {
 
   return z
     .object({
-      email: z.email({ message: m.emailRequired }),
-      password: z
-        .string({ message: m.passwordRequired })
-        .min(8, m.passwordMin)
-        .max(64, m.passwordMax),
+      email: z.email({ message: m.public_forms_validations_email }),
+      newPassword: z
+        .string({ message: m.public_forms_validations_required })
+        .min(8, m.minLength(8))
+        .max(64, m.maxLength(64)),
       rePassword: z
-        .string({ message: m.passwordRequired })
-        .min(8, m.passwordMin)
-        .max(64, m.passwordMax),
+        .string({ message: m.public_forms_validations_required })
+        .min(8, m.minLength(8))
+        .max(64, m.maxLength(64)),
     })
-    .refine((data) => data.password === data.rePassword, {
-      message: m.passwordConfirmMismatch,
+    .refine((data) => data.newPassword === data.rePassword, {
+      message: m.public_forms_validations_sameAs,
       path: ['rePassword'],
     });
 };

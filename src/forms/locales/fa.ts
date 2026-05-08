@@ -1,13 +1,8 @@
-import type { AuthMessages } from './types.js';
-
-export const auth: AuthMessages = {
-  emailRequired: 'ایمیل الزامی است',
-  emailInvalid: 'لطفاً یک آدرس ایمیل معتبر وارد کنید',
-  passwordRequired: 'رمز عبور الزامی است',
-  passwordMin: 'رمز عبور باید حداقل ۸ کاراکتر باشد',
-  passwordMax: 'رمز عبور باید حداکثر ۶۴ کاراکتر باشد',
-  passwordUppercase: 'باید حداقل یک حرف بزرگ داشته باشد',
-  passwordNumber: 'باید حداقل یک عدد داشته باشد',
-  passwordConfirmRequired: 'تأیید رمز عبور الزامی است',
-  passwordConfirmMismatch: 'رمزهای عبور مطابقت ندارند',
+export const validations = {
+  public_forms_validations_required: 'این فیلد الزامی است!',
+  public_forms_validations_email: 'لطفاً یک ایمیل معتبر وارد کنید!',
+  public_forms_validations_sameAs: 'رمزهای عبور مطابقت ندارند!',
 };
+
+export const minlength = (min: number) => `حداقل باید ${min} کاراکتر باشد`;
+export const maxlength = (max: number) => `حداکثر می‌تواند ${max} کاراکتر باشد`;

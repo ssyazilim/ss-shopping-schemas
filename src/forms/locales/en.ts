@@ -1,13 +1,8 @@
-import type { AuthMessages } from './types.js';
-
-export const auth: AuthMessages = {
-  emailRequired: 'Email is required',
-  emailInvalid: 'Please enter a valid email address',
-  passwordRequired: 'Password is required',
-  passwordMin: 'Password must be at least 8 characters',
-  passwordMax: 'Password must be at most 64 characters',
-  passwordUppercase: 'Must contain at least one uppercase letter',
-  passwordNumber: 'Must contain at least one number',
-  passwordConfirmRequired: 'Password confirmation is required',
-  passwordConfirmMismatch: 'Passwords do not match',
+export const validations = {
+  public_forms_validations_required: 'This field is required!',
+  public_forms_validations_email: 'Please enter a valid email address!',
+  public_forms_validations_sameAs: 'Your passwords do not match!',
 };
+
+export const minlength = (min: number) => `Must be at least ${min} characters`;
+export const maxlength = (max: number) => `Must be at most ${max} characters`;

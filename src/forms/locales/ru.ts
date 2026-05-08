@@ -1,13 +1,8 @@
-import type { AuthMessages } from './types.js';
-
-export const auth: AuthMessages = {
-  emailRequired: 'Электронная почта обязательна',
-  emailInvalid: 'Введите действительный адрес электронной почты',
-  passwordRequired: 'Пароль обязателен',
-  passwordMin: 'Пароль должен содержать не менее 8 символов',
-  passwordMax: 'Пароль должен содержать не более 64 символов',
-  passwordUppercase: 'Должна быть хотя бы одна заглавная буква',
-  passwordNumber: 'Должна быть хотя бы одна цифра',
-  passwordConfirmRequired: 'Подтверждение пароля обязательно',
-  passwordConfirmMismatch: 'Пароли не совпадают',
+export const validations = {
+  public_forms_validations_required: 'Это поле обязательно!',
+  public_forms_validations_email: 'Введите корректный адрес электронной почты!',
+  public_forms_validations_sameAs: 'Ваши пароли не совпадают!',
 };
+
+export const minlength = (min: number) => `Минимум ${min} символов`;
+export const maxlength = (max: number) => `Максимум ${max} символов`;

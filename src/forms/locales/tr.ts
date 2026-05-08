@@ -1,13 +1,8 @@
-import type { AuthMessages } from './types.js';
-
-export const auth: AuthMessages = {
-  emailRequired: 'E-posta zorunludur',
-  emailInvalid: 'Geçerli bir e-posta adresi giriniz',
-  passwordRequired: 'Şifre zorunludur',
-  passwordMin: 'Şifre en az 8 karakter olmalıdır',
-  passwordMax: 'Şifre en fazla 64 karakter olabilir',
-  passwordUppercase: 'En az bir büyük harf içermelidir',
-  passwordNumber: 'En az bir rakam içermelidir',
-  passwordConfirmRequired: 'Şifre tekrarı zorunludur',
-  passwordConfirmMismatch: 'Şifreler eşleşmiyor',
+export const validations = {
+  public_forms_validations_required: 'Bu alan gereklidir!',
+  public_forms_validations_email: 'Geçerli bir e-posta adresi giriniz!',
+  public_forms_validations_sameAs: 'Şifreleriniz birbiri ile eşleşmiyor!',
 };
+
+export const minlength = (min: number) => `En az ${min} karakter olmalıdır`;
+export const maxlength = (max: number) => `En fazla ${max} karakter olabilir`;
