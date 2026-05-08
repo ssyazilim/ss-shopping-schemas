@@ -8,7 +8,10 @@ export function loginSchema(locale: Locale = 'tr') {
   const m = messages[locale];
   return z.object({
     email: z.email({ message: m.emailRequired }).min(1, m.emailRequired),
-    password: z.string({ message: m.passwordRequired }).min(8, m.passwordMin).max(64, m.passwordMax),
+    password: z
+      .string({ message: m.passwordRequired })
+      .min(8, m.passwordMin)
+      .max(64, m.passwordMax),
   });
 }
 
@@ -17,8 +20,15 @@ export function registerSchema(locale: Locale = 'tr') {
   return z
     .object({
       email: z.email({ message: m.emailRequired }).min(1, m.emailRequired),
-      password: z.string({ message: m.passwordRequired }).min(8, m.passwordMin).max(64, m.passwordMax).regex(/[A-Z]/, m.passwordUppercase).regex(/[0-9]/, m.passwordNumber),
-      passwordConfirm: z.string({ message: m.passwordConfirmRequired }).min(1, m.passwordConfirmRequired),
+      password: z
+        .string({ message: m.passwordRequired })
+        .min(8, m.passwordMin)
+        .max(64, m.passwordMax)
+        .regex(/[A-Z]/, m.passwordUppercase)
+        .regex(/[0-9]/, m.passwordNumber),
+      passwordConfirm: z
+        .string({ message: m.passwordConfirmRequired })
+        .min(1, m.passwordConfirmRequired),
     })
     .refine((data) => data.password === data.passwordConfirm, {
       message: m.passwordConfirmMismatch,
