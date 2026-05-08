@@ -7,12 +7,10 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const addBrandSchema = (locale: Locale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    name: z
-      .string()
-      .min(1, { message: m.public_forms_validations_required }),
+    name: z.string().min(1, { message: m.public_forms_validations_required }),
     images: {
       staticImages: z.array(z.string()),
-      dynamicImages: z.array(z.string())
-    }
+      dynamicImages: z.array(z.string()),
+    },
   });
-}
+};

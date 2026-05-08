@@ -8,10 +8,7 @@ export const loginSchema = (locale: Locale = 'tr') => {
   const m = messages[locale];
   return z.object({
     email: z.email({ message: m.public_forms_validations_email }),
-    password: z
-      .string()
-      .min(8, m.minLength(8))
-      .max(64, m.maxLength(64)),
+    password: z.string().min(8, m.minLength(8)).max(64, m.maxLength(64)),
   });
 };
 
