@@ -4,7 +4,7 @@ import type { Locale } from './locales';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
-export function loginFormSchema(locale: Locale = 'tr') {
+export function loginSchema(locale: Locale = 'tr') {
   const m = messages[locale];
   return z.object({
     email: z.email({ message: m.emailRequired }).min(1, m.emailRequired),
@@ -12,7 +12,7 @@ export function loginFormSchema(locale: Locale = 'tr') {
   });
 }
 
-export function registerFormSchema(locale: Locale = 'tr') {
+export function registerSchema(locale: Locale = 'tr') {
   const m = messages[locale];
   return z
     .object({
