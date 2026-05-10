@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AgreementSchema, AddAgreementsSchema, UpdateAgreementSchema } from './schema';
+import { AddAgreementsSchema, UpdateAgreementSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
 
 const responses = {
