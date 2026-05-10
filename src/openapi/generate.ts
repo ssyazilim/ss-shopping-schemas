@@ -5,6 +5,20 @@ import { registry } from '../schemas/index';
 // Tüm schema dosyaları import edildiğinde registry'ye register ederler
 // Bu script onları toplar ve openapi.json üretir
 
+registry.registerComponent('securitySchemes', 'JWT', {
+  type: 'apiKey',
+  name: 'Authorization',
+  in: 'header',
+  description: "Provide your token key in the 'Bearer <YOUR_TOKEN>' header",
+});
+
+registry.registerComponent('securitySchemes', 'X-API-KEY', {
+  type: 'apiKey',
+  name: 'x-api-key',
+  in: 'header',
+  description: "Provide your api key in the 'x-api-key' header",
+});
+
 const generator = new OpenApiGeneratorV31(registry.definitions);
 
 const document = generator.generateDocument({

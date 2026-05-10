@@ -26,6 +26,29 @@ export const PaginationQuerySchema = registry.register(
   }),
 );
 
+export const ListQuerySchema = registry.register(
+  'ListQuery',
+  z.object({
+    page: z.coerce
+      .number()
+      .int()
+      .min(1)
+      .default(1)
+      .optional()
+      .meta({ description: 'Sayfa numarası' }),
+    limit: z.coerce
+      .number()
+      .int()
+      .min(1)
+      .max(100)
+      .default(10)
+      .optional()
+      .meta({ description: 'Sayfa başına kayıt' }),
+    sort: z.string().meta({ description: 'Sıralama alanı ve yönü', examples: ['updatedAt,desc'] }),
+    text: z.string().optional().meta({ description: 'Arama metni' }),
+  }),
+);
+
 export const ApiSuccessSchema = registry.register(
   'ApiSuccess',
   z.object({
