@@ -1,6 +1,6 @@
-export { registry } from './registry.js';
-export * from './common.js';
-export * from './product.js';
+export { registry } from './registry';
+export * from './common';
+export * from './auth/schema';
 
 // Path tanımları — yalnızca OpenAPI üretimi için register edilir
-import './product.paths.js';
+import './auth/route';

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { registry } from './registry.js';
+import { registry } from './registry';
 
 export const UuidSchema = registry.register(
   'Uuid',
@@ -26,14 +26,20 @@ export const PaginationQuerySchema = registry.register(
   }),
 );
 
+export const ApiSuccessSchema = registry.register(
+  'ApiSuccess',
+  z.object({
+    success: z.object({
+      message: z.string().meta({ description: 'Başarı mesajı' }),
+    }),
+  }),
+);
+
 export const ApiErrorSchema = registry.register(
   'ApiError',
   z.object({
-    code: z.string().meta({ description: 'Hata kodu', examples: ['VALIDATION_ERROR'] }),
-    message: z.string().meta({ description: 'Hata mesajı' }),
-    details: z
-      .record(z.string(), z.array(z.string()))
-      .optional()
-      .meta({ description: 'Alan bazlı hata detayları' }),
+    error: z.object({
+      message: z.string().meta({ description: 'Hata mesajı' }),
+    }),
   }),
 );

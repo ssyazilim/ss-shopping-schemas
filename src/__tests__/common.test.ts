@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PaginationQuerySchema } from '../schemas/common.js';
+import { PaginationQuerySchema } from '../schemas/common';
 
 describe('PaginationQuerySchema', () => {
   it('string sayıları coerce eder', () => {
