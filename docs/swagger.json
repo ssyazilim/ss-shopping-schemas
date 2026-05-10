@@ -12709,10 +12709,9 @@
               "enum": [
                 "en",
                 "tr"
-              ],
-              "default": "en"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "code",
             "in": "path"
           }
