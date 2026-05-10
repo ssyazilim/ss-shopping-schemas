@@ -267,7 +267,9 @@
             "format": "email"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64
           }
         },
         "required": [
