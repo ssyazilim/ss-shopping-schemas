@@ -1,13 +1,34 @@
 import { z } from 'zod';
 import { registry } from '../registry';
+import * as locales from '../../forms/locales/index';
+import type { ILocale } from '../../forms/locales/index';
+
+const loginMessages = {
+  tr: locales.tr,
+  en: locales.en,
+  ru: locales.ru,
+  ar: locales.ar,
+  fa: locales.fa,
+};
 
 export const LoginUserSchema = registry.register(
   'loginUser',
   z.object({
     email: z.email(),
-    password: z.string(),
+    password: z.string().min(8).max(64),
   }),
 );
+
+export const loginSchema = (locale: ILocale = 'tr') => {
+  const m = loginMessages[locale];
+  return z.object({
+    email: z.email({ message: m.public_forms_validations_email }),
+    password: z
+      .string()
+      .min(8, m.public_forms_validations_minLength(8))
+      .max(64, m.public_forms_validations_maxLength(64)),
+  });
+};
 
 export const AddUserSchema = registry.register(
   'addUser',
