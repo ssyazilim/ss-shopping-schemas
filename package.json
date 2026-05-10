@@ -1,6 +1,6 @@
 {
   "name": "@ssyazilim/ss-shopping-schemas",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Shared Zod schemas and TypeScript types for Istem Medikal projects",
   "author": "Istem Medikal A.S.",
   "license": "UNLICENSED",
