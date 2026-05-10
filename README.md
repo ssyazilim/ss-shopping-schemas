@@ -19,10 +19,10 @@ npm install @ssyazilim/ss-shopping-schemas
 
 The package has two entry points:
 
-| Import | İçerik |
-|--------|--------|
-| `@ssyazilim/ss-shopping-schemas` | Zod schemas, TypeScript types |
-| `@ssyazilim/ss-shopping-schemas/forms` | Form schemas, locale types |
+| Import                                 | İçerik                        |
+| -------------------------------------- | ----------------------------- |
+| `@ssyazilim/ss-shopping-schemas`       | Zod schemas, TypeScript types |
+| `@ssyazilim/ss-shopping-schemas/forms` | Form schemas, locale types    |
 
 ---
 
@@ -46,7 +46,12 @@ const result = LoginUserSchema.safeParse({ email: 'test@example.com', password: 
 ### Types
 
 ```ts
-import type { User, UserRole, AuthResponse, AuthTokenPayload } from '@ssyazilim/ss-shopping-schemas';
+import type {
+  User,
+  UserRole,
+  AuthResponse,
+  AuthTokenPayload,
+} from '@ssyazilim/ss-shopping-schemas';
 ```
 
 ### Forms
@@ -64,42 +69,42 @@ Full interactive documentation: **https://ssyazilim.github.io/ss-shopping-schema
 
 ### Common
 
-| Schema | Açıklama |
-|--------|----------|
-| `PaginationQuerySchema` | `page`, `limit` |
-| `ListQuerySchema` | `page`, `limit`, `sort`, `text` |
-| `DeleteModelSchema` | `selectedIds: string[]` |
-| `ApiSuccessSchema` | `{ success: { message } }` |
-| `ApiErrorSchema` | `{ error: { message } }` |
+| Schema                  | Açıklama                        |
+| ----------------------- | ------------------------------- |
+| `PaginationQuerySchema` | `page`, `limit`                 |
+| `ListQuerySchema`       | `page`, `limit`, `sort`, `text` |
+| `DeleteModelSchema`     | `selectedIds: string[]`         |
+| `ApiSuccessSchema`      | `{ success: { message } }`      |
+| `ApiErrorSchema`        | `{ error: { message } }`        |
 
 ### Modüller
 
-| Modül | Schemas |
-|-------|---------|
-| **Auth** | `LoginUserSchema`, `AddUserSchema`, `ActivateUserSchema`, `PasswordResetUserSchema`, `PasswordResetCompleteUserSchema` |
-| **Address** | `AddAddressSchema`, `UpdateAddressSchema` |
-| **Agreement** | `AgreementSchema`, `AddAgreementsSchema`, `UpdateAgreementSchema` |
-| **Brand** | `BrandSchema`, `AddBrandsSchema`, `UpdateBrandSchema` |
-| **Card** | `AddCardSchema` |
-| **Cart** | `AddToCartSchema`, `SetQuantitySchema` |
-| **Category** | `CategorySchema`, `AddCategorySchema`, `UpdateCategorySchema` |
-| **Company** | `AddCompanySchema`, `UpdateCompanySchema` |
-| **External** | `AddExternalSchema`, `UpdateExternalSchema`, `CheckSMTPSchema` |
-| **Form** | `ContactMeSchema`, `ContactMeErrorSchema`, `ContactMeResumeSchema` |
-| **Google** | `GeminiPromptSchema`, `TranslateSchema` |
-| **GSM** | `SendSmsSchema` |
-| **Minio Bucket** | `AddBucketConfigSchema`, `AddBucketVersionSchema` |
-| **Minio Object** | `AddObjectSchema`, `DeleteObjectSchema`, `CopyObjectSchema`, `PresignedUrlSchema` |
-| **Payment** | `AddPaymentSchema`, `SavePaymentSchema`, `CancelPaymentSchema`, `CheckInstallmentSchema` |
-| **Post** | `PostSchema`, `AddPostsSchema`, `LikePostSchema`, `CommentPostSchema` |
-| **Product** | `ProductSchema`, `AddProductsSchema`, `EditProductSchema`, `PriceSchema`, `ImagesSchema` |
-| **Product Variant** | `VariantSchema`, `AddVariantSchema`, `AddVariantsMultiSchema`, `UpdateVariantSchema` |
-| **Question** | `AddQuestionSchema`, `UpdateQuestionSchema` |
-| **Review** | `AddReviewSchema` |
-| **Shipping** | `AddShippingAddressSchema`, `AddShippingShipmentSchema`, `ShippingTemplateSchema`, `ShippingProviderSchema` |
-| **Traffic** | `AnalyzeTrafficSchema` |
-| **Translation** | `TranslationSchema`, `AddTranslationsSchema`, `UpdateTranslationSchema` |
-| **User** | `CustomerSchema`, `AddCustomersSchema`, `EditUserSchema`, `UpdateCustomerSchema` |
+| Modül               | Schemas                                                                                                                |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Auth**            | `LoginUserSchema`, `AddUserSchema`, `ActivateUserSchema`, `PasswordResetUserSchema`, `PasswordResetCompleteUserSchema` |
+| **Address**         | `AddAddressSchema`, `UpdateAddressSchema`                                                                              |
+| **Agreement**       | `AgreementSchema`, `AddAgreementsSchema`, `UpdateAgreementSchema`                                                      |
+| **Brand**           | `BrandSchema`, `AddBrandsSchema`, `UpdateBrandSchema`                                                                  |
+| **Card**            | `AddCardSchema`                                                                                                        |
+| **Cart**            | `AddToCartSchema`, `SetQuantitySchema`                                                                                 |
+| **Category**        | `CategorySchema`, `AddCategorySchema`, `UpdateCategorySchema`                                                          |
+| **Company**         | `AddCompanySchema`, `UpdateCompanySchema`                                                                              |
+| **External**        | `AddExternalSchema`, `UpdateExternalSchema`, `CheckSMTPSchema`                                                         |
+| **Form**            | `ContactMeSchema`, `ContactMeErrorSchema`, `ContactMeResumeSchema`                                                     |
+| **Google**          | `GeminiPromptSchema`, `TranslateSchema`                                                                                |
+| **GSM**             | `SendSmsSchema`                                                                                                        |
+| **Minio Bucket**    | `AddBucketConfigSchema`, `AddBucketVersionSchema`                                                                      |
+| **Minio Object**    | `AddObjectSchema`, `DeleteObjectSchema`, `CopyObjectSchema`, `PresignedUrlSchema`                                      |
+| **Payment**         | `AddPaymentSchema`, `SavePaymentSchema`, `CancelPaymentSchema`, `CheckInstallmentSchema`                               |
+| **Post**            | `PostSchema`, `AddPostsSchema`, `LikePostSchema`, `CommentPostSchema`                                                  |
+| **Product**         | `ProductSchema`, `AddProductsSchema`, `EditProductSchema`, `PriceSchema`, `ImagesSchema`                               |
+| **Product Variant** | `VariantSchema`, `AddVariantSchema`, `AddVariantsMultiSchema`, `UpdateVariantSchema`                                   |
+| **Question**        | `AddQuestionSchema`, `UpdateQuestionSchema`                                                                            |
+| **Review**          | `AddReviewSchema`                                                                                                      |
+| **Shipping**        | `AddShippingAddressSchema`, `AddShippingShipmentSchema`, `ShippingTemplateSchema`, `ShippingProviderSchema`            |
+| **Traffic**         | `AnalyzeTrafficSchema`                                                                                                 |
+| **Translation**     | `TranslationSchema`, `AddTranslationsSchema`, `UpdateTranslationSchema`                                                |
+| **User**            | `CustomerSchema`, `AddCustomersSchema`, `EditUserSchema`, `UpdateCustomerSchema`                                       |
 
 ---
 

@@ -9,13 +9,15 @@ import {
   PasswordResetCompleteUserSchema,
 } from './schema.js';
 
-const CONTENT_TYPES = ['application/json', 'application/xml', 'application/x-www-form-urlencoded'] as const;
+const CONTENT_TYPES = [
+  'application/json',
+  'application/xml',
+  'application/x-www-form-urlencoded',
+] as const;
 
 function buildRequestBody(schema: object) {
   return {
-    content: Object.fromEntries(
-      CONTENT_TYPES.map((ct) => [ct, { schema }]),
-    ),
+    content: Object.fromEntries(CONTENT_TYPES.map((ct) => [ct, { schema }])),
   };
 }
 

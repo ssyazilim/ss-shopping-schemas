@@ -3,7 +3,7 @@ import { registry } from '../registry';
 import * as locales from '../../locales';
 import type { ILocale } from '../../locales';
 
-const loginMessages = {
+const messages = {
   tr: locales.tr,
   en: locales.en,
   ru: locales.ru,
@@ -11,10 +11,14 @@ const loginMessages = {
   fa: locales.fa,
 };
 
-export const loginSchema = (locale: ILocale = 'tr') => {
-  const m = loginMessages[locale];
+export const LOGIN_USER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
   return z.object({
-    email: z.email({ message: m.public_forms_validations_email }).meta({ examples: ['admin@ssyazilim.com'] }),
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['test@ssyazilim.com'] }),
     password: z
       .string()
       .min(8, m.public_forms_validations_minLength(8))
@@ -23,21 +27,37 @@ export const loginSchema = (locale: ILocale = 'tr') => {
   });
 };
 
-export const LoginUserSchema = registry.register('loginUser', loginSchema());
+export const LoginUserSchema = registry.register('loginUser', LOGIN_USER());
 
-export const AddUserSchema = registry.register(
-  'addUser',
-  z.object({
-    name: z.string().meta({ examples: ['Barış'] }),
+export const ADD_USER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Barış'] }),
     surname: z
       .string()
       .optional()
       .meta({ examples: ['Gür'] }),
-    email: z.email().meta({ examples: ['ua_baris_07@hotmail.com'] }),
-    phoneNumber: z.string().meta({ examples: ['905365056943'] }),
-    password: z.string().meta({ examples: ['Passw0rd'] }),
-  }),
-);
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['ua_baris_07@hotmail.com'] }),
+    phoneNumber: z
+      .e164({ message: m.public_forms_validations_phoneNumber })
+      .meta({ examples: ['+905365056943'] }),
+    password: z
+      .string()
+      .min(8, m.public_forms_validations_minLength(8))
+      .max(64, m.public_forms_validations_maxLength(64))
+      .meta({ examples: ['Passw0rd'] }),
+  });
+};
+
+export const AddUserSchema = registry.register('addUser', ADD_USER());
 
 export const CheckKeySchema = registry.register(
   'checkKey',
@@ -54,18 +74,41 @@ export const ActivateUserSchema = registry.register(
   }),
 );
 
-export const PasswordResetUserSchema = registry.register(
-  'passwordResetUser',
-  z.object({
-    email: z.email(),
-  }),
-);
+export const PASSWORD_RESET = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+  });
+};
+
+export const PasswordResetUserSchema = registry.register('passwordResetUser', PASSWORD_RESET());
+
+export const PASSWORD_RESET_COMPLETE = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    key: z
+      .string()
+      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    newPassword: z
+      .string({ message: m.public_forms_validations_required })
+      .min(8, m.public_forms_validations_minLength(8))
+      .max(64, m.public_forms_validations_maxLength(64)),
+    rePassword: z
+      .string({ message: m.public_forms_validations_required })
+      .min(8, m.public_forms_validations_minLength(8))
+      .max(64, m.public_forms_validations_maxLength(64)),
+  });
+};
 
 export const PasswordResetCompleteUserSchema = registry.register(
   'passwordResetCompleteUser',
-  z.object({
-    email: z.email(),
-    key: z.string(),
-    newPassword: z.string(),
-  }),
+  PASSWORD_RESET_COMPLETE(),
 );
