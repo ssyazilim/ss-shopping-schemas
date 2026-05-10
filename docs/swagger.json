@@ -139,6 +139,20 @@
     }
   ],
   "components": {
+    "securitySchemes": {
+      "JWT": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Provide your token key in the 'Bearer <YOUR_TOKEN>' header"
+      },
+      "X-API-KEY": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header",
+        "description": "Provide your api key in the 'x-api-key' header"
+      }
+    },
     "schemas": {
       "Uuid": {
         "type": "string",
@@ -165,6 +179,38 @@
             "description": "Sayfa başına kayıt sayısı"
           }
         }
+      },
+      "ListQuery": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1,
+            "description": "Sayfa numarası"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10,
+            "description": "Sayfa başına kayıt"
+          },
+          "sort": {
+            "type": "string",
+            "description": "Sıralama alanı ve yönü",
+            "examples": [
+              "updatedAt,desc"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "description": "Arama metni"
+          }
+        },
+        "required": [
+          "sort"
+        ]
       },
       "ApiSuccess": {
         "type": "object",
@@ -321,6 +367,121 @@
           "key",
           "newPassword"
         ]
+      },
+      "addAddress": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "examples": [
+              "EV BOGAZKENT"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "examples": [
+              "Fatma"
+            ]
+          },
+          "surname": {
+            "type": "string",
+            "examples": [
+              "Gür"
+            ]
+          },
+          "country": {
+            "type": "string",
+            "examples": [
+              "Turkey"
+            ]
+          },
+          "city": {
+            "type": "string",
+            "examples": [
+              "Antalya"
+            ]
+          },
+          "district": {
+            "type": "string",
+            "examples": [
+              "Serik"
+            ]
+          },
+          "zipCode": {
+            "type": "string",
+            "examples": [
+              "07500"
+            ]
+          },
+          "line": {
+            "type": "string",
+            "examples": [
+              "Boğazkent mahallesi İstiklal caddesi D Kümeevleri No:13"
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "name",
+          "surname",
+          "country",
+          "city",
+          "district",
+          "line"
+        ]
+      },
+      "updateAddress": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "examples": [
+              "EV BOGAZKENT"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "examples": [
+              "Fatma"
+            ]
+          },
+          "surname": {
+            "type": "string",
+            "examples": [
+              "Gür"
+            ]
+          },
+          "country": {
+            "type": "string",
+            "examples": [
+              "Turkey"
+            ]
+          },
+          "city": {
+            "type": "string",
+            "examples": [
+              "Antalya"
+            ]
+          },
+          "district": {
+            "type": "string",
+            "examples": [
+              "Serik"
+            ]
+          },
+          "zipCode": {
+            "type": "string",
+            "examples": [
+              "07500"
+            ]
+          },
+          "line": {
+            "type": "string",
+            "examples": [
+              "Boğazkent mahallesi İstiklal caddesi D Kümeevleri No:13"
+            ]
+          }
+        }
       }
     },
     "parameters": {}
@@ -652,6 +813,334 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/address": {
+      "get": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Get an address for session user from the system",
+        "operationId": "getAddressForUser",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Add a new address to system",
+        "operationId": "addAddress",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addAddress"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addAddress"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addAddress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/address/{addressId}": {
+      "get": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Get an address from the system",
+        "operationId": "getAddress",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "addressId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Update an address from the system",
+        "operationId": "updateAddress",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "addressId",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateAddress"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/updateAddress"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/updateAddress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Delete an address in the system",
+        "operationId": "deleteAddress",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "addressId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/addresses": {
+      "get": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Get all user addresses in the system",
+        "operationId": "getAddresses",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "description": "Sayfa numarası"
+            },
+            "required": false,
+            "description": "Sayfa numarası",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10,
+              "description": "Sayfa başına kayıt"
+            },
+            "required": false,
+            "description": "Sayfa başına kayıt",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Sıralama alanı ve yönü",
+              "examples": [
+                "updatedAt,desc"
+              ]
+            },
+            "required": true,
+            "description": "Sıralama alanı ve yönü",
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "Arama metni"
+            },
+            "required": false,
+            "description": "Arama metni",
+            "name": "text",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Başarılı",
