@@ -5,7 +5,11 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
-      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\Durmu\\\\Desktop\\\\test-project\\\\src\\\\forms\\\\locales\")"
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\Durmu\\\\Desktop\\\\test-project\\\\src\\\\forms\\\\locales\")",
+      "Bash(node -e \"const j = require\\('./openapi.json'\\); const paths = Object.keys\\(j.paths\\); console.log\\('Total paths:', paths.length\\); console.log\\('Sample:', paths.slice\\(0,5\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(gh run *)"
     ]
   }
 }

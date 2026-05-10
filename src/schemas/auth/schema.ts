@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import * as locales from '../../forms/locales/index';
-import type { ILocale } from '../../forms/locales/index';
+import * as locales from '../../locales';
+import type { ILocale } from '../../locales';
 
 const loginMessages = {
   tr: locales.tr,
@@ -11,24 +11,19 @@ const loginMessages = {
   fa: locales.fa,
 };
 
-export const LoginUserSchema = registry.register(
-  'loginUser',
-  z.object({
-    email: z.email(),
-    password: z.string().min(8).max(64),
-  }),
-);
-
 export const loginSchema = (locale: ILocale = 'tr') => {
   const m = loginMessages[locale];
   return z.object({
-    email: z.email({ message: m.public_forms_validations_email }),
+    email: z.email({ message: m.public_forms_validations_email }).meta({ examples: ['admin@ssyazilim.com'] }),
     password: z
       .string()
       .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64)),
+      .max(64, m.public_forms_validations_maxLength(64))
+      .meta({ examples: ['Passw0rd'] }),
   });
 };
+
+export const LoginUserSchema = registry.register('loginUser', loginSchema());
 
 export const AddUserSchema = registry.register(
   'addUser',

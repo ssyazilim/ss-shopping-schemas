@@ -78,4 +78,4 @@ writeFileSync(
   'utf-8',
 );
 
-console.log('✓ openapi.json oluşturuldu');
+console.log('✓ openapi.json created');
