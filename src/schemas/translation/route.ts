@@ -43,7 +43,7 @@ registry.registerPath({
   operationId: 'getTranslation',
   request: {
     params: z.object({
-      code: z.enum(['en', 'tr']).default('en'),
+      code: z.enum(['en', 'tr']),
     }),
   },
   responses,
