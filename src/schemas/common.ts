@@ -1,41 +1,18 @@
 import { z } from 'zod';
 import { registry } from './registry';
 
-export const UuidSchema = registry.register(
-  'Uuid',
-  z
-    .string()
-    .uuid()
-    .meta({
-      description: 'UUID v4 formatında benzersiz kimlik',
-      examples: ['123e4567-e89b-12d3-a456-426614174000'],
-    }),
-);
-
 export const PaginationQuerySchema = registry.register(
   'PaginationQuery',
   z.object({
-    page: z.coerce.number().int().min(1).default(1).meta({ description: 'Sayfa numarası' }),
-    limit: z.coerce
-      .number()
-      .int()
-      .min(1)
-      .max(100)
-      .default(20)
-      .meta({ description: 'Sayfa başına kayıt sayısı' }),
+    page: z.coerce.number().int().min(1).default(1).meta({ description: 'Page number' }),
+    limit: z.coerce.number().int().min(1).max(100).default(20).meta({ description: 'page limit' }),
   }),
 );
 
 export const ListQuerySchema = registry.register(
   'ListQuery',
   z.object({
-    page: z.coerce
-      .number()
-      .int()
-      .min(1)
-      .default(1)
-      .optional()
-      .meta({ description: 'Sayfa numarası' }),
+    page: z.coerce.number().int().min(1).default(1).optional().meta({ description: 'Page number' }),
     limit: z.coerce
       .number()
       .int()
@@ -43,9 +20,9 @@ export const ListQuerySchema = registry.register(
       .max(100)
       .default(10)
       .optional()
-      .meta({ description: 'Sayfa başına kayıt' }),
-    sort: z.string().meta({ description: 'Sıralama alanı ve yönü', examples: ['updatedAt,desc'] }),
-    text: z.string().optional().meta({ description: 'Arama metni' }),
+      .meta({ description: 'Page limit' }),
+    sort: z.string().meta({ description: 'Order and type', examples: ['updatedAt,desc'] }),
+    text: z.string().optional().meta({ description: 'Search text' }),
   }),
 );
 
@@ -53,7 +30,7 @@ export const ApiSuccessSchema = registry.register(
   'ApiSuccess',
   z.object({
     success: z.object({
-      message: z.string().meta({ description: 'Başarı mesajı' }),
+      message: z.string().meta({ description: 'Success message' }),
     }),
   }),
 );
@@ -62,7 +39,14 @@ export const ApiErrorSchema = registry.register(
   'ApiError',
   z.object({
     error: z.object({
-      message: z.string().meta({ description: 'Hata mesajı' }),
+      message: z.string().meta({ description: 'Error message' }),
     }),
+  }),
+);
+
+export const DeleteModelSchema = registry.register(
+  'DeleteModel',
+  z.object({
+    selectedIds: z.array(z.string()).meta({ description: 'IDs to delete' }),
   }),
 );

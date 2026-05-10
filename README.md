@@ -60,25 +60,46 @@ import { tr, en } from '@ssyazilim/ss-shopping-schemas/forms';
 
 ## Schemas Reference
 
-### Auth
-
-| Schema | Alanlar |
-|--------|---------|
-| `LoginUserSchema` | `email`, `password` |
-| `AddUserSchema` | `name`, `surname?`, `email`, `phoneNumber`, `password` |
-| `CheckKeySchema` | `key` |
-| `ActivateUserSchema` | `key`, `code` |
-| `PasswordResetUserSchema` | `email` |
-| `PasswordResetCompleteUserSchema` | `email`, `key`, `newPassword` |
+Full interactive documentation: **https://ssyazilim.github.io/ss-shopping-schemas**
 
 ### Common
 
 | Schema | Açıklama |
 |--------|----------|
-| `UuidSchema` | UUID v4 string |
-| `PaginationQuerySchema` | `page` (default: 1), `limit` (default: 20, max: 100) |
+| `PaginationQuerySchema` | `page`, `limit` |
+| `ListQuerySchema` | `page`, `limit`, `sort`, `text` |
+| `DeleteModelSchema` | `selectedIds: string[]` |
 | `ApiSuccessSchema` | `{ success: { message } }` |
 | `ApiErrorSchema` | `{ error: { message } }` |
+
+### Modüller
+
+| Modül | Schemas |
+|-------|---------|
+| **Auth** | `LoginUserSchema`, `AddUserSchema`, `ActivateUserSchema`, `PasswordResetUserSchema`, `PasswordResetCompleteUserSchema` |
+| **Address** | `AddAddressSchema`, `UpdateAddressSchema` |
+| **Agreement** | `AgreementSchema`, `AddAgreementsSchema`, `UpdateAgreementSchema` |
+| **Brand** | `BrandSchema`, `AddBrandsSchema`, `UpdateBrandSchema` |
+| **Card** | `AddCardSchema` |
+| **Cart** | `AddToCartSchema`, `SetQuantitySchema` |
+| **Category** | `CategorySchema`, `AddCategorySchema`, `UpdateCategorySchema` |
+| **Company** | `AddCompanySchema`, `UpdateCompanySchema` |
+| **External** | `AddExternalSchema`, `UpdateExternalSchema`, `CheckSMTPSchema` |
+| **Form** | `ContactMeSchema`, `ContactMeErrorSchema`, `ContactMeResumeSchema` |
+| **Google** | `GeminiPromptSchema`, `TranslateSchema` |
+| **GSM** | `SendSmsSchema` |
+| **Minio Bucket** | `AddBucketConfigSchema`, `AddBucketVersionSchema` |
+| **Minio Object** | `AddObjectSchema`, `DeleteObjectSchema`, `CopyObjectSchema`, `PresignedUrlSchema` |
+| **Payment** | `AddPaymentSchema`, `SavePaymentSchema`, `CancelPaymentSchema`, `CheckInstallmentSchema` |
+| **Post** | `PostSchema`, `AddPostsSchema`, `LikePostSchema`, `CommentPostSchema` |
+| **Product** | `ProductSchema`, `AddProductsSchema`, `EditProductSchema`, `PriceSchema`, `ImagesSchema` |
+| **Product Variant** | `VariantSchema`, `AddVariantSchema`, `AddVariantsMultiSchema`, `UpdateVariantSchema` |
+| **Question** | `AddQuestionSchema`, `UpdateQuestionSchema` |
+| **Review** | `AddReviewSchema` |
+| **Shipping** | `AddShippingAddressSchema`, `AddShippingShipmentSchema`, `ShippingTemplateSchema`, `ShippingProviderSchema` |
+| **Traffic** | `AnalyzeTrafficSchema` |
+| **Translation** | `TranslationSchema`, `AddTranslationsSchema`, `UpdateTranslationSchema` |
+| **User** | `CustomerSchema`, `AddCustomersSchema`, `EditUserSchema`, `UpdateCustomerSchema` |
 
 ---
 

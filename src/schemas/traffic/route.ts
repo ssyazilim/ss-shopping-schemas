@@ -1,0 +1,84 @@
+import { z } from 'zod';
+import { registry } from '../registry';
+import { AnalyzeTrafficSchema } from './schema';
+import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
+
+const responses = {
+  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
+  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
+};
+
+function buildRequestBody(schema: z.ZodTypeAny) {
+  return {
+    content: {
+      'application/json': { schema },
+      'application/xml': { schema },
+      'application/x-www-form-urlencoded': { schema },
+    },
+  };
+}
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/traffic/analyze',
+  tags: ['Traffic'],
+  summary: 'Analyze website traffic',
+  operationId: 'analyzeTraffic',
+  request: { body: buildRequestBody(AnalyzeTrafficSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/admin/traffic/analyze-traffic',
+  tags: ['Traffic'],
+  summary: 'Get all visitors in the system',
+  operationId: 'getTrafficsAdmin',
+  security: [{ JWT: [] }],
+  request: {
+    query: z.object({
+      startDate: z
+        .string()
+        .optional()
+        .meta({ examples: ['2024-12-15T00:00:00.000Z'] }),
+      endDate: z
+        .string()
+        .optional()
+        .meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
+    }),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/admin/traffic/analyze-organic-traffic',
+  tags: ['Traffic'],
+  summary: 'Get all organic visitors in the system',
+  operationId: 'getOrganicTrafficsAdmin',
+  security: [{ JWT: [] }],
+  request: {
+    query: ListQuerySchema.extend({
+      startDate: z
+        .string()
+        .optional()
+        .meta({ examples: ['2024-12-15T00:00:00.000Z'] }),
+      endDate: z
+        .string()
+        .optional()
+        .meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
+    }),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/traffic/analyze-organic-traffic',
+  tags: ['Traffic'],
+  summary: 'Delete visitor traffic records',
+  operationId: 'deleteVisitor',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(DeleteModelSchema) },
+  responses,
+});
