@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import * as locales from './locales/index.js';
+import * as locales from './locales/index';
 import type { ILocale } from './locales';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
