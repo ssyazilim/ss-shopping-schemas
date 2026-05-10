@@ -264,12 +264,20 @@
         "properties": {
           "email": {
             "type": "string",
-            "format": "email"
+            "minLength": 6,
+            "maxLength": 254,
+            "format": "email",
+            "examples": [
+              "test@ssyazilim.com"
+            ]
           },
           "password": {
             "type": "string",
             "minLength": 8,
-            "maxLength": 64
+            "maxLength": 64,
+            "examples": [
+              "Passw0rd"
+            ]
           }
         },
         "required": [
@@ -282,6 +290,8 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Barış"
             ]
@@ -294,6 +304,8 @@
           },
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email",
             "examples": [
               "ua_baris_07@hotmail.com"
@@ -302,11 +314,13 @@
           "phoneNumber": {
             "type": "string",
             "examples": [
-              "905365056943"
+              "+905365056943"
             ]
           },
           "password": {
             "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
             "examples": [
               "Passw0rd"
             ]
@@ -350,6 +364,8 @@
         "properties": {
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email"
           }
         },
@@ -360,21 +376,33 @@
       "passwordResetCompleteUser": {
         "type": "object",
         "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 254
+          },
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email"
           },
-          "key": {
-            "type": "string"
-          },
           "newPassword": {
-            "type": "string"
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64
+          },
+          "rePassword": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64
           }
         },
         "required": [
-          "email",
           "key",
-          "newPassword"
+          "email",
+          "newPassword",
+          "rePassword"
         ]
       },
       "addAddress": {
