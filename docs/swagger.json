@@ -1,22 +1,141 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Istem Medikal API",
-    "version": "1.0.0",
-    "description": "Istem Medikal A.Ş. — Ortak API şema tanımları",
+    "title": "SS-Ecommerce - API - OpenAPI 3.0",
+    "description": "The SS-Ecommerce API, built on the OpenAPI 3.0 specification, provides a standardized, language-agnostic interface for interacting with an e-commerce platform.",
+    "termsOfService": "https://swagger.io/terms/",
     "contact": {
-      "name": "Istem Medikal ArGe",
-      "email": "istemmedikalai@gmail.com"
+      "name": "SS Yazılım",
+      "email": "admin@ssyazilim.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.11"
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "API authentications process for users"
+    },
+    {
+      "name": "Address",
+      "description": "Addresses for the system"
+    },
+    {
+      "name": "Agreement",
+      "description": "User agreements for the system"
+    },
+    {
+      "name": "Brand",
+      "description": "Brands for the system"
+    },
+    {
+      "name": "Card",
+      "description": "User card information"
+    },
+    {
+      "name": "Cart",
+      "description": "Carts for the system"
+    },
+    {
+      "name": "Category",
+      "description": "Categories for the system"
+    },
+    {
+      "name": "Company",
+      "description": "Company information for the User"
+    },
+    {
+      "name": "Countries Cities & Districts",
+      "description": "Country State City for the User"
+    },
+    {
+      "name": "Currency",
+      "description": "Currencies for the system"
+    },
+    {
+      "name": "External",
+      "description": "External Services for the system"
+    },
+    {
+      "name": "Form",
+      "description": "Form process for users"
+    },
+    {
+      "name": "Google",
+      "description": "Google operations for the system"
+    },
+    {
+      "name": "Gsm",
+      "description": "GSM service operations for the system"
+    },
+    {
+      "name": "Minio Bucket S3",
+      "description": "Simple Storage Service for the bucket operations"
+    },
+    {
+      "name": "Minio Object S3",
+      "description": "Simple Storage Service for the object operations"
+    },
+    {
+      "name": "Payment",
+      "description": "User payment information"
+    },
+    {
+      "name": "Post",
+      "description": "Posts for the system"
+    },
+    {
+      "name": "Product",
+      "description": "Products for the system"
+    },
+    {
+      "name": "Product Variant",
+      "description": "Variants for the products"
+    },
+    {
+      "name": "Question",
+      "description": "Questions for the product"
+    },
+    {
+      "name": "Review",
+      "description": "Reviews for the product"
+    },
+    {
+      "name": "Shipping",
+      "description": "Shipping calculations for the system"
+    },
+    {
+      "name": "Traffic",
+      "description": "Web site analysis for users"
+    },
+    {
+      "name": "Translation",
+      "description": "Translations for the system"
+    },
+    {
+      "name": "User",
+      "description": "User process for users"
     }
+  ],
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "https://swagger.io"
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "Geliştirme ortamı"
+      "url": "http://localhost:5000/api"
     },
     {
-      "url": "https://api.istemmedikal.com",
-      "description": "Üretim ortamı"
+      "url": "https://api.bastakshop.com/api"
+    },
+    {
+      "url": "https://api.sagmanhurda.com/api"
+    },
+    {
+      "url": "https://api.ulusanelektrik.com/api"
     }
   ],
   "components": {
@@ -47,272 +166,205 @@
           }
         }
       },
+      "ApiSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Başarı mesajı"
+              }
+            },
+            "required": [
+              "message"
+            ]
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
       "ApiError": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string",
-            "description": "Hata kodu",
-            "examples": [
-              "VALIDATION_ERROR"
-            ]
-          },
-          "message": {
-            "type": "string",
-            "description": "Hata mesajı"
-          },
-          "details": {
+          "error": {
             "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Hata mesajı"
               }
             },
-            "description": "Alan bazlı hata detayları"
+            "required": [
+              "message"
+            ]
           }
         },
         "required": [
-          "code",
-          "message"
+          "error"
         ]
       },
-      "Product": {
+      "loginUser": {
         "type": "object",
         "properties": {
-          "id": {
+          "email": {
             "type": "string",
-            "format": "uuid",
-            "description": "Ürün ID"
+            "format": "email"
           },
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 200,
-            "description": "Ürün adı",
-            "examples": [
-              "LUBRAGEL"
-            ]
-          },
-          "category": {
-            "type": "string",
-            "enum": [
-              "catheter",
-              "gel",
-              "instillation",
-              "implant",
-              "irrigation"
-            ],
-            "description": "Ürün kategorisi"
-          },
-          "catalogCode": {
-            "type": "string",
-            "pattern": "^[A-Z0-9-]+$",
-            "description": "Katalog kodu",
-            "examples": [
-              "LUB-006"
-            ]
-          },
-          "isActive": {
-            "type": "boolean",
-            "default": true,
-            "description": "Ürün aktif mi?"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Oluşturulma tarihi"
+          "password": {
+            "type": "string"
           }
         },
         "required": [
-          "id",
-          "name",
-          "category",
-          "catalogCode",
-          "createdAt"
+          "email",
+          "password"
         ]
       },
-      "CreateProduct": {
+      "addUser": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 200,
-            "description": "Ürün adı",
             "examples": [
-              "LUBRAGEL"
+              "Barış"
             ]
           },
-          "category": {
+          "surname": {
             "type": "string",
-            "enum": [
-              "catheter",
-              "gel",
-              "instillation",
-              "implant",
-              "irrigation"
-            ],
-            "description": "Ürün kategorisi"
-          },
-          "catalogCode": {
-            "type": "string",
-            "pattern": "^[A-Z0-9-]+$",
-            "description": "Katalog kodu",
             "examples": [
-              "LUB-006"
+              "Gür"
             ]
           },
-          "isActive": {
-            "type": "boolean",
-            "default": true,
-            "description": "Ürün aktif mi?"
+          "email": {
+            "type": "string",
+            "format": "email",
+            "examples": [
+              "ua_baris_07@hotmail.com"
+            ]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "examples": [
+              "905365056943"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "examples": [
+              "Passw0rd"
+            ]
           }
         },
         "required": [
           "name",
-          "category",
-          "catalogCode"
+          "email",
+          "phoneNumber",
+          "password"
         ]
       },
-      "UpdateProduct": {
+      "checkKey": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 200,
-            "description": "Ürün adı",
-            "examples": [
-              "LUBRAGEL"
-            ]
-          },
-          "category": {
-            "type": "string",
-            "enum": [
-              "catheter",
-              "gel",
-              "instillation",
-              "implant",
-              "irrigation"
-            ],
-            "description": "Ürün kategorisi"
-          },
-          "catalogCode": {
-            "type": "string",
-            "pattern": "^[A-Z0-9-]+$",
-            "description": "Katalog kodu",
-            "examples": [
-              "LUB-006"
-            ]
-          },
-          "isActive": {
-            "type": "boolean",
-            "default": true,
-            "description": "Ürün aktif mi?"
+          "key": {
+            "type": "string"
           }
-        }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "activateUser": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "code"
+        ]
+      },
+      "passwordResetUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "passwordResetCompleteUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "key": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "key",
+          "newPassword"
+        ]
       }
     },
     "parameters": {}
   },
   "paths": {
-    "/products": {
-      "get": {
+    "/public/auth/login": {
+      "post": {
         "tags": [
-          "Products"
+          "Authentication"
         ],
-        "summary": "Ürün listesi",
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1,
-              "description": "Sayfa numarası"
+        "summary": "Login process for the User in the system",
+        "operationId": "loginUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginUser"
+              }
             },
-            "required": false,
-            "description": "Sayfa numarası",
-            "name": "page",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20,
-              "description": "Sayfa başına kayıt sayısı"
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/loginUser"
+              }
             },
-            "required": false,
-            "description": "Sayfa başına kayıt sayısı",
-            "name": "limit",
-            "in": "query"
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/loginUser"
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Başarılı",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Product"
-                      }
-                    },
-                    "total": {
-                      "type": "integer"
-                    },
-                    "page": {
-                      "type": "integer"
-                    },
-                    "limit": {
-                      "type": "integer"
-                    }
-                  },
-                  "required": [
-                    "data",
-                    "total",
-                    "page",
-                    "limit"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Yeni ürün oluştur",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProduct"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Oluşturuldu",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
+                  "$ref": "#/components/schemas/ApiSuccess"
                 }
               }
             }
           },
           "400": {
-            "description": "Validasyon hatası",
+            "description": "Hatalı istek",
             "content": {
               "application/json": {
                 "schema": {
@@ -324,84 +376,45 @@
         }
       }
     },
-    "/products/{id}": {
-      "get": {
+    "/public/auth/register": {
+      "post": {
         "tags": [
-          "Products"
+          "Authentication"
         ],
-        "summary": "Ürün detayı",
-        "parameters": [
-          {
-            "schema": {
-              "$ref": "#/components/schemas/Uuid"
-            },
-            "required": true,
-            "description": "UUID v4 formatında benzersiz kimlik",
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Başarılı",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Ürün bulunamadı",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Products"
-        ],
-        "summary": "Ürün güncelle",
-        "parameters": [
-          {
-            "schema": {
-              "$ref": "#/components/schemas/Uuid"
-            },
-            "required": true,
-            "description": "UUID v4 formatında benzersiz kimlik",
-            "name": "id",
-            "in": "path"
-          }
-        ],
+        "summary": "Add a new user to system",
+        "operationId": "addUser",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProduct"
+                "$ref": "#/components/schemas/addUser"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addUser"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addUser"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Güncellendi",
+            "description": "Başarılı",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product"
+                  "$ref": "#/components/schemas/ApiSuccess"
                 }
               }
             }
           },
-          "404": {
-            "description": "Ürün bulunamadı",
+          "400": {
+            "description": "Hatalı istek",
             "content": {
               "application/json": {
                 "schema": {
@@ -411,29 +424,247 @@
             }
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/public/auth/register-verification": {
+      "post": {
         "tags": [
-          "Products"
+          "Authentication"
         ],
-        "summary": "Ürün sil",
-        "parameters": [
-          {
-            "schema": {
-              "$ref": "#/components/schemas/Uuid"
+        "summary": "Check User key in the system",
+        "operationId": "checkUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkKey"
+              }
             },
-            "required": true,
-            "description": "UUID v4 formatında benzersiz kimlik",
-            "name": "id",
-            "in": "path"
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/checkKey"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/checkKey"
+              }
+            }
           }
-        ],
+        },
         "responses": {
-          "204": {
-            "description": "Silindi"
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
           },
-          "404": {
-            "description": "Ürün bulunamadı",
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/auth/register-activate": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Activate User in the system",
+        "operationId": "activateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/activateUser"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/activateUser"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/activateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/auth/refresh-code": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh code for the activation in the system",
+        "operationId": "refreshCode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkKey"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/checkKey"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/checkKey"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/auth/password-reset": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User can be reset password using this api",
+        "operationId": "passwordResetUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/passwordResetUser"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/passwordResetUser"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/passwordResetUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/auth/password-reset-complete": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User can be reset password for using this api",
+        "operationId": "passwordResetCompleteUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/passwordResetCompleteUser"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/passwordResetCompleteUser"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/passwordResetCompleteUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hatalı istek",
             "content": {
               "application/json": {
                 "schema": {
