@@ -1,4 +1,6 @@
 export { registry } from './registry';
+
+// schema definitions for OPENAPI producing
 export * from './common';
 export * from './auth/schema';
 export * from './address/schema';
@@ -25,7 +27,10 @@ export * from './traffic/schema';
 export * from './translation/schema';
 export * from './user/schema';
 
-// Path tanımları — yalnızca OpenAPI üretimi için register edilir
+// Validation defines using for backend and frontend validation middleware
+export * from './auth/validation';
+
+// Path defines — only register for OPENAPI producing
 import './auth/route';
 import './address/route';
 import './agreement/route';

@@ -18,6 +18,6 @@ export const addBrandSchema = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
     images: imageSchema,
-    productCount: z.number().optional().default(0),
+    productCount: z.number().optional(),
   });
 };
