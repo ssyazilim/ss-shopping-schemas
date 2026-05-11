@@ -6,11 +6,10 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 
 export const IMAGE_SCHEMA = z.object({
   staticImages: z.array(
-    z
-      .object({
-        name: z.string(),
-        image: z.string(),
-      })
+    z.object({
+      name: z.string(),
+      image: z.string(),
+    }),
   ),
   dynamicImages: z.array(
     z.string().meta({
