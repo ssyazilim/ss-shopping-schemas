@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddAgreementsSchema, UpdateAgreementSchema } from './schema';
+import { AddAgreementSchema, AddAgreementsSchema, UpdateAgreementSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
 
 const responses = {
@@ -30,11 +30,27 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'get',
-  path: '/public/agreement/{agreementId}',
+  path: '/public/agreement/{locale}/{name}',
   tags: ['Agreement'],
   summary: 'Get an agreement from the system',
   operationId: 'getAgreement',
-  request: { params: z.object({ agreementId: z.string() }) },
+  request: {
+    params: z.object({
+      locale: z.string().default('tr'),
+      name: z.string().default('Gizlilik politikası'),
+    }),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/agreement',
+  tags: ['Agreement'],
+  summary: 'Add new agreement to the system',
+  operationId: 'addAgreement',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(AddAgreementSchema) },
   responses,
 });
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddBrandsSchema, UpdateBrandSchema } from './schema';
+import { AddBrandSchema, AddBrandsSchema, UpdateBrandSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
 
 const responses = {
@@ -35,6 +35,17 @@ registry.registerPath({
   summary: 'Get a brand from the system',
   operationId: 'getBrand',
   request: { params: z.object({ brandId: z.string() }) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/brand',
+  tags: ['Brand'],
+  summary: 'Add new brands to the system',
+  operationId: 'addBrand',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(AddBrandSchema) },
   responses,
 });
 

@@ -1,28 +1,42 @@
 import { z } from 'zod';
 import { registry } from './registry';
 
+export const isValidCard = (card: string) => {
+  const digits = card.replace(/\s/g, '');
+
+  let sum = 0;
+  let shouldDouble = false;
+
+  for (let i = digits.length - 1; i >= 0; i--) {
+    let digit = parseInt(digits[i]!);
+
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  return sum % 10 === 0;
+};
+
 export const PaginationQuerySchema = registry.register(
   'PaginationQuery',
   z.object({
-    page: z.coerce.number().int().min(1).default(1).meta({ description: 'Page number' }),
-    limit: z.coerce.number().int().min(1).max(100).default(20).meta({ description: 'page limit' }),
+    page: z.coerce.number().int().min(1).default(1),
+    limit: z.coerce.number().int().min(1).max(100).default(25).optional(),
   }),
 );
 
 export const ListQuerySchema = registry.register(
   'ListQuery',
   z.object({
-    page: z.coerce.number().int().min(1).default(1).optional().meta({ description: 'Page number' }),
-    limit: z.coerce
-      .number()
-      .int()
-      .min(1)
-      .max(100)
-      .default(10)
-      .optional()
-      .meta({ description: 'Page limit' }),
-    sort: z.string().meta({ description: 'Order and type', examples: ['updatedAt,desc'] }),
-    text: z.string().optional().meta({ description: 'Search text' }),
+    page: z.coerce.number().int().min(1).default(1).optional(),
+    limit: z.coerce.number().int().min(1).max(100).default(25).optional(),
+    sort: z.string().default('updatedAt,desc'),
+    text: z.string().default('').optional(),
   }),
 );
 

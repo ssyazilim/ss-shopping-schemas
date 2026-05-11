@@ -2,8 +2,8 @@ import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 import { writeFileSync } from 'node:fs';
 import { registry } from '../schemas';
 
-// Tüm schema dosyaları import edildiğinde registry'ye register ederler
-// Bu script onları toplar ve openapi.json üretir
+// When all schema files are imported, they are registered in the registry.
+// This script collects them and produces openapi.json
 
 registry.registerComponent('securitySchemes', 'JWT', {
   type: 'apiKey',

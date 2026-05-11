@@ -1,9 +1,9 @@
 {
   "name": "@ssyazilim/ss-shopping-schemas",
   "version": "0.1.6",
-  "description": "Shared Zod schemas and TypeScript types for Istem Medikal projects",
-  "author": "Istem Medikal A.S.",
-  "license": "UNLICENSED",
+  "description": "Shared Zod schemas and TypeScript types for SS Software projects",
+  "author": "BARIS GUR",
+  "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
@@ -21,16 +21,6 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
-      }
-    },
-    "./forms": {
-      "import": {
-        "types": "./dist/forms/index.d.ts",
-        "default": "./dist/forms/index.js"
-      },
-      "require": {
-        "types": "./dist/forms/index.d.cts",
-        "default": "./dist/forms/index.cjs"
       }
     }
   },

@@ -8,14 +8,8 @@ const addressIdParam = z.object({
 });
 
 const responses = {
-  200: {
-    description: 'Başarılı',
-    content: { 'application/json': { schema: ApiSuccessSchema } },
-  },
-  400: {
-    description: 'Hatalı istek',
-    content: { 'application/json': { schema: ApiErrorSchema } },
-  },
+  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
+  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
 function buildRequestBody(schema: typeof AddAddressSchema | typeof UpdateAddressSchema) {
@@ -28,7 +22,6 @@ function buildRequestBody(schema: typeof AddAddressSchema | typeof UpdateAddress
   };
 }
 
-// GET /public/address
 registry.registerPath({
   method: 'get',
   path: '/public/address',
@@ -39,7 +32,6 @@ registry.registerPath({
   responses,
 });
 
-// POST /public/address
 registry.registerPath({
   method: 'post',
   path: '/public/address',
@@ -51,7 +43,6 @@ registry.registerPath({
   responses,
 });
 
-// GET /public/address/:addressId
 registry.registerPath({
   method: 'get',
   path: '/public/address/{addressId}',
@@ -63,7 +54,6 @@ registry.registerPath({
   responses,
 });
 
-// PATCH /public/address/:addressId
 registry.registerPath({
   method: 'patch',
   path: '/public/address/{addressId}',
@@ -78,7 +68,6 @@ registry.registerPath({
   responses,
 });
 
-// DELETE /public/address/:addressId
 registry.registerPath({
   method: 'delete',
   path: '/public/address/{addressId}',
@@ -90,7 +79,6 @@ registry.registerPath({
   responses,
 });
 
-// GET /admin/addresses
 registry.registerPath({
   method: 'get',
   path: '/admin/addresses',

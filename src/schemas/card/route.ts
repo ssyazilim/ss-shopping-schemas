@@ -20,11 +20,23 @@ function buildRequestBody(schema: z.ZodTypeAny) {
 
 registry.registerPath({
   method: 'get',
-  path: '/public/cards',
+  path: '/public/check-card/{userKey}',
   tags: ['Card'],
-  summary: 'Get all cards for the user',
-  operationId: 'getCards',
+  summary: 'Get a special card for the user',
+  operationId: 'getCardWithDetail',
   security: [{ JWT: [] }],
+  request: { params: z.object({ userKey: z.string() }) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/card',
+  tags: ['Card'],
+  summary: 'Get a user card tokens in the system',
+  operationId: 'getCard',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ userKey: z.string() }) },
   responses,
 });
 
@@ -40,12 +52,22 @@ registry.registerPath({
 });
 
 registry.registerPath({
+  method: 'get',
+  path: '/admin/cards',
+  tags: ['Card'],
+  summary: 'Get all cards for the user',
+  operationId: 'getCards',
+  security: [{ JWT: [] }],
+  responses,
+});
+
+registry.registerPath({
   method: 'delete',
-  path: '/public/card/{cardToken}',
+  path: '/public/card/{cardId}',
   tags: ['Card'],
   summary: 'Delete a card from the system',
   operationId: 'deleteCard',
   security: [{ JWT: [] }],
-  request: { params: z.object({ cardToken: z.string() }) },
+  request: { params: z.object({ cardId: z.string() }) },
   responses,
 });

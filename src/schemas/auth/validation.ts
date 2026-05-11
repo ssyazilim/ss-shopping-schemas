@@ -36,7 +36,7 @@ export const ADD_USER = (locale: ILocale = 'tr') => {
       .email({ message: m.public_forms_validations_email })
       .min(6, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ua_baris_07@hotmail.com'] }),
+      .meta({ examples: ['test@ssyazilim.com'] }),
     phoneNumber: z
       .e164({ message: m.public_forms_validations_phoneNumber })
       .meta({ examples: ['+905365056943'] }),
@@ -45,6 +45,31 @@ export const ADD_USER = (locale: ILocale = 'tr') => {
       .min(8, m.public_forms_validations_minLength(8))
       .max(64, m.public_forms_validations_maxLength(64))
       .meta({ examples: ['Passw0rd'] }),
+  });
+};
+
+export const CHECK_KEY = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    key: z
+      .string()
+      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+  });
+};
+
+export const ACTIVATE_USER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+
+  return z.object({
+    key: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    code: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 

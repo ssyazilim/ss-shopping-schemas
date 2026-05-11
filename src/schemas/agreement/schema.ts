@@ -1,18 +1,12 @@
 import { z } from 'zod';
 import { registry } from '../registry';
+import { ADD_AGREEMENT } from './validation';
 
-export const AgreementSchema = registry.register(
-  'Agreement',
-  z.object({
-    locale: z.string().meta({ examples: ['en'] }),
-    name: z.string().meta({ examples: ['Test'] }),
-    content: z.string().meta({ examples: ['<p>Test</p>'] }),
-  }),
-);
+export const AddAgreementSchema = registry.register('Agreement', ADD_AGREEMENT());
 
-export const AddAgreementsSchema = registry.register('AddAgreements', z.array(AgreementSchema));
+export const AddAgreementsSchema = registry.register('AddAgreements', z.array(AddAgreementSchema));
 
 export const UpdateAgreementSchema = registry.register(
   'UpdateAgreement',
-  AgreementSchema.partial(),
+  AddAgreementSchema.partial(),
 );

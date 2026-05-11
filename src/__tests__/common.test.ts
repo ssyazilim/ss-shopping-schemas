@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { PaginationQuerySchema } from '../schemas/common';
+import { PaginationQuerySchema } from '../schemas';
 
 describe('PaginationQuerySchema', () => {
-  it('string sayıları coerce eder', () => {
+  it('coerce string numbers', () => {
     const result = PaginationQuerySchema.safeParse({ page: '2', limit: '50' });
     expect(result.success).toBe(true);
     if (result.success) {
@@ -11,7 +11,7 @@ describe('PaginationQuerySchema', () => {
     }
   });
 
-  it('default değerleri uygular', () => {
+  it('apply default values', () => {
     const result = PaginationQuerySchema.safeParse({});
     expect(result.success).toBe(true);
     if (result.success) {
@@ -20,7 +20,7 @@ describe('PaginationQuerySchema', () => {
     }
   });
 
-  it('limit 100 üzerini reddeder', () => {
+  it('reject 100 limit', () => {
     const result = PaginationQuerySchema.safeParse({ limit: 101 });
     expect(result.success).toBe(false);
   });

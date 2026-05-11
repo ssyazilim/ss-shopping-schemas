@@ -5,12 +5,14 @@ import type { ILocale } from '../../locales';
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const IMAGE_SCHEMA = z.object({
-  staticImages: z.array(
-    z.object({
-      name: z.string(),
-      image: z.string(),
-    }),
-  ),
+  staticImages: z
+    .array(
+      z.object({
+        name: z.string(),
+        image: z.string(),
+      }),
+    )
+    .meta({ example: [] }),
   dynamicImages: z.array(
     z.string().meta({
       examples: [

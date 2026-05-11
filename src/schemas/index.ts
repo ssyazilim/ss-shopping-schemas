@@ -28,8 +28,11 @@ export * from './translation/schema';
 export * from './user/schema';
 
 // Validation defines using for backend and frontend validation middleware
+export * from './address/validation';
+export * from './agreement/validation';
 export * from './auth/validation';
 export * from './brand/validation';
+export * from './card/validation';
 export * from './category/validation';
 
 // Path defines — only register for OPENAPI producing
