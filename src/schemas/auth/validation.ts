@@ -2,13 +2,7 @@ import { z } from 'zod';
 import * as locales from '../../locales';
 import type { ILocale } from '../../locales';
 
-const messages = {
-  tr: locales.tr,
-  en: locales.en,
-  ru: locales.ru,
-  ar: locales.ar,
-  fa: locales.fa,
-};
+const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const LOGIN_USER = (locale: ILocale = 'tr') => {
   const m = messages[locale];

@@ -29,6 +29,8 @@ export * from './user/schema';
 
 // Validation defines using for backend and frontend validation middleware
 export * from './auth/validation';
+export * from './brand/validation';
+export * from './category/validation';
 
 // Path defines — only register for OPENAPI producing
 import './auth/route';
