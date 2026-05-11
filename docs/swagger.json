@@ -581,11 +581,56 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "example": "Beko"
+          },
+          "images": {
+            "type": "object",
+            "properties": {
+              "staticImages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "image"
+                  ]
+                }
+              },
+              "dynamicImages": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1",
+                    "https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "staticImages",
+              "dynamicImages"
+            ]
+          },
+          "productCount": {
+            "type": "number",
+            "example": 0
           }
         },
         "required": [
-          "name"
+          "name",
+          "images"
         ]
       },
       "AddBrands": {
@@ -598,7 +643,51 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "example": "Beko"
+          },
+          "images": {
+            "type": "object",
+            "properties": {
+              "staticImages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "image"
+                  ]
+                }
+              },
+              "dynamicImages": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1",
+                    "https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "staticImages",
+              "dynamicImages"
+            ]
+          },
+          "productCount": {
+            "type": "number",
+            "example": 0
           }
         }
       },
