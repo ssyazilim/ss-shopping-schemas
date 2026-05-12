@@ -1,17 +1,6 @@
-import { z } from 'zod';
 import { registry } from '../registry';
+import { GEMINI_PROMPT, TRANSLATE } from './validation';
 
-export const GeminiPromptSchema = registry.register(
-  'GeminiPrompt',
-  z.object({
-    prompt: z.string().meta({ examples: ['Write a 25-word poem.'] }),
-  }),
-);
+export const GeminiPromptSchema = registry.register('GeminiPrompt', GEMINI_PROMPT);
 
-export const TranslateSchema = registry.register(
-  'Translate',
-  z.object({
-    to: z.string().meta({ examples: ['tr'] }),
-    prompt: z.string().meta({ examples: ['Hello. How are you today?'] }),
-  }),
-);
+export const TranslateSchema = registry.register('Translate', TRANSLATE);

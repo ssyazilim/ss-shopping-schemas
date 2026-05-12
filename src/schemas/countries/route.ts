@@ -9,59 +9,59 @@ const responses = {
 
 registry.registerPath({
   method: 'get',
-  path: '/public/countries',
+  path: '/public/country',
   tags: ['Countries Cities & Districts'],
-  summary: 'Get all countries in the system',
+  summary: 'Get a Countries for the user',
   operationId: 'getCountries',
   responses,
 });
 
 registry.registerPath({
   method: 'get',
-  path: '/public/country/{countryId}',
+  path: '/public/country/{countryCode}',
   tags: ['Countries Cities & Districts'],
-  summary: 'Get a country from the system',
-  operationId: 'getCountry',
-  request: { params: z.object({ countryId: z.string() }) },
+  summary: 'Get a States or Cities for the user',
+  operationId: 'getStates',
+  request: { params: z.object({ countryCode: z.string().meta({ examples: ['TR'] }) }) },
   responses,
 });
 
 registry.registerPath({
   method: 'get',
-  path: '/public/cities/{countryId}',
+  path: '/public/country/{countryCode}/city/{cityCode}',
   tags: ['Countries Cities & Districts'],
-  summary: 'Get all cities for a country',
-  operationId: 'getCities',
-  request: { params: z.object({ countryId: z.string() }) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'get',
-  path: '/public/city/{cityId}',
-  tags: ['Countries Cities & Districts'],
-  summary: 'Get a city from the system',
-  operationId: 'getCity',
-  request: { params: z.object({ cityId: z.string() }) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'get',
-  path: '/public/districts/{cityId}',
-  tags: ['Countries Cities & Districts'],
-  summary: 'Get all districts for a city',
+  summary: 'Get a Districts for the user',
   operationId: 'getDistricts',
-  request: { params: z.object({ cityId: z.string() }) },
+  request: {
+    params: z.object({
+      countryCode: z.string().meta({ examples: ['TR'] }),
+      cityCode: z.string().meta({ examples: ['06'] }),
+    }),
+  },
   responses,
 });
 
 registry.registerPath({
   method: 'get',
-  path: '/public/district/{districtId}',
+  path: '/public/geliver/country/{countryCode}',
   tags: ['Countries Cities & Districts'],
-  summary: 'Get a district from the system',
-  operationId: 'getDistrict',
-  request: { params: z.object({ districtId: z.string() }) },
+  summary: 'Get a States or Cities for the user using geliver.io service',
+  operationId: 'getGeliverStates',
+  request: { params: z.object({ countryCode: z.string().meta({ examples: ['TR'] }) }) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/geliver/country/{countryCode}/city/{cityCode}',
+  tags: ['Countries Cities & Districts'],
+  summary: 'Get a Districts for the user using geliver.io service',
+  operationId: 'getGeliverDistricts',
+  request: {
+    params: z.object({
+      countryCode: z.string().meta({ examples: ['TR'] }),
+      cityCode: z.string().meta({ examples: ['06'] }),
+    }),
+  },
   responses,
 });

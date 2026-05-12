@@ -1,19 +1,8 @@
-import { z } from 'zod';
 import { registry } from '../registry';
+import { SEND_SMS, GSM_MESSAGES } from './validation';
 
-const MessagesSchema = registry.register(
-  'GsmMessages',
-  z.object({
-    msg: z.string().meta({ examples: ['Hi there. This is just a test message!'] }),
-    no: z.string().meta({ examples: ['5365056943'] }),
-  }),
-);
+const MessagesSchema = registry.register('GsmMessages', GSM_MESSAGES);
 
-export const SendSmsSchema = registry.register(
-  'SendSms',
-  z.object({
-    msgheader: z.string().meta({ examples: ['ERBIL.GUR'] }),
-    encoding: z.string().meta({ examples: ['TR'] }),
-    messages: z.array(MessagesSchema),
-  }),
-);
+export const SendSmsSchema = registry.register('SendSms', SEND_SMS);
+
+void MessagesSchema;

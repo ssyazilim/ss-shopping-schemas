@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddExternalSchema, UpdateExternalSchema, CheckSMTPSchema } from './schema';
+import { AddExternalSchema, UpdateExternalSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema } from '../common';
 
 const responses = {
@@ -20,11 +20,20 @@ function buildRequestBody(schema: z.ZodTypeAny) {
 
 registry.registerPath({
   method: 'get',
-  path: '/admin/external',
+  path: '/public/external',
   tags: ['External'],
-  summary: 'Get external service configuration',
+  summary: 'Get external services in the system',
   operationId: 'getExternal',
-  security: [{ JWT: [] }],
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/external/{key}',
+  tags: ['External'],
+  summary: 'Get external service key in the system',
+  operationId: 'getExternalKey',
+  request: { params: z.object({ key: z.string() }) },
   responses,
 });
 
@@ -32,7 +41,7 @@ registry.registerPath({
   method: 'post',
   path: '/admin/external',
   tags: ['External'],
-  summary: 'Add external service configuration',
+  summary: 'Add a new external to the system',
   operationId: 'addExternal',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddExternalSchema) },
@@ -41,22 +50,14 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'patch',
-  path: '/admin/external',
+  path: '/admin/external/{externalId}',
   tags: ['External'],
-  summary: 'Update external service configuration',
+  summary: 'Update a external to the system',
   operationId: 'updateExternal',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(UpdateExternalSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/external/check-smtp',
-  tags: ['External'],
-  summary: 'Check SMTP configuration',
-  operationId: 'checkSMTP',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(CheckSMTPSchema) },
+  request: {
+    params: z.object({ externalId: z.string() }),
+    body: buildRequestBody(UpdateExternalSchema),
+  },
   responses,
 });

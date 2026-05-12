@@ -5,9 +5,25 @@ import { IMAGE_SCHEMA } from '../brand/validation';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
+export const CATEGORY = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Kıyafet ve Aksesuarlar'] }),
+    parent: z.string().meta({ examples: ['root'] }),
+    tree: z.array(z.string()).meta({ examples: [['root']] }),
+    categoryI10n: z
+      .string()
+      .optional()
+      .meta({ examples: ["{'id':'543586','name':'Kıyafet'}"] }),
+  });
+};
+
 export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-
   return z.object({
     name: z
       .string()
@@ -21,10 +37,10 @@ export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
       .meta({ example: 'root' }),
     tree: z.array(z.string().meta({ example: 'root' })),
     images: IMAGE_SCHEMA,
-    categoryI10n: z.string().optional().meta({
-      example:
-        "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}",
-    }),
+    categoryI10n: z
+      .string()
+      .optional()
+      .meta({ example: "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}" }),
     productCount: z.number().optional().meta({ example: 0 }),
   });
 };

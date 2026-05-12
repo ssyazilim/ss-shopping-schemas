@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddCompanySchema, UpdateCompanySchema } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema } from '../common';
+import { AddCompanySchema, UpdateCompanySchema, CompanyPaymentSchema } from './schema';
+import { ApiSuccessSchema, ApiErrorSchema, DeleteModelSchema } from '../common';
 
 const responses = {
   200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
@@ -20,11 +20,10 @@ function buildRequestBody(schema: z.ZodTypeAny) {
 
 registry.registerPath({
   method: 'get',
-  path: '/admin/company',
+  path: '/public/company',
   tags: ['Company'],
-  summary: 'Get company information',
+  summary: 'Get a company information in the system',
   operationId: 'getCompany',
-  security: [{ JWT: [] }],
   responses,
 });
 
@@ -32,7 +31,7 @@ registry.registerPath({
   method: 'post',
   path: '/admin/company',
   tags: ['Company'],
-  summary: 'Add company information',
+  summary: 'Add a company information for the system',
   operationId: 'addCompany',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddCompanySchema) },
@@ -41,11 +40,56 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'patch',
-  path: '/admin/company',
+  path: '/admin/company/{companyId}',
   tags: ['Company'],
-  summary: 'Update company information',
+  summary: 'Update a company to the system',
   operationId: 'updateCompany',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(UpdateCompanySchema) },
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: buildRequestBody(UpdateCompanySchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/company/payment/{companyId}',
+  tags: ['Company'],
+  summary: 'Add a company payment for the system',
+  operationId: 'addCompanyPayments',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: buildRequestBody(CompanyPaymentSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'patch',
+  path: '/admin/company/payment/{companyId}',
+  tags: ['Company'],
+  summary: 'Update a company payment for the system',
+  operationId: 'updateCompanyPayments',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: buildRequestBody(CompanyPaymentSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/company/payment/{companyId}',
+  tags: ['Company'],
+  summary: 'Delete a company payment in the system',
+  operationId: 'deleteCompanyPayments',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: buildRequestBody(DeleteModelSchema),
+  },
   responses,
 });

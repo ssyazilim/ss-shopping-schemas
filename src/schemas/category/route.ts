@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddCategorySchema, UpdateCategorySchema, ImageSchema } from './schema';
+import { AddCategorySchema, CategorySchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
 
 const responses = {
@@ -30,11 +30,41 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'get',
-  path: '/public/category/{categoryId}',
+  path: '/public/category/parent/{parentName}',
   tags: ['Category'],
-  summary: 'Get a category from the system',
-  operationId: 'getCategory',
-  request: { params: z.object({ categoryId: z.string() }) },
+  summary: 'Returns matching category parents in the database',
+  operationId: 'getCategoryParent',
+  request: { params: z.object({ parentName: z.string() }) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/category/tree/{treeName}',
+  tags: ['Category'],
+  summary: 'Returns all matching category for the category tree in database',
+  operationId: 'getCategoryTree',
+  request: { params: z.object({ treeName: z.string() }) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/category/name/{categoryName}',
+  tags: ['Category'],
+  summary: 'Returns all category parents matching the category name in the database',
+  operationId: 'getCategoryNodes',
+  request: { params: z.object({ categoryName: z.string() }) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/categories/google/{locale}',
+  tags: ['Category'],
+  summary: 'Get Google categories from the system',
+  operationId: 'getGoogleCategories',
+  request: { params: z.object({ locale: z.enum(['en-US', 'tr-TR']).default('tr-TR') }) },
   responses,
 });
 
@@ -42,10 +72,32 @@ registry.registerPath({
   method: 'post',
   path: '/admin/categories',
   tags: ['Category'],
-  summary: 'Add new categories to the system',
+  summary: 'Add a new categories to system',
   operationId: 'addCategories',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddCategorySchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/category',
+  tags: ['Category'],
+  summary: 'Add a new category to system',
+  operationId: 'addCategory',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(CategorySchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/category',
+  tags: ['Category'],
+  summary: 'Delete a categories in the system',
+  operationId: 'deleteCategories',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(DeleteModelSchema) },
   responses,
 });
 
@@ -58,46 +110,7 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     params: z.object({ categoryId: z.string() }),
-    body: buildRequestBody(UpdateCategorySchema),
-  },
-  responses,
-});
-
-registry.registerPath({
-  method: 'delete',
-  path: '/admin/category',
-  tags: ['Category'],
-  summary: 'Delete categories from the system',
-  operationId: 'deleteCategories',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/category/image/{categoryId}',
-  tags: ['Category'],
-  summary: 'Add image to a category',
-  operationId: 'addCategoryImage',
-  security: [{ JWT: [] }],
-  request: {
-    params: z.object({ categoryId: z.string() }),
-    body: buildRequestBody(ImageSchema),
-  },
-  responses,
-});
-
-registry.registerPath({
-  method: 'delete',
-  path: '/admin/category/image/{categoryId}',
-  tags: ['Category'],
-  summary: 'Delete image from a category',
-  operationId: 'deleteCategoryImage',
-  security: [{ JWT: [] }],
-  request: {
-    params: z.object({ categoryId: z.string() }),
-    body: buildRequestBody(ImageSchema),
+    body: buildRequestBody(CategorySchema),
   },
   responses,
 });

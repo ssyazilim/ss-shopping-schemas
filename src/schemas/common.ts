@@ -40,6 +40,14 @@ export const ListQuerySchema = registry.register(
   }),
 );
 
+export const DateRangeQuerySchema = registry.register(
+  'DateRangeQuery',
+  z.object({
+    startDate: z.string().optional().meta({ examples: ['2024-12-15T00:00:00.000Z'] }),
+    endDate: z.string().optional().meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
+  }),
+);
+
 export const ApiSuccessSchema = registry.register(
   'ApiSuccess',
   z.object({

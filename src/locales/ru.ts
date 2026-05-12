@@ -6,6 +6,7 @@ export const notifications: INotifications = {
   public_forms_validations_sameAs: 'Ваши пароли не совпадают!',
   public_forms_validations_phoneNumber: 'Пожалуйста, введите корректный номер телефона',
   public_forms_validations_cardNumber: 'Пожалуйста, введите действительный номер карты.',
+  public_forms_validations_url: 'Пожалуйста, введите корректный URL!',
   public_forms_validations_minLength: (min: number) => `Должно быть не менее ${min} символов`,
   public_forms_validations_maxLength: (max: number) => `Должно быть не более ${max} символов`,
 };

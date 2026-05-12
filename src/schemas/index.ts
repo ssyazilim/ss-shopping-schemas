@@ -33,7 +33,15 @@ export * from './agreement/validation';
 export * from './auth/validation';
 export * from './brand/validation';
 export * from './card/validation';
+export * from './cart/validation';
 export * from './category/validation';
+export * from './company/validation';
+export * from './external/validation';
+export * from './form/validation';
+export * from './google/validation';
+export * from './gsm/validation';
+export * from './minio/bucket/validation';
+export * from './minio/object/validation';
 
 // Path defines — only register for OPENAPI producing
 import './auth/route';

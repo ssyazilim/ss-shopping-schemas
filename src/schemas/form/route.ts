@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { ContactMeSchema, ContactMeErrorSchema, ContactMeResumeSchema } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema } from '../common';
+import { ContactMeSchema, ContactMeErrorSchema, ContactMeResumeSchema, FileSchema } from './schema';
+import { CheckSMTPSchema } from '../external/schema';
+import { ApiSuccessSchema, ApiErrorSchema } from '../common';
 
 const responses = {
   200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
@@ -19,42 +20,58 @@ function buildRequestBody(schema: z.ZodTypeAny) {
 }
 
 registry.registerPath({
-  method: 'get',
-  path: '/admin/forms',
-  tags: ['Form'],
-  summary: 'Get all form submissions in the system',
-  operationId: 'getForms',
-  security: [{ JWT: [] }],
-  request: { query: ListQuerySchema },
-  responses,
-});
-
-registry.registerPath({
   method: 'post',
-  path: '/public/form/contact-me',
+  path: '/public/contact/send-message',
   tags: ['Form'],
-  summary: 'Submit a contact form',
-  operationId: 'contactMe',
+  summary: 'Send a Customer message to system',
+  operationId: 'sendMessageToSystem',
   request: { body: buildRequestBody(ContactMeSchema) },
   responses,
 });
 
 registry.registerPath({
   method: 'post',
-  path: '/public/form/contact-me/error',
+  path: '/public/contact/upload-file',
   tags: ['Form'],
-  summary: 'Submit a contact form error report',
-  operationId: 'contactMeError',
+  summary: 'User can be upload a file (xml, pdf)',
+  operationId: 'addFile',
+  request: {
+    body: {
+      content: {
+        'multipart/form-data': { schema: FileSchema },
+      },
+    },
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/contact/send-resume',
+  tags: ['Form'],
+  summary: 'Send a Customer resume to the authorities',
+  operationId: 'sendResume',
+  request: { body: buildRequestBody(ContactMeResumeSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/contact/send-error-message',
+  tags: ['Form'],
+  summary: 'Send a Customer error message to system',
+  operationId: 'sendErrorMessageToSystem',
   request: { body: buildRequestBody(ContactMeErrorSchema) },
   responses,
 });
 
 registry.registerPath({
   method: 'post',
-  path: '/public/form/contact-me/resume',
+  path: '/admin/contact/check-smtp',
   tags: ['Form'],
-  summary: 'Submit a resume contact form',
-  operationId: 'contactMeResume',
-  request: { body: buildRequestBody(ContactMeResumeSchema) },
+  summary: 'Check your SMTP settings is valid',
+  operationId: 'checkSMTP',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(CheckSMTPSchema) },
   responses,
 });
