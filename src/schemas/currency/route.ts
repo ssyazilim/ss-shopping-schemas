@@ -27,9 +27,13 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      from: z.string().meta({ description: 'TRY, USD, EUR, GBP, CHF, JPY, SAR, NOK, DKK, AUD, CAD, SEK, SRU' }),
+      from: z
+        .string()
+        .meta({ description: 'TRY, USD, EUR, GBP, CHF, JPY, SAR, NOK, DKK, AUD, CAD, SEK, SRU' }),
       quantity: z.string().meta({ description: 'You can define a number for currency amount' }),
-      to: z.string().meta({ description: 'TRY, USD, EUR, GBP, CHF, JPY, SAR, NOK, DKK, AUD, CAD, SEK, SRU' }),
+      to: z
+        .string()
+        .meta({ description: 'TRY, USD, EUR, GBP, CHF, JPY, SAR, NOK, DKK, AUD, CAD, SEK, SRU' }),
     }),
   },
   responses,

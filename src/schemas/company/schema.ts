@@ -16,19 +16,35 @@ import {
 const CompanyAddressSchema = registry.register('CompanyAddress', COMPANY_ADDRESS());
 const CompanySocialMediaSchema = registry.register('CompanySocialMedia', COMPANY_SOCIAL_MEDIA());
 export const CompanyPaymentSchema = registry.register('CompanyPayment', COMPANY_PAYMENT());
-const CompanyPropertiesHomePageSchema = registry.register('CompanyPropertiesHomePage', COMPANY_PROPERTIES_HOME_PAGE);
-const CompanyPropertiesPaymentSettingsSchema = registry.register('CompanyPropertiesPaymentSettings', COMPANY_PROPERTIES_PAYMENT_SETTINGS);
-const CompanyPropertiesProductSettingsSchema = registry.register('CompanyPropertiesProductSettings', COMPANY_PROPERTIES_PRODUCT_SETTINGS);
-const CompanyPropertiesOrderSettingsSchema = registry.register('CompanyPropertiesOrderSettings', COMPANY_PROPERTIES_ORDER_SETTINGS);
+const CompanyPropertiesHomePageSchema = registry.register(
+  'CompanyPropertiesHomePage',
+  COMPANY_PROPERTIES_HOME_PAGE,
+);
+const CompanyPropertiesPaymentSettingsSchema = registry.register(
+  'CompanyPropertiesPaymentSettings',
+  COMPANY_PROPERTIES_PAYMENT_SETTINGS,
+);
+const CompanyPropertiesProductSettingsSchema = registry.register(
+  'CompanyPropertiesProductSettings',
+  COMPANY_PROPERTIES_PRODUCT_SETTINGS,
+);
+const CompanyPropertiesOrderSettingsSchema = registry.register(
+  'CompanyPropertiesOrderSettings',
+  COMPANY_PROPERTIES_ORDER_SETTINGS,
+);
 const CompanyPropertiesSchema = registry.register('CompanyProperties', COMPANY_PROPERTIES);
 const CompanyMailOptionsSchema = registry.register('CompanyMailOptions', COMPANY_MAIL_OPTIONS);
-const CompanyShippingOptionsSchema = registry.register('CompanyShippingOptions', COMPANY_SHIPPING_OPTIONS);
+const CompanyShippingOptionsSchema = registry.register(
+  'CompanyShippingOptions',
+  COMPANY_SHIPPING_OPTIONS,
+);
 
 export const AddCompanySchema = registry.register('AddCompany', ADD_COMPANY());
 export const UpdateCompanySchema = registry.register('UpdateCompany', AddCompanySchema.partial());
 
 // suppress unused warnings — registered for OpenAPI only
-void CompanyAddressSchema,
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+(void CompanyAddressSchema,
   CompanySocialMediaSchema,
   CompanyPropertiesHomePageSchema,
   CompanyPropertiesPaymentSettingsSchema,
@@ -36,4 +52,4 @@ void CompanyAddressSchema,
   CompanyPropertiesOrderSettingsSchema,
   CompanyPropertiesSchema,
   CompanyMailOptionsSchema,
-  CompanyShippingOptionsSchema;
+  CompanyShippingOptionsSchema);

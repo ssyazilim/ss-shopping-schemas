@@ -11,7 +11,11 @@ export const SET_QUANTITY = (locale: ILocale = 'tr') => {
       .string()
       .min(24, { message: m.public_forms_validations_minLength(24) })
       .max(24, { message: m.public_forms_validations_maxLength(24) }),
-    quantity: z.number().int().min(1, { message: m.public_forms_validations_minLength(1) }).meta({ examples: [1] }),
+    quantity: z
+      .number()
+      .int()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .meta({ examples: [1] }),
   });
 };
 

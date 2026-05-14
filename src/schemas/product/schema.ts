@@ -1,19 +1,8 @@
 import { z } from 'zod';
 import { registry } from '../registry';
+import { ImageSchema } from '../../types/product';
 
-export const ImagesSchema = registry.register(
-  'Images',
-  z.object({
-    staticImages: z
-      .array(z.object({ name: z.string(), image: z.string() }))
-      .optional()
-      .meta({ examples: [[]] }),
-    dynamicImages: z
-      .array(z.string())
-      .optional()
-      .meta({ examples: [[]] }),
-  }),
-);
+export const ImagesSchema = registry.register('Images', ImageSchema);
 
 export const PriceSchema = registry.register(
   'Price',

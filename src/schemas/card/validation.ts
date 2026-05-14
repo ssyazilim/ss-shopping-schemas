@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import * as locales from '../../locales';
-import { isValidCard } from '../common';
+import { isValidCard } from '../../utils/validations';
 import type { ILocale } from '../../locales';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };

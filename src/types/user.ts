@@ -1,25 +1,45 @@
-// Düz TypeScript tipleri — Zod bağımlılığı yok, sadece tip tanımı
+import { z } from 'zod';
+import { MongoSchema } from './common';
+import { IpDetailsSchema } from './traffic';
+import { StaticImageSchema } from './product';
+import { getDefaultsForSchema } from 'zod-defaults';
 
-export type UserRole = 'admin' | 'manager' | 'customer';
+/*************************
+ *       TYPES           *
+ *************************/
+export type IUser = z.infer<typeof UserSchema>;
+export const UserSchema = z
+  .object({
+    name: z.string(),
+    surname: z.string().optional(),
+    email: z.string(),
+    phoneNumber: z.string(),
+    password: z.string(),
+    profileImage: StaticImageSchema,
+    role: z.array(z.string()),
+    isActivated: z.boolean(),
+    activationType: z.string(),
+    activationKey: z.string().optional(),
+    activationCode: z.string().optional(),
+    details: IpDetailsSchema.nullable(),
+  })
+  .extend(MongoSchema.shape);
 
-export interface User {
-  id: string;
-  email: string;
-  fullName: string;
-  role: UserRole;
-  createdAt: string;
-}
+export type IUserToken = z.infer<typeof UserSchema>;
+export const UserTokenSchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  surname: z.string(),
+  email: z.string(),
+  phoneNumber: z.string(),
+  role: z.array(z.string()),
+  isActivated: z.boolean(),
+  activationCode: z.string(),
+  iat: z.number(),
+  exp: z.number(),
+});
 
-export interface AuthTokenPayload {
-  userId: string;
-  email: string;
-  role: UserRole;
-  iat: number;
-  exp: number;
-}
-
-export interface AuthResponse {
-  user: User;
-  accessToken: string;
-  refreshToken: string;
-}
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const DEFAULT_USER: IUser = getDefaultsForSchema(UserSchema);

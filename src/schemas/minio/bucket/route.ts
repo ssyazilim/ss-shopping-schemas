@@ -71,8 +71,14 @@ registry.registerPath({
   request: {
     query: z.object({
       bucketName: z.string().meta({ examples: ['test'] }),
-      prefix: z.string().optional().meta({ examples: [''], description: 'Where to start => .../../' }),
-      recursive: z.boolean().optional().meta({ examples: [false], description: 'Include to the subfolders' }),
+      prefix: z
+        .string()
+        .optional()
+        .meta({ examples: [''], description: 'Where to start => .../../' }),
+      recursive: z
+        .boolean()
+        .optional()
+        .meta({ examples: [false], description: 'Include to the subfolders' }),
     }),
   },
   responses,
@@ -88,9 +94,21 @@ registry.registerPath({
   request: {
     query: z.object({
       bucketName: z.string().meta({ examples: ['test'] }),
-      prefix: z.string().optional().meta({ examples: [''], description: 'Where to start => .../../' }),
-      recursive: z.boolean().optional().meta({ examples: [false], description: 'Include to the subfolders' }),
-      startAfter: z.string().optional().meta({ examples: [''], description: 'You can start from a point in an alphabetical directory => e.txt | k.txt' }),
+      prefix: z
+        .string()
+        .optional()
+        .meta({ examples: [''], description: 'Where to start => .../../' }),
+      recursive: z
+        .boolean()
+        .optional()
+        .meta({ examples: [false], description: 'Include to the subfolders' }),
+      startAfter: z
+        .string()
+        .optional()
+        .meta({
+          examples: [''],
+          description: 'You can start from a point in an alphabetical directory => e.txt | k.txt',
+        }),
     }),
   },
   responses,

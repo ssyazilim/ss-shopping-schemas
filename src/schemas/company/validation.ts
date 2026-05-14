@@ -9,27 +9,77 @@ export const COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     isCompany: z.boolean().meta({ examples: [false] }),
-    companyName: z.string().max(254, { message: m.public_forms_validations_maxLength(254) }).optional().meta({ examples: ['Varyant Et & Balık Restaurant'] }),
-    name: z.string().max(254, { message: m.public_forms_validations_maxLength(254) }).optional().meta({ examples: ['Halil'] }),
-    surname: z.string().max(254, { message: m.public_forms_validations_maxLength(254) }).optional().meta({ examples: ['Gür'] }),
-    taxOffice: z.string().optional().meta({ examples: ['Üçkapılar'] }),
-    taxNumber: z.string().optional().meta({ examples: ['2780943302'] }),
-    identityNumber: z.string().optional().meta({ examples: ['25054218850'] }),
-    phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }).meta({ examples: ['+905446627836'] }),
-    email: z.email({ message: m.public_forms_validations_email }).meta({ examples: ['varyantrestaurant@hotmail.com'] }),
-    country: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ['Turkey'] }),
-    city: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ['Antalya'] }),
-    district: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ['Muratpasa'] }),
-    zipCode: z.string().optional().meta({ examples: ['07030'] }),
-    line: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(500, { message: m.public_forms_validations_maxLength(500) }).meta({ examples: ['Bahçelievler Mahallesi Atatürk Parkı 25/21'] }),
+    companyName: z
+      .string()
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .optional()
+      .meta({ examples: ['Varyant Et & Balık Restaurant'] }),
+    name: z
+      .string()
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .optional()
+      .meta({ examples: ['Halil'] }),
+    surname: z
+      .string()
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .optional()
+      .meta({ examples: ['Gür'] }),
+    taxOffice: z
+      .string()
+      .optional()
+      .meta({ examples: ['Üçkapılar'] }),
+    taxNumber: z
+      .string()
+      .optional()
+      .meta({ examples: ['2780943302'] }),
+    identityNumber: z
+      .string()
+      .optional()
+      .meta({ examples: ['25054218850'] }),
+    phoneNumber: z
+      .e164({ message: m.public_forms_validations_phoneNumber })
+      .meta({ examples: ['+905446627836'] }),
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .meta({ examples: ['varyantrestaurant@hotmail.com'] }),
+    country: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Turkey'] }),
+    city: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Antalya'] }),
+    district: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Muratpasa'] }),
+    zipCode: z
+      .string()
+      .optional()
+      .meta({ examples: ['07030'] }),
+    line: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(500, { message: m.public_forms_validations_maxLength(500) })
+      .meta({ examples: ['Bahçelievler Mahallesi Atatürk Parkı 25/21'] }),
   });
 };
 
 export const COMPANY_SOCIAL_MEDIA = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    name: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ['Facebook'] }),
-    link: z.url({ message: m.public_forms_validations_url }).meta({ examples: ['https://www.facebook.com'] }),
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Facebook'] }),
+    link: z
+      .url({ message: m.public_forms_validations_url })
+      .meta({ examples: ['https://www.facebook.com'] }),
     icon: z.string(),
   });
 };
@@ -37,8 +87,16 @@ export const COMPANY_SOCIAL_MEDIA = (locale: ILocale = 'tr') => {
 export const COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    status: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ["{'_id':'0','name':'IBAN'}"] }),
-    content: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ['<p>Halil Gür</p>'] }),
+    status: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ["{'_id':'0','name':'IBAN'}"] }),
+    content: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['<p>Halil Gür</p>'] }),
   });
 };
 
@@ -104,28 +162,63 @@ export const COMPANY_MAIL_OPTIONS = z.object({
 export const COMPANY_SHIPPING_OPTIONS = z.object({
   method: z.string().meta({ examples: ['standard'] }),
   shipment: z.object({
-    standard: z.object({
-      dealer: z.string().optional().meta({ examples: ['KolayGelsin'] }),
-      price: z.number().optional().meta({ examples: [250] }),
-      currency: z.string().optional().meta({ examples: ['TRY'] }),
-    }).optional(),
-    free: z.object({
-      price: z.number().optional().meta({ examples: [5000] }),
-      currency: z.string().optional().meta({ examples: ['TRY'] }),
-    }).optional(),
+    standard: z
+      .object({
+        dealer: z
+          .string()
+          .optional()
+          .meta({ examples: ['KolayGelsin'] }),
+        price: z
+          .number()
+          .optional()
+          .meta({ examples: [250] }),
+        currency: z
+          .string()
+          .optional()
+          .meta({ examples: ['TRY'] }),
+      })
+      .optional(),
+    free: z
+      .object({
+        price: z
+          .number()
+          .optional()
+          .meta({ examples: [5000] }),
+        currency: z
+          .string()
+          .optional()
+          .meta({ examples: ['TRY'] }),
+      })
+      .optional(),
   }),
 });
 
 export const ADD_COMPANY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    name: z.string().min(2, { message: m.public_forms_validations_minLength(2) }).max(254, { message: m.public_forms_validations_maxLength(254) }).meta({ examples: ['Opia Heart'] }),
-    baseUrl: z.url({ message: m.public_forms_validations_url }).optional().meta({ examples: ['https://opiaheart.com'] }),
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Opia Heart'] }),
+    baseUrl: z
+      .url({ message: m.public_forms_validations_url })
+      .optional()
+      .meta({ examples: ['https://opiaheart.com'] }),
     logo: IMAGE_SCHEMA.shape.staticImages.optional(),
     favicon: IMAGE_SCHEMA.shape.staticImages.optional(),
-    description: z.string().max(1000, { message: m.public_forms_validations_maxLength(1000) }).optional(),
-    timeZone: z.string().optional().meta({ examples: ['Ankara'] }),
-    currency: z.string().optional().meta({ examples: ['TRY'] }),
+    description: z
+      .string()
+      .max(1000, { message: m.public_forms_validations_maxLength(1000) })
+      .optional(),
+    timeZone: z
+      .string()
+      .optional()
+      .meta({ examples: ['Ankara'] }),
+    currency: z
+      .string()
+      .optional()
+      .meta({ examples: ['TRY'] }),
     address: COMPANY_ADDRESS(locale),
     socialMedia: z.array(COMPANY_SOCIAL_MEDIA(locale)).optional(),
     payments: z.array(COMPANY_PAYMENT(locale)).optional(),

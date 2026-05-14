@@ -22,9 +22,9 @@ export const AddExternalSchema = registry.register('AddExternal', ADD_EXTERNAL);
 export const UpdateExternalSchema = registry.register('UpdateExternal', UPDATE_EXTERNAL);
 export const CheckSMTPSchema = registry.register('CheckSMTP', CHECK_SMTP);
 
-void ExternalIyzicoSchema,
+(void ExternalIyzicoSchema,
   ExternalGoogleSchema,
   ExternalFacebookSchema,
   ExternalTawkToSchema,
   ExternalCrispSchema,
-  ExternalGeliverSchema;
+  ExternalGeliverSchema);

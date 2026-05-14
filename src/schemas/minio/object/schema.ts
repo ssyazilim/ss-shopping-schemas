@@ -18,4 +18,7 @@ export const CopyObjectSchema = registry.register('CopyObject', COPY_OBJECT);
 
 export const PresignedUrlSchema = registry.register('PresignedUrl', PRESIGNED_URL);
 
-export const PresignedGetObjectSchema = registry.register('PresignedGetObject', PRESIGNED_GET_OBJECT);
+export const PresignedGetObjectSchema = registry.register(
+  'PresignedGetObject',
+  PRESIGNED_GET_OBJECT,
+);

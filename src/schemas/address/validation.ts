@@ -41,7 +41,6 @@ export const ADD_ADDRESS = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
       .meta({ examples: ['07500'] }),
     line: z
       .string()

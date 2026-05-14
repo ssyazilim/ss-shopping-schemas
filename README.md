@@ -111,11 +111,7 @@ Full interactive documentation: **https://ssyazilim.github.io/ss-shopping-schema
 ## API Response Format
 
 ```json
-// Success
-{ "success": { "message": "...", "data": { ... } } }
-
-// Error
-{ "error": { "message": "..." } }
+{ "success": { "message": "...", "data": {} } }
 ```
 
 ---

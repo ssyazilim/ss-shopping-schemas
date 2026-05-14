@@ -1,27 +1,6 @@
 import { z } from 'zod';
 import { registry } from './registry';
 
-export const isValidCard = (card: string) => {
-  const digits = card.replace(/\s/g, '');
-
-  let sum = 0;
-  let shouldDouble = false;
-
-  for (let i = digits.length - 1; i >= 0; i--) {
-    let digit = parseInt(digits[i]!);
-
-    if (shouldDouble) {
-      digit *= 2;
-      if (digit > 9) digit -= 9;
-    }
-
-    sum += digit;
-    shouldDouble = !shouldDouble;
-  }
-
-  return sum % 10 === 0;
-};
-
 export const PaginationQuerySchema = registry.register(
   'PaginationQuery',
   z.object({
@@ -43,8 +22,14 @@ export const ListQuerySchema = registry.register(
 export const DateRangeQuerySchema = registry.register(
   'DateRangeQuery',
   z.object({
-    startDate: z.string().optional().meta({ examples: ['2024-12-15T00:00:00.000Z'] }),
-    endDate: z.string().optional().meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
+    startDate: z
+      .string()
+      .optional()
+      .meta({ examples: ['2024-12-15T00:00:00.000Z'] }),
+    endDate: z
+      .string()
+      .optional()
+      .meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
   }),
 );
 
