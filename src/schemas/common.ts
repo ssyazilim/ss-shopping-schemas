@@ -5,7 +5,7 @@ export const PaginationQuerySchema = registry.register(
   'PaginationQuery',
   z.object({
     page: z.coerce.number().int().min(1).default(1),
-    limit: z.coerce.number().int().min(1).max(100).default(25).optional(),
+    limit: z.coerce.number().int().min(1).max(100).default(20).optional(),
   }),
 );
 
