@@ -651,10 +651,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     }
                   },
                   "required": [
@@ -666,7 +670,12 @@
               "dynamicImages": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
                 }
               }
             },
@@ -709,10 +718,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     }
                   },
                   "required": [
@@ -724,7 +737,12 @@
               "dynamicImages": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
                 }
               }
             },
@@ -882,10 +900,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     }
                   },
                   "required": [
@@ -897,7 +919,12 @@
               "dynamicImages": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
                 }
               }
             },
@@ -959,10 +986,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     }
                   },
                   "required": [
@@ -974,7 +1005,12 @@
               "dynamicImages": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
                 }
               }
             },
@@ -1705,10 +1741,14 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 },
                 "image": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 }
               },
               "required": [
@@ -1723,10 +1763,14 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 },
                 "image": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 }
               },
               "required": [
@@ -2365,10 +2409,14 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 },
                 "image": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 }
               },
               "required": [
@@ -2383,10 +2431,14 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 },
                 "image": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254
                 }
               },
               "required": [
@@ -5469,158 +5521,21 @@
           }
         }
       },
-      "images": {
-        "type": "object",
-        "properties": {
-          "staticImages": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "name",
-                "image"
-              ]
-            }
-          },
-          "dynamicImages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "staticImages",
-          "dynamicImages"
-        ]
-      },
-      "price": {
-        "type": "object",
-        "properties": {
-          "currency": {
-            "type": "string",
-            "examples": [
-              "TRY"
-            ]
-          },
-          "purchase": {
-            "type": "number",
-            "examples": [
-              1000
-            ]
-          },
-          "sell": {
-            "type": "number",
-            "examples": [
-              1500
-            ]
-          },
-          "dealerCode": {
-            "type": "string",
-            "examples": [
-              "SURAT"
-            ]
-          },
-          "shipping": {
-            "type": "number",
-            "examples": [
-              150
-            ]
-          },
-          "discount": {
-            "type": "number",
-            "examples": [
-              10
-            ]
-          },
-          "tax": {
-            "type": "number",
-            "examples": [
-              20
-            ]
-          }
-        },
-        "required": [
-          "currency",
-          "purchase",
-          "sell",
-          "dealerCode",
-          "shipping",
-          "discount",
-          "tax"
-        ]
-      },
-      "productProperties": {
-        "type": "object",
-        "properties": {
-          "hidePrice": {
-            "type": "boolean",
-            "examples": [
-              false
-            ]
-          },
-          "isFeatured": {
-            "type": "boolean",
-            "examples": [
-              false
-            ]
-          },
-          "isShippingFree": {
-            "type": "boolean",
-            "examples": [
-              false
-            ]
-          }
-        }
-      },
-      "variantsType": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "examples": [
-                "Renk"
-              ]
-            },
-            "variants": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "examples": [
-                [
-                  "Siyah"
-                ]
-              ]
-            }
-          },
-          "required": [
-            "name",
-            "variants"
-          ]
-        }
-      },
       "product": {
         "type": "object",
         "properties": {
           "title": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Lorem ipsum dolor sit amet"
             ]
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 65000
           },
           "images": {
             "type": "object",
@@ -5631,10 +5546,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     }
                   },
                   "required": [
@@ -5646,7 +5565,12 @@
               "dynamicImages": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
                 }
               }
             },
@@ -5660,42 +5584,51 @@
             "properties": {
               "currency": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 4,
                 "examples": [
                   "TRY"
                 ]
               },
               "purchase": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   1000
                 ]
               },
               "sell": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   1500
                 ]
               },
               "dealerCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "SURAT"
                 ]
               },
               "shipping": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   150
                 ]
               },
               "discount": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   10
                 ]
               },
               "tax": {
-                "type": "number",
+                "type": "integer",
+                "exclusiveMinimum": 0,
                 "examples": [
                   20
                 ]
@@ -5712,37 +5645,47 @@
             ]
           },
           "stockQuantity": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               100
             ]
           },
           "desi": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               2
             ]
           },
           "brand": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "67d15594f49546e19c4f2342"
             ]
           },
           "gtin": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "0123456789012"
             ]
           },
           "sku": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "0123456"
             ]
           },
           "category": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "67f38474e1d5b52fee02dcba"
             ]
@@ -5768,7 +5711,12 @@
                   false
                 ]
               }
-            }
+            },
+            "required": [
+              "hidePrice",
+              "isFeatured",
+              "isShippingFree"
+            ]
           }
         },
         "required": [
@@ -5790,12 +5738,16 @@
           "properties": {
             "title": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "Lorem ipsum dolor sit amet"
               ]
             },
             "description": {
-              "type": "string"
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 65000
             },
             "images": {
               "type": "object",
@@ -5806,10 +5758,14 @@
                     "type": "object",
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "image": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       }
                     },
                     "required": [
@@ -5821,7 +5777,12 @@
                 "dynamicImages": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                    ]
                   }
                 }
               },
@@ -5835,42 +5796,51 @@
               "properties": {
                 "currency": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 4,
                   "examples": [
                     "TRY"
                   ]
                 },
                 "purchase": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1000
                   ]
                 },
                 "sell": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1500
                   ]
                 },
                 "dealerCode": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "SURAT"
                   ]
                 },
                 "shipping": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     150
                   ]
                 },
                 "discount": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     10
                   ]
                 },
                 "tax": {
-                  "type": "number",
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     20
                   ]
@@ -5887,37 +5857,47 @@
               ]
             },
             "stockQuantity": {
-              "type": "number",
+              "type": "integer",
+              "minimum": 0,
               "examples": [
                 100
               ]
             },
             "desi": {
-              "type": "number",
+              "type": "integer",
+              "minimum": 0,
               "examples": [
                 2
               ]
             },
             "brand": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "67d15594f49546e19c4f2342"
               ]
             },
             "gtin": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "0123456789012"
               ]
             },
             "sku": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "0123456"
               ]
             },
             "category": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "67f38474e1d5b52fee02dcba"
               ]
@@ -5943,52 +5923,11 @@
                     false
                   ]
                 }
-              }
-            },
-            "_id": {
-              "type": "string",
-              "examples": [
-                "66f29aefff9245b28d05482e"
-              ]
-            },
-            "variantsType": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "examples": [
-                      "Renk"
-                    ]
-                  },
-                  "variants": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "examples": [
-                      [
-                        "Siyah"
-                      ]
-                    ]
-                  }
-                },
-                "required": [
-                  "name",
-                  "variants"
-                ]
-              }
-            },
-            "variants": {
-              "type": "array",
-              "items": {
-                "type": "string"
               },
-              "examples": [
-                [
-                  "66f29aefff9245b28d05482c"
-                ]
+              "required": [
+                "hidePrice",
+                "isFeatured",
+                "isShippingFree"
               ]
             }
           },
@@ -6001,9 +5940,7 @@
             "brand",
             "sku",
             "category",
-            "properties",
-            "variantsType",
-            "variants"
+            "properties"
           ]
         }
       },
@@ -6017,29 +5954,6 @@
             ]
           }
         }
-      },
-      "productImage": {
-        "type": "object",
-        "properties": {
-          "image": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "image"
-            ]
-          }
-        },
-        "required": [
-          "image"
-        ]
       },
       "variant": {
         "type": "object",
@@ -6059,10 +5973,14 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
                     }
                   },
                   "required": [
@@ -6074,7 +5992,12 @@
               "dynamicImages": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
                 }
               }
             },
@@ -6088,42 +6011,51 @@
             "properties": {
               "currency": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 4,
                 "examples": [
                   "TRY"
                 ]
               },
               "purchase": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   1000
                 ]
               },
               "sell": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   1500
                 ]
               },
               "dealerCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "SURAT"
                 ]
               },
               "shipping": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   150
                 ]
               },
               "discount": {
                 "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   10
                 ]
               },
               "tax": {
-                "type": "number",
+                "type": "integer",
+                "exclusiveMinimum": 0,
                 "examples": [
                   20
                 ]
@@ -6183,6 +6115,8 @@
               "properties": {
                 "name": {
                   "type": "string",
+                  "minLength": 1,
+                  "maxLength": 254,
                   "examples": [
                     "Renk"
                   ]
@@ -6190,7 +6124,9 @@
                 "variants": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 254
                   },
                   "examples": [
                     [
@@ -6223,10 +6159,14 @@
                       "type": "object",
                       "properties": {
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 254
                         },
                         "image": {
-                          "type": "string"
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 254
                         }
                       },
                       "required": [
@@ -6238,7 +6178,12 @@
                   "dynamicImages": {
                     "type": "array",
                     "items": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254,
+                      "examples": [
+                        "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                      ]
                     }
                   }
                 },
@@ -6252,42 +6197,51 @@
                 "properties": {
                   "currency": {
                     "type": "string",
+                    "minLength": 2,
+                    "maxLength": 4,
                     "examples": [
                       "TRY"
                     ]
                   },
                   "purchase": {
                     "type": "number",
+                    "exclusiveMinimum": 0,
                     "examples": [
                       1000
                     ]
                   },
                   "sell": {
                     "type": "number",
+                    "exclusiveMinimum": 0,
                     "examples": [
                       1500
                     ]
                   },
                   "dealerCode": {
                     "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
                     "examples": [
                       "SURAT"
                     ]
                   },
                   "shipping": {
                     "type": "number",
+                    "exclusiveMinimum": 0,
                     "examples": [
                       150
                     ]
                   },
                   "discount": {
                     "type": "number",
+                    "exclusiveMinimum": 0,
                     "examples": [
                       10
                     ]
                   },
                   "tax": {
-                    "type": "number",
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
                     "examples": [
                       20
                     ]
@@ -6363,10 +6317,14 @@
                     "type": "object",
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "image": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       }
                     },
                     "required": [
@@ -6378,7 +6336,12 @@
                 "dynamicImages": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                    ]
                   }
                 }
               },
@@ -6392,42 +6355,51 @@
               "properties": {
                 "currency": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 4,
                   "examples": [
                     "TRY"
                   ]
                 },
                 "purchase": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1000
                   ]
                 },
                 "sell": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1500
                   ]
                 },
                 "dealerCode": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "SURAT"
                   ]
                 },
                 "shipping": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     150
                   ]
                 },
                 "discount": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     10
                   ]
                 },
                 "tax": {
-                  "type": "number",
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     20
                   ]
@@ -6501,6 +6473,8 @@
               "properties": {
                 "name": {
                   "type": "string",
+                  "minLength": 1,
+                  "maxLength": 254,
                   "examples": [
                     "Renk"
                   ]
@@ -6508,7 +6482,9 @@
                 "variants": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 254
                   },
                   "examples": [
                     [
@@ -6561,6 +6537,8 @@
               "properties": {
                 "name": {
                   "type": "string",
+                  "minLength": 1,
+                  "maxLength": 254,
                   "examples": [
                     "Renk"
                   ]
@@ -6568,7 +6546,9 @@
                 "variants": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 254
                   },
                   "examples": [
                     [
