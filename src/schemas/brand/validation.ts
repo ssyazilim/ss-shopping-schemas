@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import * as locales from '../../locales';
-import { ImageSchema } from '../../types/zod/image';
 import type { ILocale } from '../../locales';
+import { IMAGES } from '../product/validation';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
@@ -14,7 +14,7 @@ export const ADD_BRAND = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ example: 'Beko' }),
-    images: ImageSchema,
+    images: IMAGES(locale),
     productCount: z.number().optional().meta({ example: 0 }),
   });
 };

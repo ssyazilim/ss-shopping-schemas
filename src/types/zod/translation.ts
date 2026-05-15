@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { TRANSLATION } from '../../schemas/translation/validation';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 
 /*************************

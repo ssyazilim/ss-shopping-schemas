@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { PRICE, VARIANTS_TYPE } from '../product/validation';
-import { ImageSchema } from '../../types/zod/image';
+import { PRICE, VARIANTS_TYPE, IMAGES } from '../product/validation';
 
 export const VARIANT = () =>
   z.object({
     name: z.string().meta({ examples: ['Siyah'] }),
-    images: ImageSchema,
+    images: IMAGES(),
     price: PRICE(),
     stockQuantity: z.number().meta({ examples: [100] }),
     sku: z.string().meta({ examples: ['4SN106C'] }),

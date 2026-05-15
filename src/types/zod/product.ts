@@ -1,15 +1,19 @@
 import { z } from 'zod';
-import { getDefaultsForSchema } from 'zod-defaults';
-import { PRICE, PRODUCT } from '../../schemas';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
+import { IMAGES, PRICE, VARIANTS_TYPE, ADD_PRODUCT } from '../../schemas';
 import { BrandSchema } from './brand';
 import { CategorySchema } from './category';
 import { MongoSchema } from './common';
-import { ImageSchema, StaticImageSchema, DynamicImageSchema } from './image';
-import type { IImage } from './image';
 import type { IVariant } from './variant';
 
-export type { IStaticImage, IDynamicImage, IImage } from './image';
-export { StaticImageSchema, DynamicImageSchema, ImageSchema };
+export type IImage = z.infer<typeof ImageSchema>;
+export const ImageSchema = IMAGES();
+
+export type IStaticImage = z.infer<typeof StaticImageSchema>;
+export const StaticImageSchema = ImageSchema.shape.staticImages;
+
+export type IDynamicImage = z.infer<typeof DynamicImageSchema>;
+export const DynamicImageSchema = ImageSchema.shape.dynamicImages;
 
 export type ILike = z.infer<typeof LikeSchema>;
 export const LikeSchema = z.object({
@@ -28,15 +32,12 @@ export const PriceSchema = PRICE().extend({
 });
 
 export type IType = z.infer<typeof TypeSchema>;
-export const TypeSchema = z.object({
-  name: z.string(),
-  variants: z.array(z.string()),
-});
+export const TypeSchema = VARIANTS_TYPE();
 
 export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants'> & {
   variants: string[] | IVariant[];
 };
-export const ProductSchema = PRODUCT()
+export const ProductSchema = ADD_PRODUCT()
   .extend({
     price: PriceSchema,
     video: z.string().optional(),

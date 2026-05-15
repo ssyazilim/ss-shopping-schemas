@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import {
   ADD_COMPANY,
   COMPANY_ADDRESS,

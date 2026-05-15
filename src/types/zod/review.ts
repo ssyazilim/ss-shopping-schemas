@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { ADD_REVIEW } from '../../schemas/review/validation';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import type { IUser } from './user';
 import type { IProduct } from './product';

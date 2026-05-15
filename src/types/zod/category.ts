@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import { ImageSchema } from './product';
 import { ADD_CATEGORY } from '../../schemas';
@@ -29,6 +29,7 @@ export const TagsSchema = z.object({
 });
 
 export type ICategoryMenu = z.infer<typeof CategoryMenuSchema>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CategoryMenuSchema: z.ZodType<any> = z.object({
   _id: z.string(),
   name: z.string(),

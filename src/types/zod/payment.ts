@@ -8,12 +8,12 @@ import {
   SAVE_PAYMENT,
 } from '../../schemas/payment/validation';
 import { MongoSchema } from './common';
-import { ImageSchema } from './image';
+import { ImageSchema } from './product';
 import type { IProduct } from './product';
 import type { IVariant } from './variant';
 import { DEFAULT_USER } from './user';
 import type { IUser } from './user';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import type { IDefault } from './contact';
 
 /*************************

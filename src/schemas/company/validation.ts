@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import * as locales from '../../locales';
 import type { ILocale } from '../../locales';
-import { ImageSchema } from '../../types/zod/image';
+import { ImageSchema } from '../../types/zod/product';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 

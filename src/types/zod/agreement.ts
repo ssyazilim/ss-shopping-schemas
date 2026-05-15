@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import { ADD_AGREEMENT } from '../../schemas';
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { ADD_POST, COMMENT_POST } from '../../schemas/post/validation';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import type { IUser } from './user';
 

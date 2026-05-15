@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { MongoSchema } from './common';
 import { IpDetailsSchema } from './traffic';
 import { StaticImageSchema } from './product';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
 /*************************
  *       TYPES           *

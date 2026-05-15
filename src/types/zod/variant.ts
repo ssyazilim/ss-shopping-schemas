@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { VARIANT } from '../../schemas';
-import { getDefaultsForSchema } from 'zod-defaults';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import { PriceSchema, ProductSchema } from './product';
-import { ImageSchema } from './image';
+import { ImageSchema } from './product';
 
 /*************************
  *       TYPES           *
