@@ -1,31 +1,31 @@
 export { registry } from './registry';
 
-// schema definitions for OPENAPI producing
+// schema definitions for OPENAPI producing (side-effect only — registers with registry)
 export * from './common';
-export * from './auth/schema';
-export * from './address/schema';
-export * from './agreement/schema';
-export * from './brand/schema';
-export * from './card/schema';
-export * from './cart/schema';
-export * from './category/schema';
-export * from './company/schema';
-export * from './external/schema';
-export * from './form/schema';
-export * from './google/schema';
-export * from './gsm/schema';
-export * from './minio/bucket/schema';
-export * from './minio/object/schema';
-export * from './payment/schema';
-export * from './post/schema';
-export * from './product/schema';
-export * from './product-variant/schema';
-export * from './question/schema';
-export * from './review/schema';
-export * from './shipping/schema';
-export * from './traffic/schema';
-export * from './translation/schema';
-export * from './user/schema';
+import './auth/schema';
+import './address/schema';
+import './agreement/schema';
+import './brand/schema';
+import './card/schema';
+import './cart/schema';
+import './category/schema';
+import './company/schema';
+import './external/schema';
+import './form/schema';
+import './google/schema';
+import './gsm/schema';
+import './minio/bucket/schema';
+import './minio/object/schema';
+import './payment/schema';
+import './post/schema';
+import './product/schema';
+import './product-variant/schema';
+import './question/schema';
+import './review/schema';
+import './shipping/schema';
+import './traffic/schema';
+import './translation/schema';
+import './user/schema';
 
 // Validation defines using for backend and frontend validation middleware
 export * from './address/validation';

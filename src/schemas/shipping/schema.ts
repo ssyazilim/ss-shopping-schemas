@@ -14,17 +14,32 @@ import {
 
 registry.register('shippingOrderInfo', SHIPPING_ORDER_INFO());
 
-export const AddShippingAddressSchema = registry.register('addShippingAddress', ADD_SHIPPING_ADDRESS());
+export const AddShippingAddressSchema = registry.register(
+  'addShippingAddress',
+  ADD_SHIPPING_ADDRESS(),
+);
 
-export const AddShippingShipmentSchema = registry.register('addShippingShipment', ADD_SHIPPING_SHIPMENT());
+export const AddShippingShipmentSchema = registry.register(
+  'addShippingShipment',
+  ADD_SHIPPING_SHIPMENT(),
+);
 
-export const CreateShippingShipmentSchema = registry.register('createShippingShipment', CREATE_SHIPPING_SHIPMENT());
+export const CreateShippingShipmentSchema = registry.register(
+  'createShippingShipment',
+  CREATE_SHIPPING_SHIPMENT(),
+);
 
 registry.register('shippingReturnAddress', SHIPPING_RETURN_ADDRESS());
 
-export const ReturnShippingShipmentSchema = registry.register('returnShippingShipment', RETURN_SHIPPING_SHIPMENT());
+export const ReturnShippingShipmentSchema = registry.register(
+  'returnShippingShipment',
+  RETURN_SHIPPING_SHIPMENT(),
+);
 
-export const UpdateShippingPackageSchema = registry.register('updateShippingPackage', UPDATE_SHIPPING_PACKAGE());
+export const UpdateShippingPackageSchema = registry.register(
+  'updateShippingPackage',
+  UPDATE_SHIPPING_PACKAGE(),
+);
 
 export const ShippingTemplateSchema = registry.register('shippingTemplate', SHIPPING_TEMPLATE());
 

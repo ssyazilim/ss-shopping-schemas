@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ImageSchema } from '../../types/product';
+import { ImageSchema } from '../../types/zod/image';
 
 export const PRICE = () =>
   z.object({
@@ -14,9 +14,18 @@ export const PRICE = () =>
 
 export const PRODUCT_PROPERTIES = () =>
   z.object({
-    hidePrice: z.boolean().optional().meta({ examples: [false] }),
-    isFeatured: z.boolean().optional().meta({ examples: [false] }),
-    isShippingFree: z.boolean().optional().meta({ examples: [false] }),
+    hidePrice: z
+      .boolean()
+      .optional()
+      .meta({ examples: [false] }),
+    isFeatured: z
+      .boolean()
+      .optional()
+      .meta({ examples: [false] }),
+    isShippingFree: z
+      .boolean()
+      .optional()
+      .meta({ examples: [false] }),
   });
 
 export const VARIANTS_TYPE = () =>
@@ -36,7 +45,10 @@ export const PRODUCT = () =>
     stockQuantity: z.number().meta({ examples: [100] }),
     desi: z.number().meta({ examples: [2] }),
     brand: z.string().meta({ examples: ['67d15594f49546e19c4f2342'] }),
-    gtin: z.string().optional().meta({ examples: ['0123456789012'] }),
+    gtin: z
+      .string()
+      .optional()
+      .meta({ examples: ['0123456789012'] }),
     sku: z.string().meta({ examples: ['0123456'] }),
     category: z.string().meta({ examples: ['67f38474e1d5b52fee02dcba'] }),
     properties: PRODUCT_PROPERTIES(),
@@ -45,7 +57,10 @@ export const PRODUCT = () =>
 export const ADD_PRODUCTS = () =>
   z.array(
     PRODUCT().extend({
-      _id: z.string().optional().meta({ examples: ['66f29aefff9245b28d05482e'] }),
+      _id: z
+        .string()
+        .optional()
+        .meta({ examples: ['66f29aefff9245b28d05482e'] }),
       variantsType: VARIANTS_TYPE(),
       variants: z.array(z.string()).meta({ examples: [['66f29aefff9245b28d05482c']] }),
     }),
@@ -53,7 +68,10 @@ export const ADD_PRODUCTS = () =>
 
 export const EDIT_PRODUCT = () =>
   z.object({
-    title: z.string().optional().meta({ examples: ['Grundig Gpdh 9634'] }),
+    title: z
+      .string()
+      .optional()
+      .meta({ examples: ['Grundig Gpdh 9634'] }),
   });
 
 export const PRODUCT_IMAGE = () =>

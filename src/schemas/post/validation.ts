@@ -23,4 +23,3 @@ export const COMMENT_POST = () =>
     name: z.string().optional(),
     text: z.string().optional(),
   });
-

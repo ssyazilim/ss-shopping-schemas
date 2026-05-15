@@ -1,6 +1,14 @@
 import { registry } from '../registry';
-import { PRICE, PRODUCT_PROPERTIES, VARIANTS_TYPE, PRODUCT, ADD_PRODUCTS, EDIT_PRODUCT, PRODUCT_IMAGE } from './validation';
-import { ImageSchema } from '../../types/product';
+import {
+  PRICE,
+  PRODUCT_PROPERTIES,
+  VARIANTS_TYPE,
+  PRODUCT,
+  ADD_PRODUCTS,
+  EDIT_PRODUCT,
+  PRODUCT_IMAGE,
+} from './validation';
+import { ImageSchema } from '../../types/zod/image';
 
 export const ImagesSchema = registry.register('images', ImageSchema);
 export const PriceSchema = registry.register('price', PRICE());

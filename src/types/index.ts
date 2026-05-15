@@ -1,11 +1,2 @@
-import type { z } from 'zod';
-import type { PaginationQuerySchema, ApiErrorSchema } from '../schemas';
-
-export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
-export type ApiError = z.infer<typeof ApiErrorSchema>;
-
-export * from './address';
-export * from './agreement';
-export * from './auth';
-export * from './card';
-export * from './category';
+export * from './zod';
+export * from './normal';

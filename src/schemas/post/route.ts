@@ -36,8 +36,14 @@ registry.registerPath({
   operationId: 'getPosts',
   request: {
     query: ListQuerySchema.extend({
-      type: z.string().optional().meta({ examples: ['blog'] }),
-      exclude: z.string().optional().meta({ examples: ['comments'] }),
+      type: z
+        .string()
+        .optional()
+        .meta({ examples: ['blog'] }),
+      exclude: z
+        .string()
+        .optional()
+        .meta({ examples: ['comments'] }),
     }),
   },
   responses,

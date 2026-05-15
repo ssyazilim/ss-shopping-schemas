@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import * as locales from '../../locales';
 import type { ILocale } from '../../locales';
-import { ImageSchema } from '../../types/product';
+import { ImageSchema } from '../../types/zod/image';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
@@ -101,6 +101,10 @@ export const COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
 };
 
 export const COMPANY_PROPERTIES_HOME_PAGE = z.object({
+  article: z.boolean(),
+  blog: z.boolean(),
+  event: z.boolean(),
+  news: z.boolean(),
   category: z.boolean(),
   categoryPreview: z.boolean(),
   cta: z.boolean(),
@@ -129,6 +133,7 @@ export const COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
   notifyWhenPriceDrops: z.boolean(),
   notifyWhenProductBackInStock: z.boolean(),
   hideNoStockProducts: z.boolean(),
+  hideNoPriceProducts: z.boolean(),
   hideReturnPeriod: z.boolean(),
   selectedProductListing: z.string(),
   taxAmount: z.number().meta({ examples: [20] }),
@@ -141,8 +146,8 @@ export const COMPANY_PROPERTIES_ORDER_SETTINGS = z.object({
 });
 
 export const COMPANY_PROPERTIES = z.object({
-  paymentMethod: z.string().meta({ examples: ['cash'] }),
-  liveChatMethod: z.string().meta({ examples: ['none'] }),
+  paymentMethod: z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
+  liveChatMethod: z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
   homePage: COMPANY_PROPERTIES_HOME_PAGE,
   paymentSettings: COMPANY_PROPERTIES_PAYMENT_SETTINGS,
   productSettings: COMPANY_PROPERTIES_PRODUCT_SETTINGS.optional(),
@@ -156,40 +161,47 @@ export const COMPANY_MAIL_OPTIONS = z.object({
   port: z.number().meta({ examples: [465] }),
   mainMail: z.string().meta({ examples: ['iletisim@example.com'] }),
   secondMail: z.string().meta({ examples: ['support@example.com'] }),
-  from: z.string().optional(),
+  from: z.string(),
+});
+
+export const COMPANY_COMMUNICATION_OPTIONS = z.object({
+  method: z.enum(['none', 'netgsm', 'twilio']).meta({ examples: ['none'] }),
+  netgsm: z.object({
+    sender: z.string(),
+    phoneNumber: z.string(),
+  }),
+  twilio: z.object({
+    accountSid: z.string(),
+    authToken: z.string(),
+    phoneNumber: z.string(),
+  }),
 });
 
 export const COMPANY_SHIPPING_OPTIONS = z.object({
   method: z.string().meta({ examples: ['standard'] }),
   shipment: z.object({
-    standard: z
-      .object({
-        dealer: z
-          .string()
-          .optional()
-          .meta({ examples: ['KolayGelsin'] }),
-        price: z
-          .number()
-          .optional()
-          .meta({ examples: [250] }),
-        currency: z
-          .string()
-          .optional()
-          .meta({ examples: ['TRY'] }),
-      })
-      .optional(),
-    free: z
-      .object({
-        price: z
-          .number()
-          .optional()
-          .meta({ examples: [5000] }),
-        currency: z
-          .string()
-          .optional()
-          .meta({ examples: ['TRY'] }),
-      })
-      .optional(),
+    automatic: z.object({
+      name: z.string(),
+      code: z.string(),
+    }),
+    standard: z.object({
+      name: z.string(),
+      code: z.string(),
+      price: z.number(),
+      priceLocale: z.number(),
+      currency: z.string(),
+      currencyLocale: z.string(),
+    }),
+    geliver: z.object({
+      isTest: z.boolean(),
+    }),
+  }),
+  free: z.object({
+    isEnabled: z.boolean(),
+    price: z.number(),
+    priceLocale: z.number(),
+    currency: z.string(),
+    currencyLocale: z.string(),
   }),
 });
 
@@ -224,6 +236,7 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
     payments: z.array(COMPANY_PAYMENT(locale)).optional(),
     properties: COMPANY_PROPERTIES.optional(),
     mailOptions: COMPANY_MAIL_OPTIONS.optional(),
+    communicationOptions: COMPANY_COMMUNICATION_OPTIONS.optional(),
     shippingOptions: COMPANY_SHIPPING_OPTIONS.optional(),
   });
 };

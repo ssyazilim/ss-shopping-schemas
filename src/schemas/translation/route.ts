@@ -26,7 +26,10 @@ registry.registerPath({
   operationId: 'getTranslations',
   request: {
     query: ListQuerySchema.extend({
-      exclude: z.string().optional().meta({ examples: ['translations,logs'] }),
+      exclude: z
+        .string()
+        .optional()
+        .meta({ examples: ['translations,logs'] }),
     }),
   },
   responses,

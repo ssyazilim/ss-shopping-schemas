@@ -14,7 +14,10 @@ import {
 } from './validation';
 
 export const CompanyAddressSchema = registry.register('CompanyAddress', COMPANY_ADDRESS());
-export const CompanySocialMediaSchema = registry.register('CompanySocialMedia', COMPANY_SOCIAL_MEDIA());
+export const CompanySocialMediaSchema = registry.register(
+  'CompanySocialMedia',
+  COMPANY_SOCIAL_MEDIA(),
+);
 export const CompanyPaymentSchema = registry.register('CompanyPayment', COMPANY_PAYMENT());
 const CompanyPropertiesHomePageSchema = registry.register(
   'CompanyPropertiesHomePage',

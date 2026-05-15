@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { ContactMeSchema, ContactMeErrorSchema, ContactMeResumeSchema, FileSchema, CheckSMTPSchema } from './schema';
+import {
+  ContactMeSchema,
+  ContactMeErrorSchema,
+  ContactMeResumeSchema,
+  FileSchema,
+  CheckSMTPSchema,
+} from './schema';
 import { ApiSuccessSchema, ApiErrorSchema } from '../common';
 
 const responses = {

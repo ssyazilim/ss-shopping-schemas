@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from 'zod-defaults';
 import { MongoSchema } from './common';
-import { ADD_BRAND } from '../schemas';
+import { ADD_BRAND } from '../../schemas';
 
 /*************************
  *       TYPES           *

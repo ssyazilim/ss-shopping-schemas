@@ -2,7 +2,10 @@ import { z } from 'zod';
 
 export const EDIT_USER = () =>
   z.object({
-    name: z.string().optional().meta({ examples: ['Mahmut'] }),
+    name: z
+      .string()
+      .optional()
+      .meta({ examples: ['Mahmut'] }),
   });
 
 export const DELETE_USER = () =>

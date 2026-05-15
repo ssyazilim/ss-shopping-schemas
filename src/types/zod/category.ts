@@ -1,13 +1,14 @@
 import { z } from 'zod';
+import { getDefaultsForSchema } from 'zod-defaults';
 import { MongoSchema } from './common';
 import { ImageSchema } from './product';
-import { ADD_CATEGORY } from '../schemas';
+import { ADD_CATEGORY } from '../../schemas';
 
 /*************************
  *        TYPES          *
  *************************/
-export type ICategory = z.infer<typeof CategoryDocSchema>;
-export const CategoryDocSchema = ADD_CATEGORY().extend(MongoSchema.shape);
+export type ICategory = z.infer<typeof CategorySchema>;
+export const CategorySchema = ADD_CATEGORY().extend(MongoSchema.shape);
 
 export type ICategoryYML = z.infer<typeof CategoryYMLSchema>;
 export const CategoryYMLSchema = z.object({
@@ -36,3 +37,8 @@ export const CategoryMenuSchema: z.ZodType<any> = z.object({
   images: ImageSchema,
   subCategories: z.lazy(() => z.array(CategoryMenuSchema)),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const DEFAULT_CATEGORY: ICategory = getDefaultsForSchema(CategorySchema);

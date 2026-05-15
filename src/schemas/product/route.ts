@@ -28,7 +28,10 @@ registry.registerPath({
   request: {
     query: ListQuerySchema.extend({
       category: z.string().optional(),
-      filters: z.string().optional().meta({ examples: ['color:red,size:XL'] }),
+      filters: z
+        .string()
+        .optional()
+        .meta({ examples: ['color:red,size:XL'] }),
     }),
   },
   responses,
@@ -42,7 +45,11 @@ registry.registerPath({
   operationId: 'getItems',
   request: {
     query: z.object({
-      limit: z.number().int().optional().meta({ examples: [10] }),
+      limit: z
+        .number()
+        .int()
+        .optional()
+        .meta({ examples: [10] }),
     }),
   },
   responses,
@@ -75,7 +82,10 @@ registry.registerPath({
   request: {
     params: z.object({ productId: z.string() }),
     query: z.object({
-      locale: z.string().optional().meta({ examples: ['tr'] }),
+      locale: z
+        .string()
+        .optional()
+        .meta({ examples: ['tr'] }),
     }),
   },
   responses,

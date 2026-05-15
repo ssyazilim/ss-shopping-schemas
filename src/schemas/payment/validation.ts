@@ -24,7 +24,10 @@ const PAYMENT_ADDRESS = (examples: {
     country: z.string().meta({ examples: ['Turkey'] }),
     city: z.string().meta({ examples: ['Antalya'] }),
     address: z.string().meta({ examples: [examples.address] }),
-    zipCode: z.string().optional().meta({ examples: [examples.zipCode] }),
+    zipCode: z
+      .string()
+      .optional()
+      .meta({ examples: [examples.zipCode] }),
   });
 
 export const BILLING_ADDRESS = () =>

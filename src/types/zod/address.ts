@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { UserSchema } from './user';
-import { ADD_ADDRESS } from '../schemas';
+import { ADD_ADDRESS } from '../../schemas';
 import { MongoSchema } from './common';
 
 /*************************

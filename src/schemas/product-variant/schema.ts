@@ -1,5 +1,11 @@
 import { registry } from '../registry';
-import { VARIANT, ADD_VARIANT, ADD_VARIANTS_MULTI, UPDATE_VARIANT, DELETE_FOR_VARIANT } from './validation';
+import {
+  VARIANT,
+  ADD_VARIANT,
+  ADD_VARIANTS_MULTI,
+  UPDATE_VARIANT,
+  DELETE_FOR_VARIANT,
+} from './validation';
 
 export const VariantSchema = registry.register('variant', VARIANT());
 

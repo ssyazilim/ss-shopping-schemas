@@ -1,14 +1,14 @@
 import type { z } from 'zod';
-import type { AddUserSchema, PasswordResetCompleteUserSchema } from '../schemas';
+import { ADD_USER, PASSWORD_RESET_COMPLETE } from '../../schemas/auth/validation';
 
 /*************************
  *       TYPES           *
  *************************/
 export type IUserRole = 'ROLE_USER' | 'ROLE_ADMIN';
 
-export type IUserRegister = z.infer<typeof AddUserSchema>;
+export type IUserRegister = z.infer<ReturnType<typeof ADD_USER>>;
 
-export type IResetPasswordForm = z.infer<typeof PasswordResetCompleteUserSchema>;
+export type IResetPasswordForm = z.infer<ReturnType<typeof PASSWORD_RESET_COMPLETE>>;
 
 export interface ICommonMail {
   userName: string;

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from 'zod-defaults';
 import { MongoSchema } from './common';
-import { ADD_AGREEMENT } from '../schemas';
+import { ADD_AGREEMENT } from '../../schemas';
 
 /*************************
  *        TYPES          *

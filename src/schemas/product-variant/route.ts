@@ -1,6 +1,11 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddVariantSchema, AddVariantsMultiSchema, UpdateVariantSchema, DeleteForVariantSchema } from './schema';
+import {
+  AddVariantSchema,
+  AddVariantsMultiSchema,
+  UpdateVariantSchema,
+  DeleteForVariantSchema,
+} from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema } from '../common';
 
 const responses = {

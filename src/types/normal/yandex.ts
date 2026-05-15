@@ -1,0 +1,35 @@
+// https://yandex.com.tr/support/direct/tr/feeds/requirements-yml?tabs=defaultTabsGroup-jamhuehl_basit%2520a%25c3%25a7%25c4%25b1klama%2520t%25c3%25bcr%25c3%25bc
+export interface IReqXMLYandex {
+  index: number;
+  id: string;
+  name: string;
+  typePrefix: string;
+  model: string;
+  vendor: string;
+  vendorCode?: string;
+  categoryId: string;
+  url: string;
+  picture: string[];
+  description?: string;
+  sales_notes?: string;
+  param?: string;
+  price: string;
+  currencyId: string;
+  video?: string;
+  market_category?: string;
+  store?: boolean;
+  pickup?: boolean;
+  delivery?: boolean;
+  manufacturer_warranty?: boolean;
+  country_of_origin?: string;
+  age?: string;
+  adult?: boolean;
+  downloadable?: boolean;
+  collectionId?: string;
+  custom_label_0?: string;
+  custom_label_1?: string;
+  custom_label_2?: string;
+  custom_label_3?: string;
+  custom_label_4?: string;
+  custom_score?: string;
+}
