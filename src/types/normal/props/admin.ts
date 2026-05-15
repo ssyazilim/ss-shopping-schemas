@@ -295,7 +295,7 @@ export interface PVariantAdd {
   isAdd?: boolean;
   rowData?: ITableIndex & IVariant;
   products?: IProduct[];
-  dealerPrices?: any[];
+  dealerPrices?: unknown[];
 }
 
 export interface PProductAdd {
@@ -306,7 +306,7 @@ export interface PProductAdd {
   brands?: IBrand[];
   taxAmount?: string;
   dealer?: string;
-  dealerPrices?: any[];
+  dealerPrices?: unknown[];
 }
 
 export interface PAgreementAdd {
@@ -362,7 +362,7 @@ export interface PSellerShipping {
   company?: ICompany;
   external?: IExternal;
   currencies?: IUpdatedData[];
-  dealers?: any[];
+  dealers?: unknown[];
 }
 
 export interface PSocialMedia {
@@ -407,7 +407,13 @@ export interface PMailOptions {
 
 export interface PPaymentAdd {
   isAdd?: boolean;
-  payment?: { _id?: string; status?: string; content?: string; createdAt?: string; updatedAt?: string };
+  payment?: {
+    _id?: string;
+    status?: string;
+    content?: string;
+    createdAt?: string;
+    updatedAt?: string;
+  };
 }
 
 export interface PAddQuestion {
@@ -508,7 +514,7 @@ export interface PDefaultForm {
 }
 
 export interface PDraggableList {
-  modelValue?: any[];
+  modelValue?: unknown[];
 }
 
 export interface PFileUpload {
@@ -551,7 +557,7 @@ export interface PInputOverlap {
 }
 
 export interface PRadioList {
-  data?: { _id?: string | number; [key: string]: any }[];
+  data?: { _id?: string | number; [key: string]: unknown }[];
   modelValue?: object;
   type?: string;
   selectedIndex?: number;
@@ -576,7 +582,7 @@ export interface PSearch {
 }
 
 export interface PSelectCheck {
-  data?: { name?: string; [key: string]: any }[];
+  data?: { name?: string; [key: string]: unknown }[];
   modelValue?: string;
   type?: string;
   labelTitle?: string;
@@ -585,7 +591,7 @@ export interface PSelectCheck {
 }
 
 export interface PSelectCombo {
-  data?: { [key: string]: any }[];
+  data?: { [key: string]: unknown }[];
   modelValue?: string;
   type?: string;
   uniqueId?: string;
@@ -601,7 +607,7 @@ export interface PSelectCombo {
 }
 
 export interface PSelectDefault {
-  data?: { name?: string; code?: string; [key: string]: any }[];
+  data?: { name?: string; code?: string; [key: string]: unknown }[];
   modelValue?: string;
   type?: 'default' | 'translation' | 'category' | 'sort';
   uniqueId?: string;
@@ -679,7 +685,7 @@ export interface PTextArea {
 }
 
 export interface PAccordion {
-  data?: { name?: string; [key: string]: any }[];
+  data?: { name?: string; [key: string]: unknown }[];
 }
 
 export interface PPrivateSidebar {
@@ -790,7 +796,7 @@ export interface PShipmentAdd {
   products?: IProduct[];
   variants?: IVariant[];
   phoneCodes?: IPhoneCode[];
-  templates?: any[];
+  templates?: unknown[];
   receivers?: { name?: string; description?: string; current?: boolean }[];
   senders?: { name?: string; description?: string; current?: boolean }[];
   cities?: IGeliverCity[];
@@ -803,7 +809,7 @@ export interface PShipping {
 }
 
 export interface PDesiInformation {
-  templates?: any[];
+  templates?: unknown[];
   item?: IProductAndVariant;
 }
 
@@ -822,7 +828,7 @@ export interface PProviderAdd {
 }
 
 export interface PRadioListSmall {
-  data?: { name?: string; [key: string]: any }[];
+  data?: { name?: string; [key: string]: unknown }[];
   selectedData?: string;
   dataIndex?: number;
   formClass?: string;
@@ -859,7 +865,11 @@ export interface PPbar {
 /*************************
  *       CONSTANTS       *
  *************************/
-export const DEFAULT_SELLER_DATA: PGoogle['sellerData'] = { name: '', baseUrl: '', description: '' };
+export const DEFAULT_SELLER_DATA: PGoogle['sellerData'] = {
+  name: '',
+  baseUrl: '',
+  description: '',
+};
 export const DEFAULT_VISITORS: PFunnel['visitors'] = {
   totalReferrer: 0,
   totalDirect: 0,

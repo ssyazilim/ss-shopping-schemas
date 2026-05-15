@@ -64,5 +64,5 @@ export const LifeCycleConfigSchema = z.object({
   Expiration: z.object({ Days: z.number() }),
 });
 
-export type IStatOpts = { [key: string]: any } | Record<string, never>;
+export type IStatOpts = { [key: string]: unknown } | Record<string, never>;
 export type IDeleteOpts = { versionId: string; governanceBypass: boolean } | Record<string, never>;

@@ -71,7 +71,7 @@ export interface PPTabPanel {
 
 export interface PPSlider {
   products?: IProduct[];
-  dealerPrices?: any[];
+  dealerPrices?: unknown[];
   productSettings?: IProductSettings;
   shippingOptions?: IShippingOptions;
 }
@@ -89,7 +89,7 @@ export interface PPReceipt {
 }
 
 export interface PPProductList {
-  dealerPrices?: any[];
+  dealerPrices?: unknown[];
   products?: IProduct[];
   totalCount?: number;
   totalPage?: number;
@@ -98,13 +98,13 @@ export interface PPProductList {
 export interface PPQuickView {
   show?: boolean;
   item?: IProduct;
-  dealerPrices?: any[];
+  dealerPrices?: unknown[];
   productSettings?: IProductSettings;
   shippingOptions?: IShippingOptions;
 }
 
 export interface PPDataList {
-  items?: any[];
+  items?: unknown[];
   selectedType?: string;
   type?: string;
 }
@@ -174,7 +174,7 @@ export interface PPSearchBar {
 }
 
 export interface PPAccordion {
-  data?: { _id?: string; [key: string]: any }[];
+  data?: { _id?: string; [key: string]: unknown }[];
   type?: 'default' | 'questions' | 'agreements';
 }
 
@@ -262,14 +262,14 @@ export interface PPCardList {
 export interface PPAddReview {
   productId?: string;
   isAdd?: boolean;
-  selectedData?: { _id?: string; [key: string]: any };
+  selectedData?: { _id?: string; [key: string]: unknown };
   activeStatus?: string;
 }
 
 export interface PPAddQuestion {
   productId?: string;
   isAdd?: boolean;
-  selectedData?: { _id?: string; [key: string]: any };
+  selectedData?: { _id?: string; [key: string]: unknown };
   activeStatus?: string;
 }
 
@@ -314,7 +314,7 @@ export interface PPFileUpload {
 }
 
 export interface PPSelectCombo {
-  data?: { name?: string; [key: string]: any }[];
+  data?: { name?: string; [key: string]: unknown }[];
   modelValue?: string;
   type?: string;
   uniqueId?: string;
@@ -330,7 +330,7 @@ export interface PPSelectCombo {
 }
 
 export interface PPSelectDefault {
-  data?: { name?: string; [key: string]: any }[];
+  data?: { name?: string; [key: string]: unknown }[];
   modelValue?: string;
   uniqueId?: string;
   autocomplete?: string;
@@ -402,7 +402,7 @@ export interface PPRadioListSmall {
 }
 
 export interface PPRadioListNoButton {
-  data?: any[];
+  data?: unknown[];
   modelValue?: string;
   formClass?: string;
   labelTitle?: string;
@@ -410,7 +410,7 @@ export interface PPRadioListNoButton {
 }
 
 export interface PPSelectCheck {
-  data?: { name?: string; [key: string]: any }[];
+  data?: { name?: string; [key: string]: unknown }[];
   modelValue?: string;
   type?: string;
   labelTitle?: string;
@@ -427,7 +427,7 @@ export interface PPButton {
 }
 
 export interface PPRadioList {
-  data?: { _id?: string | number; disabled?: boolean; [key: string]: any }[];
+  data?: { _id?: string | number; disabled?: boolean; [key: string]: unknown }[];
   modelValue?: object;
   type?: string;
   selectedIndex?: number;
@@ -502,7 +502,7 @@ export interface PPHelpersBrandSelector {
 
 export interface PPSidebarMobile {
   mobileFiltersOpen?: boolean;
-  filters?: any[];
+  filters?: unknown[];
   selectedCategory?: ICategory[];
   brands?: IBrand[];
 }
@@ -510,19 +510,19 @@ export interface PPSidebarMobile {
 export interface PPSidebarTopSection {
   categoryTree?: string[];
   mobileFiltersOpen?: boolean;
-  pagination?: { name?: string; [key: string]: any }[];
+  pagination?: { name?: string; [key: string]: unknown }[];
   sortOptions?: { id?: number; name?: string; href?: string; current?: boolean }[];
 }
 
 export interface PPSidebarMain {
-  dealerPrices?: any[];
-  filters?: any[];
+  dealerPrices?: unknown[];
+  filters?: unknown[];
   selectedCategory?: ICategory[];
   categoryTree?: string[];
   products?: IProduct[];
   brands?: IBrand[];
   sortOptions?: { id?: number; name?: string; href?: string; current?: boolean }[];
-  pagination?: { name?: string; [key: string]: any }[];
+  pagination?: { name?: string; [key: string]: unknown }[];
   totalCount?: number;
   totalPage?: number;
   isLoading?: boolean;
@@ -600,7 +600,7 @@ export interface PPTablesPagination {
 }
 
 export interface PPTablesSimple {
-  data?: { _id?: string; [key: string]: any }[];
+  data?: { _id?: string; [key: string]: unknown }[];
   type?: string;
   activeStatus?: string;
 }
@@ -620,7 +620,7 @@ export interface PPHelpersImageReview {
 
 export interface PPHelpersPrice {
   type?: string;
-  dealerPrices?: any[];
+  dealerPrices?: unknown[];
   item?: IProduct;
   productSettings?: IProductSettings;
   shippingOptions?: IShippingOptions;
