@@ -149,7 +149,7 @@ export interface IGeliverAddProvider {
   providerCode: string;
   version: number;
   isActive: boolean;
-  parameters: Record<string, any>;
+  parameters: Record<string, unknown>;
   isC2C: boolean;
   sharable: boolean;
   isTest: boolean;
@@ -171,7 +171,7 @@ export interface IGeliverAddProviderResponse {
   sharable: boolean;
   integrationType: string;
   labelFileType: string;
-  parameters: Record<string, any>;
+  parameters: Record<string, unknown>;
   version: number;
   priceUpdatedAt: string;
 }
@@ -438,7 +438,7 @@ export interface IGeliverOfferShipment {
   refundInvoiceID: string | null;
   productPaymentOnDelivery: boolean;
   orderID: string;
-  order: any | null;
+  order: unknown | null;
   senderAddressID: string;
   senderAddress: IGeliverAddressAddResponse | null;
   recipientAddressID: string;

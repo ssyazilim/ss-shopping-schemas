@@ -37,13 +37,13 @@ export interface IClient {
 export interface ISecondaryNavigation {
   name: string;
   to: string;
-  icon: any;
+  icon: unknown;
 }
 
 export interface INavigation {
   name: string;
   to: string | { path: string };
-  icon: any;
+  icon: unknown;
   current: boolean;
   subItems: ISecondaryNavigation[];
 }
@@ -70,5 +70,5 @@ export interface ILink {
   name: string;
   description: string;
   to: string;
-  icon: any;
+  icon: unknown;
 }

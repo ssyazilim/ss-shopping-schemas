@@ -9,7 +9,6 @@ import type {
   IPaymentMethods,
   IPaymentSettings,
   IProductSettings,
-  IShippingOptions,
 } from '../../zod/company';
 import type { ICity, ICountry, IDistrict, IPhoneCode, IUpdatedData } from '../../zod/country';
 import type { IExternal } from '../../zod/external';
@@ -32,7 +31,7 @@ import type { ISocketVisitor } from '../../zod/traffic';
 import type { ITranslation } from '../../zod/translation';
 import type { IUser } from '../../zod/user';
 import type { IVariant, IVariantValue } from '../../zod/variant';
-import type { IDateButton, IImageData, ITableIndex } from '../common';
+import type { IDateButton, ITableIndex } from '../common';
 import type { IClient, INavigation, ISecondaryNavigation, ITopNavigation } from '../menu';
 
 /*************************
@@ -129,7 +128,7 @@ export interface PLanguageSelector {
 
 export interface PListFeeds {
   data?: IProductAndVariant[];
-  templates?: any[];
+  templates?: unknown[];
 }
 
 export interface PModal {
@@ -264,7 +263,7 @@ export interface PCash {
 export interface POrderAddress {
   currency?: string;
   payment?: IPayment;
-  templates?: any[];
+  templates?: unknown[];
 }
 
 export interface PCardInformation {
@@ -288,8 +287,8 @@ export interface PAddBuyer {
 }
 
 export interface PAddShipping {
-  dealers?: any[];
-  templates?: any[];
+  dealers?: unknown[];
+  templates?: unknown[];
 }
 
 export interface PVariantAdd {

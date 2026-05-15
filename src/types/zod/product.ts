@@ -5,7 +5,7 @@ import { BrandSchema } from './brand';
 import { CategorySchema } from './category';
 import { MongoSchema } from './common';
 import { ImageSchema, StaticImageSchema, DynamicImageSchema } from './image';
-import type { IImage, IStaticImage, IDynamicImage } from './image';
+import type { IImage } from './image';
 import type { IVariant } from './variant';
 
 export type { IStaticImage, IDynamicImage, IImage } from './image';
