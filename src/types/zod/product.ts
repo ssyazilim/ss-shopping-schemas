@@ -2,9 +2,9 @@ import { z } from 'zod';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { IMAGES, PRICE, VARIANTS_TYPE, ADD_PRODUCT } from '../../schemas';
 import { BrandSchema } from './brand';
-import { CategorySchema } from './category';
 import { MongoSchema } from './common';
 import type { IVariant } from './variant';
+import type { ICategory } from './category';
 
 export type IImage = z.infer<typeof ImageSchema>;
 export const ImageSchema = IMAGES();
@@ -34,8 +34,9 @@ export const PriceSchema = PRICE().extend({
 export type IType = z.infer<typeof TypeSchema>;
 export const TypeSchema = VARIANTS_TYPE();
 
-export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants'> & {
+export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants' | 'category'> & {
   variants: string[] | IVariant[];
+  category: string | ICategory;
 };
 export const ProductSchema = ADD_PRODUCT()
   .extend({
@@ -51,7 +52,7 @@ export const ProductSchema = ADD_PRODUCT()
     order: z.object({ totalCount: z.number() }),
     variantsType: TypeSchema,
     brand: z.union([z.string(), BrandSchema]),
-    category: z.union([z.string(), CategorySchema]),
+    category: z.string(),
     variants: z.array(z.string()),
   })
   .extend(MongoSchema.shape);
