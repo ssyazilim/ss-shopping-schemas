@@ -8,7 +8,7 @@ const responses = {
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },
@@ -26,10 +26,7 @@ registry.registerPath({
   operationId: 'getTranslations',
   request: {
     query: ListQuerySchema.extend({
-      exclude: z
-        .string()
-        .optional()
-        .meta({ examples: ['translations,logs'] }),
+      exclude: z.string().optional().meta({ examples: ['translations,logs'] }),
     }),
   },
   responses,
@@ -39,11 +36,11 @@ registry.registerPath({
   method: 'get',
   path: '/public/translation/{code}',
   tags: ['Translation'],
-  summary: 'Get a translation by locale code',
+  summary: 'Get a translation from the system',
   operationId: 'getTranslation',
   request: {
     params: z.object({
-      code: z.enum(['en', 'tr']),
+      code: z.enum(['en', 'tr']).meta({ default: 'en' }),
     }),
   },
   responses,
@@ -53,7 +50,7 @@ registry.registerPath({
   method: 'post',
   path: '/admin/translations',
   tags: ['Translation'],
-  summary: 'Add new translations to the system',
+  summary: 'Add a new translations to system (JSON or CSV)',
   operationId: 'addTranslations',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddTranslationsSchema) },
@@ -64,7 +61,7 @@ registry.registerPath({
   method: 'get',
   path: '/admin/translation',
   tags: ['Translation'],
-  summary: 'Get a specific key translation',
+  summary: 'Get a specific key translation in the system',
   operationId: 'getTranslationByKey',
   security: [{ JWT: [] }],
   request: {
@@ -81,7 +78,7 @@ registry.registerPath({
   method: 'post',
   path: '/admin/translation',
   tags: ['Translation'],
-  summary: 'Add a new translation to the system',
+  summary: 'Add a new translation to system',
   operationId: 'addTranslation',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(TranslationSchema) },
@@ -92,7 +89,7 @@ registry.registerPath({
   method: 'delete',
   path: '/admin/translation',
   tags: ['Translation'],
-  summary: 'Delete translations from the system',
+  summary: 'Delete a translation or translations in the system',
   operationId: 'deleteTranslations',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
@@ -103,7 +100,7 @@ registry.registerPath({
   method: 'patch',
   path: '/admin/translation/{translationId}',
   tags: ['Translation'],
-  summary: 'Update a translation in the system',
+  summary: 'Update a translation from the system',
   operationId: 'updateTranslation',
   security: [{ JWT: [] }],
   request: {

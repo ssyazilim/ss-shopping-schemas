@@ -1,26 +1,9 @@
 import { z } from 'zod';
 import * as locales from '../../locales';
-import { ImagesSchema } from '../product/schema';
+import { ImageSchema } from '../../types/product';
 import type { ILocale } from '../../locales';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
-
-export const CATEGORY = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    name: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Kıyafet ve Aksesuarlar'] }),
-    parent: z.string().meta({ examples: ['root'] }),
-    tree: z.array(z.string()).meta({ examples: [['root']] }),
-    categoryI10n: z
-      .string()
-      .optional()
-      .meta({ examples: ["{'id':'543586','name':'Kıyafet'}"] }),
-  });
-};
 
 export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
@@ -36,7 +19,7 @@ export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ example: 'root' }),
     tree: z.array(z.string().meta({ example: 'root' })),
-    images: ImagesSchema,
+    images: ImageSchema,
     categoryI10n: z.string().optional().meta({
       example:
         "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}",

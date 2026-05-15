@@ -1,4 +1,4 @@
-import type { ZodTypeAny } from 'zod';
+import { z } from 'zod';
 import { registry } from '../registry';
 import { ApiSuccessSchema, ApiErrorSchema } from '../common';
 import {
@@ -10,7 +10,7 @@ import {
   PasswordResetCompleteUserSchema,
 } from './schema';
 
-function buildRequestBody(schema: ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },

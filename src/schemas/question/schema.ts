@@ -1,19 +1,6 @@
-import { z } from 'zod';
 import { registry } from '../registry';
+import { ADD_QUESTION, UPDATE_QUESTION } from './validation';
 
-export const AddQuestionSchema = registry.register(
-  'AddQuestion',
-  z.object({
-    status: z.string().meta({ examples: ['pending'] }),
-    question: z.string().meta({ examples: ['Çoraplarınızda kullanılan kumaş türleri nelerdir?'] }),
-  }),
-);
+export const AddQuestionSchema = registry.register('addQuestion', ADD_QUESTION());
 
-export const UpdateQuestionSchema = registry.register(
-  'UpdateQuestion',
-  z.object({
-    status: z.string().meta({ examples: ['approved'] }),
-    question: z.string().meta({ examples: ['Çoraplarınızda kullanılan kumaş türleri nelerdir?'] }),
-    answer: z.string().meta({ examples: ['Pamuk, yün ve akrilik kullandık.'] }),
-  }),
-);
+export const UpdateQuestionSchema = registry.register('updateQuestion', UPDATE_QUESTION());

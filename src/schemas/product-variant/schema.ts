@@ -1,61 +1,12 @@
-import { z } from 'zod';
 import { registry } from '../registry';
-import { ImagesSchema, PriceSchema, VariantsTypeSchema } from '../product/schema';
-import { DeleteModelSchema } from '../common';
+import { VARIANT, ADD_VARIANT, ADD_VARIANTS_MULTI, UPDATE_VARIANT, DELETE_FOR_VARIANT } from './validation';
 
-export const VariantSchema = registry.register(
-  'Variant',
-  z.object({
-    name: z.string().meta({ examples: ['Siyah'] }),
-    images: ImagesSchema,
-    price: PriceSchema,
-    stockQuantity: z.number().meta({ examples: [100] }),
-    sku: z.string().meta({ examples: ['4SN106C'] }),
-    gtin: z
-      .string()
-      .optional()
-      .meta({ examples: ['0123450123456'] }),
-    desi: z.number().meta({ examples: [2] }),
-  }),
-);
+export const VariantSchema = registry.register('variant', VARIANT());
 
-export const AddVariantSchema = registry.register(
-  'AddVariant',
-  z.object({
-    variantsType: VariantsTypeSchema,
-    variant: VariantSchema,
-  }),
-);
+export const AddVariantSchema = registry.register('addVariant', ADD_VARIANT());
 
-export const AddVariantsMultiSchema = registry.register(
-  'AddVariantsMulti',
-  z.array(
-    VariantSchema.extend({
-      productId: z.string().meta({ examples: ['66f29aefff9245b28d05482f'] }),
-      _id: z
-        .string()
-        .optional()
-        .meta({ examples: ['66f29aefff9245b28d05482e'] }),
-    }),
-  ),
-);
+export const AddVariantsMultiSchema = registry.register('addVariantsMulti', ADD_VARIANTS_MULTI());
 
-export const UpdateVariantSchema = registry.register(
-  'UpdateVariant',
-  z.object({
-    variantsType: VariantsTypeSchema,
-    _id: z
-      .string()
-      .optional()
-      .meta({ examples: ['66f27bdc8a01cf36d27cbe1c'] }),
-    name: z.string().meta({ examples: ['Siyah'] }),
-  }),
-);
+export const UpdateVariantSchema = registry.register('updateVariant', UPDATE_VARIANT());
 
-export const DeleteForVariantSchema = registry.register(
-  'DeleteForVariant',
-  DeleteModelSchema.extend({
-    productId: z.string(),
-    variantsType: VariantsTypeSchema,
-  }),
-);
+export const DeleteForVariantSchema = registry.register('deleteForVariant', DELETE_FOR_VARIANT());

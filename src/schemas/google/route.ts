@@ -9,7 +9,7 @@ const responses = {
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },

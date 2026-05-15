@@ -1,28 +1,8 @@
-import { z } from 'zod';
 import { registry } from '../registry';
+import { TRANSLATION, ADD_TRANSLATIONS, UPDATE_TRANSLATION } from './validation';
 
-export const TranslationSchema = registry.register(
-  'Translation',
-  z.object({
-    locale: z.string().meta({ examples: ['en'] }),
-    name: z.string().meta({ examples: ['Test'] }),
-    translations: z
-      .record(z.string(), z.string())
-      .meta({ description: 'Key-value translation pairs' }),
-  }),
-);
+export const TranslationSchema = registry.register('translation', TRANSLATION());
 
-export const AddTranslationsSchema = registry.register(
-  'AddTranslations',
-  z.array(TranslationSchema),
-);
+export const AddTranslationsSchema = registry.register('addTranslations', ADD_TRANSLATIONS());
 
-export const UpdateTranslationSchema = registry.register(
-  'UpdateTranslation',
-  z.object({
-    name: z
-      .string()
-      .optional()
-      .meta({ examples: ['web'] }),
-  }),
-);
+export const UpdateTranslationSchema = registry.register('updateTranslation', UPDATE_TRANSLATION());

@@ -1,6 +1,9 @@
 import type { z } from 'zod';
 import type { AddUserSchema, PasswordResetCompleteUserSchema } from '../schemas';
 
+/*************************
+ *       TYPES           *
+ *************************/
 export type IUserRole = 'ROLE_USER' | 'ROLE_ADMIN';
 
 export type IUserRegister = z.infer<typeof AddUserSchema>;

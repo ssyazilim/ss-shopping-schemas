@@ -13,8 +13,8 @@ import {
   COMPANY_SHIPPING_OPTIONS,
 } from './validation';
 
-const CompanyAddressSchema = registry.register('CompanyAddress', COMPANY_ADDRESS());
-const CompanySocialMediaSchema = registry.register('CompanySocialMedia', COMPANY_SOCIAL_MEDIA());
+export const CompanyAddressSchema = registry.register('CompanyAddress', COMPANY_ADDRESS());
+export const CompanySocialMediaSchema = registry.register('CompanySocialMedia', COMPANY_SOCIAL_MEDIA());
 export const CompanyPaymentSchema = registry.register('CompanyPayment', COMPANY_PAYMENT());
 const CompanyPropertiesHomePageSchema = registry.register(
   'CompanyPropertiesHomePage',
@@ -42,14 +42,12 @@ const CompanyShippingOptionsSchema = registry.register(
 export const AddCompanySchema = registry.register('AddCompany', ADD_COMPANY());
 export const UpdateCompanySchema = registry.register('UpdateCompany', AddCompanySchema.partial());
 
-// suppress unused warnings — registered for OpenAPI only
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-(void CompanyAddressSchema,
-  CompanySocialMediaSchema,
-  CompanyPropertiesHomePageSchema,
-  CompanyPropertiesPaymentSettingsSchema,
-  CompanyPropertiesProductSettingsSchema,
-  CompanyPropertiesOrderSettingsSchema,
-  CompanyPropertiesSchema,
-  CompanyMailOptionsSchema,
-  CompanyShippingOptionsSchema);
+void CompanyAddressSchema;
+void CompanySocialMediaSchema;
+void CompanyPropertiesHomePageSchema;
+void CompanyPropertiesPaymentSettingsSchema;
+void CompanyPropertiesProductSettingsSchema;
+void CompanyPropertiesOrderSettingsSchema;
+void CompanyPropertiesSchema;
+void CompanyMailOptionsSchema;
+void CompanyShippingOptionsSchema;

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { registry } from '../registry';
 import {
   AddPaymentSchema,
@@ -7,16 +8,16 @@ import {
   CompletePayment3DSchema,
   SavePaymentSchema,
   CancelPaymentSchema,
-  UpdateTaxSchema,
 } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
+import { AddCardSchema } from '../card/schema';
+import { ApiSuccessSchema, ApiErrorSchema, DeleteModelSchema } from '../common';
 
 const responses = {
   200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },
@@ -28,12 +29,16 @@ function buildRequestBody(schema: z.ZodTypeAny) {
 
 registry.registerPath({
   method: 'get',
-  path: '/admin/payments',
+  path: '/public/payment',
   tags: ['Payment'],
-  summary: 'Get all payments in the system',
-  operationId: 'getPayments',
-  security: [{ JWT: [] }],
-  request: { query: ListQuerySchema },
+  summary: 'Get User payment in system',
+  operationId: 'getPayment',
+  request: {
+    query: z.object({
+      orderId: z.string().optional(),
+      orderToken: z.string().optional(),
+    }),
+  },
   responses,
 });
 
@@ -41,86 +46,188 @@ registry.registerPath({
   method: 'post',
   path: '/public/payment',
   tags: ['Payment'],
-  summary: 'Make a payment',
-  operationId: 'addPayment',
+  summary: 'Save payment result to the system',
+  operationId: 'savePayment',
+  request: { body: buildRequestBody(SavePaymentSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/payment/check/{paymentId}',
+  tags: ['Payment'],
+  summary: 'Check payment for the IYZICO Service',
+  operationId: 'checkPaymentId',
+  request: {
+    params: z.object({ paymentId: z.string() }),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/payment/IYZICO/{locale}',
+  tags: ['Payment'],
+  summary: 'Check HTML Code for IYZICO Service',
+  operationId: 'checkHTMLCodeForIYZICO',
+  request: {
+    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    body: buildRequestBody(CheckHTMLForIyzicoSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/payment/IYZICO/{token}/{locale}',
+  tags: ['Payment'],
+  summary: 'Complete payment for IYZICO Service',
+  operationId: 'completePaymentForIyzico',
+  request: {
+    params: z.object({
+      token: z.string(),
+      locale: z.enum(['en', 'tr']).default('tr'),
+    }),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/public/payments',
+  tags: ['Payment'],
+  summary: 'Get User Payments in the system',
+  operationId: 'getPaymentsForTheUser',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddPaymentSchema) },
   responses,
 });
 
 registry.registerPath({
   method: 'post',
-  path: '/public/payment/check-html-for-iyzico',
+  path: '/public/payment/{locale}',
   tags: ['Payment'],
-  summary: 'Check HTML form for Iyzico payment',
-  operationId: 'checkHTMLForIyzico',
-  request: { body: buildRequestBody(CheckHTMLForIyzicoSchema) },
+  summary: 'Add payment to the IYZICO Service',
+  operationId: 'paymentForUser',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    body: buildRequestBody(AddPaymentSchema),
+  },
   responses,
 });
 
 registry.registerPath({
   method: 'post',
-  path: '/public/payment/check-installment',
+  path: '/public/payment/3D/{locale}',
   tags: ['Payment'],
-  summary: 'Check installment options',
-  operationId: 'checkInstallment',
+  summary: 'Check HTML Code for the 3D Service',
+  operationId: 'check3DForUser',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    body: buildRequestBody(AddPaymentSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/payment/3D/{paymentId}/{locale}',
+  tags: ['Payment'],
+  summary: 'Complete payment for 3D Service',
+  operationId: 'completePayment3DForIyzico',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({
+      paymentId: z.string(),
+      locale: z.enum(['en', 'tr']).default('tr'),
+    }),
+    body: buildRequestBody(CompletePayment3DSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/payment/check/card',
+  tags: ['Payment'],
+  summary: 'Check card from IYZICO system',
+  operationId: 'checkCard',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(AddCardSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/public/payment/check/installment',
+  tags: ['Payment'],
+  summary: 'Check installment for the IYZICO Service',
+  operationId: 'installmentForUser',
+  security: [{ JWT: [] }],
   request: { body: buildRequestBody(CheckInstallmentSchema) },
   responses,
 });
 
 registry.registerPath({
   method: 'post',
-  path: '/public/payment/complete-payment-3d',
+  path: '/public/payment/cancel/{locale}',
   tags: ['Payment'],
-  summary: 'Complete a 3D payment',
-  operationId: 'completePayment3D',
-  request: { body: buildRequestBody(CompletePayment3DSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/payment/save-payment',
-  tags: ['Payment'],
-  summary: 'Save payment record',
-  operationId: 'savePayment',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(SavePaymentSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/payment/cancel',
-  tags: ['Payment'],
-  summary: 'Cancel a payment',
+  summary: 'Cancel payment for the suddenly payment',
   operationId: 'cancelPayment',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(CancelPaymentSchema) },
+  request: {
+    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    body: buildRequestBody(CancelPaymentSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/admin/payments',
+  tags: ['Payment'],
+  summary: 'Get all payments in the system',
+  operationId: 'getPaymentsAdmin',
+  security: [{ JWT: [] }],
+  request: {
+    query: z.object({
+      page: z
+        .number()
+        .int()
+        .optional()
+        .meta({ examples: [1] }),
+      limit: z
+        .number()
+        .int()
+        .optional()
+        .meta({ examples: [10] }),
+      sort: z.string().meta({ examples: ['updatedAt,desc'] }),
+      text: z.string().optional(),
+      startDate: z
+        .string()
+        .optional()
+        .meta({ examples: ['2024-12-15T00:00:00.000Z'] }),
+      endDate: z
+        .string()
+        .optional()
+        .meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
+      status: z
+        .string()
+        .optional()
+        .meta({ examples: ['pending'] }),
+    }),
+  },
   responses,
 });
 
 registry.registerPath({
   method: 'delete',
-  path: '/admin/payment',
+  path: '/admin/payments',
   tags: ['Payment'],
-  summary: 'Delete payments from the system',
+  summary: 'Delete a payment or payments in the system',
   operationId: 'deletePayments',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'patch',
-  path: '/admin/payment/{paymentId}/tax',
-  tags: ['Payment'],
-  summary: 'Update tax for a payment',
-  operationId: 'updatePaymentTax',
-  security: [{ JWT: [] }],
-  request: {
-    params: z.object({ paymentId: z.string() }),
-    body: buildRequestBody(UpdateTaxSchema),
-  },
   responses,
 });

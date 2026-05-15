@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AnalyzeTrafficSchema } from './schema';
+import { AnalyzeSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
 
 const responses = {
@@ -8,7 +8,7 @@ const responses = {
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },
@@ -22,9 +22,9 @@ registry.registerPath({
   method: 'post',
   path: '/public/traffic/analyze',
   tags: ['Traffic'],
-  summary: 'Analyze website traffic',
+  summary: 'Analyze the web site traffic',
   operationId: 'analyzeTraffic',
-  request: { body: buildRequestBody(AnalyzeTrafficSchema) },
+  request: { body: buildRequestBody(AnalyzeSchema) },
   responses,
 });
 
@@ -76,7 +76,7 @@ registry.registerPath({
   method: 'delete',
   path: '/admin/traffic/analyze-organic-traffic',
   tags: ['Traffic'],
-  summary: 'Delete visitor traffic records',
+  summary: 'Delete a customer traffic from the system',
   operationId: 'deleteVisitor',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },

@@ -5,4 +5,7 @@ export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
 export type ApiError = z.infer<typeof ApiErrorSchema>;
 
 export * from './address';
+export * from './agreement';
 export * from './auth';
+export * from './card';
+export * from './category';

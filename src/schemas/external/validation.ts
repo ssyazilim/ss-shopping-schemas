@@ -54,11 +54,3 @@ export const UPDATE_EXTERNAL = z.object({
     })
     .optional(),
 });
-
-export const CHECK_SMTP = z.object({
-  user: z.string().meta({ examples: ['no-reply@ssyazilim.com'] }),
-  password: z.string(),
-  host: z.string().meta({ examples: ['mail.ssyazilim.com'] }),
-  port: z.number().meta({ examples: [465] }),
-  from: z.string().meta({ examples: ['SS-TEST | <no-reply@ssyazilim.com>'] }),
-});

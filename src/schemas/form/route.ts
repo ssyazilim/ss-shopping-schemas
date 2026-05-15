@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { ContactMeSchema, ContactMeErrorSchema, ContactMeResumeSchema, FileSchema } from './schema';
-import { CheckSMTPSchema } from '../external/schema';
+import { ContactMeSchema, ContactMeErrorSchema, ContactMeResumeSchema, FileSchema, CheckSMTPSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema } from '../common';
 
 const responses = {
@@ -9,7 +8,7 @@ const responses = {
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },

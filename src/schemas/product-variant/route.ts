@@ -1,11 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import {
-  AddVariantSchema,
-  AddVariantsMultiSchema,
-  UpdateVariantSchema,
-  DeleteForVariantSchema,
-} from './schema';
+import { AddVariantSchema, AddVariantsMultiSchema, UpdateVariantSchema, DeleteForVariantSchema } from './schema';
 import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema } from '../common';
 
 const responses = {
@@ -13,7 +8,7 @@ const responses = {
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },
@@ -37,7 +32,7 @@ registry.registerPath({
   method: 'get',
   path: '/public/product/variants/{productId}',
   tags: ['Product Variant'],
-  summary: 'Get variants for a product',
+  summary: 'Get a product variants from the system',
   operationId: 'getProductVariants',
   request: { params: z.object({ productId: z.string() }) },
   responses,
@@ -47,7 +42,7 @@ registry.registerPath({
   method: 'post',
   path: '/admin/product/variants',
   tags: ['Product Variant'],
-  summary: 'Add multiple variants to the system',
+  summary: 'Add a new variants to system',
   operationId: 'addVariantsMulti',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddVariantsMultiSchema) },
@@ -58,7 +53,7 @@ registry.registerPath({
   method: 'delete',
   path: '/admin/product/variants',
   tags: ['Product Variant'],
-  summary: 'Delete variants from the system',
+  summary: 'Delete a variant or variants in the system',
   operationId: 'deleteVariant',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteForVariantSchema) },
@@ -69,7 +64,7 @@ registry.registerPath({
   method: 'post',
   path: '/admin/product/variant/{productId}',
   tags: ['Product Variant'],
-  summary: 'Add a variant to a product',
+  summary: 'Add a new variant or variants to system',
   operationId: 'addVariant',
   security: [{ JWT: [] }],
   request: {

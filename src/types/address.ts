@@ -3,6 +3,9 @@ import { UserSchema } from './user';
 import { ADD_ADDRESS } from '../schemas';
 import { MongoSchema } from './common';
 
+/*************************
+ *       TYPES           *
+ *************************/
 export type IAddress = z.infer<typeof AddressSchema>;
 export const AddressSchema = z
   .object({

@@ -1,44 +1,12 @@
-import { z } from 'zod';
 import { registry } from '../registry';
+import { EDIT_USER, DELETE_USER, CUSTOMER, ADD_CUSTOMERS, UPDATE_CUSTOMER } from './validation';
 
-export const EditUserSchema = registry.register(
-  'EditUser',
-  z.object({
-    name: z
-      .string()
-      .optional()
-      .meta({ examples: ['Mahmut'] }),
-  }),
-);
+export const EditUserSchema = registry.register('editUser', EDIT_USER());
 
-export const DeleteUserSchema = registry.register(
-  'DeleteUser',
-  z.object({
-    password: z.string(),
-  }),
-);
+export const DeleteUserSchema = registry.register('deleteUser', DELETE_USER());
 
-export const CustomerSchema = registry.register(
-  'Customer',
-  z.object({
-    name: z.string().meta({ examples: ['Adem'] }),
-    surname: z.string().meta({ examples: ['Şenocak'] }),
-    email: z.email().meta({ examples: ['senocak-a@hotmail.com'] }),
-    phoneNumber: z.string().meta({ examples: ['905425496142'] }),
-    password: z.string().meta({ examples: ['Passw0rd'] }),
-    role: z.array(z.string()).meta({ examples: [['ROLE_USER']] }),
-    isActivated: z.boolean().meta({ examples: [true] }),
-  }),
-);
+export const CustomerSchema = registry.register('customer', CUSTOMER());
 
-export const AddCustomersSchema = registry.register('AddCustomers', z.array(CustomerSchema));
+export const AddCustomersSchema = registry.register('addCustomers', ADD_CUSTOMERS());
 
-export const UpdateCustomerSchema = registry.register(
-  'UpdateCustomer',
-  z.object({
-    name: z
-      .string()
-      .optional()
-      .meta({ examples: ['Mustafa Gökay'] }),
-  }),
-);
+export const UpdateCustomerSchema = registry.register('updateCustomer', UPDATE_CUSTOMER());

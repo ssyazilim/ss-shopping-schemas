@@ -1,20 +1,15 @@
 import { z } from 'zod';
+
 import { registry } from '../registry';
-import {
-  AddPostsSchema,
-  PostSchema,
-  LikePostSchema,
-  CommentPostSchema,
-  PostImageSchema,
-} from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
+import { AddPostsSchema, PostSchema, LikePostSchema, CommentPostSchema } from './schema';
+import { ApiSuccessSchema, ApiErrorSchema, DeleteModelSchema, ListQuerySchema } from '../common';
 
 const responses = {
   200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
 
-function buildRequestBody(schema: z.ZodTypeAny) {
+function buildRequestBody(schema: z.ZodType) {
   return {
     content: {
       'application/json': { schema },
@@ -26,11 +21,25 @@ function buildRequestBody(schema: z.ZodTypeAny) {
 
 registry.registerPath({
   method: 'get',
+  path: '/public/posts/total',
+  tags: ['Post'],
+  summary: 'Get all posts total count in the system',
+  operationId: 'getPostTotal',
+  responses,
+});
+
+registry.registerPath({
+  method: 'get',
   path: '/public/posts',
   tags: ['Post'],
   summary: 'Get all posts in the system',
   operationId: 'getPosts',
-  request: { query: ListQuerySchema },
+  request: {
+    query: ListQuerySchema.extend({
+      type: z.string().optional().meta({ examples: ['blog'] }),
+      exclude: z.string().optional().meta({ examples: ['comments'] }),
+    }),
+  },
   responses,
 });
 
@@ -40,80 +49,24 @@ registry.registerPath({
   tags: ['Post'],
   summary: 'Get a post from the system',
   operationId: 'getPost',
-  request: { params: z.object({ postId: z.string() }) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/posts',
-  tags: ['Post'],
-  summary: 'Add new posts to the system',
-  operationId: 'addPosts',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddPostsSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'patch',
-  path: '/admin/post/{postId}',
-  tags: ['Post'],
-  summary: 'Update a post in the system',
-  operationId: 'updatePost',
-  security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),
-    body: buildRequestBody(PostSchema),
-  },
-  responses,
-});
-
-registry.registerPath({
-  method: 'delete',
-  path: '/admin/post',
-  tags: ['Post'],
-  summary: 'Delete posts from the system',
-  operationId: 'deletePosts',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/post/image/{postId}',
-  tags: ['Post'],
-  summary: 'Add image to a post',
-  operationId: 'addPostImage',
-  security: [{ JWT: [] }],
-  request: {
-    params: z.object({ postId: z.string() }),
-    body: buildRequestBody(PostImageSchema),
-  },
-  responses,
-});
-
-registry.registerPath({
-  method: 'delete',
-  path: '/admin/post/image/{postId}',
-  tags: ['Post'],
-  summary: 'Delete image from a post',
-  operationId: 'deletePostImage',
-  security: [{ JWT: [] }],
-  request: {
-    params: z.object({ postId: z.string() }),
-    body: buildRequestBody(PostImageSchema),
+    query: z.object({
+      locale: z
+        .string()
+        .optional()
+        .meta({ examples: ['tr'] }),
+    }),
   },
   responses,
 });
 
 registry.registerPath({
   method: 'post',
-  path: '/admin/post/like/{postId}',
+  path: '/public/post/{postId}/like',
   tags: ['Post'],
-  summary: 'Like or dislike a post',
-  operationId: 'likePost',
+  summary: 'Add a like or dislike to post in the system',
+  operationId: 'likePosts',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),
@@ -124,14 +77,61 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'post',
-  path: '/admin/post/comment/{postId}',
+  path: '/public/post/{postId}/comment',
   tags: ['Post'],
-  summary: 'Comment on a post',
-  operationId: 'commentPost',
+  summary: 'Add a comment to post in the system',
+  operationId: 'commentBlogs',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),
     body: buildRequestBody(CommentPostSchema),
+  },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/posts',
+  tags: ['Post'],
+  summary: 'Add a new posts to system (JSON or CSV)',
+  operationId: 'addPosts',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(AddPostsSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/post',
+  tags: ['Post'],
+  summary: 'Add a new post to system',
+  operationId: 'addPost',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(PostSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/post',
+  tags: ['Post'],
+  summary: 'Delete a post or posts in the system',
+  operationId: 'deletePosts',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(DeleteModelSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'patch',
+  path: '/admin/post/{postId}',
+  tags: ['Post'],
+  summary: 'Update a post from the system',
+  operationId: 'updatePost',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ postId: z.string() }),
+    body: buildRequestBody(PostSchema),
   },
   responses,
 });
