@@ -5,3 +5,4 @@ openapi.json
 .env
 .idea/
 .vscode/
+.claude/
