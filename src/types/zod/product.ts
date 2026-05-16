@@ -32,7 +32,7 @@ export const PriceSchema = PRICE().extend({
 });
 
 export type IType = z.infer<typeof TypeSchema>;
-export const TypeSchema = VARIANTS_TYPE();
+export const TypeSchema = VARIANTS_TYPE().element;
 
 export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants' | 'category'> & {
   variants: string[] | IVariant[];
@@ -50,7 +50,7 @@ export const ProductSchema = ADD_PRODUCT()
     }),
     question: z.object({ totalCount: z.number() }),
     order: z.object({ totalCount: z.number() }),
-    variantsType: TypeSchema,
+    variantsType: z.array(TypeSchema),
     brand: z.union([z.string(), BrandSchema]),
     category: z.string(),
     variants: z.array(z.string()),
