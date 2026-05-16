@@ -96,7 +96,7 @@ export const VARIANTS_TYPE = (locale: ILocale = 'tr') => {
             .min(1, { message: m.public_forms_validations_minLength(2) })
             .max(254, { message: m.public_forms_validations_maxLength(254) }),
         )
-        .meta({ examples: [['Siyah']] }),
+        .meta({ examples: [['Siyah', 'Beyaz']] }),
     }),
   );
 };
