@@ -1,10 +1,34 @@
+export interface IPackageTemplate {
+  id: string;
+  length: string;
+  width: string;
+  height: string;
+  weight: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface IDealerPricesWithDesi {
+  desi: string;
+  providerCode: string;
+  amount: string;
+  amountVat: string;
+  amountTax: string;
+  totalAmount: string;
+  currency: string;
+}
+export interface IDealerPricesWithDesiFormatted extends IDealerPricesWithDesi {
+  _id: string;
+  name: string;
+  image: string;
+}
+
 export interface IGeliverBalanceResponse {
   result: boolean;
   additionalMessage: string;
   data: string;
   dept: string;
 }
-
 export interface IGeliverDealerPriceResponse {
   desi: string;
   offers: {

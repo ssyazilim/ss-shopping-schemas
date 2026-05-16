@@ -20,6 +20,8 @@ import type {
   IGeliverCity,
   IGeliverDistrict,
   IGeliverShipmentAddResponse,
+  IDealerPricesWithDesi,
+  IPackageTemplate,
 } from '../geliver';
 import type { IItemTransactions, IPaymentResultForIyzico } from '../iyzico';
 import type { IPayment, IPaymentBasketItems } from '../../zod/payment';
@@ -128,7 +130,7 @@ export interface PLanguageSelector {
 
 export interface PListFeeds {
   data?: IProductAndVariant[];
-  templates?: unknown[];
+  templates?: IPackageTemplate[];
 }
 
 export interface PModal {
@@ -263,7 +265,7 @@ export interface PCash {
 export interface POrderAddress {
   currency?: string;
   payment?: IPayment;
-  templates?: unknown[];
+  templates?: IPackageTemplate[];
 }
 
 export interface PCardInformation {
@@ -288,14 +290,14 @@ export interface PAddBuyer {
 
 export interface PAddShipping {
   dealers?: unknown[];
-  templates?: unknown[];
+  templates?: IPackageTemplate[];
 }
 
 export interface PVariantAdd {
   isAdd?: boolean;
   rowData?: ITableIndex & IVariant;
   products?: IProduct[];
-  dealerPrices?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
 }
 
 export interface PProductAdd {
@@ -306,7 +308,7 @@ export interface PProductAdd {
   brands?: IBrand[];
   taxAmount?: string;
   dealer?: string;
-  dealerPrices?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
 }
 
 export interface PAgreementAdd {
@@ -796,7 +798,7 @@ export interface PShipmentAdd {
   products?: IProduct[];
   variants?: IVariant[];
   phoneCodes?: IPhoneCode[];
-  templates?: unknown[];
+  templates?: IPackageTemplate[];
   receivers?: { name?: string; description?: string; current?: boolean }[];
   senders?: { name?: string; description?: string; current?: boolean }[];
   cities?: IGeliverCity[];
@@ -809,7 +811,7 @@ export interface PShipping {
 }
 
 export interface PDesiInformation {
-  templates?: unknown[];
+  templates?: IPackageTemplate[];
   item?: IProductAndVariant;
 }
 

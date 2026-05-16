@@ -73,9 +73,9 @@ export const PRICE = (locale: ILocale = 'tr') => {
 
 export const PRODUCT_PROPERTIES = () => {
   return z.object({
-    hidePrice: z.boolean().meta({ examples: [false] }), // prettier-ignore
-    isFeatured: z.boolean().meta({ examples: [false] }), // prettier-ignore
-    isShippingFree: z.boolean().meta({ examples: [false] }), // prettier-ignore
+    hidePrice: z.boolean().optional().meta({ examples: [false] }), // prettier-ignore
+    isFeatured: z.boolean().optional().meta({ examples: [false] }), // prettier-ignore
+    isShippingFree: z.boolean().optional().meta({ examples: [false] }), // prettier-ignore
   });
 };
 
