@@ -5711,12 +5711,7 @@
                   false
                 ]
               }
-            },
-            "required": [
-              "hidePrice",
-              "isFeatured",
-              "isShippingFree"
-            ]
+            }
           }
         },
         "required": [
@@ -5923,12 +5918,7 @@
                     false
                   ]
                 }
-              },
-              "required": [
-                "hidePrice",
-                "isFeatured",
-                "isShippingFree"
-              ]
+              }
             }
           },
           "required": [
