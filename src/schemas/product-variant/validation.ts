@@ -66,7 +66,7 @@ export const VARIANT = (locale: ILocale = 'tr') => {
 };
 
 export const ADD_VARIANT = (locale: ILocale = 'tr') => {
-  z.object({
+  return z.object({
     variantsType: VARIANTS_TYPE(locale),
     variant: VARIANT(locale),
   });
