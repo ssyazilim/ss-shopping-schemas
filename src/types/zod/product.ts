@@ -37,7 +37,7 @@ export const PriceSchema = PRICE().extend({
 export type IType = z.infer<typeof TypeSchema>;
 export const TypeSchema = VARIANTS_TYPE().element;
 
-export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants' | 'category'> & {
+export type IProduct = Omit<z.infer<typeof ProductSchema>, 'brand' | 'category' | 'variants'> & {
   brand: string | IBrand;
   category: string | ICategory;
   variants: string[] | IVariant[];

@@ -296,6 +296,7 @@ export interface PAddShipping {
 export interface PVariantAdd {
   isAdd?: boolean;
   rowData?: ITableIndex & IVariant;
+  dealer?: string;
   products?: IProduct[];
   dealerPrices?: IDealerPricesWithDesi[];
 }

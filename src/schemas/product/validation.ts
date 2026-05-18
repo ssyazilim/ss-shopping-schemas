@@ -6,7 +6,6 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 
 export const IMAGES = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-
   return z.object({
     staticImages: z.array(
       z.object({
@@ -44,7 +43,7 @@ export const PRICE = (locale: ILocale = 'tr') => {
       .meta({ examples: ['TRY'] }),
     purchase: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [1000] }),
     sell: z
       .number({ message: m.public_forms_validations_mustNumber })
@@ -57,15 +56,16 @@ export const PRICE = (locale: ILocale = 'tr') => {
       .meta({ examples: ['SURAT'] }),
     shipping: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [150] }),
     discount: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [10] }),
     tax: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [20] }),
   });
@@ -77,28 +77,6 @@ export const PRODUCT_PROPERTIES = () => {
     isFeatured: z.boolean().meta({ examples: [false] }), // prettier-ignore
     isShippingFree: z.boolean().meta({ examples: [false] }), // prettier-ignore
   });
-};
-
-export const VARIANTS_TYPE = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-
-  return z.array(
-    z.object({
-      name: z
-        .string()
-        .min(1, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .meta({ examples: ['Renk'] }),
-      variants: z
-        .array(
-          z
-            .string()
-            .min(1, { message: m.public_forms_validations_minLength(2) })
-            .max(254, { message: m.public_forms_validations_maxLength(254) }),
-        )
-        .meta({ examples: [['Siyah', 'Beyaz']] }),
-    }),
-  );
 };
 
 export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
@@ -123,13 +101,13 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
     stockQuantity: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [100] }),
     desi: z
-      .number()
-      .int()
-      .nonnegative()
-      .meta({ examples: [2] }),
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1] }),
     brand: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -148,7 +126,7 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['0123456'] }),
+      .meta({ examples: ['4SN106B'] }),
     category: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

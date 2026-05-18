@@ -1,25 +1,76 @@
 import { z } from 'zod';
-import { PRICE, VARIANTS_TYPE, IMAGES } from '../product/validation';
+import { ILocale } from '../../locales';
+import * as locales from '../../locales';
+import { PRICE, IMAGES } from '../product/validation';
 
-export const VARIANT = () =>
-  z.object({
-    name: z.string().meta({ examples: ['Siyah'] }),
+const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
+
+export const VARIANTS_TYPE = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+
+  return z.array(
+    z.object({
+      name: z
+        .string()
+        .min(1, { message: m.public_forms_validations_minLength(1) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['Renk'] }),
+      variants: z
+        .array(
+          z
+            .string()
+            .min(1, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+        )
+        .meta({ examples: [['Siyah', 'Beyaz']] }),
+    }),
+  );
+};
+
+export const VARIANT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+
+  return z.object({
+    name: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Siyah'] }),
     images: IMAGES(),
     price: PRICE(),
-    stockQuantity: z.number().meta({ examples: [100] }),
-    sku: z.string().meta({ examples: ['4SN106C'] }),
-    gtin: z
+    stockQuantity: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [100] }),
+    sku: z
       .string()
-      .optional()
-      .meta({ examples: ['0123450123456'] }),
-    desi: z.number().meta({ examples: [2] }),
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['4SN106C'] }),
+    gtin: z.preprocess(
+      (value: string) => (value === '' ? undefined : value),
+      z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .optional()
+        .meta({ examples: ['0123456789012'] }),
+    ),
+    desi: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1] }),
   });
+};
 
-export const ADD_VARIANT = () =>
+export const ADD_VARIANT = (locale: ILocale = 'tr') => {
   z.object({
-    variantsType: VARIANTS_TYPE(),
-    variant: VARIANT(),
+    variantsType: VARIANTS_TYPE(locale),
+    variant: VARIANT(locale),
   });
+};
 
 export const ADD_VARIANTS_MULTI = () =>
   z.array(
