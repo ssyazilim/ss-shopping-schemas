@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
-import { IMAGES, PRICE, VARIANTS_TYPE, ADD_PRODUCT } from '../../schemas';
+import { IMAGES, PRICE, ADD_PRODUCT } from '../../schemas/product/validation';
+import { VARIANTS_TYPE } from '../../schemas/product-variant/validation';
 import { MongoSchema } from './common';
 import type { IBrand } from './brand';
 import type { ICategory } from './category';
