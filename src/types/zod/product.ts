@@ -41,15 +41,17 @@ export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants' | 'categor
 export const ProductSchema = ADD_PRODUCT()
   .extend({
     price: PriceSchema,
-    video: z.string().optional(),
-    viewCount: z.number(),
-    like: z.object({
-      percentage: z.array(LikeSchema),
-      average: z.number(),
-      totalCount: z.number(),
-    }),
-    question: z.object({ totalCount: z.number() }),
-    order: z.object({ totalCount: z.number() }),
+    video: z.string().optional().optional(),
+    viewCount: z.number().optional(),
+    like: z
+      .object({
+        percentage: z.array(LikeSchema),
+        average: z.number(),
+        totalCount: z.number(),
+      })
+      .optional(),
+    question: z.object({ totalCount: z.number() }).optional(),
+    order: z.object({ totalCount: z.number() }).optional(),
     variantsType: z.array(TypeSchema),
     brand: z.union([z.string(), BrandSchema]),
     category: z.string(),

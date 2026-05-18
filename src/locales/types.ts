@@ -2,6 +2,9 @@ export type ILocale = 'tr' | 'en' | 'ru' | 'ar' | 'fa';
 
 export type INotifications = {
   public_forms_validations_required: string;
+  public_forms_validations_mustNumber: string;
+  public_forms_validations_mustNumberPositive: string;
+  public_forms_validations_mustNumberInteger: string;
   public_forms_validations_email: string;
   public_forms_validations_sameAs: string;
   public_forms_validations_phoneNumber: string;

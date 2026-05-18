@@ -43,12 +43,12 @@ export const PRICE = (locale: ILocale = 'tr') => {
       .max(4, { message: m.public_forms_validations_maxLength(4) })
       .meta({ examples: ['TRY'] }),
     purchase: z
-      .number()
-      .positive()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [1000] }),
     sell: z
-      .number()
-      .positive()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [1500] }),
     dealerCode: z
       .string()
@@ -56,26 +56,26 @@ export const PRICE = (locale: ILocale = 'tr') => {
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['SURAT'] }),
     shipping: z
-      .number()
-      .positive()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [150] }),
     discount: z
-      .number()
-      .positive()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [10] }),
     tax: z
-      .number()
-      .positive()
-      .int()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [20] }),
   });
 };
 
 export const PRODUCT_PROPERTIES = () => {
   return z.object({
-    hidePrice: z.boolean().optional().meta({ examples: [false] }), // prettier-ignore
-    isFeatured: z.boolean().optional().meta({ examples: [false] }), // prettier-ignore
-    isShippingFree: z.boolean().optional().meta({ examples: [false] }), // prettier-ignore
+    hidePrice: z.boolean().meta({ examples: [false] }), // prettier-ignore
+    isFeatured: z.boolean().meta({ examples: [false] }), // prettier-ignore
+    isShippingFree: z.boolean().meta({ examples: [false] }), // prettier-ignore
   });
 };
 
@@ -118,9 +118,9 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
     images: IMAGES(locale),
     price: PRICE(locale),
     stockQuantity: z
-      .number()
-      .int()
-      .nonnegative()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [100] }),
     desi: z
       .number()
