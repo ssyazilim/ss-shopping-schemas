@@ -345,7 +345,7 @@
         "properties": {
           "key": {
             "type": "string",
-            "minLength": 6,
+            "minLength": 2,
             "maxLength": 254
           }
         },
@@ -391,7 +391,7 @@
         "properties": {
           "key": {
             "type": "string",
-            "minLength": 6,
+            "minLength": 2,
             "maxLength": 254
           },
           "email": {
