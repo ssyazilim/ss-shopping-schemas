@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { IMAGES, PRICE, VARIANTS_TYPE, ADD_PRODUCT } from '../../schemas';
-import { BrandSchema } from './brand';
 import { MongoSchema } from './common';
-import type { IVariant } from './variant';
+import type { IBrand } from './brand';
 import type { ICategory } from './category';
+import type { IVariant } from './variant';
 
 export type IImage = z.infer<typeof ImageSchema>;
 export const ImageSchema = IMAGES();
@@ -24,8 +24,11 @@ export const LikeSchema = z.object({
 export type IPrice = z.infer<typeof PriceSchema>;
 export const PriceSchema = PRICE().extend({
   currencyLocale: z.string().optional(),
+  purchaseDisplay: z.string().optional(),
   purchaseLocale: z.number().optional(),
+  sellDisplay: z.string().optional(),
   sellLocale: z.number().optional(),
+  shippingDisplay: z.string().optional(),
   shippingLocale: z.number().optional(),
   total: z.number().optional(),
   totalLocale: z.number().optional(),
@@ -35,12 +38,15 @@ export type IType = z.infer<typeof TypeSchema>;
 export const TypeSchema = VARIANTS_TYPE().element;
 
 export type IProduct = Omit<z.infer<typeof ProductSchema>, 'variants' | 'category'> & {
-  variants: string[] | IVariant[];
+  brand: string | IBrand;
   category: string | ICategory;
+  variants: string[] | IVariant[];
 };
 export const ProductSchema = ADD_PRODUCT()
   .extend({
     price: PriceSchema,
+    brand: z.string(),
+    category: z.string(),
     video: z.string().optional().optional(),
     viewCount: z.number().optional(),
     like: z
@@ -53,8 +59,6 @@ export const ProductSchema = ADD_PRODUCT()
     question: z.object({ totalCount: z.number() }).optional(),
     order: z.object({ totalCount: z.number() }).optional(),
     variantsType: z.array(TypeSchema),
-    brand: z.union([z.string(), BrandSchema]),
-    category: z.string(),
     variants: z.array(z.string()),
   })
   .extend(MongoSchema.shape);

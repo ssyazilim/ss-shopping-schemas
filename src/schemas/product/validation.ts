@@ -110,11 +110,14 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Lorem ipsum dolor sit amet'] }),
-    description: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(65000, { message: m.public_forms_validations_maxLength(65000) })
-      .optional(),
+    description: z.preprocess(
+      (value: string) => (value === '' ? undefined : value),
+      z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(65000, { message: m.public_forms_validations_maxLength(65000) })
+        .optional(),
+    ),
     images: IMAGES(locale),
     price: PRICE(locale),
     stockQuantity: z
@@ -132,12 +135,15 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['67d15594f49546e19c4f2342'] }),
-    gtin: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['0123456789012'] }),
+    gtin: z.preprocess(
+      (value: string) => (value === '' ? undefined : value),
+      z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .optional()
+        .meta({ examples: ['0123456789012'] }),
+    ),
     sku: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

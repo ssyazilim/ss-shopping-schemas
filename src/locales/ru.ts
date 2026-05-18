@@ -10,6 +10,6 @@ export const notifications: INotifications = {
   public_forms_validations_phoneNumber: 'Введите корректный номер телефона!',
   public_forms_validations_cardNumber: 'Введите корректный номер карты!',
   public_forms_validations_url: 'Введите корректный URL!',
-  public_forms_validations_minLength: (min: number) => `Минимум ${min} символов`,
-  public_forms_validations_maxLength: (max: number) => `Максимум ${max} символов`,
+  public_forms_validations_minLength: (min: number) => `Минимум ${min} символов!`,
+  public_forms_validations_maxLength: (max: number) => `Максимум ${max} символов!`,
 };

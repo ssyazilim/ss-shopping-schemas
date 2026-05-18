@@ -10,6 +10,6 @@ export const notifications: INotifications = {
   public_forms_validations_phoneNumber: 'يرجى إدخال رقم هاتف صحيح!',
   public_forms_validations_cardNumber: 'يرجى إدخال رقم بطاقة صحيح!',
   public_forms_validations_url: 'يرجى إدخال رابط URL صحيح!',
-  public_forms_validations_minLength: (min: number) => `الحد الأدنى ${min} أحرف`,
-  public_forms_validations_maxLength: (max: number) => `الحد الأقصى ${max} أحرف`,
+  public_forms_validations_minLength: (min: number) => `الحد الأدنى !${min} أحرف`,
+  public_forms_validations_maxLength: (max: number) => `الحد الأقصى !${max} أحرف`,
 };

@@ -34,7 +34,7 @@ export const ADD_USER = (locale: ILocale = 'tr') => {
       .meta({ examples: ['Gür'] }),
     email: z
       .email({ message: m.public_forms_validations_email })
-      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['test@ssyazilim.com'] }),
     phoneNumber: z
@@ -53,7 +53,7 @@ export const CHECK_KEY = (locale: ILocale = 'tr') => {
   return z.object({
     key: z
       .string()
-      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
@@ -88,11 +88,11 @@ export const PASSWORD_RESET_COMPLETE = (locale: ILocale = 'tr') => {
   return z.object({
     key: z
       .string()
-      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
     email: z
       .email({ message: m.public_forms_validations_email })
-      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
     newPassword: z
       .string({ message: m.public_forms_validations_required })

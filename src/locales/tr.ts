@@ -10,6 +10,6 @@ export const notifications: INotifications = {
   public_forms_validations_phoneNumber: 'Geçerli bir telefon numarası gir!',
   public_forms_validations_cardNumber: 'Geçerli bir kart numarası gir!',
   public_forms_validations_url: 'Geçerli bir URL gir!',
-  public_forms_validations_minLength: (min: number) => `En az ${min} karakter`,
-  public_forms_validations_maxLength: (max: number) => `En fazla ${max} karakter`,
+  public_forms_validations_minLength: (min: number) => `En az ${min} karakter!`,
+  public_forms_validations_maxLength: (max: number) => `En fazla ${max} karakter!`,
 };
