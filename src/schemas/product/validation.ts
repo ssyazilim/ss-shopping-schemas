@@ -105,6 +105,8 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
       .meta({ examples: [100] }),
     desi: z
       .number({ message: m.public_forms_validations_mustNumber })
+      .min(0, { message: m.public_forms_validations_minLength(0) })
+      .max(1000, { message: m.public_forms_validations_maxLength(1000) })
       .int({ message: m.public_forms_validations_mustNumberInteger })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [1] }),
