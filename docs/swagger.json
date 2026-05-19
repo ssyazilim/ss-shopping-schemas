@@ -5592,7 +5592,7 @@
               },
               "purchase": {
                 "type": "number",
-                "exclusiveMinimum": 0,
+                "minimum": 0,
                 "examples": [
                   1000
                 ]
@@ -5614,21 +5614,21 @@
               },
               "shipping": {
                 "type": "number",
-                "exclusiveMinimum": 0,
+                "minimum": 0,
                 "examples": [
                   150
                 ]
               },
               "discount": {
-                "type": "number",
-                "exclusiveMinimum": 0,
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
                   10
                 ]
               },
               "tax": {
                 "type": "integer",
-                "exclusiveMinimum": 0,
+                "minimum": 0,
                 "examples": [
                   20
                 ]
@@ -5655,7 +5655,7 @@
             "type": "integer",
             "minimum": 0,
             "examples": [
-              2
+              1
             ]
           },
           "brand": {
@@ -5679,7 +5679,7 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "0123456"
+              "4SN106B"
             ]
           },
           "category": {
@@ -5804,7 +5804,7 @@
                 },
                 "purchase": {
                   "type": "number",
-                  "exclusiveMinimum": 0,
+                  "minimum": 0,
                   "examples": [
                     1000
                   ]
@@ -5826,21 +5826,21 @@
                 },
                 "shipping": {
                   "type": "number",
-                  "exclusiveMinimum": 0,
+                  "minimum": 0,
                   "examples": [
                     150
                   ]
                 },
                 "discount": {
-                  "type": "number",
-                  "exclusiveMinimum": 0,
+                  "type": "integer",
+                  "minimum": 0,
                   "examples": [
                     10
                   ]
                 },
                 "tax": {
                   "type": "integer",
-                  "exclusiveMinimum": 0,
+                  "minimum": 0,
                   "examples": [
                     20
                   ]
@@ -5867,7 +5867,7 @@
               "type": "integer",
               "minimum": 0,
               "examples": [
-                2
+                1
               ]
             },
             "brand": {
@@ -5891,7 +5891,7 @@
               "minLength": 2,
               "maxLength": 254,
               "examples": [
-                "0123456"
+                "4SN106B"
               ]
             },
             "category": {
@@ -5960,6 +5960,8 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "Siyah"
             ]
@@ -6019,7 +6021,7 @@
               },
               "purchase": {
                 "type": "number",
-                "exclusiveMinimum": 0,
+                "minimum": 0,
                 "examples": [
                   1000
                 ]
@@ -6041,21 +6043,21 @@
               },
               "shipping": {
                 "type": "number",
-                "exclusiveMinimum": 0,
+                "minimum": 0,
                 "examples": [
                   150
                 ]
               },
               "discount": {
-                "type": "number",
-                "exclusiveMinimum": 0,
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
                   10
                 ]
               },
               "tax": {
                 "type": "integer",
-                "exclusiveMinimum": 0,
+                "minimum": 0,
                 "examples": [
                   20
                 ]
@@ -6072,27 +6074,33 @@
             ]
           },
           "stockQuantity": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               100
             ]
           },
           "sku": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "4SN106C"
             ]
           },
           "gtin": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "0123450123456"
+              "0123456789012"
             ]
           },
           "desi": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
-              2
+              1
             ]
           }
         },
@@ -6147,6 +6155,8 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 1,
+                "maxLength": 254,
                 "examples": [
                   "Siyah"
                 ]
@@ -6206,7 +6216,7 @@
                   },
                   "purchase": {
                     "type": "number",
-                    "exclusiveMinimum": 0,
+                    "minimum": 0,
                     "examples": [
                       1000
                     ]
@@ -6228,21 +6238,21 @@
                   },
                   "shipping": {
                     "type": "number",
-                    "exclusiveMinimum": 0,
+                    "minimum": 0,
                     "examples": [
                       150
                     ]
                   },
                   "discount": {
-                    "type": "number",
-                    "exclusiveMinimum": 0,
+                    "type": "integer",
+                    "minimum": 0,
                     "examples": [
                       10
                     ]
                   },
                   "tax": {
                     "type": "integer",
-                    "exclusiveMinimum": 0,
+                    "minimum": 0,
                     "examples": [
                       20
                     ]
@@ -6259,27 +6269,33 @@
                 ]
               },
               "stockQuantity": {
-                "type": "number",
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
                   100
                 ]
               },
               "sku": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "4SN106C"
                 ]
               },
               "gtin": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "0123450123456"
+                  "0123456789012"
                 ]
               },
               "desi": {
-                "type": "number",
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
-                  2
+                  1
                 ]
               }
             },
@@ -6305,6 +6321,8 @@
           "properties": {
             "name": {
               "type": "string",
+              "minLength": 1,
+              "maxLength": 254,
               "examples": [
                 "Siyah"
               ]
@@ -6364,7 +6382,7 @@
                 },
                 "purchase": {
                   "type": "number",
-                  "exclusiveMinimum": 0,
+                  "minimum": 0,
                   "examples": [
                     1000
                   ]
@@ -6386,21 +6404,21 @@
                 },
                 "shipping": {
                   "type": "number",
-                  "exclusiveMinimum": 0,
+                  "minimum": 0,
                   "examples": [
                     150
                   ]
                 },
                 "discount": {
-                  "type": "number",
-                  "exclusiveMinimum": 0,
+                  "type": "integer",
+                  "minimum": 0,
                   "examples": [
                     10
                   ]
                 },
                 "tax": {
                   "type": "integer",
-                  "exclusiveMinimum": 0,
+                  "minimum": 0,
                   "examples": [
                     20
                   ]
@@ -6417,27 +6435,33 @@
               ]
             },
             "stockQuantity": {
-              "type": "number",
+              "type": "integer",
+              "minimum": 0,
               "examples": [
                 100
               ]
             },
             "sku": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "4SN106C"
               ]
             },
             "gtin": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
-                "0123450123456"
+                "0123456789012"
               ]
             },
             "desi": {
-              "type": "number",
+              "type": "integer",
+              "minimum": 0,
               "examples": [
-                2
+                1
               ]
             },
             "productId": {
