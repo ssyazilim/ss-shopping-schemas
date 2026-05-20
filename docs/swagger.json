@@ -3859,48 +3859,80 @@
           "properties": {
             "id": {
               "type": "string",
+              "minLength": 24,
+              "maxLength": 24,
               "examples": [
                 "674094c121add706a8980815"
               ]
             },
+            "productId": {
+              "type": "string",
+              "minLength": 24,
+              "maxLength": 24,
+              "examples": [
+                "674094c121add706a8980816"
+              ]
+            },
+            "variantId": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 24,
+              "maxLength": 24,
+              "examples": [
+                null
+              ]
+            },
             "name": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "Alluve Lilac Superslims - 20 Cigarettes"
               ]
             },
             "price": {
               "type": "number",
+              "exclusiveMinimum": 0,
               "examples": [
                 500
               ]
             },
             "quantity": {
-              "type": "number",
+              "type": "integer",
+              "exclusiveMinimum": 0,
               "examples": [
                 1
               ]
             },
             "category1": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "Sigaralar"
               ]
             },
             "category2": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "product"
               ]
             },
             "itemType": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "PHYSICAL"
               ]
             },
             "tax": {
-              "type": "number",
+              "type": "integer",
+              "minimum": 0,
               "examples": [
                 20
               ]
@@ -3908,6 +3940,8 @@
           },
           "required": [
             "id",
+            "productId",
+            "variantId",
             "name",
             "price",
             "quantity",
@@ -3923,38 +3957,58 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Halil"
             ]
           },
           "surname": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Gür"
             ]
           },
           "country": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "Turkey"
+              "Türkiye"
             ]
           },
           "city": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Antalya"
             ]
           },
+          "district": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Konyaaltı"
+            ]
+          },
           "address": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
             ]
           },
           "zipCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "07030"
+              "07500"
             ]
           }
         },
@@ -3963,7 +4017,9 @@
           "surname",
           "country",
           "city",
-          "address"
+          "district",
+          "address",
+          "zipCode"
         ]
       },
       "buyer": {
@@ -3971,39 +4027,68 @@
         "properties": {
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email",
             "examples": [
-              "davidmashadow@yandex.com"
-            ]
+              "ayse.sari@mailinator.com"
+            ],
+            "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
           },
           "identityNumber": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "19342410262"
             ]
           },
           "registrationAddress": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
             ]
           },
           "country": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "Turkey"
+              "Türkiye"
             ]
           },
           "city": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Antalya"
             ]
           },
+          "district": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Serik"
+            ]
+          },
           "zipCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "07500"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Hediye paketi olsun!"
             ]
           }
         },
@@ -4012,7 +4097,9 @@
           "identityNumber",
           "registrationAddress",
           "country",
-          "city"
+          "city",
+          "district",
+          "zipCode"
         ]
       },
       "paymentCard": {
@@ -4020,48 +4107,62 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "ALI"
             ]
           },
           "surname": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "SARI"
             ]
           },
           "cardNumber": {
             "type": "string",
+            "minLength": 16,
+            "maxLength": 16,
             "examples": [
               "5890040000000016"
             ]
           },
           "expireMonth": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 2,
             "examples": [
               "11"
             ]
           },
           "expireYear": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 4,
             "examples": [
               "2026"
             ]
           },
           "cvc": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 4,
             "examples": [
               "704"
             ]
           },
           "installment": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               1
             ]
           },
           "registerCard": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               0
             ]
@@ -4083,36 +4184,56 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Ayşe"
             ]
           },
           "surname": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Sarı"
             ]
           },
           "country": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "Turkey"
+              "Türkiye"
             ]
           },
           "city": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Antalya"
             ]
           },
+          "district": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Serik"
+            ]
+          },
           "address": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
             ]
           },
           "zipCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "07500"
             ]
@@ -4123,7 +4244,9 @@
           "surname",
           "country",
           "city",
-          "address"
+          "district",
+          "address",
+          "zipCode"
         ]
       },
       "shipment": {
@@ -4244,24 +4367,32 @@
         "properties": {
           "id": {
             "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
             "examples": [
               "66ae616a9d86f0da5d4d25f6"
             ]
           },
           "paymentId": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 12,
             "examples": [
               "22629933"
             ]
           },
           "token": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "649eb03e-cfd2-4f24-86b0-95628a37a029"
             ]
           },
           "contactName": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Halil Erbil Gür"
             ]
@@ -4274,6 +4405,8 @@
           },
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email",
             "examples": [
               "halilerbilgur@gmail.com"
@@ -4297,48 +4430,62 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "ALI"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "SARI"
                 ]
               },
               "cardNumber": {
                 "type": "string",
+                "minLength": 16,
+                "maxLength": 16,
                 "examples": [
                   "5890040000000016"
                 ]
               },
               "expireMonth": {
                 "type": "string",
+                "minLength": 1,
+                "maxLength": 2,
                 "examples": [
                   "11"
                 ]
               },
               "expireYear": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 4,
                 "examples": [
                   "2026"
                 ]
               },
               "cvc": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 4,
                 "examples": [
                   "704"
                 ]
               },
               "installment": {
-                "type": "number",
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
                   1
                 ]
               },
               "registerCard": {
-                "type": "number",
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
                   0
                 ]
@@ -4360,39 +4507,68 @@
             "properties": {
               "email": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
                 "format": "email",
                 "examples": [
-                  "davidmashadow@yandex.com"
-                ]
+                  "ayse.sari@mailinator.com"
+                ],
+                "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
               },
               "identityNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "19342410262"
                 ]
               },
               "registrationAddress": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07500"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Hediye paketi olsun!"
                 ]
               }
             },
@@ -4401,7 +4577,9 @@
               "identityNumber",
               "registrationAddress",
               "country",
-              "city"
+              "city",
+              "district",
+              "zipCode"
             ]
           },
           "shippingAddress": {
@@ -4409,36 +4587,56 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Ayşe"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarı"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
               "address": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07500"
                 ]
@@ -4449,7 +4647,9 @@
               "surname",
               "country",
               "city",
-              "address"
+              "district",
+              "address",
+              "zipCode"
             ]
           },
           "billingAddress": {
@@ -4457,38 +4657,58 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Halil"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Gür"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Konyaaltı"
+                ]
+              },
               "address": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
                 ]
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "07030"
+                  "07500"
                 ]
               }
             },
@@ -4497,7 +4717,9 @@
               "surname",
               "country",
               "city",
-              "address"
+              "district",
+              "address",
+              "zipCode"
             ]
           },
           "basketItems": {
@@ -4507,48 +4729,80 @@
               "properties": {
                 "id": {
                   "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
                   "examples": [
                     "674094c121add706a8980815"
                   ]
                 },
+                "productId": {
+                  "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    "674094c121add706a8980816"
+                  ]
+                },
+                "variantId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    null
+                  ]
+                },
                 "name": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Alluve Lilac Superslims - 20 Cigarettes"
                   ]
                 },
                 "price": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     500
                   ]
                 },
                 "quantity": {
-                  "type": "number",
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1
                   ]
                 },
                 "category1": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Sigaralar"
                   ]
                 },
                 "category2": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "product"
                   ]
                 },
                 "itemType": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "PHYSICAL"
                   ]
                 },
                 "tax": {
-                  "type": "number",
+                  "type": "integer",
+                  "minimum": 0,
                   "examples": [
                     20
                   ]
@@ -4556,6 +4810,8 @@
               },
               "required": [
                 "id",
+                "productId",
+                "variantId",
                 "name",
                 "price",
                 "quantity",
@@ -4692,13 +4948,16 @@
         "type": "object",
         "properties": {
           "method": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               0
             ]
           },
           "status": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "pending"
             ]
@@ -4708,24 +4967,32 @@
             "properties": {
               "id": {
                 "type": "string",
+                "minLength": 24,
+                "maxLength": 24,
                 "examples": [
                   "66ae616a9d86f0da5d4d25f6"
                 ]
               },
               "paymentId": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 12,
                 "examples": [
                   "22629933"
                 ]
               },
               "token": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "649eb03e-cfd2-4f24-86b0-95628a37a029"
                 ]
               },
               "contactName": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Halil Erbil Gür"
                 ]
@@ -4738,6 +5005,8 @@
               },
               "email": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "halilerbilgur@gmail.com"
@@ -4758,39 +5027,68 @@
             "properties": {
               "email": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
                 "format": "email",
                 "examples": [
-                  "davidmashadow@yandex.com"
-                ]
+                  "ayse.sari@mailinator.com"
+                ],
+                "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
               },
               "identityNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "19342410262"
                 ]
               },
               "registrationAddress": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07500"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Hediye paketi olsun!"
                 ]
               }
             },
@@ -4799,7 +5097,9 @@
               "identityNumber",
               "registrationAddress",
               "country",
-              "city"
+              "city",
+              "district",
+              "zipCode"
             ]
           },
           "shippingAddress": {
@@ -4807,36 +5107,56 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Ayşe"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarı"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
               "address": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07500"
                 ]
@@ -4847,7 +5167,9 @@
               "surname",
               "country",
               "city",
-              "address"
+              "district",
+              "address",
+              "zipCode"
             ]
           },
           "billingAddress": {
@@ -4855,38 +5177,58 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Halil"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Gür"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Konyaaltı"
+                ]
+              },
               "address": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
                 ]
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "07030"
+                  "07500"
                 ]
               }
             },
@@ -4895,7 +5237,9 @@
               "surname",
               "country",
               "city",
-              "address"
+              "district",
+              "address",
+              "zipCode"
             ]
           },
           "basketItems": {
@@ -4905,48 +5249,80 @@
               "properties": {
                 "id": {
                   "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
                   "examples": [
                     "674094c121add706a8980815"
                   ]
                 },
+                "productId": {
+                  "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    "674094c121add706a8980816"
+                  ]
+                },
+                "variantId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    null
+                  ]
+                },
                 "name": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Alluve Lilac Superslims - 20 Cigarettes"
                   ]
                 },
                 "price": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     500
                   ]
                 },
                 "quantity": {
-                  "type": "number",
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1
                   ]
                 },
                 "category1": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Sigaralar"
                   ]
                 },
                 "category2": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "product"
                   ]
                 },
                 "itemType": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "PHYSICAL"
                   ]
                 },
                 "tax": {
-                  "type": "number",
+                  "type": "integer",
+                  "minimum": 0,
                   "examples": [
                     20
                   ]
@@ -4954,6 +5330,8 @@
               },
               "required": [
                 "id",
+                "productId",
+                "variantId",
                 "name",
                 "price",
                 "quantity",
@@ -5097,12 +5475,16 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Ali"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "SARI"
                 ]
@@ -5118,39 +5500,68 @@
             "properties": {
               "email": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
                 "format": "email",
                 "examples": [
-                  "davidmashadow@yandex.com"
-                ]
+                  "ayse.sari@mailinator.com"
+                ],
+                "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
               },
               "identityNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "19342410262"
                 ]
               },
               "registrationAddress": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07500"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Hediye paketi olsun!"
                 ]
               }
             },
@@ -5159,7 +5570,9 @@
               "identityNumber",
               "registrationAddress",
               "country",
-              "city"
+              "city",
+              "district",
+              "zipCode"
             ]
           },
           "shippingAddress": {
@@ -5167,36 +5580,56 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Ayşe"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarı"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
               "address": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07500"
                 ]
@@ -5207,7 +5640,9 @@
               "surname",
               "country",
               "city",
-              "address"
+              "district",
+              "address",
+              "zipCode"
             ]
           },
           "billingAddress": {
@@ -5215,38 +5650,58 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Halil"
                 ]
               },
               "surname": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Gür"
                 ]
               },
               "country": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "Turkey"
+                  "Türkiye"
                 ]
               },
               "city": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Antalya"
                 ]
               },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Konyaaltı"
+                ]
+              },
               "address": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
                 ]
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "07030"
+                  "07500"
                 ]
               }
             },
@@ -5255,7 +5710,9 @@
               "surname",
               "country",
               "city",
-              "address"
+              "district",
+              "address",
+              "zipCode"
             ]
           },
           "basketItems": {
@@ -5265,48 +5722,80 @@
               "properties": {
                 "id": {
                   "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
                   "examples": [
                     "674094c121add706a8980815"
                   ]
                 },
+                "productId": {
+                  "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    "674094c121add706a8980816"
+                  ]
+                },
+                "variantId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    null
+                  ]
+                },
                 "name": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Alluve Lilac Superslims - 20 Cigarettes"
                   ]
                 },
                 "price": {
                   "type": "number",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     500
                   ]
                 },
                 "quantity": {
-                  "type": "number",
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     1
                   ]
                 },
                 "category1": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Sigaralar"
                   ]
                 },
                 "category2": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "product"
                   ]
                 },
                 "itemType": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "PHYSICAL"
                   ]
                 },
                 "tax": {
-                  "type": "number",
+                  "type": "integer",
+                  "minimum": 0,
                   "examples": [
                     20
                   ]
@@ -5314,6 +5803,8 @@
               },
               "required": [
                 "id",
+                "productId",
+                "variantId",
                 "name",
                 "price",
                 "quantity",
@@ -5338,12 +5829,16 @@
         "properties": {
           "conversationId": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "e1e4b5c04f3a4b6a9d8ca0a6f3e3f4a1"
             ]
           },
           "conversationData": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               ""
             ]
@@ -5359,12 +5854,16 @@
         "properties": {
           "binNumber": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "531157"
             ]
           },
           "price": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "2500"
             ]
@@ -5379,7 +5878,9 @@
         "type": "object",
         "properties": {
           "paymentId": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
           }
         },
         "required": [
@@ -5390,7 +5891,8 @@
         "type": "object",
         "properties": {
           "tax": {
-            "type": "number",
+            "type": "integer",
+            "minimum": 0,
             "examples": [
               20
             ]
@@ -5654,6 +6156,7 @@
           "desi": {
             "type": "integer",
             "minimum": 0,
+            "maximum": 1000,
             "examples": [
               1
             ]
@@ -5866,6 +6369,7 @@
             "desi": {
               "type": "integer",
               "minimum": 0,
+              "maximum": 1000,
               "examples": [
                 1
               ]
@@ -6099,6 +6603,7 @@
           "desi": {
             "type": "integer",
             "minimum": 0,
+            "maximum": 1000,
             "examples": [
               1
             ]
@@ -6294,6 +6799,7 @@
               "desi": {
                 "type": "integer",
                 "minimum": 0,
+                "maximum": 1000,
                 "examples": [
                   1
                 ]
@@ -6460,6 +6966,7 @@
             "desi": {
               "type": "integer",
               "minimum": 0,
+              "maximum": 1000,
               "examples": [
                 1
               ]
