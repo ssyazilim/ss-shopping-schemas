@@ -25,7 +25,7 @@ export const SHIPPING_ORDER_INFO = () =>
       .meta({ examples: ['TL'] }),
   });
 
-export const ADD_SHIPPING_ADDRESS = () =>
+export const ADD_SHIPPING_SHIPMENT_ADDRESS = () =>
   z.object({
     name: z.string().meta({ examples: ['Ufuk Sarı'] }),
     email: z.email().meta({ examples: ['test@example.com'] }),

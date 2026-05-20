@@ -1,7 +1,7 @@
 import { registry } from '../registry';
 import {
   SHIPPING_ORDER_INFO,
-  ADD_SHIPPING_ADDRESS,
+  ADD_SHIPPING_SHIPMENT_ADDRESS,
   ADD_SHIPPING_SHIPMENT,
   CREATE_SHIPPING_SHIPMENT,
   SHIPPING_RETURN_ADDRESS,
@@ -16,7 +16,7 @@ registry.register('shippingOrderInfo', SHIPPING_ORDER_INFO());
 
 export const AddShippingAddressSchema = registry.register(
   'addShippingAddress',
-  ADD_SHIPPING_ADDRESS(),
+  ADD_SHIPPING_SHIPMENT_ADDRESS(),
 );
 
 export const AddShippingShipmentSchema = registry.register(
