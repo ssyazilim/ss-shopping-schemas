@@ -436,3 +436,19 @@ export const UPDATE_TAX = (locale: ILocale = 'tr') => {
       .meta({ examples: [20] }),
   });
 };
+
+// FRONTEND
+export const ADD_FE_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
+  const { paymentUser, shippingAddress } = SAVE_PAYMENT(locale).shape;
+
+  return z.object({
+    contactName: paymentUser.shape.contactName,
+    phoneNumber: paymentUser.shape.phoneNumber,
+    email: paymentUser.shape.email,
+    country: shippingAddress.shape.country,
+    city: shippingAddress.shape.city,
+    district: shippingAddress.shape.district,
+    zipCode: shippingAddress.shape.zipCode,
+    address: shippingAddress.shape.address,
+  });
+};
