@@ -1,80 +1,243 @@
 import { z } from 'zod';
+import { ILocale } from '../../locales';
+import * as locales from '../../locales';
 
-export const BASKET_ITEM = () =>
-  z.object({
-    id: z.string().meta({ examples: ['674094c121add706a8980815'] }),
-    name: z.string().meta({ examples: ['Alluve Lilac Superslims - 20 Cigarettes'] }),
-    price: z.number().meta({ examples: [500] }),
-    quantity: z.number().meta({ examples: [1] }),
-    category1: z.string().meta({ examples: ['Sigaralar'] }),
-    category2: z.string().meta({ examples: ['product'] }),
-    itemType: z.string().meta({ examples: ['PHYSICAL'] }),
-    tax: z.number().meta({ examples: [20] }),
-  });
+const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
-const PAYMENT_ADDRESS = (examples: {
-  name: string;
-  surname: string;
-  address: string;
-  zipCode: string;
-}) =>
-  z.object({
-    name: z.string().meta({ examples: [examples.name] }),
-    surname: z.string().meta({ examples: [examples.surname] }),
-    country: z.string().meta({ examples: ['Turkey'] }),
-    city: z.string().meta({ examples: ['Antalya'] }),
-    address: z.string().meta({ examples: [examples.address] }),
-    zipCode: z
+export const ADD_BASKET_ITEM = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    id: z
       .string()
-      .optional()
-      .meta({ examples: [examples.zipCode] }),
-  });
-
-export const BILLING_ADDRESS = () =>
-  PAYMENT_ADDRESS({
-    name: 'Halil',
-    surname: 'Gür',
-    address: 'Bahçelievler Mahallesi, Atatürk Parkı 25/21',
-    zipCode: '07030',
-  });
-
-export const BUYER = () =>
-  z.object({
-    email: z.email().meta({ examples: ['davidmashadow@yandex.com'] }),
-    identityNumber: z.string().meta({ examples: ['19342410262'] }),
-    registrationAddress: z
+      .min(24, { message: m.public_forms_validations_minLength(24) })
+      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .meta({ examples: ['674094c121add706a8980815'] }),
+    productId: z
       .string()
+      .min(24, { message: m.public_forms_validations_minLength(24) })
+      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .meta({ examples: ['674094c121add706a8980816'] }),
+    variantId: z
+      .string()
+      .min(24, { message: m.public_forms_validations_minLength(24) })
+      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .nullable()
+      .meta({ examples: [null] }),
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Alluve Lilac Superslims - 20 Cigarettes'] }),
+    price: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [500] }),
+    quantity: z
+      .number()
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .meta({ examples: [1] }),
+    category1: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Sigaralar'] }),
+    category2: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['product'] }),
+    itemType: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['PHYSICAL'] }),
+    tax: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .meta({ examples: [20] }),
+  });
+};
+export const ADD_SHIPPING_ADDRESS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Ayşe'] }),
+    surname: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Sarı'] }),
+    country: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Türkiye'] }),
+    city: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Antalya'] }),
+    district: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Serik'] }),
+    address: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik'] }),
-    country: z.string().meta({ examples: ['Turkey'] }),
-    city: z.string().meta({ examples: ['Antalya'] }),
     zipCode: z
       .string()
-      .optional()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['07500'] }),
   });
-
-export const PAYMENT_CARD = () =>
-  z.object({
-    name: z.string().meta({ examples: ['ALI'] }),
-    surname: z.string().meta({ examples: ['SARI'] }),
-    cardNumber: z.string().meta({ examples: ['5890040000000016'] }),
-    expireMonth: z.string().meta({ examples: ['11'] }),
-    expireYear: z.string().meta({ examples: ['2026'] }),
-    cvc: z.string().meta({ examples: ['704'] }),
-    installment: z.number().meta({ examples: [1] }),
-    registerCard: z.number().meta({ examples: [0] }),
+};
+export const ADD_BILLING_ADDRESS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Halil'] }),
+    surname: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Gür'] }),
+    country: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Türkiye'] }),
+    city: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Antalya'] }),
+    district: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Konyaaltı'] }),
+    address: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Bahçelievler Mahallesi, Atatürk Parkı 25/21'] }),
+    zipCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['07500'] }),
   });
-
-export const SHIPPING_ADDRESS = () =>
-  PAYMENT_ADDRESS({
-    name: 'Ayşe',
-    surname: 'Sarı',
-    address: 'Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik',
-    zipCode: '07500',
+};
+export const ADD_BUYER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({
+        examples: ['ayse.sari@mailinator.com'],
+        description: 'https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari',
+      }),
+    identityNumber: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['19342410262'] }),
+    registrationAddress: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik'] }),
+    country: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Türkiye'] }),
+    city: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Antalya'] }),
+    district: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Serik'] }),
+    zipCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['07500'] }),
+    message: z.preprocess(
+      (value: string) => (value === '' ? undefined : value),
+      z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .optional()
+        .meta({ examples: ['Hediye paketi olsun!'] }),
+    ),
   });
-
-export const SHIPMENT = () =>
-  z.object({
+};
+export const ADD_PAYMENT_CARD = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['ALI'] }),
+    surname: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['SARI'] }),
+    cardNumber: z
+      .string()
+      .min(16, { message: m.public_forms_validations_minLength(16) })
+      .max(16, { message: m.public_forms_validations_maxLength(16) })
+      .meta({ examples: ['5890040000000016'] }),
+    expireMonth: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(2, { message: m.public_forms_validations_maxLength(2) })
+      .meta({ examples: ['11'] }),
+    expireYear: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(4, { message: m.public_forms_validations_maxLength(4) })
+      .meta({ examples: ['2026'] }),
+    cvc: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(4, { message: m.public_forms_validations_maxLength(4) })
+      .meta({ examples: ['704'] }),
+    installment: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1] }),
+    registerCard: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [0] }),
+  });
+};
+export const ADD_SHIPMENT = () => {
+  return z.object({
     method: z.string().meta({ examples: ['standard'] }),
     orderID: z
       .string()
@@ -138,69 +301,138 @@ export const SHIPMENT = () =>
         ],
       }),
   });
-
-export const PAYMENT_USER = () =>
-  z.object({
-    id: z.string().meta({ examples: ['66ae616a9d86f0da5d4d25f6'] }),
-    paymentId: z.string().meta({ examples: ['22629933'] }),
-    token: z.string().meta({ examples: ['649eb03e-cfd2-4f24-86b0-95628a37a029'] }),
-    contactName: z.string().meta({ examples: ['Halil Erbil Gür'] }),
-    phoneNumber: z.string().meta({ examples: ['905527406607'] }),
-    email: z.email().meta({ examples: ['halilerbilgur@gmail.com'] }),
+};
+export const ADD_PAYMENT_USER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    id: z
+      .string()
+      .min(24, { message: m.public_forms_validations_minLength(24) })
+      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .meta({ examples: ['66ae616a9d86f0da5d4d25f6'] }),
+    paymentId: z
+      .string()
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(12, { message: m.public_forms_validations_maxLength(12) })
+      .meta({ examples: ['22629933'] }),
+    token: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['649eb03e-cfd2-4f24-86b0-95628a37a029'] }),
+    contactName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Halil Erbil Gür'] }),
+    phoneNumber: z
+      .e164({ message: m.public_forms_validations_phoneNumber })
+      .meta({ examples: ['905527406607'] }),
+    email: z
+      .email()
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['halilerbilgur@gmail.com'] }),
   });
-
-export const ADD_PAYMENT = () =>
-  z.object({
-    paymentCard: PAYMENT_CARD(),
-    buyer: BUYER(),
-    shippingAddress: SHIPPING_ADDRESS(),
-    billingAddress: BILLING_ADDRESS(),
-    basketItems: z.array(BASKET_ITEM()),
-    shipment: SHIPMENT().optional(),
+};
+export const ADD_PAYMENT = (locale: ILocale = 'tr') => {
+  return z.object({
+    paymentCard: ADD_PAYMENT_CARD(locale),
+    buyer: ADD_BUYER(locale),
+    shippingAddress: ADD_SHIPPING_ADDRESS(locale),
+    billingAddress: ADD_BILLING_ADDRESS(locale),
+    basketItems: z.array(ADD_BASKET_ITEM(locale)),
+    shipment: ADD_SHIPMENT().optional(),
   });
-
-export const SAVE_PAYMENT = () =>
-  z.object({
-    method: z.number().meta({ examples: [0] }),
-    status: z.string().meta({ examples: ['pending'] }),
-    paymentUser: PAYMENT_USER(),
-    buyer: BUYER(),
-    shippingAddress: SHIPPING_ADDRESS(),
-    billingAddress: BILLING_ADDRESS(),
-    basketItems: z.array(BASKET_ITEM()),
-    shipment: SHIPMENT(),
+};
+export const SAVE_PAYMENT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    method: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [0] }),
+    status: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['pending'] }),
+    paymentUser: ADD_PAYMENT_USER(locale),
+    buyer: ADD_BUYER(locale),
+    shippingAddress: ADD_SHIPPING_ADDRESS(locale),
+    billingAddress: ADD_BILLING_ADDRESS(locale),
+    basketItems: z.array(ADD_BASKET_ITEM(locale)),
+    shipment: ADD_SHIPMENT(),
   });
-
-export const CHECK_HTML_FOR_IYZICO = () =>
-  z.object({
+};
+export const CHECK_HTML_FOR_IYZICO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
     paymentCard: z.object({
-      name: z.string().meta({ examples: ['Ali'] }),
-      surname: z.string().meta({ examples: ['SARI'] }),
+      name: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['Ali'] }),
+      surname: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['SARI'] }),
     }),
-    buyer: BUYER(),
-    shippingAddress: SHIPPING_ADDRESS(),
-    billingAddress: BILLING_ADDRESS(),
-    basketItems: z.array(BASKET_ITEM()),
+    buyer: ADD_BUYER(locale),
+    shippingAddress: ADD_SHIPPING_ADDRESS(locale),
+    billingAddress: ADD_BILLING_ADDRESS(locale),
+    basketItems: z.array(ADD_BASKET_ITEM(locale)),
   });
-
-export const COMPLETE_PAYMENT_3D = () =>
-  z.object({
-    conversationId: z.string().meta({ examples: ['e1e4b5c04f3a4b6a9d8ca0a6f3e3f4a1'] }),
-    conversationData: z.string().meta({ examples: [''] }),
+};
+export const COMPLETE_PAYMENT_3D = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    conversationId: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['e1e4b5c04f3a4b6a9d8ca0a6f3e3f4a1'] }),
+    conversationData: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: [''] }),
   });
-
-export const CHECK_INSTALLMENT = () =>
-  z.object({
-    binNumber: z.string().meta({ examples: ['531157'] }),
-    price: z.string().meta({ examples: ['2500'] }),
+};
+export const CHECK_INSTALLMENT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    binNumber: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['531157'] }),
+    price: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['2500'] }),
   });
-
-export const CANCEL_PAYMENT = () =>
-  z.object({
-    paymentId: z.string(),
+};
+export const CANCEL_PAYMENT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    paymentId: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
-
-export const UPDATE_TAX = () =>
-  z.object({
-    tax: z.number().meta({ examples: [20] }),
+};
+export const UPDATE_TAX = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    tax: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [20] }),
   });
+};

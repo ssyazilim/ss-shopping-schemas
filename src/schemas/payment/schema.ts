@@ -1,13 +1,13 @@
 import { z } from 'zod';
 import { registry } from '../registry';
 import {
-  BASKET_ITEM,
-  BILLING_ADDRESS,
-  BUYER,
-  PAYMENT_CARD,
-  SHIPPING_ADDRESS,
-  SHIPMENT,
-  PAYMENT_USER,
+  ADD_BASKET_ITEM,
+  ADD_BILLING_ADDRESS,
+  ADD_BUYER,
+  ADD_PAYMENT_CARD,
+  ADD_SHIPPING_ADDRESS,
+  ADD_SHIPMENT,
+  ADD_PAYMENT_USER,
   ADD_PAYMENT,
   SAVE_PAYMENT,
   CHECK_HTML_FOR_IYZICO,
@@ -17,13 +17,13 @@ import {
   UPDATE_TAX,
 } from './validation';
 
-registry.register('basketItems', z.array(BASKET_ITEM()));
-registry.register('billingAddress', BILLING_ADDRESS());
-registry.register('buyer', BUYER());
-registry.register('paymentCard', PAYMENT_CARD());
-registry.register('shippingAddress', SHIPPING_ADDRESS());
-registry.register('shipment', SHIPMENT());
-registry.register('paymentUser', PAYMENT_USER());
+registry.register('basketItems', z.array(ADD_BASKET_ITEM()));
+registry.register('billingAddress', ADD_BILLING_ADDRESS());
+registry.register('buyer', ADD_BUYER());
+registry.register('paymentCard', ADD_PAYMENT_CARD());
+registry.register('shippingAddress', ADD_SHIPPING_ADDRESS());
+registry.register('shipment', ADD_SHIPMENT());
+registry.register('paymentUser', ADD_PAYMENT_USER());
 
 export const AddPaymentSchema = registry.register('addPayment', ADD_PAYMENT());
 
