@@ -18,7 +18,7 @@ export const SHIPPING_ITEM = (locale: ILocale) => {
       .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [2] }),
   });
-}
+};
 
 export const SHIPPING_ORDER_INFO = (locale: ILocale = 'tr') => {
   const m = messages[locale];
@@ -48,7 +48,7 @@ export const SHIPPING_ORDER_INFO = (locale: ILocale = 'tr') => {
       .optional()
       .meta({ examples: ['TL'] }),
   });
-}
+};
 export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -139,9 +139,9 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
       .optional()
       .meta({ examples: [false] }),
   });
-}
-export const CREATE_SHIPPING_SHIPMENT = () =>
-  ADD_SHIPPING_SHIPMENT().extend({
+};
+export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') =>
+  ADD_SHIPPING_SHIPMENT(locale).extend({
     providerServiceCode: z
       .string()
       .optional()
@@ -152,95 +152,164 @@ export const CREATE_SHIPPING_SHIPMENT = () =>
       .meta({ examples: [''] }),
   });
 
-export const SHIPPING_RETURN_ADDRESS = () =>
-  z.object({
-    name: z.string().meta({ examples: ['İzzet Sarı'] }),
+export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['İzzet Sarı'] }),
     email: z.email().optional(),
     phone: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['+905332810759'] }),
-    address1: z.string().optional(),
+    address1: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .optional(),
     countryCode: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['TR'] }),
     cityCode: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['07'] }),
     districtName: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Serik'] }),
   });
+};
 
-export const RETURN_SHIPPING_SHIPMENT = () =>
-  z.object({
+export const RETURN_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
     isReturn: z
       .boolean()
       .optional()
       .meta({ examples: [true] }),
     providerServiceCode: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['GELIVER_STANDART'] }),
     count: z
-      .number()
-      .int()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
       .optional()
       .meta({ examples: [1] }),
-    senderAddress: SHIPPING_RETURN_ADDRESS().optional(),
+    senderAddress: SHIPPING_RETURN_ADDRESS(locale).optional(),
   });
+};
 
-export const UPDATE_SHIPPING_PACKAGE = () =>
-  z.object({
+export const UPDATE_SHIPPING_PACKAGE = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
     length: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['20'] }),
     width: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['15'] }),
     height: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['10'] }),
     weight: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['0.8'] }),
   });
+};
 
-export const SHIPPING_TEMPLATE = () =>
-  z.object({
-    name: z.string().meta({ examples: ['kilim-olcusu'] }),
-    length: z.string().meta({ examples: ['100'] }),
-    width: z.string().meta({ examples: ['50'] }),
-    height: z.string().meta({ examples: ['2'] }),
-    weight: z.string().meta({ examples: ['5'] }),
+export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['kilim-olcusu'] }),
+    length: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['100'] }),
+    width: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['50'] }),
+    height: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['2'] }),
+    weight: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['5'] }),
     distanceUnit: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['cm'] }),
     massUnit: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['kg'] }),
   });
+};
 
-export const SHIPPING_PROVIDER = () =>
-  z.object({
-    username: z.string().meta({ examples: ['test'] }),
+export const SHIPPING_PROVIDER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    username: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['test'] }),
     password: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['pass'] }),
-    providerCode: z.string().meta({ examples: ['SURAT'] }),
+    providerCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['SURAT'] }),
     version: z
-      .number()
-      .int()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [1] }),
     isActive: z.boolean().meta({ examples: [false] }),
     isC2C: z
@@ -254,9 +323,18 @@ export const SHIPPING_PROVIDER = () =>
       .meta({ examples: [false] }),
     parameters: z.record(z.string(), z.unknown()).optional(),
   });
+};
 
-export const SHIPPING_WEBHOOK = () =>
-  z.object({
-    url: z.string().meta({ examples: ['https://webhook.site/test'] }),
-    type: z.string().meta({ examples: ['TRACK_UPDATED'] }),
+export const SHIPPING_WEBHOOK = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    url: z
+      .url({ message: m.public_forms_validations_url })
+      .meta({ examples: ['https://webhook.site/test'] }),
+    type: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['TRACK_UPDATED'] }),
   });
+};
