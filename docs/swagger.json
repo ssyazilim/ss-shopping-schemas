@@ -7226,15 +7226,19 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Ufuk Sarı"
             ]
           },
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email",
             "examples": [
-              "test@example.com"
+              "ufuk.sari@mailinator.com"
             ]
           },
           "phone": {
@@ -7245,42 +7249,56 @@
           },
           "address1": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Belek mahallesi Atatürk caddesi No: 11/1"
             ]
           },
           "address2": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               ""
             ]
           },
           "countryCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "TR"
             ]
           },
           "cityName": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Antalya"
             ]
           },
           "cityCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "07"
             ]
           },
           "districtName": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Belek"
             ]
           },
           "zip": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "07500"
             ]
@@ -7293,6 +7311,8 @@
           },
           "shortName": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "UFUKSARI"
             ]
