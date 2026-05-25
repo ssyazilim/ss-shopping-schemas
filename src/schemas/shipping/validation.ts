@@ -1,4 +1,8 @@
 import { z } from 'zod';
+import { ILocale } from '../../locales';
+import * as locales from '../../locales';
+
+const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const SHIPPING_ITEM = () =>
   z.object({
@@ -25,25 +29,69 @@ export const SHIPPING_ORDER_INFO = () =>
       .meta({ examples: ['TL'] }),
   });
 
-export const ADD_SHIPPING_SHIPMENT_ADDRESS = () =>
-  z.object({
-    name: z.string().meta({ examples: ['Ufuk Sarı'] }),
-    email: z.email().meta({ examples: ['test@example.com'] }),
-    phone: z.string().meta({ examples: ['+905309464864'] }),
-    address1: z.string().meta({ examples: ['Belek mahallesi Atatürk caddesi No: 11/1'] }),
-    address2: z
+export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
       .string()
-      .optional()
-      .meta({ examples: [''] }),
-    countryCode: z.string().meta({ examples: ['TR'] }),
-    cityName: z.string().meta({ examples: ['Antalya'] }),
-    cityCode: z.string().meta({ examples: ['07'] }),
-    districtName: z.string().meta({ examples: ['Belek'] }),
-    zip: z.string().meta({ examples: ['07500'] }),
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Ufuk Sarı'] }),
+    email: z
+      .email()
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['ufuk.sari@mailinator.com'] }),
+    phone: z
+      .e164({ message: m.public_forms_validations_phoneNumber })
+      .meta({ examples: ['+905309464864'] }),
+    address1: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Belek mahallesi Atatürk caddesi No: 11/1'] }),
+    address2: z.preprocess(
+      (value: string) => (value === '' ? undefined : value),
+      z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .optional()
+        .meta({ examples: [''] }),
+    ),
+    countryCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['TR'] }),
+    cityName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Antalya'] }),
+    cityCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['07'] }),
+    districtName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Belek'] }),
+    zip: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['07500'] }),
     isRecipientAddress: z.boolean().meta({ examples: [true] }),
-    shortName: z.string().meta({ examples: ['UFUKSARI'] }),
+    shortName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['UFUKSARI'] }),
   });
-
+};
 export const ADD_SHIPPING_SHIPMENT = () =>
   z.object({
     test: z.boolean().meta({ examples: [true] }),
