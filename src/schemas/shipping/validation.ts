@@ -4,23 +4,43 @@ import * as locales from '../../locales';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
-export const SHIPPING_ITEM = () =>
-  z.object({
-    title: z.string().meta({ examples: ['Lorem ipsum dolor sit amet'] }),
+export const SHIPPING_ITEM = (locale: ILocale) => {
+  const m = messages[locale];
+  return z.object({
+    title: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Lorem ipsum dolor sit amet'] }),
     quantity: z
-      .number()
-      .int()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [2] }),
   });
+}
 
-export const SHIPPING_ORDER_INFO = () =>
-  z.object({
-    sourceCode: z.string().meta({ examples: ['API'] }),
-    sourceIdentifier: z.string().meta({ examples: ['http://localhost:5000'] }),
-    orderNumber: z.string().meta({ examples: ['1234567890'] }),
+export const SHIPPING_ORDER_INFO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    sourceCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['API'] }),
+    sourceIdentifier: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['http://localhost:5000'] }),
+    orderNumber: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['1234567890'] }),
     totalAmount: z
-      .number()
-      .int()
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
       .optional()
       .meta({ examples: [250] }),
     totalAmountCurrency: z
@@ -28,7 +48,7 @@ export const SHIPPING_ORDER_INFO = () =>
       .optional()
       .meta({ examples: ['TL'] }),
   });
-
+}
 export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -92,21 +112,34 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['UFUKSARI'] }),
   });
 };
-export const ADD_SHIPPING_SHIPMENT = () =>
-  z.object({
+export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
     test: z.boolean().meta({ examples: [true] }),
-    items: z.array(SHIPPING_ITEM()),
-    senderAddressID: z.string().meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
+    items: z.array(SHIPPING_ITEM(locale)),
+    senderAddressID: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
     returnAddressID: z.string().optional(),
-    recipientAddressID: z.string().meta({ examples: ['64c4f70f-83b8-4195-85c3-cb5a16751e3d'] }),
+    recipientAddressID: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['64c4f70f-83b8-4195-85c3-cb5a16751e3d'] }),
     order: SHIPPING_ORDER_INFO(),
-    parcelTemplateID: z.string().meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
+    parcelTemplateID: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
     productPaymentOnDelivery: z
       .boolean()
       .optional()
       .meta({ examples: [false] }),
   });
-
+}
 export const CREATE_SHIPPING_SHIPMENT = () =>
   ADD_SHIPPING_SHIPMENT().extend({
     providerServiceCode: z
