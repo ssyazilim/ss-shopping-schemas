@@ -7186,24 +7186,31 @@
         "properties": {
           "sourceCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "API"
             ]
           },
           "sourceIdentifier": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "http://localhost:5000"
             ]
           },
           "orderNumber": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "1234567890"
             ]
           },
           "totalAmount": {
-            "type": "integer",
+            "type": "number",
+            "exclusiveMinimum": 0,
             "examples": [
               250
             ]
@@ -7348,12 +7355,15 @@
               "properties": {
                 "title": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Lorem ipsum dolor sit amet"
                   ]
                 },
                 "quantity": {
                   "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     2
                   ]
@@ -7367,6 +7377,8 @@
           },
           "senderAddressID": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "7f76e149-9d63-4993-b62a-ac0eee05f830"
             ]
@@ -7376,6 +7388,8 @@
           },
           "recipientAddressID": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "64c4f70f-83b8-4195-85c3-cb5a16751e3d"
             ]
@@ -7385,24 +7399,31 @@
             "properties": {
               "sourceCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "API"
                 ]
               },
               "sourceIdentifier": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "http://localhost:5000"
                 ]
               },
               "orderNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "1234567890"
                 ]
               },
               "totalAmount": {
-                "type": "integer",
+                "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   250
                 ]
@@ -7422,6 +7443,8 @@
           },
           "parcelTemplateID": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "3cb149af-8c2b-4712-863a-25b39c1dbe0a"
             ]
@@ -7458,12 +7481,15 @@
               "properties": {
                 "title": {
                   "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
                   "examples": [
                     "Lorem ipsum dolor sit amet"
                   ]
                 },
                 "quantity": {
                   "type": "integer",
+                  "exclusiveMinimum": 0,
                   "examples": [
                     2
                   ]
@@ -7477,6 +7503,8 @@
           },
           "senderAddressID": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "7f76e149-9d63-4993-b62a-ac0eee05f830"
             ]
@@ -7486,6 +7514,8 @@
           },
           "recipientAddressID": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "64c4f70f-83b8-4195-85c3-cb5a16751e3d"
             ]
@@ -7495,24 +7525,31 @@
             "properties": {
               "sourceCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "API"
                 ]
               },
               "sourceIdentifier": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "http://localhost:5000"
                 ]
               },
               "orderNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "1234567890"
                 ]
               },
               "totalAmount": {
-                "type": "integer",
+                "type": "number",
+                "exclusiveMinimum": 0,
                 "examples": [
                   250
                 ]
@@ -7532,6 +7569,8 @@
           },
           "parcelTemplateID": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "3cb149af-8c2b-4712-863a-25b39c1dbe0a"
             ]
@@ -7569,6 +7608,8 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "İzzet Sarı"
             ]
@@ -7579,27 +7620,37 @@
           },
           "phone": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "+905332810759"
             ]
           },
           "address1": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
           },
           "countryCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "TR"
             ]
           },
           "cityCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "07"
             ]
           },
           "districtName": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Serik"
             ]
@@ -7620,6 +7671,8 @@
           },
           "providerServiceCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "GELIVER_STANDART"
             ]
@@ -7635,6 +7688,8 @@
             "properties": {
               "name": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "İzzet Sarı"
                 ]
@@ -7645,27 +7700,37 @@
               },
               "phone": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "+905332810759"
                 ]
               },
               "address1": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254
               },
               "countryCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "TR"
                 ]
               },
               "cityCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07"
                 ]
               },
               "districtName": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Serik"
                 ]
@@ -7682,24 +7747,32 @@
         "properties": {
           "length": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "20"
             ]
           },
           "width": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "15"
             ]
           },
           "height": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "10"
             ]
           },
           "weight": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "0.8"
             ]
@@ -7711,42 +7784,56 @@
         "properties": {
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "kilim-olcusu"
             ]
           },
           "length": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "100"
             ]
           },
           "width": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "50"
             ]
           },
           "height": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "2"
             ]
           },
           "weight": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "5"
             ]
           },
           "distanceUnit": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "cm"
             ]
           },
           "massUnit": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "kg"
             ]
@@ -7765,18 +7852,24 @@
         "properties": {
           "username": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "test"
             ]
           },
           "password": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "pass"
             ]
           },
           "providerCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "SURAT"
             ]
@@ -7829,12 +7922,15 @@
         "properties": {
           "url": {
             "type": "string",
+            "format": "uri",
             "examples": [
               "https://webhook.site/test"
             ]
           },
           "type": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "TRACK_UPDATED"
             ]
