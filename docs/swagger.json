@@ -7784,7 +7784,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "minLength": 2,
+            "minLength": 1,
             "maxLength": 254,
             "examples": [
               "kilim-olcusu"
