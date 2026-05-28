@@ -121,8 +121,8 @@ export interface IGeliverAddress {
 
 export interface IGeliverAddPackageTemplate {
   name: string;
-  distanceUnit: 'm' | 'cm' | 'mm';
-  massUnit: 'kg' | 'g';
+  distanceUnit: string; // 'm' | 'cm' | 'mm';
+  massUnit: string; // 'kg' | 'g';
   length: string;
   height: string;
   width: string;
@@ -138,7 +138,7 @@ export interface IGeliverAddPackageTemplateResponse {
   height: string;
   desi: string;
   oldDesi: string;
-  distanceUnit: 'm' | 'cm' | 'mm';
+  distanceUnit: string; // 'm' | 'cm' | 'mm';
   weight: string;
   oldWeight: string;
   massUnit: 'kg' | 'g';
@@ -235,9 +235,9 @@ export interface IGeliverShipmentAdd {
   length?: string;
   height?: string;
   width?: string;
-  distanceUnit?: 'cm' | 'm' | 'mm';
+  distanceUnit?: string; // 'cm' | 'm' | 'mm';
   weight: string;
-  massUnit: 'kg' | 'g';
+  massUnit: string; // 'kg' | 'g';
   productPaymentOnDelivery: boolean;
 }
 
