@@ -250,7 +250,7 @@ export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
   return z.object({
     name: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['kilim-olcusu'] }),
     length: z
