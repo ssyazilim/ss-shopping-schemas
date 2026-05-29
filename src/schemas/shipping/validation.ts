@@ -336,5 +336,7 @@ export const SHIPPING_WEBHOOK = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['TRACK_UPDATED'] }),
+    headerName: z.string().optional(),
+    headerValue: z.string().optional(),
   });
 };

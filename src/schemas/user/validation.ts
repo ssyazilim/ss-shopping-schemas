@@ -26,7 +26,7 @@ export const DELETE_USER = (locale: ILocale = 'tr') => {
   });
 };
 
-export const CUSTOMER = (locale: ILocale = 'tr') => {
+export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     name: z
@@ -51,12 +51,13 @@ export const CUSTOMER = (locale: ILocale = 'tr') => {
         .string()
         .min(8, m.public_forms_validations_minLength(8))
         .max(64, m.public_forms_validations_maxLength(64))
+        .optional()
         .meta({ examples: ['Passw0rd'] }),
     ),
     role: z.array(z.enum(['ROLE_ADMIN', 'ROLE_USER'])).meta({ examples: [['ROLE_USER']] }),
     isActivated: z.boolean().meta({ examples: [true] }),
   });
 };
-export const ADD_CUSTOMERS = () => z.array(CUSTOMER());
+export const ADD_CUSTOMERS = () => z.array(ADD_CUSTOMER());
 
-export const UPDATE_CUSTOMER = () => CUSTOMER().partial();
+export const UPDATE_CUSTOMER = () => ADD_CUSTOMER().partial();
