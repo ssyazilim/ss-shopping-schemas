@@ -7109,12 +7109,16 @@
         "properties": {
           "status": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "pending"
             ]
           },
           "question": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Çoraplarınızda kullanılan kumaş türleri nelerdir?"
             ]
@@ -7130,18 +7134,24 @@
         "properties": {
           "status": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "approved"
             ]
           },
           "question": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Çoraplarınızda kullanılan kumaş türleri nelerdir?"
             ]
           },
           "answer": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Pamuk, yün ve akrilik kullandık."
             ]
@@ -7158,18 +7168,23 @@
         "properties": {
           "status": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "pending"
             ]
           },
           "rating": {
-            "type": "number",
+            "type": "integer",
+            "exclusiveMinimum": 0,
             "examples": [
               5
             ]
           },
           "content": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Harika bir ürün. Kesinlikle tavsiye ederim."
             ]
@@ -7934,6 +7949,12 @@
             "examples": [
               "TRACK_UPDATED"
             ]
+          },
+          "headerName": {
+            "type": "string"
+          },
+          "headerValue": {
+            "type": "string"
           }
         },
         "required": [
@@ -8161,7 +8182,6 @@
           "surname",
           "email",
           "phoneNumber",
-          "password",
           "role",
           "isActivated"
         ]
@@ -8237,7 +8257,6 @@
             "surname",
             "email",
             "phoneNumber",
-            "password",
             "role",
             "isActivated"
           ]
