@@ -9,8 +9,8 @@ import type { IProduct } from './product';
  *       TYPES           *
  *************************/
 export type IReview = Omit<z.infer<typeof ReviewSchema>, 'userId' | 'productId'> & {
-  userId: IUser;
-  productId: IProduct;
+  userId: IUser | string;
+  productId: IProduct | string;
 };
 export const ReviewSchema = ADD_REVIEW()
   .extend({

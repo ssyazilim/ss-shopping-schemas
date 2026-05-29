@@ -9,8 +9,8 @@ import type { IProduct } from './product';
  *       TYPES           *
  *************************/
 export type IQuestion = Omit<z.infer<typeof QuestionSchema>, 'userId' | 'productId'> & {
-  userId: IUser;
-  productId: IProduct;
+  userId: IUser | string;
+  productId: IProduct | string;
 };
 export const QuestionSchema = UPDATE_QUESTION()
   .extend({
