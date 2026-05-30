@@ -438,25 +438,36 @@ export const UPDATE_TAX = (locale: ILocale = 'tr') => {
 };
 
 export const ADD_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
-  const { paymentUser, shippingAddress } = SAVE_PAYMENT(locale).shape;
-
-  return z.object({
-    contactName: paymentUser.shape.contactName,
-    phoneNumber: paymentUser.shape.phoneNumber,
-    email: paymentUser.shape.email,
-    country: shippingAddress.shape.country,
-    city: shippingAddress.shape.city,
-    district: shippingAddress.shape.district,
-    zipCode: shippingAddress.shape.zipCode,
-    address: shippingAddress.shape.address,
-  });
-};
-export const ADD_PAYMENT_METHOD = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    content: z
+    contactName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(65535, { message: m.public_forms_validations_maxLength(65535) }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
+    email: z
+      .email()
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    country: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    city: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    district: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    zipCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    address: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };

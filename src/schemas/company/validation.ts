@@ -5,7 +5,7 @@ import { ImageSchema } from '../../types/zod/product';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
-export const COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
+export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     isCompany: z.boolean().meta({ examples: [false] }),
@@ -68,8 +68,7 @@ export const COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['Bahçelievler Mahallesi Atatürk Parkı 25/21'] }),
   });
 };
-
-export const COMPANY_SOCIAL_MEDIA = (locale: ILocale = 'tr') => {
+export const ADD_COMPANY_SOCIAL_MEDIA = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     name: z
@@ -83,8 +82,7 @@ export const COMPANY_SOCIAL_MEDIA = (locale: ILocale = 'tr') => {
     icon: z.string(),
   });
 };
-
-export const COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
+export const ADD_COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     status: z
@@ -99,8 +97,7 @@ export const COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
       .meta({ examples: ['<p>Halil Gür</p>'] }),
   });
 };
-
-export const COMPANY_PROPERTIES_HOME_PAGE = z.object({
+export const ADD_COMPANY_PROPERTIES_HOME_PAGE = z.object({
   article: z.boolean(),
   blog: z.boolean(),
   event: z.boolean(),
@@ -117,8 +114,7 @@ export const COMPANY_PROPERTIES_HOME_PAGE = z.object({
   teamSection: z.boolean(),
   testimonial: z.boolean().optional(),
 });
-
-export const COMPANY_PROPERTIES_PAYMENT_SETTINGS = z.object({
+export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = z.object({
   cashDiscount: z.string().meta({ examples: ['0'] }),
   doorToDoor: z.object({
     isEnabled: z.boolean(),
@@ -126,8 +122,7 @@ export const COMPANY_PROPERTIES_PAYMENT_SETTINGS = z.object({
     maxValue: z.number(),
   }),
 });
-
-export const COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
+export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
   callMe: z.boolean(),
   addFavorites: z.boolean(),
   notifyWhenPriceDrops: z.boolean(),
@@ -139,22 +134,19 @@ export const COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
   taxAmount: z.number().meta({ examples: [20] }),
   showTaxAmount: z.boolean(),
 });
-
-export const COMPANY_PROPERTIES_ORDER_SETTINGS = z.object({
+export const ADD_COMPANY_PROPERTIES_ORDER_SETTINGS = z.object({
   orderPrefix: z.boolean(),
   orderCanDelete: z.boolean(),
 });
-
-export const COMPANY_PROPERTIES = z.object({
+export const ADD_COMPANY_PROPERTIES = z.object({
   paymentMethod: z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
   liveChatMethod: z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
-  homePage: COMPANY_PROPERTIES_HOME_PAGE,
-  paymentSettings: COMPANY_PROPERTIES_PAYMENT_SETTINGS,
-  productSettings: COMPANY_PROPERTIES_PRODUCT_SETTINGS.optional(),
-  orderSettings: COMPANY_PROPERTIES_ORDER_SETTINGS.optional(),
+  homePage: ADD_COMPANY_PROPERTIES_HOME_PAGE,
+  paymentSettings: ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS,
+  productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS.optional(),
+  orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS.optional(),
 });
-
-export const COMPANY_MAIL_OPTIONS = z.object({
+export const ADD_COMPANY_MAIL_OPTIONS = z.object({
   user: z.string().meta({ examples: ['no-reply@example.com'] }),
   password: z.string(),
   host: z.string().meta({ examples: ['smtp.gmail.com'] }),
@@ -163,8 +155,7 @@ export const COMPANY_MAIL_OPTIONS = z.object({
   secondMail: z.string().meta({ examples: ['support@example.com'] }),
   from: z.string(),
 });
-
-export const COMPANY_COMMUNICATION_OPTIONS = z.object({
+export const ADD_COMPANY_COMMUNICATION_OPTIONS = z.object({
   method: z.enum(['none', 'netgsm', 'twilio']).meta({ examples: ['none'] }),
   netgsm: z.object({
     sender: z.string(),
@@ -176,8 +167,7 @@ export const COMPANY_COMMUNICATION_OPTIONS = z.object({
     phoneNumber: z.string(),
   }),
 });
-
-export const COMPANY_SHIPPING_OPTIONS = z.object({
+export const ADD_COMPANY_SHIPPING_OPTIONS = z.object({
   method: z.string().meta({ examples: ['standard'] }),
   shipment: z.object({
     automatic: z.object({
@@ -204,7 +194,6 @@ export const COMPANY_SHIPPING_OPTIONS = z.object({
     currencyLocale: z.string(),
   }),
 });
-
 export const ADD_COMPANY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -231,12 +220,12 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
       .string()
       .optional()
       .meta({ examples: ['TRY'] }),
-    address: COMPANY_ADDRESS(locale),
-    socialMedia: z.array(COMPANY_SOCIAL_MEDIA(locale)).optional(),
-    payments: z.array(COMPANY_PAYMENT(locale)).optional(),
-    properties: COMPANY_PROPERTIES.optional(),
-    mailOptions: COMPANY_MAIL_OPTIONS.optional(),
-    communicationOptions: COMPANY_COMMUNICATION_OPTIONS.optional(),
-    shippingOptions: COMPANY_SHIPPING_OPTIONS.optional(),
+    address: ADD_COMPANY_ADDRESS(locale),
+    socialMedia: z.array(ADD_COMPANY_SOCIAL_MEDIA(locale)).optional(),
+    payments: z.array(ADD_COMPANY_PAYMENT(locale)).optional(),
+    properties: ADD_COMPANY_PROPERTIES.optional(),
+    mailOptions: ADD_COMPANY_MAIL_OPTIONS.optional(),
+    communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS.optional(),
+    shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS.optional(),
   });
 };
