@@ -1562,39 +1562,60 @@
         "properties": {
           "user": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "no-reply@example.com"
             ]
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "examples": [
+              "12345678"
+            ]
           },
           "host": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "smtp.gmail.com"
+              "mail.ssyazilim.com"
             ]
           },
           "port": {
-            "type": "number",
+            "type": "integer",
+            "exclusiveMinimum": 0,
             "examples": [
               465
             ]
           },
           "mainMail": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
+            "format": "email",
             "examples": [
-              "iletisim@example.com"
+              "erbil.gur@ssyazilim.com"
             ]
           },
           "secondMail": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
+            "format": "email",
             "examples": [
-              "support@example.com"
+              "hande.kaya@ssyazilim.com"
             ]
           },
           "from": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "SS-YAZILIM-✉-<no-reply@ssyazilim.com>"
+            ]
           }
         },
         "required": [
@@ -2169,39 +2190,60 @@
             "properties": {
               "user": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "no-reply@example.com"
                 ]
               },
               "password": {
-                "type": "string"
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 64,
+                "examples": [
+                  "12345678"
+                ]
               },
               "host": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "smtp.gmail.com"
+                  "mail.ssyazilim.com"
                 ]
               },
               "port": {
-                "type": "number",
+                "type": "integer",
+                "exclusiveMinimum": 0,
                 "examples": [
                   465
                 ]
               },
               "mainMail": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
+                "format": "email",
                 "examples": [
-                  "iletisim@example.com"
+                  "erbil.gur@ssyazilim.com"
                 ]
               },
               "secondMail": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
+                "format": "email",
                 "examples": [
-                  "support@example.com"
+                  "hande.kaya@ssyazilim.com"
                 ]
               },
               "from": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "SS-YAZILIM-✉-<no-reply@ssyazilim.com>"
+                ]
               }
             },
             "required": [
@@ -2837,39 +2879,60 @@
             "properties": {
               "user": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "no-reply@example.com"
                 ]
               },
               "password": {
-                "type": "string"
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 64,
+                "examples": [
+                  "12345678"
+                ]
               },
               "host": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
-                  "smtp.gmail.com"
+                  "mail.ssyazilim.com"
                 ]
               },
               "port": {
-                "type": "number",
+                "type": "integer",
+                "exclusiveMinimum": 0,
                 "examples": [
                   465
                 ]
               },
               "mainMail": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
+                "format": "email",
                 "examples": [
-                  "iletisim@example.com"
+                  "erbil.gur@ssyazilim.com"
                 ]
               },
               "secondMail": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
+                "format": "email",
                 "examples": [
-                  "support@example.com"
+                  "hande.kaya@ssyazilim.com"
                 ]
               },
               "from": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "SS-YAZILIM-✉-<no-reply@ssyazilim.com>"
+                ]
               }
             },
             "required": [
