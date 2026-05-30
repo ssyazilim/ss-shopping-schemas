@@ -283,7 +283,7 @@ export interface PAddBasketItems {
 }
 
 export interface PAddBuyer {
-  triggerDistrict?: boolean;
+  triggerClick?: number;
   phoneCodes?: IPhoneCode[];
   cities?: IGeliverCity[];
 }
@@ -455,6 +455,7 @@ export interface PResetPassword {
 export interface PButton {
   uniqueId?: string;
   type?: 'button' | 'submit' | 'reset';
+  iconAfter?: boolean;
   buttonClass?: string;
   labelTitle?: string;
   disabled?: boolean;
@@ -818,6 +819,7 @@ export interface PDesiInformation {
 
 export interface POrderAddAddress {
   selectedAddress?: string;
+  triggerClick: number;
   cities?: IGeliverCity[];
 }
 

@@ -437,8 +437,7 @@ export const UPDATE_TAX = (locale: ILocale = 'tr') => {
   });
 };
 
-// FRONTEND
-export const ADD_FE_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
+export const ADD_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
   const { paymentUser, shippingAddress } = SAVE_PAYMENT(locale).shape;
 
   return z.object({
@@ -450,5 +449,14 @@ export const ADD_FE_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
     district: shippingAddress.shape.district,
     zipCode: shippingAddress.shape.zipCode,
     address: shippingAddress.shape.address,
+  });
+};
+export const ADD_PAYMENT_METHOD = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    content: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(65535, { message: m.public_forms_validations_maxLength(65535) }),
   });
 };

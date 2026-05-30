@@ -79,18 +79,28 @@ export const CHANGE_PERSONAL_INFO = (locale: ILocale = 'tr') => {
 };
 export const CHANGE_PERSONAL_PASSWORD = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    oldPassword: z
-      .string()
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64)),
-    password: z
-      .string()
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64)),
-    rePassword: z
-      .string()
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64)),
-  });
+  return z
+    .object({
+      oldPassword: z
+        .string()
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+      password: z
+        .string()
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+      rePassword: z
+        .string()
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+    })
+    .superRefine((data, ctx) => {
+      if (data.password !== data.rePassword) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['rePassword'],
+          message: m.public_forms_validations_sameAs,
+        });
+      }
+    });
 };
