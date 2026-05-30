@@ -146,15 +146,46 @@ export const ADD_COMPANY_PROPERTIES = z.object({
   productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS.optional(),
   orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS.optional(),
 });
-export const ADD_COMPANY_MAIL_OPTIONS = z.object({
-  user: z.string().meta({ examples: ['no-reply@example.com'] }),
-  password: z.string(),
-  host: z.string().meta({ examples: ['smtp.gmail.com'] }),
-  port: z.number().meta({ examples: [465] }),
-  mainMail: z.string().meta({ examples: ['iletisim@example.com'] }),
-  secondMail: z.string().meta({ examples: ['support@example.com'] }),
-  from: z.string(),
-});
+export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    user: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['no-reply@example.com'] }),
+    password: z
+      .string()
+      .min(8, { message: m.public_forms_validations_minLength(8) })
+      .max(64, { message: m.public_forms_validations_maxLength(64) })
+      .meta({ examples: ['12345678'] }),
+    host: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['mail.ssyazilim.com'] }),
+    port: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [465] }),
+    mainMail: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['erbil.gur@ssyazilim.com'] }),
+    secondMail: z
+      .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['hande.kaya@ssyazilim.com'] }),
+    from: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['SS-YAZILIM-✉-<no-reply@ssyazilim.com>'] }),
+  });
+};
 export const ADD_COMPANY_COMMUNICATION_OPTIONS = z.object({
   method: z.enum(['none', 'netgsm', 'twilio']).meta({ examples: ['none'] }),
   netgsm: z.object({
@@ -224,7 +255,7 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
     socialMedia: z.array(ADD_COMPANY_SOCIAL_MEDIA(locale)).optional(),
     payments: z.array(ADD_COMPANY_PAYMENT(locale)).optional(),
     properties: ADD_COMPANY_PROPERTIES.optional(),
-    mailOptions: ADD_COMPANY_MAIL_OPTIONS.optional(),
+    mailOptions: ADD_COMPANY_MAIL_OPTIONS(locale).optional(),
     communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS.optional(),
     shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS.optional(),
   });

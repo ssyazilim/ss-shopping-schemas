@@ -36,7 +36,7 @@ const CompanyPropertiesOrderSettingsSchema = registry.register(
   ADD_COMPANY_PROPERTIES_ORDER_SETTINGS,
 );
 const CompanyPropertiesSchema = registry.register('CompanyProperties', ADD_COMPANY_PROPERTIES);
-const CompanyMailOptionsSchema = registry.register('CompanyMailOptions', ADD_COMPANY_MAIL_OPTIONS);
+const CompanyMailOptionsSchema = registry.register('CompanyMailOptions', ADD_COMPANY_MAIL_OPTIONS());
 const CompanyShippingOptionsSchema = registry.register(
   'CompanyShippingOptions',
   ADD_COMPANY_SHIPPING_OPTIONS,
