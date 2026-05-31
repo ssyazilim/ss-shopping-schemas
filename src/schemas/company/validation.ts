@@ -252,11 +252,11 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
       .optional()
       .meta({ examples: ['TRY'] }),
     address: ADD_COMPANY_ADDRESS(locale),
-    socialMedia: z.array(ADD_COMPANY_SOCIAL_MEDIA(locale)).optional(),
-    payments: z.array(ADD_COMPANY_PAYMENT(locale)).optional(),
+    socialMedia: z.array(ADD_COMPANY_SOCIAL_MEDIA(locale)),
+    payments: z.array(ADD_COMPANY_PAYMENT(locale)),
     properties: ADD_COMPANY_PROPERTIES.optional(),
-    mailOptions: ADD_COMPANY_MAIL_OPTIONS(locale).optional(),
-    communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS.optional(),
-    shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS.optional(),
+    mailOptions: ADD_COMPANY_MAIL_OPTIONS(locale),
+    communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS,
+    shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS,
   });
 };
