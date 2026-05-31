@@ -2424,7 +2424,12 @@
         },
         "required": [
           "name",
-          "address"
+          "address",
+          "socialMedia",
+          "payments",
+          "mailOptions",
+          "communicationOptions",
+          "shippingOptions"
         ]
       },
       "UpdateCompany": {
