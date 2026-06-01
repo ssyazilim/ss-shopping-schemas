@@ -1040,6 +1040,7 @@
           },
           "companyName": {
             "type": "string",
+            "minLength": 2,
             "maxLength": 254,
             "examples": [
               "Varyant Et & Balık Restaurant"
@@ -1047,6 +1048,7 @@
           },
           "name": {
             "type": "string",
+            "minLength": 2,
             "maxLength": 254,
             "examples": [
               "Halil"
@@ -1054,6 +1056,7 @@
           },
           "surname": {
             "type": "string",
+            "minLength": 1,
             "maxLength": 254,
             "examples": [
               "Gür"
@@ -1061,6 +1064,8 @@
           },
           "taxOffice": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Üçkapılar"
             ]
@@ -1073,6 +1078,8 @@
           },
           "identityNumber": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "25054218850"
             ]
@@ -1085,6 +1092,8 @@
           },
           "email": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 254,
             "format": "email",
             "examples": [
               "varyantrestaurant@hotmail.com"
@@ -1116,6 +1125,8 @@
           },
           "zipCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "07030"
             ]
@@ -1123,7 +1134,7 @@
           "line": {
             "type": "string",
             "minLength": 2,
-            "maxLength": 500,
+            "maxLength": 6500,
             "examples": [
               "Bahçelievler Mahallesi Atatürk Parkı 25/21"
             ]
@@ -1181,7 +1192,7 @@
           "content": {
             "type": "string",
             "minLength": 2,
-            "maxLength": 254,
+            "maxLength": 65000,
             "examples": [
               "<p>Halil Gür</p>"
             ]
@@ -1264,7 +1275,7 @@
         "properties": {
           "cashDiscount": {
             "type": "string",
-            "minLength": 2,
+            "minLength": 1,
             "maxLength": 254,
             "examples": [
               "0"
@@ -1325,7 +1336,8 @@
             "type": "string"
           },
           "taxAmount": {
-            "type": "number"
+            "type": "integer",
+            "minimum": 0
           },
           "showTaxAmount": {
             "type": "boolean"
@@ -1458,7 +1470,7 @@
             "properties": {
               "cashDiscount": {
                 "type": "string",
-                "minLength": 2,
+                "minLength": 1,
                 "maxLength": 254,
                 "examples": [
                   "0"
@@ -1519,7 +1531,8 @@
                 "type": "string"
               },
               "taxAmount": {
-                "type": "number"
+                "type": "integer",
+                "minimum": 0
               },
               "showTaxAmount": {
                 "type": "boolean"
@@ -1850,6 +1863,7 @@
               },
               "companyName": {
                 "type": "string",
+                "minLength": 2,
                 "maxLength": 254,
                 "examples": [
                   "Varyant Et & Balık Restaurant"
@@ -1857,6 +1871,7 @@
               },
               "name": {
                 "type": "string",
+                "minLength": 2,
                 "maxLength": 254,
                 "examples": [
                   "Halil"
@@ -1864,6 +1879,7 @@
               },
               "surname": {
                 "type": "string",
+                "minLength": 1,
                 "maxLength": 254,
                 "examples": [
                   "Gür"
@@ -1871,6 +1887,8 @@
               },
               "taxOffice": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Üçkapılar"
                 ]
@@ -1883,6 +1901,8 @@
               },
               "identityNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "25054218850"
                 ]
@@ -1895,6 +1915,8 @@
               },
               "email": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "varyantrestaurant@hotmail.com"
@@ -1926,6 +1948,8 @@
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07030"
                 ]
@@ -1933,7 +1957,7 @@
               "line": {
                 "type": "string",
                 "minLength": 2,
-                "maxLength": 500,
+                "maxLength": 6500,
                 "examples": [
                   "Bahçelievler Mahallesi Atatürk Parkı 25/21"
                 ]
@@ -1996,7 +2020,7 @@
                 "content": {
                   "type": "string",
                   "minLength": 2,
-                  "maxLength": 254,
+                  "maxLength": 65000,
                   "examples": [
                     "<p>Halil Gür</p>"
                   ]
@@ -2107,7 +2131,7 @@
                 "properties": {
                   "cashDiscount": {
                     "type": "string",
-                    "minLength": 2,
+                    "minLength": 1,
                     "maxLength": 254,
                     "examples": [
                       "0"
@@ -2168,7 +2192,8 @@
                     "type": "string"
                   },
                   "taxAmount": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "showTaxAmount": {
                     "type": "boolean"
@@ -2572,6 +2597,7 @@
               },
               "companyName": {
                 "type": "string",
+                "minLength": 2,
                 "maxLength": 254,
                 "examples": [
                   "Varyant Et & Balık Restaurant"
@@ -2579,6 +2605,7 @@
               },
               "name": {
                 "type": "string",
+                "minLength": 2,
                 "maxLength": 254,
                 "examples": [
                   "Halil"
@@ -2586,6 +2613,7 @@
               },
               "surname": {
                 "type": "string",
+                "minLength": 1,
                 "maxLength": 254,
                 "examples": [
                   "Gür"
@@ -2593,6 +2621,8 @@
               },
               "taxOffice": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "Üçkapılar"
                 ]
@@ -2605,6 +2635,8 @@
               },
               "identityNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "25054218850"
                 ]
@@ -2617,6 +2649,8 @@
               },
               "email": {
                 "type": "string",
+                "minLength": 6,
+                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "varyantrestaurant@hotmail.com"
@@ -2648,6 +2682,8 @@
               },
               "zipCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "07030"
                 ]
@@ -2655,7 +2691,7 @@
               "line": {
                 "type": "string",
                 "minLength": 2,
-                "maxLength": 500,
+                "maxLength": 6500,
                 "examples": [
                   "Bahçelievler Mahallesi Atatürk Parkı 25/21"
                 ]
@@ -2718,7 +2754,7 @@
                 "content": {
                   "type": "string",
                   "minLength": 2,
-                  "maxLength": 254,
+                  "maxLength": 65000,
                   "examples": [
                     "<p>Halil Gür</p>"
                   ]
@@ -2829,7 +2865,7 @@
                 "properties": {
                   "cashDiscount": {
                     "type": "string",
-                    "minLength": 2,
+                    "minLength": 1,
                     "maxLength": 254,
                     "examples": [
                       "0"
@@ -2890,7 +2926,8 @@
                     "type": "string"
                   },
                   "taxAmount": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "showTaxAmount": {
                     "type": "boolean"
@@ -6053,6 +6090,8 @@
         "properties": {
           "type": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "blog"
             ]
@@ -6060,7 +6099,9 @@
           "date": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254
             },
             "examples": [
               [
@@ -6071,18 +6112,24 @@
           },
           "timeZone": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Cankaya/Ankara/Turkey"
             ]
           },
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "Ticaret ve E-ticaret Kavramları"
             ]
           },
           "content": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 65000,
             "examples": [
               "<p><b>Merhaba</b> bu bir test yazisidir.</p>"
             ]
@@ -6103,6 +6150,8 @@
           "properties": {
             "type": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "blog"
               ]
@@ -6110,7 +6159,9 @@
             "date": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254
               },
               "examples": [
                 [
@@ -6121,18 +6172,24 @@
             },
             "timeZone": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "Cankaya/Ankara/Turkey"
               ]
             },
             "name": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
                 "Ticaret ve E-ticaret Kavramları"
               ]
             },
             "content": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 65000,
               "examples": [
                 "<p><b>Merhaba</b> bu bir test yazisidir.</p>"
               ]
@@ -6162,12 +6219,20 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
           },
           "text": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
           }
-        }
+        },
+        "required": [
+          "name",
+          "text"
+        ]
       },
       "product": {
         "type": "object",
