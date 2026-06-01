@@ -26,7 +26,6 @@ export const VARIANTS_TYPE = (locale: ILocale = 'tr') => {
     }),
   );
 };
-
 export const VARIANT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
 
@@ -64,38 +63,77 @@ export const VARIANT = (locale: ILocale = 'tr') => {
       .meta({ examples: [1] }),
   });
 };
-
 export const ADD_VARIANT = (locale: ILocale = 'tr') => {
   return z.object({
     variantsType: VARIANTS_TYPE(locale),
     variant: VARIANT(locale),
   });
 };
-
-export const ADD_VARIANTS_MULTI = () =>
-  z.array(
+export const ADD_VARIANTS_MULTI = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.array(
     VARIANT().extend({
-      productId: z.string().meta({ examples: ['66f29aefff9245b28d05482f'] }),
+      productId: z
+        .string()
+        .min(24, { message: m.public_forms_validations_minLength(24) })
+        .max(24, { message: m.public_forms_validations_maxLength(24) })
+        .meta({ examples: ['66f29aefff9245b28d05482f'] }),
       _id: z
         .string()
         .optional()
         .meta({ examples: ['66f29aefff9245b28d05482e'] }),
     }),
   );
-
-export const UPDATE_VARIANT = () =>
-  z.object({
+};
+export const UPDATE_VARIANT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
     variantsType: VARIANTS_TYPE(),
     _id: z
       .string()
       .optional()
       .meta({ examples: ['66f27bdc8a01cf36d27cbe1c'] }),
-    name: z.string().meta({ examples: ['Siyah'] }),
+    name: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Siyah'] }),
   });
-
-export const DELETE_FOR_VARIANT = () =>
-  z.object({
-    selectedIds: z.array(z.string()).meta({ description: 'IDs to delete' }),
-    productId: z.string(),
+};
+export const DELETE_FOR_VARIANT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    selectedIds: z
+      .array(
+        z
+          .string()
+          .min(24, { message: m.public_forms_validations_minLength(24) })
+          .max(24, { message: m.public_forms_validations_maxLength(24) }),
+      )
+      .meta({ description: 'IDs to delete' }),
+    productId: z
+      .string()
+      .min(24, { message: m.public_forms_validations_minLength(24) })
+      .max(24, { message: m.public_forms_validations_maxLength(24) }),
     variantsType: VARIANTS_TYPE(),
   });
+};
+
+export const ADD_VARIANT_TYPE = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    type: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+  });
+};
+export const ADD_VARIANT_VALUE = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    value: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+  });
+};

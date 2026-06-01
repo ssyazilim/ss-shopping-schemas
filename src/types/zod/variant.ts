@@ -17,11 +17,6 @@ export const VariantSchema = VARIANT()
   })
   .extend(MongoSchema.shape);
 
-/*************************
- *       CONSTANTS       *
- *************************/
-export const DEFAULT_VARIANT: IVariant = getDefaultsForSchema(VariantSchema);
-
 export type IVariantValue = z.infer<typeof VariantValueSchema>;
 export const VariantValueSchema = z.object({
   name: z.string(),
@@ -32,3 +27,8 @@ export const VariantValueSchema = z.object({
   sku: z.string(),
   desi: z.number(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const DEFAULT_VARIANT: IVariant = getDefaultsForSchema(VariantSchema);
