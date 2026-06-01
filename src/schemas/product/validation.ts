@@ -32,7 +32,6 @@ export const IMAGES = (locale: ILocale = 'tr') => {
     ),
   });
 };
-
 export const PRICE = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -78,7 +77,6 @@ export const PRODUCT_PROPERTIES = () => {
     isShippingFree: z.boolean().meta({ examples: [false] }), // prettier-ignore
   });
 };
-
 export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
 
@@ -137,9 +135,7 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
     properties: PRODUCT_PROPERTIES(),
   });
 };
-
 export const ADD_PRODUCTS = () => z.array(ADD_PRODUCT());
-
 export const EDIT_PRODUCT = () =>
   z.object({
     title: z

@@ -112,16 +112,29 @@ export const ADD_COMPANY_PROPERTIES_HOME_PAGE = z.object({
   slider: z.boolean(),
   stat: z.boolean(),
   teamSection: z.boolean(),
-  testimonial: z.boolean().optional(),
+  testimonial: z.boolean(),
 });
-export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = z.object({
-  cashDiscount: z.string().meta({ examples: ['0'] }),
-  doorToDoor: z.object({
-    isEnabled: z.boolean(),
-    minValue: z.number(),
-    maxValue: z.number(),
-  }),
-});
+export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    cashDiscount: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['0'] }),
+    doorToDoor: z.object({
+      isEnabled: z.boolean(),
+      minValue: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .int({ message: m.public_forms_validations_mustNumberInteger })
+        .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+      maxValue: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .int({ message: m.public_forms_validations_mustNumberInteger })
+        .positive({ message: m.public_forms_validations_mustNumberPositive }),
+    }),
+  });
+};
 export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
   callMe: z.boolean(),
   addFavorites: z.boolean(),
@@ -131,21 +144,23 @@ export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
   hideNoPriceProducts: z.boolean(),
   hideReturnPeriod: z.boolean(),
   selectedProductListing: z.string(),
-  taxAmount: z.number().meta({ examples: [20] }),
+  taxAmount: z.number(),
   showTaxAmount: z.boolean(),
 });
 export const ADD_COMPANY_PROPERTIES_ORDER_SETTINGS = z.object({
   orderPrefix: z.boolean(),
   orderCanDelete: z.boolean(),
 });
-export const ADD_COMPANY_PROPERTIES = z.object({
-  paymentMethod: z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
-  liveChatMethod: z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
-  homePage: ADD_COMPANY_PROPERTIES_HOME_PAGE,
-  paymentSettings: ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS,
-  productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS.optional(),
-  orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS.optional(),
-});
+export const ADD_COMPANY_PROPERTIES = (locale: ILocale = 'tr') => {
+  return z.object({
+    paymentMethod: z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
+    liveChatMethod: z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
+    homePage: ADD_COMPANY_PROPERTIES_HOME_PAGE,
+    paymentSettings: ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS(locale),
+    productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS,
+    orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS,
+  });
+};
 export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -186,45 +201,106 @@ export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['SS-YAZILIM-✉-<no-reply@ssyazilim.com>'] }),
   });
 };
-export const ADD_COMPANY_COMMUNICATION_OPTIONS = z.object({
-  method: z.enum(['none', 'netgsm', 'twilio']).meta({ examples: ['none'] }),
-  netgsm: z.object({
-    sender: z.string(),
-    phoneNumber: z.string(),
-  }),
-  twilio: z.object({
-    accountSid: z.string(),
-    authToken: z.string(),
-    phoneNumber: z.string(),
-  }),
-});
-export const ADD_COMPANY_SHIPPING_OPTIONS = z.object({
-  method: z.string().meta({ examples: ['standard'] }),
-  shipment: z.object({
-    automatic: z.object({
-      name: z.string(),
-      code: z.string(),
+export const ADD_COMPANY_COMMUNICATION_OPTIONS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    method: z.enum(['none', 'netgsm', 'twilio']).meta({ examples: ['none'] }),
+    netgsm: z.object({
+      sender: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      phoneNumber: z.e164(),
     }),
-    standard: z.object({
-      name: z.string(),
-      code: z.string(),
-      price: z.number(),
-      priceLocale: z.number(),
-      currency: z.string(),
-      currencyLocale: z.string(),
+    twilio: z.object({
+      accountSid: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      authToken: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      phoneNumber: z.e164(),
     }),
-    geliver: z.object({
-      isTest: z.boolean(),
+  });
+};
+export const ADD_COMPANY_SHIPPING_OPTIONS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    method: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['standard'] }),
+    shipment: z.object({
+      automatic: z
+        .object({
+          name: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+          code: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+        })
+        .optional(),
+      standard: z
+        .object({
+          name: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+          code: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+          price: z
+            .number({ message: m.public_forms_validations_mustNumber })
+            .int({ message: m.public_forms_validations_mustNumberInteger })
+            .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+          priceLocale: z
+            .number({ message: m.public_forms_validations_mustNumber })
+            .int({ message: m.public_forms_validations_mustNumberInteger })
+            .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+          currency: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+          currencyLocale: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+        })
+        .optional(),
+      geliver: z
+        .object({
+          isTest: z.boolean(),
+        })
+        .optional(),
     }),
-  }),
-  free: z.object({
-    isEnabled: z.boolean(),
-    price: z.number(),
-    priceLocale: z.number(),
-    currency: z.string(),
-    currencyLocale: z.string(),
-  }),
-});
+    free: z.object({
+      isEnabled: z.boolean(),
+      price: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .int({ message: m.public_forms_validations_mustNumberInteger })
+        .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+      priceLocale: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .int({ message: m.public_forms_validations_mustNumberInteger })
+        .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+      currency: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      currencyLocale: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    }),
+  });
+};
 export const ADD_COMPANY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -254,7 +330,7 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
     address: ADD_COMPANY_ADDRESS(locale),
     socialMedia: z.array(ADD_COMPANY_SOCIAL_MEDIA(locale)),
     payments: z.array(ADD_COMPANY_PAYMENT(locale)),
-    properties: ADD_COMPANY_PROPERTIES.optional(),
+    properties: ADD_COMPANY_PROPERTIES(),
     mailOptions: ADD_COMPANY_MAIL_OPTIONS(locale),
     communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS,
     shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS,

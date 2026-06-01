@@ -424,6 +424,7 @@ export interface PPButton {
   labelTitle?: string;
   labelClass?: string;
   disabled?: boolean;
+  iconAfter: boolean;
 }
 
 export interface PPRadioList {
