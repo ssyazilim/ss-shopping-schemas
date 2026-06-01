@@ -25,7 +25,7 @@ const CompanyPropertiesHomePageSchema = registry.register(
 );
 const CompanyPropertiesPaymentSettingsSchema = registry.register(
   'CompanyPropertiesPaymentSettings',
-  ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS,
+  ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS(),
 );
 const CompanyPropertiesProductSettingsSchema = registry.register(
   'CompanyPropertiesProductSettings',
@@ -35,14 +35,14 @@ const CompanyPropertiesOrderSettingsSchema = registry.register(
   'CompanyPropertiesOrderSettings',
   ADD_COMPANY_PROPERTIES_ORDER_SETTINGS,
 );
-const CompanyPropertiesSchema = registry.register('CompanyProperties', ADD_COMPANY_PROPERTIES);
+const CompanyPropertiesSchema = registry.register('CompanyProperties', ADD_COMPANY_PROPERTIES());
 const CompanyMailOptionsSchema = registry.register(
   'CompanyMailOptions',
   ADD_COMPANY_MAIL_OPTIONS(),
 );
 const CompanyShippingOptionsSchema = registry.register(
   'CompanyShippingOptions',
-  ADD_COMPANY_SHIPPING_OPTIONS,
+  ADD_COMPANY_SHIPPING_OPTIONS(),
 );
 
 export const AddCompanySchema = registry.register('AddCompany', ADD_COMPANY());
