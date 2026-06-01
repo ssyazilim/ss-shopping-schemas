@@ -11,21 +11,26 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
     isCompany: z.boolean().meta({ examples: [false] }),
     companyName: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Varyant Et & Balık Restaurant'] }),
     name: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Halil'] }),
     surname: z
       .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Gür'] }),
     taxOffice: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Üçkapılar'] }),
     taxNumber: z
@@ -34,6 +39,8 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['2780943302'] }),
     identityNumber: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['25054218850'] }),
     phoneNumber: z
@@ -41,6 +48,8 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['+905446627836'] }),
     email: z
       .email({ message: m.public_forms_validations_email })
+      .min(6, { message: m.public_forms_validations_minLength(6) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['varyantrestaurant@hotmail.com'] }),
     country: z
       .string()
@@ -59,12 +68,14 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['Muratpasa'] }),
     zipCode: z
       .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['07030'] }),
     line: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(500, { message: m.public_forms_validations_maxLength(500) })
+      .max(6500, { message: m.public_forms_validations_maxLength(6500) })
       .meta({ examples: ['Bahçelievler Mahallesi Atatürk Parkı 25/21'] }),
   });
 };
@@ -93,7 +104,7 @@ export const ADD_COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
     content: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .max(65000, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['<p>Halil Gür</p>'] }),
   });
 };
@@ -121,7 +132,7 @@ export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') 
   return z.object({
     cashDiscount: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['0'] }),
     doorToDoor: z.object({
@@ -137,7 +148,8 @@ export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') 
     }),
   });
 };
-export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = () => {
+export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
   return z.object({
     callMe: z.boolean(),
     addFavorites: z.boolean(),
@@ -147,7 +159,10 @@ export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = () => {
     hideNoPriceProducts: z.boolean(),
     hideReturnPeriod: z.boolean(),
     selectedProductListing: z.string(),
-    taxAmount: z.number(),
+    taxAmount: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
     showTaxAmount: z.boolean(),
   });
 };
