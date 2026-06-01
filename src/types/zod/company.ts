@@ -29,28 +29,28 @@ export type IPaymentMethods = z.infer<typeof PaymentMethodsSchema>;
 export const PaymentMethodsSchema = ADD_COMPANY_PAYMENT().extend(MongoSchema.shape);
 
 export type IHomePage = z.infer<typeof HomePageSchema>;
-export const HomePageSchema = ADD_COMPANY_PROPERTIES_HOME_PAGE;
+export const HomePageSchema = ADD_COMPANY_PROPERTIES_HOME_PAGE();
 
 export type IPaymentSettings = z.infer<typeof PaymentSettingsSchema>;
-export const PaymentSettingsSchema = ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS;
+export const PaymentSettingsSchema = ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS();
 
 export type IProductSettings = z.infer<typeof ProductSettingsSchema>;
-export const ProductSettingsSchema = ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS;
+export const ProductSettingsSchema = ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS();
 
 export type IOrderSettings = z.infer<typeof OrderSettingsSchema>;
-export const OrderSettingsSchema = ADD_COMPANY_PROPERTIES_ORDER_SETTINGS;
+export const OrderSettingsSchema = ADD_COMPANY_PROPERTIES_ORDER_SETTINGS();
 
 export type IProperties = z.infer<typeof PropertiesSchema>;
-export const PropertiesSchema = ADD_COMPANY_PROPERTIES;
+export const PropertiesSchema = ADD_COMPANY_PROPERTIES();
 
 export type IMailOptions = z.infer<typeof MailOptionsSchema>;
-export const MailOptionsSchema = ADD_COMPANY_MAIL_OPTIONS;
+export const MailOptionsSchema = ADD_COMPANY_MAIL_OPTIONS();
 
 export type ICommunicationOptions = z.infer<typeof CommunicationOptionsSchema>;
-export const CommunicationOptionsSchema = ADD_COMPANY_COMMUNICATION_OPTIONS;
+export const CommunicationOptionsSchema = ADD_COMPANY_COMMUNICATION_OPTIONS();
 
 export type IShippingOptions = z.infer<typeof ShippingOptionsSchema>;
-export const ShippingOptionsSchema = ADD_COMPANY_SHIPPING_OPTIONS;
+export const ShippingOptionsSchema = ADD_COMPANY_SHIPPING_OPTIONS();
 
 export type ICompany = z.infer<typeof CompanySchema>;
 export const CompanySchema = ADD_COMPANY().extend(MongoSchema.shape);

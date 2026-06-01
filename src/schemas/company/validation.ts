@@ -97,23 +97,25 @@ export const ADD_COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
       .meta({ examples: ['<p>Halil Gür</p>'] }),
   });
 };
-export const ADD_COMPANY_PROPERTIES_HOME_PAGE = z.object({
-  article: z.boolean(),
-  blog: z.boolean(),
-  event: z.boolean(),
-  news: z.boolean(),
-  category: z.boolean(),
-  categoryPreview: z.boolean(),
-  cta: z.boolean(),
-  feature: z.boolean(),
-  hero: z.boolean(),
-  logoCloud: z.boolean(),
-  newsLetter: z.boolean(),
-  slider: z.boolean(),
-  stat: z.boolean(),
-  teamSection: z.boolean(),
-  testimonial: z.boolean(),
-});
+export const ADD_COMPANY_PROPERTIES_HOME_PAGE = () => {
+  return z.object({
+    article: z.boolean(),
+    blog: z.boolean(),
+    event: z.boolean(),
+    news: z.boolean(),
+    category: z.boolean(),
+    categoryPreview: z.boolean(),
+    cta: z.boolean(),
+    feature: z.boolean(),
+    hero: z.boolean(),
+    logoCloud: z.boolean(),
+    newsLetter: z.boolean(),
+    slider: z.boolean(),
+    stat: z.boolean(),
+    teamSection: z.boolean(),
+    testimonial: z.boolean(),
+  });
+};
 export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -135,30 +137,34 @@ export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') 
     }),
   });
 };
-export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = z.object({
-  callMe: z.boolean(),
-  addFavorites: z.boolean(),
-  notifyWhenPriceDrops: z.boolean(),
-  notifyWhenProductBackInStock: z.boolean(),
-  hideNoStockProducts: z.boolean(),
-  hideNoPriceProducts: z.boolean(),
-  hideReturnPeriod: z.boolean(),
-  selectedProductListing: z.string(),
-  taxAmount: z.number(),
-  showTaxAmount: z.boolean(),
-});
-export const ADD_COMPANY_PROPERTIES_ORDER_SETTINGS = z.object({
-  orderPrefix: z.boolean(),
-  orderCanDelete: z.boolean(),
-});
+export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = () => {
+  return z.object({
+    callMe: z.boolean(),
+    addFavorites: z.boolean(),
+    notifyWhenPriceDrops: z.boolean(),
+    notifyWhenProductBackInStock: z.boolean(),
+    hideNoStockProducts: z.boolean(),
+    hideNoPriceProducts: z.boolean(),
+    hideReturnPeriod: z.boolean(),
+    selectedProductListing: z.string(),
+    taxAmount: z.number(),
+    showTaxAmount: z.boolean(),
+  });
+};
+export const ADD_COMPANY_PROPERTIES_ORDER_SETTINGS = () => {
+  return z.object({
+    orderPrefix: z.boolean(),
+    orderCanDelete: z.boolean(),
+  });
+};
 export const ADD_COMPANY_PROPERTIES = (locale: ILocale = 'tr') => {
   return z.object({
     paymentMethod: z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
     liveChatMethod: z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
-    homePage: ADD_COMPANY_PROPERTIES_HOME_PAGE,
+    homePage: ADD_COMPANY_PROPERTIES_HOME_PAGE(),
     paymentSettings: ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS(locale),
-    productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS,
-    orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS,
+    productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS(),
+    orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS(),
   });
 };
 export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {

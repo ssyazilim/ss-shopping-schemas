@@ -21,7 +21,7 @@ export const CompanySocialMediaSchema = registry.register(
 export const CompanyPaymentSchema = registry.register('CompanyPayment', ADD_COMPANY_PAYMENT());
 const CompanyPropertiesHomePageSchema = registry.register(
   'CompanyPropertiesHomePage',
-  ADD_COMPANY_PROPERTIES_HOME_PAGE,
+  ADD_COMPANY_PROPERTIES_HOME_PAGE(),
 );
 const CompanyPropertiesPaymentSettingsSchema = registry.register(
   'CompanyPropertiesPaymentSettings',
@@ -29,11 +29,11 @@ const CompanyPropertiesPaymentSettingsSchema = registry.register(
 );
 const CompanyPropertiesProductSettingsSchema = registry.register(
   'CompanyPropertiesProductSettings',
-  ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS,
+  ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS(),
 );
 const CompanyPropertiesOrderSettingsSchema = registry.register(
   'CompanyPropertiesOrderSettings',
-  ADD_COMPANY_PROPERTIES_ORDER_SETTINGS,
+  ADD_COMPANY_PROPERTIES_ORDER_SETTINGS(),
 );
 const CompanyPropertiesSchema = registry.register('CompanyProperties', ADD_COMPANY_PROPERTIES());
 const CompanyMailOptionsSchema = registry.register(
