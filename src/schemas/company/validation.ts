@@ -332,7 +332,7 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
     payments: z.array(ADD_COMPANY_PAYMENT(locale)),
     properties: ADD_COMPANY_PROPERTIES(),
     mailOptions: ADD_COMPANY_MAIL_OPTIONS(locale),
-    communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS,
-    shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS,
+    communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS(locale),
+    shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS(),
   });
 };
