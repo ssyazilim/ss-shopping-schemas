@@ -1255,7 +1255,8 @@
           "newsLetter",
           "slider",
           "stat",
-          "teamSection"
+          "teamSection",
+          "testimonial"
         ]
       },
       "CompanyPropertiesPaymentSettings": {
@@ -1263,6 +1264,8 @@
         "properties": {
           "cashDiscount": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "0"
             ]
@@ -1274,10 +1277,12 @@
                 "type": "boolean"
               },
               "minValue": {
-                "type": "number"
+                "type": "integer",
+                "minimum": 0
               },
               "maxValue": {
-                "type": "number"
+                "type": "integer",
+                "exclusiveMinimum": 0
               }
             },
             "required": [
@@ -1320,10 +1325,7 @@
             "type": "string"
           },
           "taxAmount": {
-            "type": "number",
-            "examples": [
-              20
-            ]
+            "type": "number"
           },
           "showTaxAmount": {
             "type": "boolean"
@@ -1447,7 +1449,8 @@
               "newsLetter",
               "slider",
               "stat",
-              "teamSection"
+              "teamSection",
+              "testimonial"
             ]
           },
           "paymentSettings": {
@@ -1455,6 +1458,8 @@
             "properties": {
               "cashDiscount": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "0"
                 ]
@@ -1466,10 +1471,12 @@
                     "type": "boolean"
                   },
                   "minValue": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "maxValue": {
-                    "type": "number"
+                    "type": "integer",
+                    "exclusiveMinimum": 0
                   }
                 },
                 "required": [
@@ -1512,10 +1519,7 @@
                 "type": "string"
               },
               "taxAmount": {
-                "type": "number",
-                "examples": [
-                  20
-                ]
+                "type": "number"
               },
               "showTaxAmount": {
                 "type": "boolean"
@@ -1554,7 +1558,9 @@
           "paymentMethod",
           "liveChatMethod",
           "homePage",
-          "paymentSettings"
+          "paymentSettings",
+          "productSettings",
+          "orderSettings"
         ]
       },
       "CompanyMailOptions": {
@@ -1633,6 +1639,8 @@
         "properties": {
           "method": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "standard"
             ]
@@ -1644,10 +1652,14 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "code": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   }
                 },
                 "required": [
@@ -1659,22 +1671,32 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "code": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "price": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "priceLocale": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "currency": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "currencyLocale": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   }
                 },
                 "required": [
@@ -1697,12 +1719,7 @@
                   "isTest"
                 ]
               }
-            },
-            "required": [
-              "automatic",
-              "standard",
-              "geliver"
-            ]
+            }
           },
           "free": {
             "type": "object",
@@ -1711,16 +1728,22 @@
                 "type": "boolean"
               },
               "price": {
-                "type": "number"
+                "type": "integer",
+                "minimum": 0
               },
               "priceLocale": {
-                "type": "number"
+                "type": "integer",
+                "minimum": 0
               },
               "currency": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254
               },
               "currencyLocale": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254
               }
             },
             "required": [
@@ -2075,7 +2098,8 @@
                   "newsLetter",
                   "slider",
                   "stat",
-                  "teamSection"
+                  "teamSection",
+                  "testimonial"
                 ]
               },
               "paymentSettings": {
@@ -2083,6 +2107,8 @@
                 "properties": {
                   "cashDiscount": {
                     "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
                     "examples": [
                       "0"
                     ]
@@ -2094,10 +2120,12 @@
                         "type": "boolean"
                       },
                       "minValue": {
-                        "type": "number"
+                        "type": "integer",
+                        "minimum": 0
                       },
                       "maxValue": {
-                        "type": "number"
+                        "type": "integer",
+                        "exclusiveMinimum": 0
                       }
                     },
                     "required": [
@@ -2140,10 +2168,7 @@
                     "type": "string"
                   },
                   "taxAmount": {
-                    "type": "number",
-                    "examples": [
-                      20
-                    ]
+                    "type": "number"
                   },
                   "showTaxAmount": {
                     "type": "boolean"
@@ -2182,7 +2207,9 @@
               "paymentMethod",
               "liveChatMethod",
               "homePage",
-              "paymentSettings"
+              "paymentSettings",
+              "productSettings",
+              "orderSettings"
             ]
           },
           "mailOptions": {
@@ -2274,7 +2301,9 @@
                 "type": "object",
                 "properties": {
                   "sender": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "phoneNumber": {
                     "type": "string"
@@ -2289,10 +2318,14 @@
                 "type": "object",
                 "properties": {
                   "accountSid": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "authToken": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "phoneNumber": {
                     "type": "string"
@@ -2316,6 +2349,8 @@
             "properties": {
               "method": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "standard"
                 ]
@@ -2327,10 +2362,14 @@
                     "type": "object",
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "code": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       }
                     },
                     "required": [
@@ -2342,22 +2381,32 @@
                     "type": "object",
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "code": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "price": {
-                        "type": "number"
+                        "type": "integer",
+                        "minimum": 0
                       },
                       "priceLocale": {
-                        "type": "number"
+                        "type": "integer",
+                        "minimum": 0
                       },
                       "currency": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "currencyLocale": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       }
                     },
                     "required": [
@@ -2380,12 +2429,7 @@
                       "isTest"
                     ]
                   }
-                },
-                "required": [
-                  "automatic",
-                  "standard",
-                  "geliver"
-                ]
+                }
               },
               "free": {
                 "type": "object",
@@ -2394,16 +2438,22 @@
                     "type": "boolean"
                   },
                   "price": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "priceLocale": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "currency": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "currencyLocale": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   }
                 },
                 "required": [
@@ -2427,6 +2477,7 @@
           "address",
           "socialMedia",
           "payments",
+          "properties",
           "mailOptions",
           "communicationOptions",
           "shippingOptions"
@@ -2769,7 +2820,8 @@
                   "newsLetter",
                   "slider",
                   "stat",
-                  "teamSection"
+                  "teamSection",
+                  "testimonial"
                 ]
               },
               "paymentSettings": {
@@ -2777,6 +2829,8 @@
                 "properties": {
                   "cashDiscount": {
                     "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
                     "examples": [
                       "0"
                     ]
@@ -2788,10 +2842,12 @@
                         "type": "boolean"
                       },
                       "minValue": {
-                        "type": "number"
+                        "type": "integer",
+                        "minimum": 0
                       },
                       "maxValue": {
-                        "type": "number"
+                        "type": "integer",
+                        "exclusiveMinimum": 0
                       }
                     },
                     "required": [
@@ -2834,10 +2890,7 @@
                     "type": "string"
                   },
                   "taxAmount": {
-                    "type": "number",
-                    "examples": [
-                      20
-                    ]
+                    "type": "number"
                   },
                   "showTaxAmount": {
                     "type": "boolean"
@@ -2876,7 +2929,9 @@
               "paymentMethod",
               "liveChatMethod",
               "homePage",
-              "paymentSettings"
+              "paymentSettings",
+              "productSettings",
+              "orderSettings"
             ]
           },
           "mailOptions": {
@@ -2968,7 +3023,9 @@
                 "type": "object",
                 "properties": {
                   "sender": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "phoneNumber": {
                     "type": "string"
@@ -2983,10 +3040,14 @@
                 "type": "object",
                 "properties": {
                   "accountSid": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "authToken": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "phoneNumber": {
                     "type": "string"
@@ -3010,6 +3071,8 @@
             "properties": {
               "method": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "standard"
                 ]
@@ -3021,10 +3084,14 @@
                     "type": "object",
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "code": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       }
                     },
                     "required": [
@@ -3036,22 +3103,32 @@
                     "type": "object",
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "code": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "price": {
-                        "type": "number"
+                        "type": "integer",
+                        "minimum": 0
                       },
                       "priceLocale": {
-                        "type": "number"
+                        "type": "integer",
+                        "minimum": 0
                       },
                       "currency": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       },
                       "currencyLocale": {
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
                       }
                     },
                     "required": [
@@ -3074,12 +3151,7 @@
                       "isTest"
                     ]
                   }
-                },
-                "required": [
-                  "automatic",
-                  "standard",
-                  "geliver"
-                ]
+                }
               },
               "free": {
                 "type": "object",
@@ -3088,16 +3160,22 @@
                     "type": "boolean"
                   },
                   "price": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "priceLocale": {
-                    "type": "number"
+                    "type": "integer",
+                    "minimum": 0
                   },
                   "currency": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   },
                   "currencyLocale": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
                   }
                 },
                 "required": [
