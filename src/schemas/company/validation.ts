@@ -357,3 +357,13 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
     shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS(),
   });
 };
+
+export const ADD_SOCIAL_MEDIA_LINKS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    facebook: z.url({ message: m.public_forms_validations_url }).or(z.literal('')),
+    twitter: z.url({ message: m.public_forms_validations_url }).or(z.literal('')),
+    instagram: z.url({ message: m.public_forms_validations_url }).or(z.literal('')),
+    youtube: z.url({ message: m.public_forms_validations_url }).or(z.literal('')),
+  });
+};

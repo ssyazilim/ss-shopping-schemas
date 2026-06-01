@@ -48,15 +48,13 @@ export const VARIANT = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['4SN106C'] }),
-    gtin: z.preprocess(
-      (value: string) => (value === '' ? undefined : value),
-      z
-        .string()
-        .min(2, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .optional()
-        .meta({ examples: ['0123456789012'] }),
-    ),
+    gtin: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .or(z.literal(''))
+      .optional()
+      .meta({ examples: ['0123456789012'] }),
     desi: z
       .number({ message: m.public_forms_validations_mustNumber })
       .min(0, { message: m.public_forms_validations_minLength(0) })
