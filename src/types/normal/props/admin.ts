@@ -289,7 +289,7 @@ export interface PAddBuyer {
 }
 
 export interface PAddShipping {
-  dealers?: unknown[];
+  dealers?: IDealerPricesWithDesi[];
   templates?: IPackageTemplate[];
 }
 
@@ -365,7 +365,7 @@ export interface PSellerShipping {
   company?: ICompany;
   external?: IExternal;
   currencies?: IUpdatedData[];
-  dealers?: unknown[];
+  dealers?: IDealerPricesWithDesi[];
 }
 
 export interface PSocialMedia {
@@ -518,7 +518,7 @@ export interface PDefaultForm {
 }
 
 export interface PDraggableList {
-  modelValue?: unknown[];
+  modelValue?: any[];
 }
 
 export interface PFileUpload {
@@ -561,7 +561,7 @@ export interface PInputOverlap {
 }
 
 export interface PRadioList {
-  data?: { _id?: string | number; [key: string]: unknown }[];
+  data?: { _id?: string | number; [key: string]: any }[];
   modelValue?: object;
   type?: string;
   selectedIndex?: number;
@@ -586,7 +586,7 @@ export interface PSearch {
 }
 
 export interface PSelectCheck {
-  data?: { name?: string; [key: string]: unknown }[];
+  data?: { name?: string; [key: string]: any }[];
   modelValue?: string;
   type?: string;
   labelTitle?: string;
@@ -595,7 +595,7 @@ export interface PSelectCheck {
 }
 
 export interface PSelectCombo {
-  data?: { [key: string]: unknown }[];
+  data?: { [key: string]: any }[];
   modelValue?: string;
   type?: string;
   uniqueId?: string;
@@ -611,7 +611,7 @@ export interface PSelectCombo {
 }
 
 export interface PSelectDefault {
-  data?: { name?: string; code?: string; [key: string]: unknown }[];
+  data?: { name?: string; code?: string; [key: string]: any }[];
   modelValue?: string;
   type?: 'default' | 'translation' | 'category' | 'sort';
   uniqueId?: string;
@@ -689,7 +689,7 @@ export interface PTextArea {
 }
 
 export interface PAccordion {
-  data?: { name?: string; [key: string]: unknown }[];
+  data?: { name?: string; [key: string]: any }[];
 }
 
 export interface PPrivateSidebar {
@@ -833,7 +833,7 @@ export interface PProviderAdd {
 }
 
 export interface PRadioListSmall {
-  data?: { name?: string; [key: string]: unknown }[];
+  data?: { name?: string; [key: string]: any }[];
   selectedData?: string;
   dataIndex?: number;
   formClass?: string;
