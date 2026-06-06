@@ -1,0 +1,38 @@
+// https://yandex.com.tr/support/direct/tr/feeds/requirements-yml?tabs=defaultTabsGroup-jamhuehl_basit%2520a%25c3%25a7%25c4%25b1klama%2520t%25c3%25bcr%25c3%25bc
+import { z } from 'zod';
+
+export type IReqXMLYandex = z.infer<typeof ReqXMLYandexSchema>;
+export const ReqXMLYandexSchema = z.object({
+  index: z.number(),
+  id: z.string(),
+  name: z.string(),
+  typePrefix: z.string(),
+  model: z.string(),
+  vendor: z.string(),
+  vendorCode: z.string().optional(),
+  categoryId: z.string(),
+  url: z.string(),
+  picture: z.array(z.string()),
+  description: z.string().optional(),
+  sales_notes: z.string().optional(),
+  param: z.string().optional(),
+  price: z.string(),
+  currencyId: z.string(),
+  video: z.string().optional(),
+  market_category: z.string().optional(),
+  store: z.boolean().optional(),
+  pickup: z.boolean().optional(),
+  delivery: z.boolean().optional(),
+  manufacturer_warranty: z.boolean().optional(),
+  country_of_origin: z.string().optional(),
+  age: z.string().optional(),
+  adult: z.boolean().optional(),
+  downloadable: z.boolean().optional(),
+  collectionId: z.string().optional(),
+  custom_label_0: z.string().optional(),
+  custom_label_1: z.string().optional(),
+  custom_label_2: z.string().optional(),
+  custom_label_3: z.string().optional(),
+  custom_label_4: z.string().optional(),
+  custom_score: z.string().optional(),
+});

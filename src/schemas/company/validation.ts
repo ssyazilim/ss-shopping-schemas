@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import * as locales from '../../locales';
 import type { ILocale } from '../../locales';
-import { ImageSchema } from '../../types/zod/product';
+import { IMAGES } from '../product/validation';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
@@ -334,8 +334,8 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
       .url({ message: m.public_forms_validations_url })
       .optional()
       .meta({ examples: ['https://opiaheart.com'] }),
-    logo: ImageSchema.shape.staticImages.optional(),
-    favicon: ImageSchema.shape.staticImages.optional(),
+    logo: IMAGES(locale).shape.staticImages.optional(),
+    favicon: IMAGES(locale).shape.staticImages.optional(),
     description: z
       .string()
       .max(1000, { message: m.public_forms_validations_maxLength(1000) })
