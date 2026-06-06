@@ -7294,6 +7294,8 @@
             },
             "productId": {
               "type": "string",
+              "minLength": 24,
+              "maxLength": 24,
               "examples": [
                 "66f29aefff9245b28d05482f"
               ]
@@ -7361,6 +7363,8 @@
           },
           "name": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
               "Siyah"
             ]
@@ -7377,12 +7381,16 @@
           "selectedIds": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "minLength": 24,
+              "maxLength": 24
             },
             "description": "IDs to delete"
           },
           "productId": {
-            "type": "string"
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24
           },
           "variantsType": {
             "type": "array",
