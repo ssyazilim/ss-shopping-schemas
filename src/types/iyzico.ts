@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import { PaymentBasketItemsSchema } from './payment';
+import type { IDefault } from './contact';
+import type { IPayment, IPaymentStatus } from './payment';
 
 export type IPaymentCard = z.infer<typeof PaymentCardSchema>;
 export const PaymentCardSchema = z.object({
@@ -310,3 +312,16 @@ export const IyzicoHTML3DSchema = z.object({
 export const DEFAULT_PAYMENT_RESULT_IYZICO: IPaymentResultForIyzico = getDefaultsForSchema(
   PaymentResultForIyzicoSchema,
 );
+
+export interface IPaymentData extends IDefault {
+  payment: {
+    method: number;
+    status: IPaymentStatus;
+    paymentUser: IPayment['paymentUser'];
+    buyer: IPayment['buyer'];
+    shippingAddress: IPayment['shippingAddress'];
+    billingAddress: IPayment['billingAddress'];
+    basketItems: IPayment['basketItems'];
+    shipment: IPayment['shipment'];
+  };
+}
