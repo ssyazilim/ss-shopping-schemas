@@ -41,7 +41,7 @@ export const IpDetailsSchema = z.object({
   ]),
 });
 
-export type IVisitorSchema = z.infer<typeof VisitorSchema>;
+export type IVisitor = z.infer<typeof VisitorSchema>;
 export const VisitorSchema = z
   .object({
     visitorId: z.string(),
@@ -59,7 +59,7 @@ export const TopItemSchema = z.object({
   count: z.number(),
 });
 
-export type IVisitorStatisticsSchema = z.infer<typeof VisitorStatisticsSchema>;
+export type IVisitorStatistics = z.infer<typeof VisitorStatisticsSchema>;
 export const VisitorStatisticsSchema = z.object({
   _id: z.string(),
   date: z.string(),

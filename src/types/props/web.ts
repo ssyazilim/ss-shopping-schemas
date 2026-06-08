@@ -424,11 +424,11 @@ export interface PPButton {
   labelTitle?: string;
   labelClass?: string;
   disabled?: boolean;
-  iconAfter: boolean;
+  iconAfter?: boolean;
 }
 
 export interface PPRadioList {
-  data?: { _id?: string | number; disabled?: boolean; [key: string]: unknown }[];
+  data?: { _id: string | number; disabled: boolean; [key: string]: any }[];
   modelValue?: object;
   type?: string;
   selectedIndex?: number;
@@ -535,7 +535,7 @@ export interface PPPrivateSidebar {
 }
 
 export interface PPPrivateTabSection {
-  tabs?: { name?: string; to?: { path?: string } | string; checked?: boolean }[];
+  tabs?: { name: string; to: { path: string } | string; checked: boolean }[];
 }
 
 export interface PPPrivateSidebarMobile {

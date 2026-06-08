@@ -290,7 +290,7 @@ export interface PAddBuyer {
 }
 
 export interface PAddShipping {
-  dealers?: IDealerPricesWithDesi[];
+  dealers?: IDealer[];
   templates?: IPackageTemplate[];
 }
 
@@ -308,7 +308,7 @@ export interface PProductAdd {
   productVariants?: { type?: IType[]; values?: IVariantValue[] };
   categories?: ICategory[];
   brands?: IBrand[];
-  taxAmount?: string;
+  taxAmount?: number;
   dealer?: string;
   dealerPrices?: IDealerPricesWithDesi[];
 }
@@ -439,7 +439,7 @@ export interface PFileUploader {
   objectPath?: string;
   isAdd?: boolean;
   resetUploader?: boolean;
-  staticImages?: IStaticImage[];
+  staticImages?: IStaticImage;
   dynamicImages?: string[];
 }
 
@@ -612,7 +612,7 @@ export interface PSelectCombo {
 }
 
 export interface PSelectDefault {
-  data?: { name?: string; code?: string; [key: string]: any }[];
+  data?: { name: string; code?: string; [key: string]: any }[];
   modelValue?: string;
   type?: 'default' | 'translation' | 'category' | 'sort';
   uniqueId?: string;
