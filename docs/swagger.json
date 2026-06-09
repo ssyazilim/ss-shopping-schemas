@@ -599,12 +599,6 @@
           "content"
         ]
       },
-      "AddAgreements": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Agreement"
-        }
-      },
       "UpdateAgreement": {
         "type": "object",
         "properties": {
@@ -631,6 +625,42 @@
               "<h1>Gizlilik Politikasi</h1>"
             ]
           }
+        }
+      },
+      "AddAgreements": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "locale": {
+              "type": "string",
+              "minLength": 6,
+              "maxLength": 254,
+              "examples": [
+                "tr"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "minLength": 6,
+              "maxLength": 254,
+              "examples": [
+                "test"
+              ]
+            },
+            "content": {
+              "type": "string",
+              "minLength": 6,
+              "examples": [
+                "<h1>Gizlilik Politikasi</h1>"
+              ]
+            }
+          },
+          "required": [
+            "locale",
+            "name",
+            "content"
+          ]
         }
       },
       "Brand": {
@@ -697,7 +727,65 @@
       "AddBrands": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/Brand"
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
+              "example": "Beko"
+            },
+            "images": {
+              "type": "object",
+              "properties": {
+                "staticImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "image": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "image"
+                    ]
+                  }
+                },
+                "dynamicImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "staticImages",
+                "dynamicImages"
+              ]
+            },
+            "productCount": {
+              "type": "number",
+              "example": 0
+            }
+          },
+          "required": [
+            "name",
+            "images"
+          ]
         }
       },
       "UpdateBrand": {
@@ -949,12 +1037,6 @@
           "images"
         ]
       },
-      "AddCategory": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Category"
-        }
-      },
       "UpdateCategory": {
         "type": "object",
         "properties": {
@@ -1027,6 +1109,89 @@
             "type": "number",
             "example": 0
           }
+        }
+      },
+      "AddCategory": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
+              "example": "Kıyafet ve Aksesuarlar"
+            },
+            "parent": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
+              "example": "root"
+            },
+            "tree": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "root"
+              }
+            },
+            "images": {
+              "type": "object",
+              "properties": {
+                "staticImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "image": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "image"
+                    ]
+                  }
+                },
+                "dynamicImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "staticImages",
+                "dynamicImages"
+              ]
+            },
+            "categoryI10n": {
+              "type": "string",
+              "example": "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
+            },
+            "productCount": {
+              "type": "number",
+              "example": 0
+            }
+          },
+          "required": [
+            "name",
+            "parent",
+            "tree",
+            "images"
+          ]
         }
       },
       "CompanyAddress": {
@@ -3443,6 +3608,17 @@
               "callbackUrl"
             ]
           },
+          "yandex": {
+            "type": "object",
+            "properties": {
+              "metricaId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "metricaId"
+            ]
+          },
           "facebook": {
             "type": "object",
             "properties": {
@@ -3512,13 +3688,152 @@
       "UpdateExternal": {
         "type": "object",
         "properties": {
-          "geoLocation": {
+          "name": {
+            "type": "string"
+          },
+          "iyzico": {
+            "type": "object",
+            "properties": {
+              "lang": {
+                "type": "string",
+                "examples": [
+                  "tr"
+                ]
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "examples": [
+                  "https://sandbox-api.iyzipay.com"
+                ]
+              },
+              "apiKey": {
+                "type": "string"
+              },
+              "secretKey": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "lang",
+              "url",
+              "apiKey",
+              "secretKey"
+            ]
+          },
+          "google": {
+            "type": "object",
+            "properties": {
+              "analyticsId": {
+                "type": "string",
+                "examples": [
+                  "G-123456"
+                ]
+              },
+              "analyticsPropertyId": {
+                "type": "string"
+              },
+              "tagManagerId": {
+                "type": "string",
+                "examples": [
+                  "GTM-123456"
+                ]
+              },
+              "apiKey": {
+                "type": "string"
+              },
+              "clientId": {
+                "type": "string"
+              },
+              "clientSecret": {
+                "type": "string"
+              },
+              "callbackUrl": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "analyticsId",
+              "analyticsPropertyId",
+              "tagManagerId",
+              "apiKey",
+              "clientId",
+              "clientSecret",
+              "callbackUrl"
+            ]
+          },
+          "yandex": {
+            "type": "object",
+            "properties": {
+              "metricaId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "metricaId"
+            ]
+          },
+          "facebook": {
             "type": "object",
             "properties": {
               "apiKey": {
                 "type": "string"
+              },
+              "clientId": {
+                "type": "string"
+              },
+              "clientSecret": {
+                "type": "string"
+              },
+              "callbackUrl": {
+                "type": "string",
+                "format": "uri"
               }
-            }
+            },
+            "required": [
+              "apiKey",
+              "clientId",
+              "clientSecret",
+              "callbackUrl"
+            ]
+          },
+          "tawkTo": {
+            "type": "object",
+            "properties": {
+              "propertyId": {
+                "type": "string"
+              },
+              "widgetId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "propertyId",
+              "widgetId"
+            ]
+          },
+          "crisp": {
+            "type": "object",
+            "properties": {
+              "siteId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "siteId"
+            ]
+          },
+          "geliver": {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "token"
+            ]
           }
         }
       },
@@ -3551,7 +3866,10 @@
             "maxLength": 2000
           },
           "agreed": {
-            "type": "boolean"
+            "type": "boolean",
+            "enum": [
+              true
+            ]
           }
         },
         "required": [
@@ -3565,6 +3883,19 @@
       "ContactMeError": {
         "type": "object",
         "properties": {
+          "firstName": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
+          },
+          "lastName": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
           "email": {
             "type": "string",
             "format": "email"
@@ -3581,6 +3912,9 @@
           }
         },
         "required": [
+          "firstName",
+          "lastName",
+          "phoneNumber",
           "title",
           "message"
         ]
@@ -3732,9 +4066,15 @@
           },
           "encoding": {
             "type": "string",
-            "examples": [
-              "TR"
+            "enum": [
+              "TR",
+              "ASCII"
             ]
+          },
+          "startdate": {
+            "type": "string",
+            "minLength": 12,
+            "maxLength": 12
           },
           "messages": {
             "type": "array",
@@ -3949,19 +4289,19 @@
       "CopyObject": {
         "type": "object",
         "properties": {
-          "targetBucket": {
+          "bucketName": {
             "type": "string",
             "examples": [
               "test1"
             ]
           },
-          "targetObject": {
+          "objectName": {
             "type": "string",
             "examples": [
               "1.jpg"
             ]
           },
-          "sourceObject": {
+          "sourceName": {
             "type": "string",
             "examples": [
               "test2/images/1.jpg"
@@ -3969,9 +4309,9 @@
           }
         },
         "required": [
-          "targetBucket",
-          "targetObject",
-          "sourceObject"
+          "bucketName",
+          "objectName",
+          "sourceName"
         ]
       },
       "PresignedUrl": {
@@ -4598,8 +4938,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "halilerbilgur@gmail.com"
@@ -5208,8 +5546,6 @@
               },
               "email": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "halilerbilgur@gmail.com"
@@ -6274,7 +6610,7 @@
           "text"
         ]
       },
-      "product": {
+      "addProduct": {
         "type": "object",
         "properties": {
           "title": {
@@ -6504,6 +6840,226 @@
           "category",
           "properties"
         ]
+      },
+      "editProduct": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Lorem ipsum dolor sit amet"
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 65000
+              },
+              {
+                "type": "string",
+                "enum": [
+                  ""
+                ]
+              }
+            ]
+          },
+          "images": {
+            "type": "object",
+            "properties": {
+              "staticImages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
+                    },
+                    "image": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "image"
+                  ]
+                }
+              },
+              "dynamicImages": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "staticImages",
+              "dynamicImages"
+            ]
+          },
+          "price": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 4,
+                "examples": [
+                  "TRY"
+                ]
+              },
+              "purchase": {
+                "type": "number",
+                "minimum": 0,
+                "examples": [
+                  1000
+                ]
+              },
+              "sell": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "examples": [
+                  1500
+                ]
+              },
+              "dealerCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "SURAT"
+                ]
+              },
+              "shipping": {
+                "type": "number",
+                "minimum": 0,
+                "examples": [
+                  150
+                ]
+              },
+              "discount": {
+                "type": "integer",
+                "minimum": 0,
+                "examples": [
+                  10
+                ]
+              },
+              "tax": {
+                "type": "integer",
+                "minimum": 0,
+                "examples": [
+                  20
+                ]
+              }
+            },
+            "required": [
+              "currency",
+              "purchase",
+              "sell",
+              "dealerCode",
+              "shipping",
+              "discount",
+              "tax"
+            ]
+          },
+          "stockQuantity": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              100
+            ]
+          },
+          "desi": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000,
+            "examples": [
+              1
+            ]
+          },
+          "brand": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "67d15594f49546e19c4f2342"
+            ]
+          },
+          "gtin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254
+              },
+              {
+                "type": "string",
+                "enum": [
+                  ""
+                ]
+              }
+            ],
+            "examples": [
+              "0123456789012"
+            ]
+          },
+          "sku": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "4SN106B"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "67f38474e1d5b52fee02dcba"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "hidePrice": {
+                "type": "boolean",
+                "examples": [
+                  false
+                ]
+              },
+              "isFeatured": {
+                "type": "boolean",
+                "examples": [
+                  false
+                ]
+              },
+              "isShippingFree": {
+                "type": "boolean",
+                "examples": [
+                  false
+                ]
+              }
+            },
+            "required": [
+              "hidePrice",
+              "isFeatured",
+              "isShippingFree"
+            ]
+          }
+        }
       },
       "addProducts": {
         "type": "array",
@@ -6737,17 +7293,6 @@
             "category",
             "properties"
           ]
-        }
-      },
-      "editProduct": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "examples": [
-              "Grundig Gpdh 9634"
-            ]
-          }
         }
       },
       "variant": {
@@ -7585,8 +8130,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "ufuk.sari@mailinator.com"
@@ -8473,8 +9016,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "senocak-a@hotmail.com"
@@ -8558,8 +9099,6 @@
             },
             "email": {
               "type": "string",
-              "minLength": 6,
-              "maxLength": 254,
               "format": "email",
               "examples": [
                 "senocak-a@hotmail.com"
@@ -8642,8 +9181,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "senocak-a@hotmail.com"
@@ -15459,17 +15996,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/product"
+                "$ref": "#/components/schemas/addProduct"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/product"
+                "$ref": "#/components/schemas/addProduct"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/product"
+                "$ref": "#/components/schemas/addProduct"
               }
             }
           }
