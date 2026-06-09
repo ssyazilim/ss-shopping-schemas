@@ -69,6 +69,7 @@ export const ADD_VARIANT = (locale: ILocale = 'tr') => {
     variant: VARIANT(locale),
   });
 };
+export const ADD_VARIANTS = (locale: ILocale = 'tr') => z.array(ADD_VARIANT(locale));
 export const ADD_VARIANTS_MULTI = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.array(

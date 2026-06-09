@@ -88,6 +88,11 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['07'] }),
+    districtID: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .optional(),
     districtName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
