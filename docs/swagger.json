@@ -8191,6 +8191,10 @@
               "07"
             ]
           },
+          "districtID": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
           "districtName": {
             "type": "string",
             "minLength": 2,
