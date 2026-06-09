@@ -1,12 +1,14 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import {
+  ADD_EXTERNAL,
   EXTERNAL_CRISP,
   EXTERNAL_FACEBOOK,
   EXTERNAL_GELIVER,
   EXTERNAL_GOOGLE,
   EXTERNAL_IYZICO,
   EXTERNAL_TAWK_TO,
+  EXTERNAL_YANDEX,
 } from '../schemas';
 import { MongoSchema } from './common';
 
@@ -20,9 +22,7 @@ export type IExternalFacebook = z.infer<typeof ExternalFacebookSchema>;
 export const ExternalFacebookSchema = EXTERNAL_FACEBOOK;
 
 export type IExternalYandex = z.infer<typeof ExternalYandexSchema>;
-export const ExternalYandexSchema = z.object({
-  metricaId: z.string(),
-});
+export const ExternalYandexSchema = EXTERNAL_YANDEX;
 
 export type IExternalTawkTo = z.infer<typeof ExternalTawkToSchema>;
 export const ExternalTawkToSchema = EXTERNAL_TAWK_TO;
@@ -34,17 +34,7 @@ export type IExternalGeliver = z.infer<typeof ExternalGeliverSchema>;
 export const ExternalGeliverSchema = EXTERNAL_GELIVER;
 
 export type IExternal = z.infer<typeof ExternalSchema>;
-export const ExternalSchema = z
-  .object({
-    iyzico: ExternalIyzicoSchema,
-    google: ExternalGoogleSchema,
-    facebook: ExternalFacebookSchema,
-    yandex: ExternalYandexSchema,
-    tawkTo: ExternalTawkToSchema,
-    crisp: ExternalCrispSchema,
-    geliver: ExternalGeliverSchema,
-  })
-  .extend(MongoSchema.shape);
+export const ExternalSchema = ADD_EXTERNAL.extend(MongoSchema.shape);
 
 export const DEFAULT_IYZICO: IExternalIyzico = getDefaultsForSchema(ExternalIyzicoSchema);
 export const DEFAULT_GOOGLE: IExternalGoogle = getDefaultsForSchema(ExternalGoogleSchema);

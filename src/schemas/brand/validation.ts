@@ -18,3 +18,5 @@ export const ADD_BRAND = (locale: ILocale = 'tr') => {
     productCount: z.number().optional().meta({ example: 0 }),
   });
 };
+
+export const ADD_BRANDS = (locale: ILocale = 'tr') => z.array(ADD_BRAND(locale));

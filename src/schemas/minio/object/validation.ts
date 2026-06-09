@@ -19,9 +19,9 @@ export const DELETE_OBJECTS = z.object({
 });
 
 export const COPY_OBJECT = z.object({
-  targetBucket: z.string().meta({ examples: ['test1'] }),
-  targetObject: z.string().meta({ examples: ['1.jpg'] }),
-  sourceObject: z.string().meta({ examples: ['test2/images/1.jpg'] }),
+  bucketName: z.string().meta({ examples: ['test1'] }),
+  objectName: z.string().meta({ examples: ['1.jpg'] }),
+  sourceName: z.string().meta({ examples: ['test2/images/1.jpg'] }),
 });
 
 export const PRESIGNED_URL = z.object({

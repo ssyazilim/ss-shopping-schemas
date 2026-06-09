@@ -57,11 +57,7 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Ufuk Sarı'] }),
-    email: z
-      .email()
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ufuk.sari@mailinator.com'] }),
+    email: z.email().meta({ examples: ['ufuk.sari@mailinator.com'] }),
     phone: z
       .e164({ message: m.public_forms_validations_phoneNumber })
       .meta({ examples: ['+905309464864'] }),
@@ -149,7 +145,6 @@ export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') =>
       .optional()
       .meta({ examples: [''] }),
   });
-
 export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -190,7 +185,6 @@ export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['Serik'] }),
   });
 };
-
 export const RETURN_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -212,7 +206,6 @@ export const RETURN_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
     senderAddress: SHIPPING_RETURN_ADDRESS(locale).optional(),
   });
 };
-
 export const UPDATE_SHIPPING_PACKAGE = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -242,7 +235,6 @@ export const UPDATE_SHIPPING_PACKAGE = (locale: ILocale = 'tr') => {
       .meta({ examples: ['0.8'] }),
   });
 };
-
 export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -285,7 +277,6 @@ export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
       .meta({ examples: ['kg'] }),
   });
 };
-
 export const SHIPPING_PROVIDER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -322,7 +313,6 @@ export const SHIPPING_PROVIDER = (locale: ILocale = 'tr') => {
     parameters: z.record(z.string(), z.unknown()).optional(),
   });
 };
-
 export const SHIPPING_WEBHOOK = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({

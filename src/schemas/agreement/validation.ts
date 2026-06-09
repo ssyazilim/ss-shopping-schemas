@@ -23,3 +23,5 @@ export const ADD_AGREEMENT = (locale: ILocale = 'tr') => {
       .meta({ examples: ['<h1>Gizlilik Politikasi</h1>'] }),
   });
 };
+
+export const ADD_AGREEMENTS = (locale: ILocale = 'tr') => z.array(ADD_AGREEMENT(locale));

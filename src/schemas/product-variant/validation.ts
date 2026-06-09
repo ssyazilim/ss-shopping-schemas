@@ -75,8 +75,7 @@ export const ADD_VARIANTS_MULTI = (locale: ILocale = 'tr') => {
     VARIANT().extend({
       productId: z
         .string()
-        .min(24, { message: m.public_forms_validations_minLength(24) })
-        .max(24, { message: m.public_forms_validations_maxLength(24) })
+        .length(24, { message: m.public_forms_validations_minLength(24) })
         .meta({ examples: ['66f29aefff9245b28d05482f'] }),
       _id: z
         .string()
@@ -104,17 +103,9 @@ export const DELETE_FOR_VARIANT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     selectedIds: z
-      .array(
-        z
-          .string()
-          .min(24, { message: m.public_forms_validations_minLength(24) })
-          .max(24, { message: m.public_forms_validations_maxLength(24) }),
-      )
+      .array(z.string().length(24, { message: m.public_forms_validations_minLength(24) }))
       .meta({ description: 'IDs to delete' }),
-    productId: z
-      .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) }),
+    productId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     variantsType: VARIANTS_TYPE(),
   });
 };

@@ -131,11 +131,4 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
     properties: PRODUCT_PROPERTIES(),
   });
 };
-export const ADD_PRODUCTS = () => z.array(ADD_PRODUCT());
-export const EDIT_PRODUCT = () =>
-  z.object({
-    title: z
-      .string()
-      .optional()
-      .meta({ examples: ['Grundig Gpdh 9634'] }),
-  });
+export const ADD_PRODUCTS = (locale: ILocale = 'tr') => z.array(ADD_PRODUCT(locale));

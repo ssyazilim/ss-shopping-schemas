@@ -1,13 +1,8 @@
 import { z } from 'zod';
 import { ADD_USER, PASSWORD_RESET_COMPLETE } from '../schemas/auth/validation';
-import { IMAGES } from '../schemas/product/validation';
 
+export type IUserRegister = z.infer<ReturnType<typeof ADD_USER>>;
 export type IResetPasswordForm = z.infer<ReturnType<typeof PASSWORD_RESET_COMPLETE>>;
-
-export type IUserRegister = z.infer<typeof UserRegisterSchema>;
-export const UserRegisterSchema = ADD_USER().extend({
-  profileImage: IMAGES().shape.staticImages.optional(),
-});
 
 export type IUserRole = z.infer<typeof UserRoleSchema>;
 export const UserRoleSchema = z.enum(['ROLE_USER', 'ROLE_ADMIN']);

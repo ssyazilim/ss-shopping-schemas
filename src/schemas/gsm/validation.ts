@@ -7,6 +7,7 @@ export const GSM_MESSAGES = z.object({
 
 export const SEND_SMS = z.object({
   msgheader: z.string().meta({ examples: ['ERBIL.GUR'] }),
-  encoding: z.string().meta({ examples: ['TR'] }),
+  encoding: z.enum(['TR', 'ASCII']),
+  startdate: z.string().length(12).optional(),
   messages: z.array(GSM_MESSAGES),
 });

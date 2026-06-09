@@ -25,13 +25,22 @@ export const CONTACT_ME = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(2000, { message: m.public_forms_validations_maxLength(2000) }),
-    agreed: z.boolean(),
+    agreed: z.literal(true, { error: m.public_forms_validations_required }),
   });
 };
 
 export const CONTACT_ME_ERROR = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
+    firstName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    lastName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
     email: z.email({ message: m.public_forms_validations_email }).optional(),
     title: z
       .string()

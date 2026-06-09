@@ -9,18 +9,15 @@ export const ADD_BASKET_ITEM = (locale: ILocale = 'tr') => {
   return z.object({
     id: z
       .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .length(24, { message: m.public_forms_validations_minLength(24) })
       .meta({ examples: ['674094c121add706a8980815'] }),
     productId: z
       .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .length(24, { message: m.public_forms_validations_minLength(24) })
       .meta({ examples: ['674094c121add706a8980816'] }),
     variantId: z
       .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .length(24, { message: m.public_forms_validations_minLength(24) })
       .nullable()
       .meta({ examples: [null] }),
     name: z
@@ -305,8 +302,7 @@ export const ADD_PAYMENT_USER = (locale: ILocale = 'tr') => {
   return z.object({
     id: z
       .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) })
+      .length(24, { message: m.public_forms_validations_minLength(24) })
       .meta({ examples: ['66ae616a9d86f0da5d4d25f6'] }),
     paymentId: z
       .string()
@@ -326,11 +322,7 @@ export const ADD_PAYMENT_USER = (locale: ILocale = 'tr') => {
     phoneNumber: z
       .e164({ message: m.public_forms_validations_phoneNumber })
       .meta({ examples: ['905527406607'] }),
-    email: z
-      .email()
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['halilerbilgur@gmail.com'] }),
+    email: z.email().meta({ examples: ['halilerbilgur@gmail.com'] }),
   });
 };
 export const ADD_PAYMENT = (locale: ILocale = 'tr') => {
@@ -443,10 +435,7 @@ export const ADD_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
     phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
-    email: z
-      .email()
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    email: z.email(),
     country: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

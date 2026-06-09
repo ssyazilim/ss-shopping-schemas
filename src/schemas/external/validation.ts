@@ -17,6 +17,10 @@ export const EXTERNAL_GOOGLE = z.object({
   callbackUrl: z.url(),
 });
 
+export const EXTERNAL_YANDEX = z.object({
+  metricaId: z.string(),
+});
+
 export const EXTERNAL_FACEBOOK = z.object({
   apiKey: z.string(),
   clientId: z.string(),
@@ -41,16 +45,9 @@ export const ADD_EXTERNAL = z.object({
   name: z.string(),
   iyzico: EXTERNAL_IYZICO.optional(),
   google: EXTERNAL_GOOGLE.optional(),
+  yandex: EXTERNAL_YANDEX.optional(),
   facebook: EXTERNAL_FACEBOOK.optional(),
   tawkTo: EXTERNAL_TAWK_TO.optional(),
   crisp: EXTERNAL_CRISP.optional(),
   geliver: EXTERNAL_GELIVER.optional(),
-});
-
-export const UPDATE_EXTERNAL = z.object({
-  geoLocation: z
-    .object({
-      apiKey: z.string().optional(),
-    })
-    .optional(),
 });

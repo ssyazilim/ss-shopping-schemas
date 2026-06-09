@@ -1,7 +1,6 @@
 import { registry } from '../registry';
 import {
   ADD_EXTERNAL,
-  UPDATE_EXTERNAL,
   EXTERNAL_IYZICO,
   EXTERNAL_GOOGLE,
   EXTERNAL_FACEBOOK,
@@ -18,7 +17,7 @@ const ExternalCrispSchema = registry.register('ExternalCrisp', EXTERNAL_CRISP);
 const ExternalGeliverSchema = registry.register('ExternalGeliver', EXTERNAL_GELIVER);
 
 export const AddExternalSchema = registry.register('AddExternal', ADD_EXTERNAL);
-export const UpdateExternalSchema = registry.register('UpdateExternal', UPDATE_EXTERNAL);
+export const UpdateExternalSchema = registry.register('UpdateExternal', ADD_EXTERNAL.partial());
 
 void ExternalIyzicoSchema;
 void ExternalGoogleSchema;

@@ -27,3 +27,5 @@ export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
     productCount: z.number().optional().meta({ example: 0 }),
   });
 };
+
+export const ADD_CATEGORIES = (locale: ILocale = 'tr') => z.array(ADD_CATEGORY(locale));

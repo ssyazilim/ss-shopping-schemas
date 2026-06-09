@@ -7,10 +7,7 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const SET_QUANTITY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    itemId: z
-      .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) }),
+    itemId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     quantity: z
       .number()
       .int()
@@ -22,14 +19,8 @@ export const SET_QUANTITY = (locale: ILocale = 'tr') => {
 export const ADD_CART = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    productId: z
-      .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) }),
-    variantId: z
-      .string()
-      .min(24, { message: m.public_forms_validations_minLength(24) })
-      .max(24, { message: m.public_forms_validations_maxLength(24) }),
+    productId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
+    variantId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     quantity: z.number().int(),
   });
 };

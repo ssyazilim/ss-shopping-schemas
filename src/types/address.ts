@@ -4,9 +4,8 @@ import { ADD_ADDRESS } from '../schemas';
 import { MongoSchema } from './common';
 
 export type IAddress = z.infer<typeof AddressSchema>;
-export const AddressSchema = z
-  .object({
+export const AddressSchema = ADD_ADDRESS()
+  .extend({
     userId: UserSchema,
   })
-  .extend(ADD_ADDRESS().shape)
   .extend(MongoSchema.shape);
