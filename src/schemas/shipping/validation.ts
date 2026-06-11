@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { ILocale } from '../../locales';
 import * as locales from '../../locales';
-import { GeliverShipmentRecipientAddressSchema } from '../../types';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
@@ -58,7 +57,7 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Ufuk Sarı'] }),
-    email: z.email().meta({ examples: ['ufuk.sari@mailinator.com'] }),
+    email: z.email().meta({ examples: ['no-reply@ssyazilim.com'] }),
     phone: z
       .e164({ message: m.public_forms_validations_phoneNumber })
       .meta({ examples: ['+905309464864'] }),
@@ -137,6 +136,38 @@ export const SHIPPING_PACKAGE_DIMENSIONS = (locale: ILocale = 'tr', optional = f
     massUnit: unit(['kg']),
   });
 };
+export const SHIPPING_RECIPIENT_ADDRESS = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Oğuzhan Altay'] }),
+    email: z.email().meta({ examples: ['oguzhanaltay@gmail.com'] }),
+    phone: z.e164().meta({ examples: ['+905447929292'] }),
+    address1: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Yukarı Dudullu, Kıbrıs Cd., 34775 Ümraniye/İstanbul'] }),
+    countryCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['TR'] }),
+    cityCode: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['34'] }),
+    districtName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Ümraniye'] }),
+  });
+};
 export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z
@@ -153,7 +184,7 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) })
         .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
-      recipientAddress: GeliverShipmentRecipientAddressSchema.optional(),
+      recipientAddress: SHIPPING_RECIPIENT_ADDRESS(locale).optional(),
       recipientAddressID: z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })

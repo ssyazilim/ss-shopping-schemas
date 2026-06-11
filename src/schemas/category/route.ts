@@ -49,7 +49,9 @@ registry.registerPath({
   tags: ['Category'],
   summary: 'Get Google categories from the system',
   operationId: 'getGoogleCategories',
-  request: { params: z.object({ locale: z.enum(['en-US', 'tr-TR']).default('tr-TR') }) },
+  request: {
+    params: z.object({ locale: z.enum(['en-US', 'tr-TR']).meta({ examples: ['tr-TR'] }) }),
+  },
   responses,
 });
 

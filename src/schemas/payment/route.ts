@@ -56,7 +56,7 @@ registry.registerPath({
   summary: 'Check HTML Code for IYZICO Service',
   operationId: 'checkHTMLCodeForIYZICO',
   request: {
-    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    params: z.object({ locale: z.enum(['en', 'tr']).meta({ examples: ['tr'] }) }),
     body: buildRequestBody(CheckHTMLForIyzicoSchema),
   },
   responses,
@@ -71,7 +71,7 @@ registry.registerPath({
   request: {
     params: z.object({
       token: z.string(),
-      locale: z.enum(['en', 'tr']).default('tr'),
+      locale: z.enum(['en', 'tr']).meta({ examples: ['tr'] }),
     }),
   },
   responses,
@@ -95,7 +95,7 @@ registry.registerPath({
   operationId: 'paymentForUser',
   security: [{ JWT: [] }],
   request: {
-    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    params: z.object({ locale: z.enum(['en', 'tr']).meta({ examples: ['tr'] }) }),
     body: buildRequestBody(AddPaymentSchema),
   },
   responses,
@@ -109,7 +109,7 @@ registry.registerPath({
   operationId: 'check3DForUser',
   security: [{ JWT: [] }],
   request: {
-    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    params: z.object({ locale: z.enum(['en', 'tr']).meta({ examples: ['tr'] }) }),
     body: buildRequestBody(AddPaymentSchema),
   },
   responses,
@@ -125,7 +125,7 @@ registry.registerPath({
   request: {
     params: z.object({
       paymentId: z.string(),
-      locale: z.enum(['en', 'tr']).default('tr'),
+      locale: z.enum(['en', 'tr']).meta({ examples: ['tr'] }),
     }),
     body: buildRequestBody(CompletePayment3DSchema),
   },
@@ -162,7 +162,7 @@ registry.registerPath({
   operationId: 'cancelPayment',
   security: [{ JWT: [] }],
   request: {
-    params: z.object({ locale: z.enum(['en', 'tr']).default('tr') }),
+    params: z.object({ locale: z.enum(['en', 'tr']).meta({ examples: ['tr'] }) }),
     body: buildRequestBody(CancelPaymentSchema),
   },
   responses,

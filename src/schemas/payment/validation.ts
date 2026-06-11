@@ -143,10 +143,7 @@ export const ADD_BUYER = (locale: ILocale = 'tr') => {
       .email({ message: m.public_forms_validations_email })
       .min(6, { message: m.public_forms_validations_minLength(6) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({
-        examples: ['ayse.sari@mailinator.com'],
-        description: 'https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari',
-      }),
+      .meta({ examples: ['no-reply@ssyazilim.com'] }),
     identityNumber: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

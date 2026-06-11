@@ -1,5 +1,10 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
+import { SHIPPING_RECIPIENT_ADDRESS } from '../schemas';
+
+export type IGeliverShipmentRecipientAddress = z.infer<
+  ReturnType<typeof SHIPPING_RECIPIENT_ADDRESS>
+>;
 
 export type IDealer = z.infer<typeof DealerSchema>;
 export const DealerSchema = z.object({
@@ -240,19 +245,6 @@ export const GeliverShipmentItemSchema = z.object({
   quantity: z.number(),
 });
 
-export type IGeliverShipmentRecipientAddress = z.infer<
-  typeof GeliverShipmentRecipientAddressSchema
->;
-export const GeliverShipmentRecipientAddressSchema = z.object({
-  name: z.string(),
-  email: z.email(),
-  phone: z.e164(),
-  address1: z.string(),
-  countryCode: z.string(),
-  cityCode: z.string(),
-  districtName: z.string(),
-});
-
 export type IGeliverShipmentOrderInfo = z.infer<typeof GeliverShipmentOrderInfoSchema>;
 export const GeliverShipmentOrderInfoSchema = z.object({
   sourceCode: z.literal('API'),
@@ -268,7 +260,7 @@ export const GeliverShipmentAddSchema = z.object({
   items: z.array(GeliverShipmentItemSchema),
   senderAddressID: z.string(),
   returnAddressID: z.string().optional(),
-  recipientAddress: GeliverShipmentRecipientAddressSchema.optional(),
+  recipientAddress: SHIPPING_RECIPIENT_ADDRESS().optional(),
   recipientAddressID: z.string().optional(),
   order: GeliverShipmentOrderInfoSchema,
   parcelTemplateID: z.string().optional(),
@@ -585,7 +577,7 @@ export const GeliverReturnShipmentSchema = z.object({
   willAccept: z.boolean(),
   providerServiceCode: z.string(),
   count: z.number(),
-  senderAddress: GeliverShipmentRecipientAddressSchema,
+  senderAddress: SHIPPING_RECIPIENT_ADDRESS(),
 });
 
 export type IGeliverTicket = z.infer<typeof GeliverTicketSchema>;
@@ -593,7 +585,7 @@ export const GeliverTicketSchema = z.object({
   test: z.boolean(),
   senderAddressID: z.string(),
   returnAddressID: z.string(),
-  recipientAddress: GeliverShipmentRecipientAddressSchema,
+  recipientAddress: SHIPPING_RECIPIENT_ADDRESS(),
   length: z.string(),
   height: z.string(),
   width: z.string(),

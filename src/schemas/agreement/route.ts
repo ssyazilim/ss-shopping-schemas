@@ -21,8 +21,8 @@ registry.registerPath({
   operationId: 'getAgreement',
   request: {
     params: z.object({
-      locale: z.string().default('tr'),
-      name: z.string().default('Gizlilik politikası'),
+      locale: z.string().meta({ examples: ['tr'] }),
+      name: z.string().meta({ examples: ['Gizlilik politikası'] }),
     }),
   },
   responses,
