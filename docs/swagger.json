@@ -7501,179 +7501,182 @@
               ]
             }
           },
-          "variant": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254,
-                "examples": [
-                  "Siyah"
-                ]
-              },
-              "images": {
-                "type": "object",
-                "properties": {
-                  "staticImages": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "name": {
-                          "type": "string",
-                          "minLength": 2,
-                          "maxLength": 254
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 254,
+                  "examples": [
+                    "Siyah"
+                  ]
+                },
+                "images": {
+                  "type": "object",
+                  "properties": {
+                    "staticImages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "image": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          }
                         },
-                        "image": {
-                          "type": "string",
-                          "minLength": 2,
-                          "maxLength": 254
-                        }
-                      },
-                      "required": [
-                        "name",
-                        "image"
-                      ]
+                        "required": [
+                          "name",
+                          "image"
+                        ]
+                      }
+                    },
+                    "dynamicImages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254,
+                        "examples": [
+                          "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                        ]
+                      }
                     }
                   },
-                  "dynamicImages": {
-                    "type": "array",
-                    "items": {
+                  "required": [
+                    "staticImages",
+                    "dynamicImages"
+                  ]
+                },
+                "price": {
+                  "type": "object",
+                  "properties": {
+                    "currency": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 4,
+                      "examples": [
+                        "TRY"
+                      ]
+                    },
+                    "purchase": {
+                      "type": "number",
+                      "minimum": 0,
+                      "examples": [
+                        1000
+                      ]
+                    },
+                    "sell": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "examples": [
+                        1500
+                      ]
+                    },
+                    "dealerCode": {
                       "type": "string",
                       "minLength": 2,
                       "maxLength": 254,
                       "examples": [
-                        "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                        "SURAT"
+                      ]
+                    },
+                    "shipping": {
+                      "type": "number",
+                      "minimum": 0,
+                      "examples": [
+                        150
+                      ]
+                    },
+                    "discount": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "examples": [
+                        10
+                      ]
+                    },
+                    "tax": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "examples": [
+                        20
                       ]
                     }
-                  }
+                  },
+                  "required": [
+                    "currency",
+                    "purchase",
+                    "sell",
+                    "dealerCode",
+                    "shipping",
+                    "discount",
+                    "tax"
+                  ]
                 },
-                "required": [
-                  "staticImages",
-                  "dynamicImages"
-                ]
-              },
-              "price": {
-                "type": "object",
-                "properties": {
-                  "currency": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 4,
-                    "examples": [
-                      "TRY"
-                    ]
-                  },
-                  "purchase": {
-                    "type": "number",
-                    "minimum": 0,
-                    "examples": [
-                      1000
-                    ]
-                  },
-                  "sell": {
-                    "type": "number",
-                    "exclusiveMinimum": 0,
-                    "examples": [
-                      1500
-                    ]
-                  },
-                  "dealerCode": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254,
-                    "examples": [
-                      "SURAT"
-                    ]
-                  },
-                  "shipping": {
-                    "type": "number",
-                    "minimum": 0,
-                    "examples": [
-                      150
-                    ]
-                  },
-                  "discount": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "examples": [
-                      10
-                    ]
-                  },
-                  "tax": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "examples": [
-                      20
-                    ]
-                  }
+                "stockQuantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "examples": [
+                    100
+                  ]
                 },
-                "required": [
-                  "currency",
-                  "purchase",
-                  "sell",
-                  "dealerCode",
-                  "shipping",
-                  "discount",
-                  "tax"
-                ]
+                "sku": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "4SN106C"
+                  ]
+                },
+                "gtin": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        ""
+                      ]
+                    }
+                  ],
+                  "examples": [
+                    "0123456789012"
+                  ]
+                },
+                "desi": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000,
+                  "examples": [
+                    1
+                  ]
+                }
               },
-              "stockQuantity": {
-                "type": "integer",
-                "minimum": 0,
-                "examples": [
-                  100
-                ]
-              },
-              "sku": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "4SN106C"
-                ]
-              },
-              "gtin": {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  {
-                    "type": "string",
-                    "enum": [
-                      ""
-                    ]
-                  }
-                ],
-                "examples": [
-                  "0123456789012"
-                ]
-              },
-              "desi": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 1000,
-                "examples": [
-                  1
-                ]
-              }
-            },
-            "required": [
-              "name",
-              "images",
-              "price",
-              "stockQuantity",
-              "sku",
-              "desi"
-            ]
+              "required": [
+                "name",
+                "images",
+                "price",
+                "stockQuantity",
+                "sku",
+                "desi"
+              ]
+            }
           }
         },
         "required": [
           "variantsType",
-          "variant"
+          "variants"
         ]
       },
       "addVariantsMulti": {
