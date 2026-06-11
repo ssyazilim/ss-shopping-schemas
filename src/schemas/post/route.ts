@@ -1,23 +1,8 @@
 import { z } from 'zod';
 
 import { registry } from '../registry';
-import { AddPostsSchema, PostSchema, LikePostSchema, CommentPostSchema } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, DeleteModelSchema, ListQuerySchema } from '../common';
-
-const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
-
-function buildRequestBody(schema: z.ZodType) {
-  return {
-    content: {
-      'application/json': { schema },
-      'application/xml': { schema },
-      'application/x-www-form-urlencoded': { schema },
-    },
-  };
-}
+import { PostSchema, LikePostSchema, CommentPostSchema } from './schema';
+import { responses, buildRequestBody, DeleteModelSchema, ListQuerySchema } from '../common';
 
 registry.registerPath({
   method: 'get',
@@ -92,17 +77,6 @@ registry.registerPath({
     params: z.object({ postId: z.string() }),
     body: buildRequestBody(CommentPostSchema),
   },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/posts',
-  tags: ['Post'],
-  summary: 'Add a new posts to system (JSON or CSV)',
-  operationId: 'addPosts',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddPostsSchema) },
   responses,
 });
 

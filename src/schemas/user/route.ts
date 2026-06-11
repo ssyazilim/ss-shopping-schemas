@@ -1,28 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import {
-  EditUserSchema,
-  DeleteUserSchema,
-  CustomerSchema,
-  AddCustomersSchema,
-  UpdateCustomerSchema,
-} from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
-
-const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
-
-function buildRequestBody(schema: z.ZodType) {
-  return {
-    content: {
-      'application/json': { schema },
-      'application/xml': { schema },
-      'application/x-www-form-urlencoded': { schema },
-    },
-  };
-}
+import { EditUserSchema, DeleteUserSchema, CustomerSchema, UpdateCustomerSchema } from './schema';
+import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
 registry.registerPath({
   method: 'get',
@@ -64,17 +43,6 @@ registry.registerPath({
   operationId: 'getUsers',
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/users',
-  tags: ['User'],
-  summary: 'Add customers to the system (JSON or CSV)',
-  operationId: 'addCustomers',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddCustomersSchema) },
   responses,
 });
 

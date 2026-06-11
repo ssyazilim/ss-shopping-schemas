@@ -1,22 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
 import { SendSmsSchema } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema } from '../common';
-
-const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
-
-function buildRequestBody(schema: z.ZodType) {
-  return {
-    content: {
-      'application/json': { schema },
-      'application/xml': { schema },
-      'application/x-www-form-urlencoded': { schema },
-    },
-  };
-}
+import { responses, buildRequestBody } from '../common';
 
 registry.registerPath({
   method: 'post',

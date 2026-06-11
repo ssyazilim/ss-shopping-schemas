@@ -1,26 +1,11 @@
 import { z } from 'zod';
 import { registry } from '../registry';
 import { AddAddressSchema, UpdateAddressSchema } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema } from '../common';
+import { responses, buildRequestBody, ListQuerySchema } from '../common';
 
 const addressIdParam = z.object({
   addressId: z.string(),
 });
-
-const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
-
-function buildRequestBody(schema: typeof AddAddressSchema | typeof UpdateAddressSchema) {
-  return {
-    content: {
-      'application/json': { schema },
-      'application/xml': { schema },
-      'application/x-www-form-urlencoded': { schema },
-    },
-  };
-}
 
 registry.registerPath({
   method: 'get',

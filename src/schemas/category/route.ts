@@ -1,22 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddCategorySchema, CategorySchema } from './schema';
-import { ApiSuccessSchema, ApiErrorSchema, ListQuerySchema, DeleteModelSchema } from '../common';
-
-const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
-
-function buildRequestBody(schema: z.ZodType) {
-  return {
-    content: {
-      'application/json': { schema },
-      'application/xml': { schema },
-      'application/x-www-form-urlencoded': { schema },
-    },
-  };
-}
+import { CategorySchema } from './schema';
+import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
 registry.registerPath({
   method: 'get',
@@ -65,17 +50,6 @@ registry.registerPath({
   summary: 'Get Google categories from the system',
   operationId: 'getGoogleCategories',
   request: { params: z.object({ locale: z.enum(['en-US', 'tr-TR']).default('tr-TR') }) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/admin/categories',
-  tags: ['Category'],
-  summary: 'Add a new categories to system',
-  operationId: 'addCategories',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddCategorySchema) },
   responses,
 });
 

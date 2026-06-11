@@ -4,16 +4,16 @@ import { registry } from './registry';
 export const PaginationQuerySchema = registry.register(
   'PaginationQuery',
   z.object({
-    page: z.coerce.number().int().min(1).default(1),
-    limit: z.coerce.number().int().min(1).max(100).default(20).optional(),
+    page: z.number().int().min(1).default(1),
+    limit: z.number().int().min(1).max(100).default(20).optional(),
   }),
 );
 
 export const ListQuerySchema = registry.register(
   'ListQuery',
   z.object({
-    page: z.coerce.number().int().min(1).default(1).optional(),
-    limit: z.coerce.number().int().min(1).max(100).default(25).optional(),
+    page: z.number().int().min(1).default(1).optional(),
+    limit: z.number().int().min(1).max(100).default(25).optional(),
     sort: z.string().default('updatedAt,desc'),
     text: z.string().default('').optional(),
   }),
@@ -57,3 +57,18 @@ export const DeleteModelSchema = registry.register(
     selectedIds: z.array(z.string()).meta({ description: 'IDs to delete' }),
   }),
 );
+
+export const responses = {
+  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
+  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
+};
+
+export function buildRequestBody(schema: z.ZodType) {
+  return {
+    content: {
+      'application/json': { schema },
+      'application/xml': { schema },
+      'application/x-www-form-urlencoded': { schema },
+    },
+  };
+}

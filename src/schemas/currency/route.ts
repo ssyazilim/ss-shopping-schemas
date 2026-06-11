@@ -1,11 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { ApiSuccessSchema, ApiErrorSchema } from '../common';
-
-const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
+import { responses } from '../common';
 
 registry.registerPath({
   method: 'get',

@@ -1,6 +1,5 @@
-import { z } from 'zod';
 import { registry } from '../registry';
-import { ApiSuccessSchema, ApiErrorSchema } from '../common';
+import { responses, buildRequestBody } from '../common';
 import {
   LoginUserSchema,
   AddUserSchema,
@@ -9,27 +8,6 @@ import {
   PasswordResetUserSchema,
   PasswordResetCompleteUserSchema,
 } from './schema';
-
-function buildRequestBody(schema: z.ZodType) {
-  return {
-    content: {
-      'application/json': { schema },
-      'application/xml': { schema },
-      'application/x-www-form-urlencoded': { schema },
-    },
-  };
-}
-
-const responses = {
-  200: {
-    description: 'Success',
-    content: { 'application/json': { schema: ApiSuccessSchema } },
-  },
-  400: {
-    description: 'Error',
-    content: { 'application/json': { schema: ApiErrorSchema } },
-  },
-};
 
 registry.registerPath({
   method: 'post',
