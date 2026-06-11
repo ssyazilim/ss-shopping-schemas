@@ -113,45 +113,49 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
 };
 export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    test: z.boolean().meta({ examples: [true] }),
-    items: z.array(SHIPPING_ITEM(locale)),
-    senderAddressID: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
-    returnAddressID: z.string().optional(),
-    recipientAddressID: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['64c4f70f-83b8-4195-85c3-cb5a16751e3d'] }),
-    order: SHIPPING_ORDER_INFO(),
-    parcelTemplateID: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
-    productPaymentOnDelivery: z
-      .boolean()
-      .optional()
-      .meta({ examples: [false] }),
-  }).extend(SHIPPING_TEMPLATE(locale).omit({ name: true }).partial().shape);
+  return z
+    .object({
+      test: z.boolean().meta({ examples: [true] }),
+      items: z.array(SHIPPING_ITEM(locale)),
+      senderAddressID: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
+      returnAddressID: z.string().optional(),
+      recipientAddressID: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['64c4f70f-83b8-4195-85c3-cb5a16751e3d'] }),
+      order: SHIPPING_ORDER_INFO(),
+      parcelTemplateID: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .optional()
+        .meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
+      productPaymentOnDelivery: z
+        .boolean()
+        .optional()
+        .meta({ examples: [false] }),
+    })
+    .extend(SHIPPING_TEMPLATE(locale).omit({ name: true }).partial().shape);
 };
 export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
-  return z.object({
-    providerServiceCode: z
-      .string()
-      .optional()
-      .meta({ examples: ['GELIVER_STANDART'] }),
-    providerAccountID: z
-      .string()
-      .optional()
-      .meta({ examples: [''] }),
-  }).extend(ADD_SHIPPING_SHIPMENT(locale));
-}
+  return z
+    .object({
+      providerServiceCode: z
+        .string()
+        .optional()
+        .meta({ examples: ['GELIVER_STANDART'] }),
+      providerAccountID: z
+        .string()
+        .optional()
+        .meta({ examples: [''] }),
+    })
+    .extend(ADD_SHIPPING_SHIPMENT(locale));
+};
 export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
