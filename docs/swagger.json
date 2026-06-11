@@ -7502,176 +7502,173 @@
             }
           },
           "variants": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 254,
-                  "examples": [
-                    "Siyah"
-                  ]
-                },
-                "images": {
-                  "type": "object",
-                  "properties": {
-                    "staticImages": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "minLength": 2,
-                            "maxLength": 254
-                          },
-                          "image": {
-                            "type": "string",
-                            "minLength": 2,
-                            "maxLength": 254
-                          }
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 254,
+                "examples": [
+                  "Siyah"
+                ]
+              },
+              "images": {
+                "type": "object",
+                "properties": {
+                  "staticImages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 254
                         },
-                        "required": [
-                          "name",
-                          "image"
-                        ]
-                      }
-                    },
-                    "dynamicImages": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254,
-                        "examples": [
-                          "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
-                        ]
-                      }
+                        "image": {
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 254
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "image"
+                      ]
                     }
                   },
-                  "required": [
-                    "staticImages",
-                    "dynamicImages"
-                  ]
-                },
-                "price": {
-                  "type": "object",
-                  "properties": {
-                    "currency": {
-                      "type": "string",
-                      "minLength": 2,
-                      "maxLength": 4,
-                      "examples": [
-                        "TRY"
-                      ]
-                    },
-                    "purchase": {
-                      "type": "number",
-                      "minimum": 0,
-                      "examples": [
-                        1000
-                      ]
-                    },
-                    "sell": {
-                      "type": "number",
-                      "exclusiveMinimum": 0,
-                      "examples": [
-                        1500
-                      ]
-                    },
-                    "dealerCode": {
+                  "dynamicImages": {
+                    "type": "array",
+                    "items": {
                       "type": "string",
                       "minLength": 2,
                       "maxLength": 254,
                       "examples": [
-                        "SURAT"
-                      ]
-                    },
-                    "shipping": {
-                      "type": "number",
-                      "minimum": 0,
-                      "examples": [
-                        150
-                      ]
-                    },
-                    "discount": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "examples": [
-                        10
-                      ]
-                    },
-                    "tax": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "examples": [
-                        20
+                        "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
                       ]
                     }
-                  },
-                  "required": [
-                    "currency",
-                    "purchase",
-                    "sell",
-                    "dealerCode",
-                    "shipping",
-                    "discount",
-                    "tax"
-                  ]
+                  }
                 },
-                "stockQuantity": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "examples": [
-                    100
-                  ]
-                },
-                "sku": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "4SN106C"
-                  ]
-                },
-                "gtin": {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "minLength": 2,
-                      "maxLength": 254
-                    },
-                    {
-                      "type": "string",
-                      "enum": [
-                        ""
-                      ]
-                    }
-                  ],
-                  "examples": [
-                    "0123456789012"
-                  ]
-                },
-                "desi": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "maximum": 1000,
-                  "examples": [
-                    1
-                  ]
-                }
+                "required": [
+                  "staticImages",
+                  "dynamicImages"
+                ]
               },
-              "required": [
-                "name",
-                "images",
-                "price",
-                "stockQuantity",
-                "sku",
-                "desi"
-              ]
-            }
+              "price": {
+                "type": "object",
+                "properties": {
+                  "currency": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 4,
+                    "examples": [
+                      "TRY"
+                    ]
+                  },
+                  "purchase": {
+                    "type": "number",
+                    "minimum": 0,
+                    "examples": [
+                      1000
+                    ]
+                  },
+                  "sell": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "examples": [
+                      1500
+                    ]
+                  },
+                  "dealerCode": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "SURAT"
+                    ]
+                  },
+                  "shipping": {
+                    "type": "number",
+                    "minimum": 0,
+                    "examples": [
+                      150
+                    ]
+                  },
+                  "discount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [
+                      10
+                    ]
+                  },
+                  "tax": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [
+                      20
+                    ]
+                  }
+                },
+                "required": [
+                  "currency",
+                  "purchase",
+                  "sell",
+                  "dealerCode",
+                  "shipping",
+                  "discount",
+                  "tax"
+                ]
+              },
+              "stockQuantity": {
+                "type": "integer",
+                "minimum": 0,
+                "examples": [
+                  100
+                ]
+              },
+              "sku": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "4SN106C"
+                ]
+              },
+              "gtin": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      ""
+                    ]
+                  }
+                ],
+                "examples": [
+                  "0123456789012"
+                ]
+              },
+              "desi": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000,
+                "examples": [
+                  1
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "images",
+              "price",
+              "stockQuantity",
+              "sku",
+              "desi"
+            ]
           }
         },
         "required": [
@@ -9272,7 +9269,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9282,7 +9279,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -9322,7 +9319,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9332,7 +9329,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -9372,7 +9369,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9382,7 +9379,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -9422,7 +9419,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9432,7 +9429,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -9472,7 +9469,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9482,7 +9479,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -9522,7 +9519,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9532,7 +9529,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -9572,7 +9569,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -9582,7 +9579,7 @@
             }
           },
           "400": {
-            "description": "Error",
+            "description": "BAD_REQUEST",
             "content": {
               "application/json": {
                 "schema": {
@@ -10144,61 +10141,6 @@
         }
       }
     },
-    "/admin/agreements": {
-      "post": {
-        "tags": [
-          "Agreement"
-        ],
-        "summary": "Add new agreements to the system",
-        "operationId": "addAgreements",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddAgreements"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddAgreements"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddAgreements"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/agreement/{agreementId}": {
       "patch": {
         "tags": [
@@ -10457,61 +10399,6 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/DeleteModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/brands": {
-      "post": {
-        "tags": [
-          "Brand"
-        ],
-        "summary": "Add new brands to the system",
-        "operationId": "addBrands",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddBrands"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddBrands"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddBrands"
               }
             }
           }
@@ -11374,61 +11261,6 @@
             "in": "path"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/categories": {
-      "post": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Add a new categories to system",
-        "operationId": "addCategories",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCategory"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCategory"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCategory"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -15328,61 +15160,6 @@
         }
       }
     },
-    "/admin/posts": {
-      "post": {
-        "tags": [
-          "Post"
-        ],
-        "summary": "Add a new posts to system (JSON or CSV)",
-        "operationId": "addPosts",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addPosts"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addPosts"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addPosts"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/post": {
       "post": {
         "tags": [
@@ -15817,61 +15594,6 @@
             "JWT": []
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/products": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Add a new products to the system",
-        "operationId": "addProducts",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addProducts"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addProducts"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addProducts"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -17802,57 +17524,45 @@
           },
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 10
               ]
             },
-            "required": false,
+            "required": true,
             "name": "length",
             "in": "query"
           },
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 10
               ]
             },
-            "required": false,
+            "required": true,
             "name": "width",
             "in": "query"
           },
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 10
               ]
             },
-            "required": false,
+            "required": true,
             "name": "height",
             "in": "query"
           },
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 1
               ]
             },
-            "required": false,
+            "required": true,
             "name": "weight",
             "in": "query"
           },
@@ -18152,10 +17862,7 @@
         "parameters": [
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 1
               ]
@@ -18166,10 +17873,7 @@
           },
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 25
               ]
@@ -18319,29 +18023,23 @@
         "parameters": [
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 1
               ]
             },
-            "required": false,
+            "required": true,
             "name": "page",
             "in": "query"
           },
           {
             "schema": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "examples": [
                 25
               ]
             },
-            "required": false,
+            "required": true,
             "name": "limit",
             "in": "query"
           },
@@ -19672,61 +19370,6 @@
         }
       }
     },
-    "/admin/translations": {
-      "post": {
-        "tags": [
-          "Translation"
-        ],
-        "summary": "Add a new translations to system (JSON or CSV)",
-        "operationId": "addTranslations",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addTranslations"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addTranslations"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addTranslations"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/translation": {
       "get": {
         "tags": [
@@ -20171,59 +19814,6 @@
             "in": "query"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Add customers to the system (JSON or CSV)",
-        "operationId": "addCustomers",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addCustomers"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addCustomers"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addCustomers"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
