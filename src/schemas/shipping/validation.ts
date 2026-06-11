@@ -132,15 +132,16 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .optional()
       .meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
     productPaymentOnDelivery: z
       .boolean()
       .optional()
       .meta({ examples: [false] }),
-  });
+  }).extend(SHIPPING_TEMPLATE(locale).omit({ name: true }).partial().shape);
 };
-export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') =>
-  ADD_SHIPPING_SHIPMENT(locale).extend({
+export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
+  return z.object({
     providerServiceCode: z
       .string()
       .optional()
@@ -149,7 +150,8 @@ export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') =>
       .string()
       .optional()
       .meta({ examples: [''] }),
-  });
+  }).extend(ADD_SHIPPING_SHIPMENT(locale));
+}
 export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
