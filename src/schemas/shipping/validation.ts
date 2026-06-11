@@ -111,6 +111,31 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['UFUKSARI'] }),
   });
 };
+export const SHIPPING_PACKAGE_DIMENSIONS = (locale: ILocale = 'tr', optional = false) => {
+  const m = messages[locale];
+  const size = (examples: string[]) => {
+    const base = z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) });
+    return (optional ? base.optional() : base).meta({ examples });
+  };
+  const unit = (examples: string[]) =>
+    z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .optional()
+      .meta({ examples });
+  return z.object({
+    length: size(['100']),
+    width: size(['50']),
+    height: size(['2']),
+    weight: size(['5']),
+    distanceUnit: unit(['cm']),
+    massUnit: unit(['kg']),
+  });
+};
 export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z
@@ -140,7 +165,7 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .optional()
         .meta({ examples: [false] }),
     })
-    .extend(SHIPPING_TEMPLATE(locale).omit({ name: true }).partial().shape);
+    .extend(SHIPPING_PACKAGE_DIMENSIONS(locale, true).shape);
 };
 export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   return z
@@ -154,7 +179,7 @@ export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .optional()
         .meta({ examples: [''] }),
     })
-    .extend(ADD_SHIPPING_SHIPMENT(locale));
+    .extend(ADD_SHIPPING_SHIPMENT(locale).shape);
 };
 export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
@@ -248,45 +273,15 @@ export const UPDATE_SHIPPING_PACKAGE = (locale: ILocale = 'tr') => {
 };
 export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    name: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['kilim-olcusu'] }),
-    length: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['100'] }),
-    width: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['50'] }),
-    height: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['2'] }),
-    weight: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['5'] }),
-    distanceUnit: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['cm'] }),
-    massUnit: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['kg'] }),
-  });
+  return z
+    .object({
+      name: z
+        .string()
+        .min(1, { message: m.public_forms_validations_minLength(1) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['kilim-olcusu'] }),
+    })
+    .extend(SHIPPING_PACKAGE_DIMENSIONS(locale).shape);
 };
 export const SHIPPING_PROVIDER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
