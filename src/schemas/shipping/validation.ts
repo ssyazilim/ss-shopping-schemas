@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { ILocale } from '../../locales';
 import * as locales from '../../locales';
+import { GeliverShipmentRecipientAddressSchema } from '../../types';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
@@ -147,11 +148,17 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) })
         .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
-      returnAddressID: z.string().optional(),
+      returnAddressID: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
+      recipientAddress: GeliverShipmentRecipientAddressSchema.optional(),
       recipientAddressID: z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .optional()
         .meta({ examples: ['64c4f70f-83b8-4195-85c3-cb5a16751e3d'] }),
       order: SHIPPING_ORDER_INFO(),
       parcelTemplateID: z
@@ -168,18 +175,17 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
     .extend(SHIPPING_PACKAGE_DIMENSIONS(locale, true).shape);
 };
 export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
-  return z
-    .object({
-      providerServiceCode: z
-        .string()
-        .optional()
-        .meta({ examples: ['GELIVER_STANDART'] }),
-      providerAccountID: z
-        .string()
-        .optional()
-        .meta({ examples: [''] }),
-    })
-    .extend(ADD_SHIPPING_SHIPMENT(locale).shape);
+  return z.object({
+    providerServiceCode: z
+      .string()
+      .optional()
+      .meta({ examples: ['GELIVER_STANDART'] }),
+    providerAccountID: z
+      .string()
+      .optional()
+      .meta({ examples: [''] }),
+    shipment: ADD_SHIPPING_SHIPMENT(locale),
+  });
 };
 export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];

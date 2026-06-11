@@ -245,8 +245,8 @@ export type IGeliverShipmentRecipientAddress = z.infer<
 >;
 export const GeliverShipmentRecipientAddressSchema = z.object({
   name: z.string(),
-  email: z.string(),
-  phone: z.string(),
+  email: z.email(),
+  phone: z.e164(),
   address1: z.string(),
   countryCode: z.string(),
   cityCode: z.string(),
