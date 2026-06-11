@@ -7501,7 +7501,7 @@
               ]
             }
           },
-          "variants": {
+          "variant": {
             "type": "object",
             "properties": {
               "name": {
@@ -7673,7 +7673,7 @@
         },
         "required": [
           "variantsType",
-          "variants"
+          "variant"
         ]
       },
       "addVariantsMulti": {
@@ -8355,6 +8355,54 @@
             "examples": [
               false
             ]
+          },
+          "length": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "100"
+            ]
+          },
+          "width": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "50"
+            ]
+          },
+          "height": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "2"
+            ]
+          },
+          "weight": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "5"
+            ]
+          },
+          "distanceUnit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "cm"
+            ]
+          },
+          "massUnit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "kg"
+            ]
           }
         },
         "required": [
@@ -8362,13 +8410,24 @@
           "items",
           "senderAddressID",
           "recipientAddressID",
-          "order",
-          "parcelTemplateID"
+          "order"
         ]
       },
       "createShippingShipment": {
         "type": "object",
         "properties": {
+          "providerServiceCode": {
+            "type": "string",
+            "examples": [
+              "GELIVER_STANDART"
+            ]
+          },
+          "providerAccountID": {
+            "type": "string",
+            "examples": [
+              ""
+            ]
+          },
           "test": {
             "type": "boolean",
             "examples": [
@@ -8482,16 +8541,52 @@
               false
             ]
           },
-          "providerServiceCode": {
+          "length": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
-              "GELIVER_STANDART"
+              "100"
             ]
           },
-          "providerAccountID": {
+          "width": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
             "examples": [
-              ""
+              "50"
+            ]
+          },
+          "height": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "2"
+            ]
+          },
+          "weight": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "5"
+            ]
+          },
+          "distanceUnit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "cm"
+            ]
+          },
+          "massUnit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 254,
+            "examples": [
+              "kg"
             ]
           }
         },
@@ -8500,8 +8595,7 @@
           "items",
           "senderAddressID",
           "recipientAddressID",
-          "order",
-          "parcelTemplateID"
+          "order"
         ]
       },
       "shippingReturnAddress": {
