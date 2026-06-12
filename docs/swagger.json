@@ -4554,9 +4554,8 @@
             "maxLength": 254,
             "format": "email",
             "examples": [
-              "ayse.sari@mailinator.com"
-            ],
-            "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
+              "no-reply@ssyazilim.com"
+            ]
           },
           "identityNumber": {
             "type": "string",
@@ -5042,9 +5041,8 @@
                 "maxLength": 254,
                 "format": "email",
                 "examples": [
-                  "ayse.sari@mailinator.com"
-                ],
-                "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
+                  "no-reply@ssyazilim.com"
+                ]
               },
               "identityNumber": {
                 "type": "string",
@@ -5570,9 +5568,8 @@
                 "maxLength": 254,
                 "format": "email",
                 "examples": [
-                  "ayse.sari@mailinator.com"
-                ],
-                "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
+                  "no-reply@ssyazilim.com"
+                ]
               },
               "identityNumber": {
                 "type": "string",
@@ -6053,9 +6050,8 @@
                 "maxLength": 254,
                 "format": "email",
                 "examples": [
-                  "ayse.sari@mailinator.com"
-                ],
-                "description": "https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=ayse.sari"
+                  "no-reply@ssyazilim.com"
+                ]
               },
               "identityNumber": {
                 "type": "string",
@@ -8132,7 +8128,7 @@
             "type": "string",
             "format": "email",
             "examples": [
-              "ufuk.sari@mailinator.com"
+              "no-reply@ssyazilim.com"
             ]
           },
           "phone": {
@@ -8296,26 +8292,57 @@
             "type": "object",
             "properties": {
               "name": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Oğuzhan Altay"
+                ]
               },
               "email": {
                 "type": "string",
-                "format": "email"
+                "format": "email",
+                "examples": [
+                  "oguzhanaltay@gmail.com"
+                ]
               },
               "phone": {
-                "type": "string"
+                "type": "string",
+                "examples": [
+                  "+905447929292"
+                ]
               },
               "address1": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Yukarı Dudullu, Kıbrıs Cd., 34775 Ümraniye/İstanbul"
+                ]
               },
               "countryCode": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "TR"
+                ]
               },
               "cityCode": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "34"
+                ]
               },
               "districtName": {
-                "type": "string"
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ümraniye"
+                ]
               }
             },
             "required": [
@@ -8525,26 +8552,57 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "Oğuzhan Altay"
+                    ]
                   },
                   "email": {
                     "type": "string",
-                    "format": "email"
+                    "format": "email",
+                    "examples": [
+                      "oguzhanaltay@gmail.com"
+                    ]
                   },
                   "phone": {
-                    "type": "string"
+                    "type": "string",
+                    "examples": [
+                      "+905447929292"
+                    ]
                   },
                   "address1": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "Yukarı Dudullu, Kıbrıs Cd., 34775 Ümraniye/İstanbul"
+                    ]
                   },
                   "countryCode": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "TR"
+                    ]
                   },
                   "cityCode": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "34"
+                    ]
                   },
                   "districtName": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254,
+                    "examples": [
+                      "Ümraniye"
+                    ]
                   }
                 },
                 "required": [
@@ -10177,18 +10235,22 @@
           {
             "schema": {
               "type": "string",
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           },
           {
             "schema": {
               "type": "string",
-              "default": "Gizlilik politikası"
+              "examples": [
+                "Gizlilik politikası"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "name",
             "in": "path"
           }
@@ -11438,9 +11500,11 @@
                 "en-US",
                 "tr-TR"
               ],
-              "default": "tr-TR"
+              "examples": [
+                "tr-TR"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
@@ -14334,9 +14398,11 @@
                 "en",
                 "tr"
               ],
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
@@ -14407,9 +14473,11 @@
                 "en",
                 "tr"
               ],
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
@@ -14494,9 +14562,11 @@
                 "en",
                 "tr"
               ],
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
@@ -14564,9 +14634,11 @@
                 "en",
                 "tr"
               ],
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
@@ -14642,9 +14714,11 @@
                 "en",
                 "tr"
               ],
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
@@ -14822,9 +14896,11 @@
                 "en",
                 "tr"
               ],
-              "default": "tr"
+              "examples": [
+                "tr"
+              ]
             },
-            "required": false,
+            "required": true,
             "name": "locale",
             "in": "path"
           }
