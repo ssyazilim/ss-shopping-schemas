@@ -189,8 +189,7 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .optional()
-        .meta({ examples: ['64c4f70f-83b8-4195-85c3-cb5a16751e3d'] }),
+        .optional(),
       order: SHIPPING_ORDER_INFO(),
       parcelTemplateID: z
         .string()
@@ -199,6 +198,10 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .optional()
         .meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
       productPaymentOnDelivery: z
+        .boolean()
+        .optional()
+        .meta({ examples: [false] }),
+      hidePackageContentOnTag: z
         .boolean()
         .optional()
         .meta({ examples: [false] }),
@@ -211,10 +214,7 @@ export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
       .string()
       .optional()
       .meta({ examples: ['GELIVER_STANDART'] }),
-    providerAccountID: z
-      .string()
-      .optional()
-      .meta({ examples: [''] }),
+    providerAccountID: z.string().optional(),
     shipment: ADD_SHIPPING_SHIPMENT(locale),
   });
 };

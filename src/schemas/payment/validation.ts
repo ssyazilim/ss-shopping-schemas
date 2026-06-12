@@ -7,10 +7,6 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const ADD_BASKET_ITEM = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    id: z
-      .string()
-      .length(24, { message: m.public_forms_validations_minLength(24) })
-      .meta({ examples: ['674094c121add706a8980815'] }),
     productId: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
