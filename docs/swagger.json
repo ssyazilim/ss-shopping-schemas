@@ -4777,102 +4777,142 @@
         "properties": {
           "method": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "standard"
             ]
           },
-          "orderID": {
+          "statusCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "awaiting"
+            ]
+          },
+          "orderId": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "8959beed-0296-4ca7-8112-563829252bfa"
             ]
           },
           "orderNumber": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "ABC12333322"
             ]
           },
-          "orderOrganizationID": {
+          "orderOrganizationId": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               ""
             ]
           },
-          "offerID": {
+          "offerId": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "8e8cd00c-6fc4-4ae1-af46-013d78309287"
             ]
           },
           "offerProviderCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "GELIVER"
             ]
           },
           "offerTotalAmount": {
             "type": "number",
+            "minimum": 0,
             "examples": [
               0
             ]
           },
           "desi": {
             "type": "number",
+            "minimum": 0,
             "examples": [
               1
             ]
           },
           "barcode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "88242290375"
             ]
           },
-          "trackingID": {
+          "trackingId": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
             ]
           },
           "trackingNumber": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "21634385"
             ]
           },
-          "trackingURL": {
+          "trackingUrl": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
             ]
           },
           "trackingStatusCode": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "PRE_TRANSIT"
             ]
           },
           "trackingStatusUpdate": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "2026-01-30T12:09:13.3327+03:00"
             ]
           },
           "labelFileType": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "PROVIDER_PDF"
             ]
           },
-          "labelURL": {
+          "labelUrl": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
             ]
           },
-          "labelResponsiveURL": {
+          "labelResponsiveUrl": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
               "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
             ]
@@ -4880,6 +4920,7 @@
         },
         "required": [
           "method",
+          "statusCode",
           "offerProviderCode",
           "offerTotalAmount",
           "desi"
@@ -5348,102 +5389,142 @@
             "properties": {
               "method": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "standard"
                 ]
               },
-              "orderID": {
+              "statusCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "awaiting"
+                ]
+              },
+              "orderId": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "8959beed-0296-4ca7-8112-563829252bfa"
                 ]
               },
               "orderNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "ABC12333322"
                 ]
               },
-              "orderOrganizationID": {
+              "orderOrganizationId": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   ""
                 ]
               },
-              "offerID": {
+              "offerId": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "8e8cd00c-6fc4-4ae1-af46-013d78309287"
                 ]
               },
               "offerProviderCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "GELIVER"
                 ]
               },
               "offerTotalAmount": {
                 "type": "number",
+                "minimum": 0,
                 "examples": [
                   0
                 ]
               },
               "desi": {
                 "type": "number",
+                "minimum": 0,
                 "examples": [
                   1
                 ]
               },
               "barcode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "88242290375"
                 ]
               },
-              "trackingID": {
+              "trackingId": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "21634385"
                 ]
               },
-              "trackingURL": {
+              "trackingUrl": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingStatusCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "PRE_TRANSIT"
                 ]
               },
               "trackingStatusUpdate": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "2026-01-30T12:09:13.3327+03:00"
                 ]
               },
               "labelFileType": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "PROVIDER_PDF"
                 ]
               },
-              "labelURL": {
+              "labelUrl": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
                 ]
               },
-              "labelResponsiveURL": {
+              "labelResponsiveUrl": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
                 ]
@@ -5451,6 +5532,7 @@
             },
             "required": [
               "method",
+              "statusCode",
               "offerProviderCode",
               "offerTotalAmount",
               "desi"
@@ -5866,102 +5948,142 @@
             "properties": {
               "method": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "standard"
                 ]
               },
-              "orderID": {
+              "statusCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "awaiting"
+                ]
+              },
+              "orderId": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "8959beed-0296-4ca7-8112-563829252bfa"
                 ]
               },
               "orderNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "ABC12333322"
                 ]
               },
-              "orderOrganizationID": {
+              "orderOrganizationId": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   ""
                 ]
               },
-              "offerID": {
+              "offerId": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "8e8cd00c-6fc4-4ae1-af46-013d78309287"
                 ]
               },
               "offerProviderCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "GELIVER"
                 ]
               },
               "offerTotalAmount": {
                 "type": "number",
+                "minimum": 0,
                 "examples": [
                   0
                 ]
               },
               "desi": {
                 "type": "number",
+                "minimum": 0,
                 "examples": [
                   1
                 ]
               },
               "barcode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "88242290375"
                 ]
               },
-              "trackingID": {
+              "trackingId": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingNumber": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "21634385"
                 ]
               },
-              "trackingURL": {
+              "trackingUrl": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingStatusCode": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "PRE_TRANSIT"
                 ]
               },
               "trackingStatusUpdate": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "2026-01-30T12:09:13.3327+03:00"
                 ]
               },
               "labelFileType": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "PROVIDER_PDF"
                 ]
               },
-              "labelURL": {
+              "labelUrl": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
                 ]
               },
-              "labelResponsiveURL": {
+              "labelResponsiveUrl": {
                 "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
                 "examples": [
                   "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
                 ]
@@ -5969,6 +6091,7 @@
             },
             "required": [
               "method",
+              "statusCode",
               "offerProviderCode",
               "offerTotalAmount",
               "desi"
