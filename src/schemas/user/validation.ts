@@ -32,15 +32,6 @@ export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
 };
 export const ADD_CUSTOMERS = () => z.array(ADD_CUSTOMER());
 export const UPDATE_CUSTOMER = () => ADD_CUSTOMER().partial();
-export const EDIT_USER = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    name: z
-      .string()
-      .optional()
-      .meta({ examples: ['Mahmut'] }),
-  });
-};
 export const DELETE_USER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({

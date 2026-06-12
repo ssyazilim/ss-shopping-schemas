@@ -1,7 +1,7 @@
 import { registry } from '../registry';
-import { EDIT_USER, DELETE_USER, ADD_CUSTOMER, ADD_CUSTOMERS, UPDATE_CUSTOMER } from './validation';
+import { DELETE_USER, ADD_CUSTOMER, ADD_CUSTOMERS, UPDATE_CUSTOMER } from './validation';
 
-export const EditUserSchema = registry.register('editUser', EDIT_USER());
+export const EditUserSchema = registry.register('editUser', UPDATE_CUSTOMER());
 
 export const DeleteUserSchema = registry.register('deleteUser', DELETE_USER());
 
