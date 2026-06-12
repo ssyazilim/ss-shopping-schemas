@@ -68,9 +68,6 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['Belek mahallesi Atatürk caddesi No: 11/1'] }),
     address2: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .or(z.literal(''))
       .optional()
       .meta({ examples: [''] }),
     countryCode: z
@@ -120,13 +117,7 @@ export const SHIPPING_PACKAGE_DIMENSIONS = (locale: ILocale = 'tr', optional = f
       .max(254, { message: m.public_forms_validations_maxLength(254) });
     return (optional ? base.optional() : base).meta({ examples });
   };
-  const unit = (examples: string[]) =>
-    z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples });
+  const unit = (examples: string[]) => z.string().optional().meta({ examples });
   return z.object({
     length: size(['100']),
     width: size(['50']),

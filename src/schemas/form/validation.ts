@@ -11,14 +11,8 @@ export const CONTACT_ME = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
-    lastName: z
-      .string()
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional(),
-    company: z
-      .string()
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional(),
+    lastName: z.string().optional(),
+    company: z.string().optional(),
     email: z.email({ message: m.public_forms_validations_email }),
     phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
     message: z

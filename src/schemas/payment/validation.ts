@@ -172,9 +172,6 @@ export const ADD_BUYER = (locale: ILocale = 'tr') => {
       .meta({ examples: ['07500'] }),
     message: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .or(z.literal(''))
       .optional()
       .meta({ examples: ['Hediye paketi olsun!'] }),
   });
@@ -239,26 +236,18 @@ export const ADD_SHIPMENT = (locale: ILocale = 'tr') => {
       .meta({ examples: ['awaiting'] }),
     orderId: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['8959beed-0296-4ca7-8112-563829252bfa'] }),
     orderNumber: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['ABC12333322'] }),
     orderOrganizationId: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: [''] }),
     offerId: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['8e8cd00c-6fc4-4ae1-af46-013d78309287'] }),
     offerProviderCode: z
@@ -276,58 +265,40 @@ export const ADD_SHIPMENT = (locale: ILocale = 'tr') => {
       .meta({ examples: [1] }),
     barcode: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['88242290375'] }),
     trackingId: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'] }),
     trackingNumber: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['21634385'] }),
     trackingUrl: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'] }),
     trackingStatusCode: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['PRE_TRANSIT'] }),
     trackingStatusUpdate: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['2026-01-30T12:09:13.3327+03:00'] }),
     labelFileType: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['PROVIDER_PDF'] }),
     labelUrl: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({
         examples: ['https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf'],
       }),
     labelResponsiveUrl: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({
         examples: [

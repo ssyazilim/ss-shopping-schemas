@@ -11,26 +11,18 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
     isCompany: z.boolean().meta({ examples: [false] }),
     companyName: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Varyant Et & Balık Restaurant'] }),
     name: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Halil'] }),
     surname: z
       .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Gür'] }),
     taxOffice: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['Üçkapılar'] }),
     taxNumber: z
@@ -39,8 +31,6 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['2780943302'] }),
     identityNumber: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .optional()
       .meta({ examples: ['25054218850'] }),
     phoneNumber: z

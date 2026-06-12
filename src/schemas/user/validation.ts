@@ -37,8 +37,6 @@ export const EDIT_USER = (locale: ILocale = 'tr') => {
   return z.object({
     name: z
       .string()
-      .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
       .optional()
       .meta({ examples: ['Mahmut'] }),
   });
