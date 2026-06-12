@@ -1205,32 +1205,24 @@
           },
           "companyName": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "Varyant Et & Balık Restaurant"
             ]
           },
           "name": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "Halil"
             ]
           },
           "surname": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 254,
             "examples": [
               "Gür"
             ]
           },
           "taxOffice": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "Üçkapılar"
             ]
@@ -1243,8 +1235,6 @@
           },
           "identityNumber": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "25054218850"
             ]
@@ -2028,32 +2018,24 @@
               },
               "companyName": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "Varyant Et & Balık Restaurant"
                 ]
               },
               "name": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "Halil"
                 ]
               },
               "surname": {
                 "type": "string",
-                "minLength": 1,
-                "maxLength": 254,
                 "examples": [
                   "Gür"
                 ]
               },
               "taxOffice": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "Üçkapılar"
                 ]
@@ -2066,8 +2048,6 @@
               },
               "identityNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "25054218850"
                 ]
@@ -2762,32 +2742,24 @@
               },
               "companyName": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "Varyant Et & Balık Restaurant"
                 ]
               },
               "name": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "Halil"
                 ]
               },
               "surname": {
                 "type": "string",
-                "minLength": 1,
-                "maxLength": 254,
                 "examples": [
                   "Gür"
                 ]
               },
               "taxOffice": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "Üçkapılar"
                 ]
@@ -2800,8 +2772,6 @@
               },
               "identityNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "25054218850"
                 ]
@@ -3846,12 +3816,10 @@
             "maxLength": 254
           },
           "lastName": {
-            "type": "string",
-            "maxLength": 254
+            "type": "string"
           },
           "company": {
-            "type": "string",
-            "maxLength": 254
+            "type": "string"
           },
           "email": {
             "type": "string",
@@ -4597,19 +4565,7 @@
             ]
           },
           "message": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ],
+            "type": "string",
             "examples": [
               "Hediye paketi olsun!"
             ]
@@ -4793,32 +4749,24 @@
           },
           "orderId": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "8959beed-0296-4ca7-8112-563829252bfa"
             ]
           },
           "orderNumber": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "ABC12333322"
             ]
           },
           "orderOrganizationId": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               ""
             ]
           },
           "offerId": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "8e8cd00c-6fc4-4ae1-af46-013d78309287"
             ]
@@ -4847,72 +4795,54 @@
           },
           "barcode": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "88242290375"
             ]
           },
           "trackingId": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
             ]
           },
           "trackingNumber": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "21634385"
             ]
           },
           "trackingUrl": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
             ]
           },
           "trackingStatusCode": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "PRE_TRANSIT"
             ]
           },
           "trackingStatusUpdate": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "2026-01-30T12:09:13.3327+03:00"
             ]
           },
           "labelFileType": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "PROVIDER_PDF"
             ]
           },
           "labelUrl": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
             ]
           },
           "labelResponsiveUrl": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
               "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
             ]
@@ -5125,19 +5055,7 @@
                 ]
               },
               "message": {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  {
-                    "type": "string",
-                    "enum": [
-                      ""
-                    ]
-                  }
-                ],
+                "type": "string",
                 "examples": [
                   "Hediye paketi olsun!"
                 ]
@@ -5405,32 +5323,24 @@
               },
               "orderId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "8959beed-0296-4ca7-8112-563829252bfa"
                 ]
               },
               "orderNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "ABC12333322"
                 ]
               },
               "orderOrganizationId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   ""
                 ]
               },
               "offerId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "8e8cd00c-6fc4-4ae1-af46-013d78309287"
                 ]
@@ -5459,72 +5369,54 @@
               },
               "barcode": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "88242290375"
                 ]
               },
               "trackingId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "21634385"
                 ]
               },
               "trackingUrl": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingStatusCode": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "PRE_TRANSIT"
                 ]
               },
               "trackingStatusUpdate": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "2026-01-30T12:09:13.3327+03:00"
                 ]
               },
               "labelFileType": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "PROVIDER_PDF"
                 ]
               },
               "labelUrl": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
                 ]
               },
               "labelResponsiveUrl": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
                 ]
@@ -5684,19 +5576,7 @@
                 ]
               },
               "message": {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  {
-                    "type": "string",
-                    "enum": [
-                      ""
-                    ]
-                  }
-                ],
+                "type": "string",
                 "examples": [
                   "Hediye paketi olsun!"
                 ]
@@ -5964,32 +5844,24 @@
               },
               "orderId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "8959beed-0296-4ca7-8112-563829252bfa"
                 ]
               },
               "orderNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "ABC12333322"
                 ]
               },
               "orderOrganizationId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   ""
                 ]
               },
               "offerId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "8e8cd00c-6fc4-4ae1-af46-013d78309287"
                 ]
@@ -6018,72 +5890,54 @@
               },
               "barcode": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "88242290375"
                 ]
               },
               "trackingId": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "21634385"
                 ]
               },
               "trackingUrl": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
                 ]
               },
               "trackingStatusCode": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "PRE_TRANSIT"
                 ]
               },
               "trackingStatusUpdate": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "2026-01-30T12:09:13.3327+03:00"
                 ]
               },
               "labelFileType": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "PROVIDER_PDF"
                 ]
               },
               "labelUrl": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
                 ]
               },
               "labelResponsiveUrl": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
                 "examples": [
                   "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
                 ]
@@ -6198,19 +6052,7 @@
                 ]
               },
               "message": {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  {
-                    "type": "string",
-                    "enum": [
-                      ""
-                    ]
-                  }
-                ],
+                "type": "string",
                 "examples": [
                   "Hediye paketi olsun!"
                 ]
@@ -6705,19 +6547,7 @@
             ]
           },
           "description": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 65000
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ]
+            "type": "string"
           },
           "images": {
             "type": "object",
@@ -6850,19 +6680,7 @@
             ]
           },
           "gtin": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ],
+            "type": "string",
             "examples": [
               "0123456789012"
             ]
@@ -6936,19 +6754,7 @@
             ]
           },
           "description": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 65000
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ]
+            "type": "string"
           },
           "images": {
             "type": "object",
@@ -7081,19 +6887,7 @@
             ]
           },
           "gtin": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ],
+            "type": "string",
             "examples": [
               "0123456789012"
             ]
@@ -7158,19 +6952,7 @@
               ]
             },
             "description": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 65000
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    ""
-                  ]
-                }
-              ]
+              "type": "string"
             },
             "images": {
               "type": "object",
@@ -7303,19 +7085,7 @@
               ]
             },
             "gtin": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    ""
-                  ]
-                }
-              ],
+              "type": "string",
               "examples": [
                 "0123456789012"
               ]
@@ -8233,19 +8003,7 @@
             ]
           },
           "address2": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ],
+            "type": "string",
             "examples": [
               ""
             ]
@@ -8548,16 +8306,12 @@
           },
           "distanceUnit": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 254,
             "examples": [
               "cm"
             ]
           },
           "massUnit": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 254,
             "examples": [
               "kg"
             ]
@@ -8808,16 +8562,12 @@
               },
               "distanceUnit": {
                 "type": "string",
-                "minLength": 1,
-                "maxLength": 254,
                 "examples": [
                   "cm"
                 ]
               },
               "massUnit": {
                 "type": "string",
-                "minLength": 1,
-                "maxLength": 254,
                 "examples": [
                   "kg"
                 ]
@@ -9057,16 +8807,12 @@
           },
           "distanceUnit": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 254,
             "examples": [
               "cm"
             ]
           },
           "massUnit": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 254,
             "examples": [
               "kg"
             ]
@@ -9313,7 +9059,67 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "Mahmut"
+              "Adem"
+            ]
+          },
+          "surname": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Şenocak"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "examples": [
+              "senocak-a@hotmail.com"
+            ]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "examples": [
+              "905425496142"
+            ]
+          },
+          "password": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 64
+              },
+              {
+                "type": "string",
+                "enum": [
+                  ""
+                ]
+              }
+            ],
+            "examples": [
+              "Passw0rd"
+            ]
+          },
+          "role": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ROLE_ADMIN",
+                "ROLE_USER"
+              ]
+            },
+            "examples": [
+              [
+                "ROLE_USER"
+              ]
+            ]
+          },
+          "isActivated": {
+            "type": "boolean",
+            "examples": [
+              true
             ]
           }
         }
