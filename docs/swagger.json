@@ -4380,14 +4380,6 @@
         "items": {
           "type": "object",
           "properties": {
-            "id": {
-              "type": "string",
-              "minLength": 24,
-              "maxLength": 24,
-              "examples": [
-                "674094c121add706a8980815"
-              ]
-            },
             "productId": {
               "type": "string",
               "minLength": 24,
@@ -4462,7 +4454,6 @@
             }
           },
           "required": [
-            "id",
             "productId",
             "variantId",
             "name",
@@ -5266,14 +5257,6 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string",
-                  "minLength": 24,
-                  "maxLength": 24,
-                  "examples": [
-                    "674094c121add706a8980815"
-                  ]
-                },
                 "productId": {
                   "type": "string",
                   "minLength": 24,
@@ -5348,7 +5331,6 @@
                 }
               },
               "required": [
-                "id",
                 "productId",
                 "variantId",
                 "name",
@@ -5793,14 +5775,6 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string",
-                  "minLength": 24,
-                  "maxLength": 24,
-                  "examples": [
-                    "674094c121add706a8980815"
-                  ]
-                },
                 "productId": {
                   "type": "string",
                   "minLength": 24,
@@ -5875,7 +5849,6 @@
                 }
               },
               "required": [
-                "id",
                 "productId",
                 "variantId",
                 "name",
@@ -6275,14 +6248,6 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string",
-                  "minLength": 24,
-                  "maxLength": 24,
-                  "examples": [
-                    "674094c121add706a8980815"
-                  ]
-                },
                 "productId": {
                   "type": "string",
                   "minLength": 24,
@@ -6357,7 +6322,6 @@
                 }
               },
               "required": [
-                "id",
                 "productId",
                 "variantId",
                 "name",
@@ -8358,10 +8322,7 @@
           "recipientAddressID": {
             "type": "string",
             "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "64c4f70f-83b8-4195-85c3-cb5a16751e3d"
-            ]
+            "maxLength": 254
           },
           "order": {
             "type": "object",
@@ -8419,6 +8380,12 @@
             ]
           },
           "productPaymentOnDelivery": {
+            "type": "boolean",
+            "examples": [
+              false
+            ]
+          },
+          "hidePackageContentOnTag": {
             "type": "boolean",
             "examples": [
               false
@@ -8491,10 +8458,7 @@
             ]
           },
           "providerAccountID": {
-            "type": "string",
-            "examples": [
-              ""
-            ]
+            "type": "string"
           },
           "shipment": {
             "type": "object",
@@ -8618,10 +8582,7 @@
               "recipientAddressID": {
                 "type": "string",
                 "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "64c4f70f-83b8-4195-85c3-cb5a16751e3d"
-                ]
+                "maxLength": 254
               },
               "order": {
                 "type": "object",
@@ -8679,6 +8640,12 @@
                 ]
               },
               "productPaymentOnDelivery": {
+                "type": "boolean",
+                "examples": [
+                  false
+                ]
+              },
+              "hidePackageContentOnTag": {
                 "type": "boolean",
                 "examples": [
                   false
