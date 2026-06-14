@@ -14,7 +14,7 @@ export const ContactBodySchema = z.object({
   lastName: z.string(),
   company: z.string(),
   email: z.string(),
-  phoneNumber: z.string(),
+  phoneNumber: z.e164(),
   message: z.string(),
 });
 
@@ -23,7 +23,7 @@ export const CvBodySchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   email: z.string(),
-  phoneNumber: z.string(),
+  phoneNumber: z.e164(),
   fileName: z.string(),
 });
 
@@ -31,7 +31,7 @@ export type IErrorBody = z.infer<typeof ErrorBodySchema>;
 export const ErrorBodySchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  phoneNumber: z.string(),
+  phoneNumber: z.e164(),
   email: z.string(),
   title: z.string(),
   message: z.string(),

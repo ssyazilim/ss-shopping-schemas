@@ -195,6 +195,8 @@ export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {
       .int({ message: m.public_forms_validations_mustNumberInteger })
       .positive({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [465] }),
+    secure: z.boolean().meta({ examples: [true] }),
+    rejectUnauthorized: z.boolean().meta({ examples: true }),
     mainMail: z
       .email({ message: m.public_forms_validations_email })
       .min(6, { message: m.public_forms_validations_minLength(6) })
@@ -221,7 +223,7 @@ export const ADD_COMPANY_COMMUNICATION_OPTIONS = (locale: ILocale = 'tr') => {
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) }),
-      phoneNumber: z.e164(),
+      phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
     }),
     twilio: z.object({
       accountSid: z
@@ -232,7 +234,7 @@ export const ADD_COMPANY_COMMUNICATION_OPTIONS = (locale: ILocale = 'tr') => {
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) }),
-      phoneNumber: z.e164(),
+      phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
     }),
   });
 };

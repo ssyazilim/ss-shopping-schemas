@@ -136,7 +136,9 @@ export const SHIPPING_RECIPIENT_ADDRESS = (locale: ILocale = 'tr') => {
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Oğuzhan Altay'] }),
     email: z.email().meta({ examples: ['oguzhanaltay@gmail.com'] }),
-    phone: z.e164().meta({ examples: ['+905447929292'] }),
+    phone: z
+      .e164({ message: m.public_forms_validations_phoneNumber })
+      .meta({ examples: ['+905447929292'] }),
     address1: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

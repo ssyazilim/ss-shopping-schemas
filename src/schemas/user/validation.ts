@@ -18,7 +18,9 @@ export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
       .max(254, m.public_forms_validations_maxLength(254))
       .meta({ examples: ['Şenocak'] }),
     email: z.email().meta({ examples: ['senocak-a@hotmail.com'] }),
-    phoneNumber: z.e164().meta({ examples: ['905425496142'] }),
+    phoneNumber: z
+      .e164({ message: m.public_forms_validations_phoneNumber })
+      .meta({ examples: ['905425496142'] }),
     password: z
       .string()
       .min(8, m.public_forms_validations_minLength(8))
@@ -54,7 +56,7 @@ export const CHANGE_PERSONAL_INFO = (locale: ILocale = 'tr') => {
       .min(2, m.public_forms_validations_minLength(2))
       .max(254, m.public_forms_validations_maxLength(254)),
     email: z.email(),
-    phoneNumber: z.e164(),
+    phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
   });
 };
 export const CHANGE_PERSONAL_PASSWORD = (locale: ILocale = 'tr') => {
