@@ -5,6 +5,9 @@ import { IMAGES } from '../product/validation';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
+// partial=true ise alanı .optional() yapar — create şemaları için partial=false (varsayılan) katı kalır.
+const opt = <T extends z.ZodType>(s: T, partial: boolean) => (partial ? s.optional() : s);
+
 export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -98,78 +101,108 @@ export const ADD_COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
       .meta({ examples: ['<p>Halil Gür</p>'] }),
   });
 };
-export const ADD_COMPANY_PROPERTIES_HOME_PAGE = () => {
+export const ADD_COMPANY_PROPERTIES_HOME_PAGE = (partial = false) => {
+  const b = () => opt(z.boolean(), partial);
   return z.object({
-    article: z.boolean(),
-    blog: z.boolean(),
-    event: z.boolean(),
-    news: z.boolean(),
-    category: z.boolean(),
-    categoryPreview: z.boolean(),
-    cta: z.boolean(),
-    feature: z.boolean(),
-    hero: z.boolean(),
-    logoCloud: z.boolean(),
-    newsLetter: z.boolean(),
-    slider: z.boolean(),
-    stat: z.boolean(),
-    teamSection: z.boolean(),
-    testimonial: z.boolean(),
+    article: b(),
+    blog: b(),
+    event: b(),
+    news: b(),
+    category: b(),
+    categoryPreview: b(),
+    cta: b(),
+    feature: b(),
+    hero: b(),
+    logoCloud: b(),
+    newsLetter: b(),
+    slider: b(),
+    stat: b(),
+    teamSection: b(),
+    testimonial: b(),
   });
 };
-export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') => {
+export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (
+  locale: ILocale = 'tr',
+  partial = false,
+) => {
   const m = messages[locale];
   return z.object({
-    cashDiscount: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['0'] }),
-    doorToDoor: z.object({
-      isEnabled: z.boolean(),
-      minValue: z
+    cashDiscount: opt(
+      z
+        .string()
+        .min(1, { message: m.public_forms_validations_minLength(1) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) })
+        .meta({ examples: ['0'] }),
+      partial,
+    ),
+    doorToDoor: opt(
+      z.object({
+        isEnabled: opt(z.boolean(), partial),
+        minValue: opt(
+          z
+            .number({ message: m.public_forms_validations_mustNumber })
+            .int({ message: m.public_forms_validations_mustNumberInteger })
+            .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+          partial,
+        ),
+        maxValue: opt(
+          z
+            .number({ message: m.public_forms_validations_mustNumber })
+            .int({ message: m.public_forms_validations_mustNumberInteger })
+            .positive({ message: m.public_forms_validations_mustNumberPositive }),
+          partial,
+        ),
+      }),
+      partial,
+    ),
+  });
+};
+export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = (
+  locale: ILocale = 'tr',
+  partial = false,
+) => {
+  const m = messages[locale];
+  const b = () => opt(z.boolean(), partial);
+  return z.object({
+    callMe: b(),
+    addFavorites: b(),
+    notifyWhenPriceDrops: b(),
+    notifyWhenProductBackInStock: b(),
+    hideNoStockProducts: b(),
+    hideNoPriceProducts: b(),
+    hideReturnPeriod: b(),
+    selectedProductListing: opt(z.string(), partial),
+    taxAmount: opt(
+      z
         .number({ message: m.public_forms_validations_mustNumber })
         .int({ message: m.public_forms_validations_mustNumberInteger })
         .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
-      maxValue: z
-        .number({ message: m.public_forms_validations_mustNumber })
-        .int({ message: m.public_forms_validations_mustNumberInteger })
-        .positive({ message: m.public_forms_validations_mustNumberPositive }),
-    }),
+      partial,
+    ),
+    showTaxAmount: b(),
   });
 };
-export const ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
+export const ADD_COMPANY_PROPERTIES_ORDER_SETTINGS = (partial = false) => {
+  const b = () => opt(z.boolean(), partial);
   return z.object({
-    callMe: z.boolean(),
-    addFavorites: z.boolean(),
-    notifyWhenPriceDrops: z.boolean(),
-    notifyWhenProductBackInStock: z.boolean(),
-    hideNoStockProducts: z.boolean(),
-    hideNoPriceProducts: z.boolean(),
-    hideReturnPeriod: z.boolean(),
-    selectedProductListing: z.string(),
-    taxAmount: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
-    showTaxAmount: z.boolean(),
+    orderPrefix: b(),
+    orderCanDelete: b(),
   });
 };
-export const ADD_COMPANY_PROPERTIES_ORDER_SETTINGS = () => {
+export const ADD_COMPANY_PROPERTIES = (locale: ILocale = 'tr', partial = false) => {
   return z.object({
-    orderPrefix: z.boolean(),
-    orderCanDelete: z.boolean(),
-  });
-};
-export const ADD_COMPANY_PROPERTIES = (locale: ILocale = 'tr') => {
-  return z.object({
-    paymentMethod: z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
-    liveChatMethod: z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
-    homePage: ADD_COMPANY_PROPERTIES_HOME_PAGE(),
-    paymentSettings: ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS(locale),
-    productSettings: ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS(),
-    orderSettings: ADD_COMPANY_PROPERTIES_ORDER_SETTINGS(),
+    paymentMethod: opt(
+      z.enum(['cash', 'iyzico', 'paytr', 'lemonSqueezy']).meta({ examples: ['cash'] }),
+      partial,
+    ),
+    liveChatMethod: opt(
+      z.enum(['none', 'whatsapp', 'tawkTo', 'crisp']).meta({ examples: ['none'] }),
+      partial,
+    ),
+    homePage: opt(ADD_COMPANY_PROPERTIES_HOME_PAGE(partial), partial),
+    paymentSettings: opt(ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS(locale, partial), partial),
+    productSettings: opt(ADD_COMPANY_PROPERTIES_PRODUCT_SETTINGS(locale, partial), partial),
+    orderSettings: opt(ADD_COMPANY_PROPERTIES_ORDER_SETTINGS(partial), partial),
   });
 };
 export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {
@@ -348,6 +381,18 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
     communicationOptions: ADD_COMPANY_COMMUNICATION_OPTIONS(locale),
     shippingOptions: ADD_COMPANY_SHIPPING_OPTIONS(),
   });
+};
+
+// PATCH /admin/company için: tüm üst-seviye alanlar opsiyonel, `properties` ise derin-partial.
+// .partial() KULLANILMIYOR (export edilen şemada TS2742 riskine girmemek için) — shape döngüsü + .optional().
+export const UPDATE_COMPANY = (locale: ILocale = 'tr') => {
+  const shape = ADD_COMPANY(locale).shape as Record<string, z.ZodType>;
+  const partialShape: Record<string, z.ZodType> = {};
+  for (const [key, field] of Object.entries(shape)) {
+    partialShape[key] = field instanceof z.ZodOptional ? field : field.optional();
+  }
+  partialShape.properties = ADD_COMPANY_PROPERTIES(locale, true).optional();
+  return z.object(partialShape);
 };
 
 export const ADD_SOCIAL_MEDIA_LINKS = (locale: ILocale = 'tr') => {

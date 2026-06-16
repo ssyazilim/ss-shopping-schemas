@@ -1,6 +1,7 @@
 import { registry } from '../registry';
 import {
   ADD_COMPANY,
+  UPDATE_COMPANY,
   ADD_COMPANY_ADDRESS,
   ADD_COMPANY_SOCIAL_MEDIA,
   ADD_COMPANY_PAYMENT,
@@ -46,7 +47,7 @@ const CompanyShippingOptionsSchema = registry.register(
 );
 
 export const AddCompanySchema = registry.register('AddCompany', ADD_COMPANY());
-export const UpdateCompanySchema = registry.register('UpdateCompany', AddCompanySchema.partial());
+export const UpdateCompanySchema = registry.register('UpdateCompany', UPDATE_COMPANY());
 
 void CompanyAddressSchema;
 void CompanySocialMediaSchema;
