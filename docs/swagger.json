@@ -1765,6 +1765,16 @@
               465
             ]
           },
+          "secure": {
+            "type": "boolean",
+            "examples": [
+              true
+            ]
+          },
+          "rejectUnauthorized": {
+            "type": "boolean",
+            "examples": true
+          },
           "mainMail": {
             "type": "string",
             "minLength": 6,
@@ -1797,6 +1807,8 @@
           "password",
           "host",
           "port",
+          "secure",
+          "rejectUnauthorized",
           "mainMail",
           "secondMail",
           "from"
@@ -2416,6 +2428,16 @@
                   465
                 ]
               },
+              "secure": {
+                "type": "boolean",
+                "examples": [
+                  true
+                ]
+              },
+              "rejectUnauthorized": {
+                "type": "boolean",
+                "examples": true
+              },
               "mainMail": {
                 "type": "string",
                 "minLength": 6,
@@ -2448,6 +2470,8 @@
               "password",
               "host",
               "port",
+              "secure",
+              "rejectUnauthorized",
               "mainMail",
               "secondMail",
               "from"
@@ -3140,6 +3164,16 @@
                   465
                 ]
               },
+              "secure": {
+                "type": "boolean",
+                "examples": [
+                  true
+                ]
+              },
+              "rejectUnauthorized": {
+                "type": "boolean",
+                "examples": true
+              },
               "mainMail": {
                 "type": "string",
                 "minLength": 6,
@@ -3172,6 +3206,8 @@
               "password",
               "host",
               "port",
+              "secure",
+              "rejectUnauthorized",
               "mainMail",
               "secondMail",
               "from"
