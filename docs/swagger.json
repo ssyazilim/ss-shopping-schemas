@@ -3000,24 +3000,7 @@
                   "testimonial": {
                     "type": "boolean"
                   }
-                },
-                "required": [
-                  "article",
-                  "blog",
-                  "event",
-                  "news",
-                  "category",
-                  "categoryPreview",
-                  "cta",
-                  "feature",
-                  "hero",
-                  "logoCloud",
-                  "newsLetter",
-                  "slider",
-                  "stat",
-                  "teamSection",
-                  "testimonial"
-                ]
+                }
               },
               "paymentSettings": {
                 "type": "object",
@@ -3044,18 +3027,9 @@
                         "type": "integer",
                         "exclusiveMinimum": 0
                       }
-                    },
-                    "required": [
-                      "isEnabled",
-                      "minValue",
-                      "maxValue"
-                    ]
+                    }
                   }
-                },
-                "required": [
-                  "cashDiscount",
-                  "doorToDoor"
-                ]
+                }
               },
               "productSettings": {
                 "type": "object",
@@ -3091,19 +3065,7 @@
                   "showTaxAmount": {
                     "type": "boolean"
                   }
-                },
-                "required": [
-                  "callMe",
-                  "addFavorites",
-                  "notifyWhenPriceDrops",
-                  "notifyWhenProductBackInStock",
-                  "hideNoStockProducts",
-                  "hideNoPriceProducts",
-                  "hideReturnPeriod",
-                  "selectedProductListing",
-                  "taxAmount",
-                  "showTaxAmount"
-                ]
+                }
               },
               "orderSettings": {
                 "type": "object",
@@ -3114,21 +3076,9 @@
                   "orderCanDelete": {
                     "type": "boolean"
                   }
-                },
-                "required": [
-                  "orderPrefix",
-                  "orderCanDelete"
-                ]
+                }
               }
-            },
-            "required": [
-              "paymentMethod",
-              "liveChatMethod",
-              "homePage",
-              "paymentSettings",
-              "productSettings",
-              "orderSettings"
-            ]
+            }
           },
           "mailOptions": {
             "type": "object",
