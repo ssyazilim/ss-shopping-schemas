@@ -2690,10 +2690,7 @@
           },
           "baseUrl": {
             "type": "string",
-            "format": "uri",
-            "examples": [
-              "https://opiaheart.com"
-            ]
+            "format": "uri"
           },
           "logo": {
             "type": "array",
@@ -2744,16 +2741,10 @@
             "maxLength": 1000
           },
           "timeZone": {
-            "type": "string",
-            "examples": [
-              "Ankara"
-            ]
+            "type": "string"
           },
           "currency": {
-            "type": "string",
-            "examples": [
-              "TRY"
-            ]
+            "type": "string"
           },
           "address": {
             "type": "object",
@@ -2765,40 +2756,22 @@
                 ]
               },
               "companyName": {
-                "type": "string",
-                "examples": [
-                  "Varyant Et & Balık Restaurant"
-                ]
+                "type": "string"
               },
               "name": {
-                "type": "string",
-                "examples": [
-                  "Halil"
-                ]
+                "type": "string"
               },
               "surname": {
-                "type": "string",
-                "examples": [
-                  "Gür"
-                ]
+                "type": "string"
               },
               "taxOffice": {
-                "type": "string",
-                "examples": [
-                  "Üçkapılar"
-                ]
+                "type": "string"
               },
               "taxNumber": {
-                "type": "string",
-                "examples": [
-                  "2780943302"
-                ]
+                "type": "string"
               },
               "identityNumber": {
-                "type": "string",
-                "examples": [
-                  "25054218850"
-                ]
+                "type": "string"
               },
               "phoneNumber": {
                 "type": "string",
@@ -2842,10 +2815,7 @@
               "zipCode": {
                 "type": "string",
                 "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "07030"
-                ]
+                "maxLength": 254
               },
               "line": {
                 "type": "string",
@@ -2855,16 +2825,7 @@
                   "Bahçelievler Mahallesi Atatürk Parkı 25/21"
                 ]
               }
-            },
-            "required": [
-              "isCompany",
-              "phoneNumber",
-              "email",
-              "country",
-              "city",
-              "district",
-              "line"
-            ]
+            }
           },
           "socialMedia": {
             "type": "array",
@@ -3150,18 +3111,7 @@
                   "SS-YAZILIM-✉-<no-reply@ssyazilim.com>"
                 ]
               }
-            },
-            "required": [
-              "user",
-              "password",
-              "host",
-              "port",
-              "secure",
-              "rejectUnauthorized",
-              "mainMail",
-              "secondMail",
-              "from"
-            ]
+            }
           },
           "communicationOptions": {
             "type": "object",
@@ -3188,11 +3138,7 @@
                   "phoneNumber": {
                     "type": "string"
                   }
-                },
-                "required": [
-                  "sender",
-                  "phoneNumber"
-                ]
+                }
               },
               "twilio": {
                 "type": "object",
@@ -3210,19 +3156,9 @@
                   "phoneNumber": {
                     "type": "string"
                   }
-                },
-                "required": [
-                  "accountSid",
-                  "authToken",
-                  "phoneNumber"
-                ]
+                }
               }
-            },
-            "required": [
-              "method",
-              "netgsm",
-              "twilio"
-            ]
+            }
           },
           "shippingOptions": {
             "type": "object",
@@ -3251,11 +3187,7 @@
                         "minLength": 2,
                         "maxLength": 254
                       }
-                    },
-                    "required": [
-                      "name",
-                      "code"
-                    ]
+                    }
                   },
                   "standard": {
                     "type": "object",
@@ -3288,15 +3220,7 @@
                         "minLength": 2,
                         "maxLength": 254
                       }
-                    },
-                    "required": [
-                      "name",
-                      "code",
-                      "price",
-                      "priceLocale",
-                      "currency",
-                      "currencyLocale"
-                    ]
+                    }
                   },
                   "geliver": {
                     "type": "object",
@@ -3304,10 +3228,7 @@
                       "isTest": {
                         "type": "boolean"
                       }
-                    },
-                    "required": [
-                      "isTest"
-                    ]
+                    }
                   }
                 }
               },
@@ -3335,21 +3256,9 @@
                     "minLength": 2,
                     "maxLength": 254
                   }
-                },
-                "required": [
-                  "isEnabled",
-                  "price",
-                  "priceLocale",
-                  "currency",
-                  "currencyLocale"
-                ]
+                }
               }
-            },
-            "required": [
-              "method",
-              "shipment",
-              "free"
-            ]
+            }
           }
         }
       },
