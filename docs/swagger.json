@@ -1429,11 +1429,10 @@
         "type": "object",
         "properties": {
           "cashDiscount": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 254,
+            "type": "integer",
+            "minimum": 0,
             "examples": [
-              "0"
+              0
             ]
           },
           "doorToDoor": {
@@ -1624,11 +1623,10 @@
             "type": "object",
             "properties": {
               "cashDiscount": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254,
+                "type": "integer",
+                "minimum": 0,
                 "examples": [
-                  "0"
+                  0
                 ]
               },
               "doorToDoor": {
@@ -2287,11 +2285,10 @@
                 "type": "object",
                 "properties": {
                   "cashDiscount": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 254,
+                    "type": "integer",
+                    "minimum": 0,
                     "examples": [
-                      "0"
+                      0
                     ]
                   },
                   "doorToDoor": {
@@ -2967,11 +2964,10 @@
                 "type": "object",
                 "properties": {
                   "cashDiscount": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 254,
+                    "type": "integer",
+                    "minimum": 0,
                     "examples": [
-                      "0"
+                      0
                     ]
                   },
                   "doorToDoor": {
@@ -8852,16 +8848,37 @@
       "translation": {
         "type": "object",
         "properties": {
-          "locale": {
+          "code": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
             "examples": [
-              "en"
+              "tr"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "tr-TR"
             ]
           },
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "Test"
+              "Türkçe"
+            ]
+          },
+          "file": {
+            "type": "string",
+            "enum": [
+              "index.ts"
+            ],
+            "examples": [
+              "index.ts"
             ]
           },
           "translations": {
@@ -8877,8 +8894,10 @@
           }
         },
         "required": [
-          "locale",
+          "code",
+          "language",
           "name",
+          "file",
           "translations"
         ]
       },
@@ -8887,16 +8906,37 @@
         "items": {
           "type": "object",
           "properties": {
-            "locale": {
+            "code": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
               "examples": [
-                "en"
+                "tr"
+              ]
+            },
+            "language": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
+              "examples": [
+                "tr-TR"
               ]
             },
             "name": {
               "type": "string",
+              "minLength": 2,
+              "maxLength": 254,
               "examples": [
-                "Test"
+                "Türkçe"
+              ]
+            },
+            "file": {
+              "type": "string",
+              "enum": [
+                "index.ts"
+              ],
+              "examples": [
+                "index.ts"
               ]
             },
             "translations": {
@@ -8912,8 +8952,10 @@
             }
           },
           "required": [
-            "locale",
+            "code",
+            "language",
             "name",
+            "file",
             "translations"
           ]
         }
@@ -8921,16 +8963,37 @@
       "updateTranslation": {
         "type": "object",
         "properties": {
-          "locale": {
+          "code": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
             "examples": [
-              "en"
+              "tr"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "tr-TR"
             ]
           },
           "name": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "Test"
+              "Türkçe"
+            ]
+          },
+          "file": {
+            "type": "string",
+            "enum": [
+              "index.ts"
+            ],
+            "examples": [
+              "index.ts"
             ]
           },
           "translations": {
