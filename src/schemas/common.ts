@@ -72,3 +72,26 @@ export function buildRequestBody(schema: z.ZodType) {
     },
   };
 }
+
+// Bir alanı (ve iç içe objelerini) opsiyonel yapar; kendisini sarmaz — onu çağıran .optional() ekler.
+function toDeepPartial(field: z.ZodType): z.ZodType {
+  if (field instanceof z.ZodOptional) return toDeepPartial(field.unwrap() as z.ZodType);
+  if (field instanceof z.ZodObject) return deepPartial(field);
+  return field;
+}
+
+/**
+ * Bir ZodObject'in TÜM alanlarını (iç içe objeler dahil, derinlemesine) opsiyonel yapar.
+ * PATCH/partial update şemaları için: create şemasını verirsin, hepsi opsiyonel döner.
+ * Zod 4'te .deepPartial() yok; .partial() ise yüzeysel (iç objeleri katı bırakır) + export
+ * edilen şemalarda TS2742 riski taşır. Bu yüzden recursive olarak elle kuruyoruz.
+ * Sonuç ZodObject olduğu için kullanırken .strict() zincirleyebilirsin.
+ */
+export function deepPartial(schema: z.ZodObject): z.ZodObject {
+  const shape = schema.shape as Record<string, z.ZodType>;
+  const out: Record<string, z.ZodType> = {};
+  for (const [key, field] of Object.entries(shape)) {
+    out[key] = toDeepPartial(field).optional();
+  }
+  return z.object(out);
+}
