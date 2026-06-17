@@ -124,10 +124,10 @@ export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') 
   const m = messages[locale];
   return z.object({
     cashDiscount: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['0'] }),
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [0] }),
     doorToDoor: z.object({
       isEnabled: z.boolean(),
       minValue: z

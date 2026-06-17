@@ -1,17 +1,10 @@
 import { z } from 'zod';
-import { TRANSLATION } from '../schemas/translation/validation';
+import { ADD_TRANSLATION } from '../schemas/translation/validation';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 
 export type ITranslation = z.infer<typeof TranslationSchema>;
-export const TranslationSchema = TRANSLATION()
-  .omit({ locale: true })
-  .extend({
-    code: z.string(),
-    language: z.string(),
-    file: z.string(),
-  })
-  .extend(MongoSchema.shape);
+export const TranslationSchema = ADD_TRANSLATION().extend(MongoSchema.shape);
 
 export const DEFAULT_SYSTEM_LOCALES = [
   { code: 'tr', language: 'tr-TR', name: 'Türkçe' },

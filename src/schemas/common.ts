@@ -73,7 +73,7 @@ export function buildRequestBody(schema: z.ZodType) {
   };
 }
 
-// Bir alanı (ve iç içe objelerini) opsiyonel yapar; kendisini sarmaz — onu çağıran .optional() ekler.
+// Makes a field (and its nested objects) optional; It doesn't wrap itself — the caller adds .optional().
 function toDeepPartial(field: z.ZodType): z.ZodType {
   if (field instanceof z.ZodOptional) return toDeepPartial(field.unwrap() as z.ZodType);
   if (field instanceof z.ZodObject) return deepPartial(field);
@@ -81,11 +81,11 @@ function toDeepPartial(field: z.ZodType): z.ZodType {
 }
 
 /**
- * Bir ZodObject'in TÜM alanlarını (iç içe objeler dahil, derinlemesine) opsiyonel yapar.
- * PATCH/partial update şemaları için: create şemasını verirsin, hepsi opsiyonel döner.
- * Zod 4'te .deepPartial() yok; .partial() ise yüzeysel (iç objeleri katı bırakır) + export
- * edilen şemalarda TS2742 riski taşır. Bu yüzden recursive olarak elle kuruyoruz.
- * Sonuç ZodObject olduğu için kullanırken .strict() zincirleyebilirsin.
+ * Makes ALL fields of a ZodObject (in depth, including nested objects) optional.
+ * For PATCH/partial update schemes: You provide the create scheme, all are optional.
+ * No .deepPartial() in Zod 4; .partial() is superficial (leaves internal objects solid) + export
+ * There is a risk of TS2742 in the given schemes. That's why we install it manually, recursively.
+ * Since the result is ZodObject, you can chain .strict() when using it.
  */
 export function deepPartial(schema: z.ZodObject): z.ZodObject {
   const shape = schema.shape as Record<string, z.ZodType>;
