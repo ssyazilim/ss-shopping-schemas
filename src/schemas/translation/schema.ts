@@ -1,7 +1,7 @@
 import { registry } from '../registry';
-import { TRANSLATION, ADD_TRANSLATIONS, UPDATE_TRANSLATION } from './validation';
+import { ADD_TRANSLATION, ADD_TRANSLATIONS, UPDATE_TRANSLATION } from './validation';
 
-export const TranslationSchema = registry.register('translation', TRANSLATION());
+export const TranslationSchema = registry.register('translation', ADD_TRANSLATION());
 
 export const AddTranslationsSchema = registry.register('addTranslations', ADD_TRANSLATIONS());
 
