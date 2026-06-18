@@ -571,32 +571,29 @@
         "properties": {
           "locale": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
+            "minLength": 2,
+            "maxLength": 2,
             "examples": [
               "tr"
             ]
           },
           "name": {
             "type": "string",
-            "minLength": 6,
+            "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "test"
+              "Gizlilik politikası"
             ]
           },
           "content": {
-            "type": "string",
-            "minLength": 6,
             "examples": [
-              "<h1>Gizlilik Politikasi</h1>"
+              "<h1>Gizlilik Politikasi</h1><p>...</p>"
             ]
           }
         },
         "required": [
           "locale",
-          "name",
-          "content"
+          "name"
         ]
       },
       "UpdateAgreement": {
@@ -604,25 +601,23 @@
         "properties": {
           "locale": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
+            "minLength": 2,
+            "maxLength": 2,
             "examples": [
               "tr"
             ]
           },
           "name": {
             "type": "string",
-            "minLength": 6,
+            "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "test"
+              "Gizlilik politikası"
             ]
           },
           "content": {
-            "type": "string",
-            "minLength": 6,
             "examples": [
-              "<h1>Gizlilik Politikasi</h1>"
+              "<h1>Gizlilik Politikasi</h1><p>...</p>"
             ]
           }
         }
@@ -634,32 +629,29 @@
           "properties": {
             "locale": {
               "type": "string",
-              "minLength": 6,
-              "maxLength": 254,
+              "minLength": 2,
+              "maxLength": 2,
               "examples": [
                 "tr"
               ]
             },
             "name": {
               "type": "string",
-              "minLength": 6,
+              "minLength": 2,
               "maxLength": 254,
               "examples": [
-                "test"
+                "Gizlilik politikası"
               ]
             },
             "content": {
-              "type": "string",
-              "minLength": 6,
               "examples": [
-                "<h1>Gizlilik Politikasi</h1>"
+                "<h1>Gizlilik Politikasi</h1><p>...</p>"
               ]
             }
           },
           "required": [
             "locale",
-            "name",
-            "content"
+            "name"
           ]
         }
       },
@@ -1345,17 +1337,13 @@
             ]
           },
           "content": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 65000,
             "examples": [
               "<p>Halil Gür</p>"
             ]
           }
         },
         "required": [
-          "status",
-          "content"
+          "status"
         ]
       },
       "CompanyPropertiesHomePage": {
@@ -2173,17 +2161,13 @@
                   ]
                 },
                 "content": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 65000,
                   "examples": [
                     "<p>Halil Gür</p>"
                   ]
                 }
               },
               "required": [
-                "status",
-                "content"
+                "status"
               ]
             }
           },
@@ -2869,17 +2853,13 @@
                   ]
                 },
                 "content": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 65000,
                   "examples": [
                     "<p>Halil Gür</p>"
                   ]
                 }
               },
               "required": [
-                "status",
-                "content"
+                "status"
               ]
             }
           },
@@ -6319,9 +6299,6 @@
             ]
           },
           "content": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 65000,
             "examples": [
               "<p><b>Merhaba</b> bu bir test yazisidir.</p>"
             ]
@@ -6331,8 +6308,7 @@
           "type",
           "date",
           "timeZone",
-          "name",
-          "content"
+          "name"
         ]
       },
       "addPosts": {
@@ -6379,9 +6355,6 @@
               ]
             },
             "content": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 65000,
               "examples": [
                 "<p><b>Merhaba</b> bu bir test yazisidir.</p>"
               ]
@@ -6391,8 +6364,7 @@
             "type",
             "date",
             "timeZone",
-            "name",
-            "content"
+            "name"
           ]
         }
       },
