@@ -50,5 +50,8 @@ export const PostTypeSchema = z.object({
   translation: z.string(),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_POST: IPost = getDefaultsForSchema(PostSchema) as IPost;
 export const DEFAULT_POST_COUNTS: IPostCounts = getDefaultsForSchema(PostCountsSchema);

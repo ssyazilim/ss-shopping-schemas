@@ -30,11 +30,7 @@ export const ADD_POST = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Ticaret ve E-ticaret Kavramları'] }),
-    content: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(65000, { message: m.public_forms_validations_maxLength(65000) })
-      .meta({ examples: ['<p><b>Merhaba</b> bu bir test yazisidir.</p>'] }),
+    content: z.any().meta({ examples: ['<p><b>Merhaba</b> bu bir test yazisidir.</p>'] }),
   });
 };
 export const ADD_POSTS = () => z.array(ADD_POST());

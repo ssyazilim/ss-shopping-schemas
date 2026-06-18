@@ -36,6 +36,9 @@ export const ExternalGeliverSchema = EXTERNAL_GELIVER;
 export type IExternal = z.infer<typeof ExternalSchema>;
 export const ExternalSchema = ADD_EXTERNAL.extend(MongoSchema.shape);
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_IYZICO: IExternalIyzico = getDefaultsForSchema(ExternalIyzicoSchema);
 export const DEFAULT_GOOGLE: IExternalGoogle = getDefaultsForSchema(ExternalGoogleSchema);
 export const DEFAULT_FACEBOOK: IExternalFacebook = getDefaultsForSchema(ExternalFacebookSchema);

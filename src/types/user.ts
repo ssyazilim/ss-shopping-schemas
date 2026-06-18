@@ -36,4 +36,7 @@ export const UserTokenSchema = z.object({
   exp: z.number(),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_USER: IUser = getDefaultsForSchema(UserSchema);

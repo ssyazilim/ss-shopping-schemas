@@ -9,18 +9,14 @@ export const ADD_AGREEMENT = (locale: ILocale = 'tr') => {
   return z.object({
     locale: z
       .string()
-      .min(6, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .length(2, { message: m.public_forms_validations_minLength(2) })
       .meta({ examples: ['tr'] }),
     name: z
       .string()
-      .min(6, { message: m.public_forms_validations_minLength(2) })
+      .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['test'] }),
-    content: z
-      .string()
-      .min(6, { message: m.public_forms_validations_required })
-      .meta({ examples: ['<h1>Gizlilik Politikasi</h1>'] }),
+      .meta({ examples: ['Gizlilik politikası'] }),
+    content: z.any().meta({ examples: ['<h1>Gizlilik Politikasi</h1><p>...</p>'] }),
   });
 };
 

@@ -110,11 +110,13 @@ export const ImageDataSchema = z.object({
   route: z.string(),
 });
 
-// IJSConfettiApi — constructor tipi Zod'da temsil edilemez, TypeScript tipi olarak kalır
 export interface IJSConfettiApi {
   JSConfetti: { new (): { addConfetti: (options?: { emojis: string[] }) => void } };
 }
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_TABLE_INDEX: ITableIndex = {
   key: 0,
   checkbox: false,

@@ -120,6 +120,9 @@ export const BestProductsSchema = z.object({
   order: z.object({ totalCount: z.number() }),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_IMAGE: IImage = getDefaultsForSchema(ImageSchema);
 export const DEFAULT_PRICE: IPrice = getDefaultsForSchema(PriceSchema);
 export const DEFAULT_PRODUCT: IProduct = getDefaultsForSchema(ProductSchema);

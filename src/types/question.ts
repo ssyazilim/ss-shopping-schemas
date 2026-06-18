@@ -16,4 +16,7 @@ export const QuestionSchema = UPDATE_QUESTION()
   })
   .extend(MongoSchema.shape);
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_QUESTION = getDefaultsForSchema(QuestionSchema);

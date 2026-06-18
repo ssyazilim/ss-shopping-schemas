@@ -52,3 +52,19 @@ export const UpdatedDataSchema = z.object({
   name: z.string(),
   country: z.string(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const i18nLocalesForWeb = [
+  { _id: '0', code: 'tr', language: 'tr-TR', name: 'Türkçe', file: 'index.ts', dir: 'ltr' },
+  { _id: '1', code: 'en', language: 'en-US', name: 'English', file: 'index.ts', dir: 'ltr' },
+  { _id: '2', code: 'ru', language: 'ru-RU', name: 'Русский', file: 'index.ts', dir: 'ltr' },
+  { _id: '3', code: 'sa', language: 'ar-SA', name: 'العربية', file: 'index.ts', dir: 'rtl' },
+  { _id: '4', code: 'fa', language: 'fa-FA', name: 'فارسی', file: 'index.ts', dir: 'rtl' },
+] as const;
+
+export const i18nLocalesForAdmin = [
+  { _id: '0', code: 'tr', language: 'tr-TR', name: 'Türkçe', file: 'index.ts', dir: 'ltr' },
+  { _id: '1', code: 'en', language: 'en-US', name: 'English', file: 'index.ts', dir: 'ltr' },
+] as const;

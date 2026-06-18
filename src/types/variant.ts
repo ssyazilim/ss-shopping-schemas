@@ -54,4 +54,7 @@ export const InputValueSchema = z.object({
   value: z.enum(['stockQuantity', 'sku', 'desi']),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_VARIANT: IVariant = getDefaultsForSchema(VariantSchema);

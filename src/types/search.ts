@@ -23,4 +23,7 @@ export const ActiveFilterSchema = z.object({
   value: z.string(),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_SEARCH_STATE: ISearchState = getDefaultsForSchema(SearchStateSchema);

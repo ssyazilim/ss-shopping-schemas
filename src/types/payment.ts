@@ -47,6 +47,9 @@ export const PaymentSchema = SAVE_PAYMENT()
   })
   .extend(MongoSchema.shape);
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_PAYMENT_BUYER: IPayment['buyer'] = getDefaultsForSchema(ADD_BUYER());
 export const DEFAULT_PAYMENT_ADDRESS: IPayment['shippingAddress'] =
   getDefaultsForSchema(ADD_SHIPPING_ADDRESS());

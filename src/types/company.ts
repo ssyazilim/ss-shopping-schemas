@@ -61,4 +61,7 @@ export const SiteDataSchema = z.object({
   description: z.string(),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_COMPANY: ICompany = getDefaultsForSchema(CompanySchema);

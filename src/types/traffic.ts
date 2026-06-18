@@ -72,4 +72,7 @@ export const VisitorStatisticsSchema = z.object({
   topDevices: z.array(TopItemSchema),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_IP_ADDRESS: IIpDetails = getDefaultsForSchema(IpDetailsSchema);

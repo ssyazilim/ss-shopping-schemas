@@ -16,4 +16,7 @@ export const ReviewSchema = ADD_REVIEW()
   })
   .extend(MongoSchema.shape);
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_REVIEW = getDefaultsForSchema(ReviewSchema);

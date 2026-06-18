@@ -94,11 +94,7 @@ export const ADD_COMPANY_PAYMENT = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ["{'_id':'0','name':'IBAN'}"] }),
-    content: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(65000, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['<p>Halil Gür</p>'] }),
+    content: z.any().meta({ examples: ['<p>Halil Gür</p>'] }),
   });
 };
 export const ADD_COMPANY_PROPERTIES_HOME_PAGE = () => {

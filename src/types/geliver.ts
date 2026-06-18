@@ -604,6 +604,9 @@ export const GeliverBuyTicketSchema = z.object({
   shipment: GeliverTicketSchema,
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_GELIVER_ADDRESS: IGeliverAddressAddResponse = getDefaultsForSchema(
   GeliverAddressAddResponseSchema,
 );

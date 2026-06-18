@@ -6,6 +6,9 @@ import { MongoSchema } from './common';
 export type ITranslation = z.infer<typeof TranslationSchema>;
 export const TranslationSchema = ADD_TRANSLATION().extend(MongoSchema.shape);
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_SYSTEM_LOCALES = [
   { code: 'tr', language: 'tr-TR', name: 'Türkçe' },
   { code: 'en', language: 'en-US', name: 'English' },

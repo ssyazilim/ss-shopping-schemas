@@ -39,4 +39,7 @@ export const CategoryMenuSchema: z.ZodType<ICategoryMenu> = CategoryMenuBaseSche
   subCategories: z.lazy(() => z.array(CategoryMenuSchema)),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_CATEGORY: ICategory = getDefaultsForSchema(CategorySchema);

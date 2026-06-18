@@ -309,6 +309,9 @@ export const IyzicoHTML3DSchema = z.object({
   signature: z.string(),
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
 export const DEFAULT_PAYMENT_RESULT_IYZICO: IPaymentResultForIyzico = getDefaultsForSchema(
   PaymentResultForIyzicoSchema,
 );
