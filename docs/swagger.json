@@ -972,15 +972,15 @@
               "Kıyafet ve Aksesuarlar"
             ]
           },
-          "parent": {
+          "parentId": {
             "type": [
               "string",
               "null"
             ],
-            "minLength": 2,
-            "maxLength": 254,
+            "minLength": 24,
+            "maxLength": 24,
             "examples": [
-              "Tekstil"
+              "66a1bcf0ff9245b28d054001"
             ]
           },
           "categoryI10n": {
@@ -1034,7 +1034,7 @@
         },
         "required": [
           "name",
-          "parent",
+          "parentId",
           "images"
         ]
       },
@@ -1049,15 +1049,15 @@
               "Kıyafet ve Aksesuarlar"
             ]
           },
-          "parent": {
+          "parentId": {
             "type": [
               "string",
               "null"
             ],
-            "minLength": 2,
-            "maxLength": 254,
+            "minLength": 24,
+            "maxLength": 24,
             "examples": [
-              "Tekstil"
+              "66a1bcf0ff9245b28d054001"
             ]
           },
           "categoryI10n": {
@@ -1123,15 +1123,15 @@
                 "Kıyafet ve Aksesuarlar"
               ]
             },
-            "parent": {
+            "parentId": {
               "type": [
                 "string",
                 "null"
               ],
-              "minLength": 2,
-              "maxLength": 254,
+              "minLength": 24,
+              "maxLength": 24,
               "examples": [
-                "Tekstil"
+                "66a1bcf0ff9245b28d054001"
               ]
             },
             "categoryI10n": {
@@ -1185,7 +1185,7 @@
           },
           "required": [
             "name",
-            "parent",
+            "parentId",
             "images"
           ]
         }
@@ -1201,7 +1201,7 @@
               "66f29aefff9245b28d05482f"
             ]
           },
-          "parent": {
+          "parentId": {
             "type": [
               "string",
               "null"
@@ -1222,7 +1222,7 @@
         },
         "required": [
           "_id",
-          "parent",
+          "parentId",
           "order"
         ]
       },
