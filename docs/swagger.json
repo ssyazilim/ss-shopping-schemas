@@ -662,7 +662,9 @@
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
-            "example": "Beko"
+            "examples": [
+              "Beko"
+            ]
           },
           "images": {
             "type": "object",
@@ -708,7 +710,9 @@
           },
           "productCount": {
             "type": "number",
-            "example": 0
+            "examples": [
+              0
+            ]
           }
         },
         "required": [
@@ -725,7 +729,9 @@
               "type": "string",
               "minLength": 2,
               "maxLength": 254,
-              "example": "Beko"
+              "examples": [
+                "Beko"
+              ]
             },
             "images": {
               "type": "object",
@@ -771,7 +777,9 @@
             },
             "productCount": {
               "type": "number",
-              "example": 0
+              "examples": [
+                0
+              ]
             }
           },
           "required": [
@@ -787,7 +795,9 @@
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
-            "example": "Beko"
+            "examples": [
+              "Beko"
+            ]
           },
           "images": {
             "type": "object",
@@ -833,7 +843,9 @@
           },
           "productCount": {
             "type": "number",
-            "example": 0
+            "examples": [
+              0
+            ]
           }
         }
       },
@@ -956,20 +968,26 @@
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
-            "example": "Kıyafet ve Aksesuarlar"
+            "examples": [
+              "Kıyafet ve Aksesuarlar"
+            ]
           },
           "parent": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "minLength": 2,
             "maxLength": 254,
-            "example": "root"
+            "examples": [
+              "Tekstil"
+            ]
           },
-          "tree": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "example": "root"
-            }
+          "categoryI10n": {
+            "type": "string",
+            "examples": [
+              "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
+            ]
           },
           "images": {
             "type": "object",
@@ -1012,20 +1030,11 @@
               "staticImages",
               "dynamicImages"
             ]
-          },
-          "categoryI10n": {
-            "type": "string",
-            "example": "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
-          },
-          "productCount": {
-            "type": "number",
-            "example": 0
           }
         },
         "required": [
           "name",
           "parent",
-          "tree",
           "images"
         ]
       },
@@ -1036,20 +1045,26 @@
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
-            "example": "Kıyafet ve Aksesuarlar"
+            "examples": [
+              "Kıyafet ve Aksesuarlar"
+            ]
           },
           "parent": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "minLength": 2,
             "maxLength": 254,
-            "example": "root"
+            "examples": [
+              "Tekstil"
+            ]
           },
-          "tree": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "example": "root"
-            }
+          "categoryI10n": {
+            "type": "string",
+            "examples": [
+              "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
+            ]
           },
           "images": {
             "type": "object",
@@ -1092,14 +1107,6 @@
               "staticImages",
               "dynamicImages"
             ]
-          },
-          "categoryI10n": {
-            "type": "string",
-            "example": "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
-          },
-          "productCount": {
-            "type": "number",
-            "example": 0
           }
         }
       },
@@ -1112,20 +1119,26 @@
               "type": "string",
               "minLength": 2,
               "maxLength": 254,
-              "example": "Kıyafet ve Aksesuarlar"
+              "examples": [
+                "Kıyafet ve Aksesuarlar"
+              ]
             },
             "parent": {
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "minLength": 2,
               "maxLength": 254,
-              "example": "root"
+              "examples": [
+                "Tekstil"
+              ]
             },
-            "tree": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "example": "root"
-              }
+            "categoryI10n": {
+              "type": "string",
+              "examples": [
+                "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
+              ]
             },
             "images": {
               "type": "object",
@@ -1168,23 +1181,74 @@
                 "staticImages",
                 "dynamicImages"
               ]
-            },
-            "categoryI10n": {
-              "type": "string",
-              "example": "{'id':'543586','name':'543586 - Kıyafet ve Aksesuarlar > Kıyafet Aksesuarları > Bandanalar ve Eşarplar > Bandana Örtüleri'}"
-            },
-            "productCount": {
-              "type": "number",
-              "example": 0
             }
           },
           "required": [
             "name",
             "parent",
-            "tree",
             "images"
           ]
         }
+      },
+      "MoveCategory": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "examples": [
+              "66f29aefff9245b28d05482f"
+            ]
+          },
+          "parent": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 24,
+            "maxLength": 24,
+            "examples": [
+              "66a1bcf0ff9245b28d054001"
+            ]
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              0
+            ]
+          }
+        },
+        "required": [
+          "_id",
+          "parent",
+          "order"
+        ]
+      },
+      "ReOrderCategory": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24,
+            "examples": [
+              "66f29aefff9245b28d05482f"
+            ]
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              0
+            ]
+          }
+        },
+        "required": [
+          "_id",
+          "order"
+        ]
       },
       "CompanyAddress": {
         "type": "object",
@@ -1419,9 +1483,7 @@
           "cashDiscount": {
             "type": "integer",
             "minimum": 0,
-            "examples": [
-              0
-            ]
+            "examples": 0
           },
           "doorToDoor": {
             "type": "object",
@@ -1613,9 +1675,7 @@
               "cashDiscount": {
                 "type": "integer",
                 "minimum": 0,
-                "examples": [
-                  0
-                ]
+                "examples": 0
               },
               "doorToDoor": {
                 "type": "object",
@@ -2271,9 +2331,7 @@
                   "cashDiscount": {
                     "type": "integer",
                     "minimum": 0,
-                    "examples": [
-                      0
-                    ]
+                    "examples": 0
                   },
                   "doorToDoor": {
                     "type": "object",
@@ -2946,9 +3004,7 @@
                   "cashDiscount": {
                     "type": "integer",
                     "minimum": 0,
-                    "examples": [
-                      0
-                    ]
+                    "examples": 0
                   },
                   "doorToDoor": {
                     "type": "object",
@@ -4249,16 +4305,12 @@
             "price": {
               "type": "number",
               "exclusiveMinimum": 0,
-              "examples": [
-                500
-              ]
+              "examples": 500
             },
             "quantity": {
               "type": "integer",
               "exclusiveMinimum": 0,
-              "examples": [
-                1
-              ]
+              "examples": 1
             },
             "category1": {
               "type": "string",
@@ -5117,16 +5169,12 @@
                 "price": {
                   "type": "number",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    500
-                  ]
+                  "examples": 500
                 },
                 "quantity": {
                   "type": "integer",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    1
-                  ]
+                  "examples": 1
                 },
                 "category1": {
                   "type": "string",
@@ -5638,16 +5686,12 @@
                 "price": {
                   "type": "number",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    500
-                  ]
+                  "examples": 500
                 },
                 "quantity": {
                   "type": "integer",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    1
-                  ]
+                  "examples": 1
                 },
                 "category1": {
                   "type": "string",
@@ -6114,16 +6158,12 @@
                 "price": {
                   "type": "number",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    500
-                  ]
+                  "examples": 500
                 },
                 "quantity": {
                   "type": "integer",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    1
-                  ]
+                  "examples": 1
                 },
                 "category1": {
                   "type": "string",
@@ -7969,9 +8009,7 @@
                 "quantity": {
                   "type": "integer",
                   "exclusiveMinimum": 0,
-                  "examples": [
-                    2
-                  ]
+                  "examples": 2
                 }
               },
               "required": [
@@ -8225,9 +8263,7 @@
                     "quantity": {
                       "type": "integer",
                       "exclusiveMinimum": 0,
-                      "examples": [
-                        2
-                      ]
+                      "examples": 2
                     }
                   },
                   "required": [
@@ -8823,7 +8859,7 @@
           "code": {
             "type": "string",
             "minLength": 2,
-            "maxLength": 2,
+            "maxLength": 254,
             "examples": [
               "tr"
             ]
@@ -8881,7 +8917,7 @@
             "code": {
               "type": "string",
               "minLength": 2,
-              "maxLength": 2,
+              "maxLength": 254,
               "examples": [
                 "tr"
               ]
@@ -8938,7 +8974,7 @@
           "code": {
             "type": "string",
             "minLength": 2,
-            "maxLength": 2,
+            "maxLength": 254,
             "examples": [
               "tr"
             ]
@@ -11188,129 +11224,6 @@
         }
       }
     },
-    "/public/category/parent/{parentName}": {
-      "get": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Returns matching category parents in the database",
-        "operationId": "getCategoryParent",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "parentName",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/category/tree/{treeName}": {
-      "get": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Returns all matching category for the category tree in database",
-        "operationId": "getCategoryTree",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "treeName",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/category/name/{categoryName}": {
-      "get": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Returns all category parents matching the category name in the database",
-        "operationId": "getCategoryNodes",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "categoryName",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/public/categories/google/{locale}": {
       "get": {
         "tags": [
@@ -11504,6 +11417,116 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/category/move": {
+      "patch": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Move a category to a new parent and position (drag & drop)",
+        "operationId": "moveCategory",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveCategory"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveCategory"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveCategory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/category/reorder": {
+      "patch": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Reorder categories under the same parent (drag & drop)",
+        "operationId": "reorderCategories",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReOrderCategory"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ReOrderCategory"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/ReOrderCategory"
               }
             }
           }
@@ -13202,9 +13225,7 @@
           {
             "schema": {
               "type": "boolean",
-              "examples": [
-                false
-              ],
+              "examples": false,
               "description": "Include to the subfolders"
             },
             "required": false,
