@@ -13,9 +13,12 @@ export const ADD_BRAND = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ example: 'Beko' }),
+      .meta({ examples: ['Beko'] }),
     images: IMAGES(locale),
-    productCount: z.number().optional().meta({ example: 0 }),
+    productCount: z
+      .number()
+      .optional()
+      .meta({ examples: [0] }),
   });
 };
 

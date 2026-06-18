@@ -63,7 +63,7 @@ registry.registerPath({
       recursive: z
         .boolean()
         .optional()
-        .meta({ examples: [false], description: 'Include to the subfolders' }),
+        .meta({ examples: false, description: 'Include to the subfolders' }),
     }),
   },
   responses,

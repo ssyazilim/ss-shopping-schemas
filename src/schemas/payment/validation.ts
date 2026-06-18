@@ -24,12 +24,12 @@ export const ADD_BASKET_ITEM = (locale: ILocale = 'tr') => {
     price: z
       .number({ message: m.public_forms_validations_mustNumber })
       .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [500] }),
+      .meta({ examples: 500 }),
     quantity: z
       .number()
       .positive({ message: m.public_forms_validations_mustNumberPositive })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: [1] }),
+      .meta({ examples: 1 }),
     category1: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

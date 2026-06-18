@@ -9,7 +9,8 @@ export const ADD_TRANSLATION = (locale: ILocale = 'tr') => {
   return z.object({
     code: z
       .string()
-      .length(2, { message: m.public_forms_validations_minLength(2) })
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['tr'] }),
     language: z
       .string()

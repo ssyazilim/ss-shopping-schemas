@@ -16,7 +16,7 @@ export const SHIPPING_ITEM = (locale: ILocale) => {
       .number({ message: m.public_forms_validations_mustNumber })
       .positive({ message: m.public_forms_validations_mustNumberPositive })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: [2] }),
+      .meta({ examples: 2 }),
   });
 };
 

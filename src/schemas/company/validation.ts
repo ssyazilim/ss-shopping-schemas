@@ -123,7 +123,7 @@ export const ADD_COMPANY_PROPERTIES_PAYMENT_SETTINGS = (locale: ILocale = 'tr') 
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [0] }),
+      .meta({ examples: 0 }),
     doorToDoor: z.object({
       isEnabled: z.boolean(),
       minValue: z
