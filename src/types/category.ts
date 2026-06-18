@@ -8,11 +8,10 @@ export type ICategory = z.infer<typeof CategorySchema>;
 export const CategorySchema = ADD_CATEGORY()
   .extend({
     slug: z.string().optional(),
-    parent: z.string().nullable().default(null),
-    ancestors: z.array(z.string()).default([]),
-    pathNames: z.array(z.string()).default([]),
-    order: z.number().int().nonnegative().default(0),
-    productCount: z.number().int().nonnegative().default(0),
+    ancestorsId: z.array(z.string()),
+    pathNames: z.array(z.string()),
+    order: z.number(),
+    productCount: z.number(),
   })
   .extend(MongoSchema.shape);
 

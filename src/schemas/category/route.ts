@@ -13,39 +13,6 @@ registry.registerPath({
   responses,
 });
 
-/*
-// Eski isim-tabanlı ağaç lookup'ları — ID-tabanlı modele geçildiği için kullanılmıyor.
-registry.registerPath({
-  method: 'get',
-  path: '/public/category/parent/{parentName}',
-  tags: ['Category'],
-  summary: 'Returns matching category parents in the database',
-  operationId: 'getCategoryParent',
-  request: { params: z.object({ parentName: z.string() }) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'get',
-  path: '/public/category/tree/{treeName}',
-  tags: ['Category'],
-  summary: 'Returns all matching category for the category tree in database',
-  operationId: 'getCategoryTree',
-  request: { params: z.object({ treeName: z.string() }) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'get',
-  path: '/public/category/name/{categoryName}',
-  tags: ['Category'],
-  summary: 'Returns all category parents matching the category name in the database',
-  operationId: 'getCategoryNodes',
-  request: { params: z.object({ categoryName: z.string() }) },
-  responses,
-});
-*/
-
 registry.registerPath({
   method: 'get',
   path: '/public/categories/google/{locale}',

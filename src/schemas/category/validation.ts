@@ -13,12 +13,11 @@ export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Kıyafet ve Aksesuarlar'] }),
-    parent: z
+    parentId: z
       .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .length(24, { message: m.public_forms_validations_minLength(24) })
       .nullable()
-      .meta({ examples: ['Tekstil'] }),
+      .meta({ examples: ['66a1bcf0ff9245b28d054001'] }),
     categoryI10n: z
       .string()
       .optional()
@@ -40,7 +39,7 @@ export const MOVE_CATEGORY = (locale: ILocale = 'tr') => {
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
       .meta({ examples: ['66f29aefff9245b28d05482f'] }),
-    parent: z
+    parentId: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
       .nullable()
