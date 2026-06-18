@@ -1,6 +1,6 @@
 {
   "name": "@ssyazilim/ss-shopping-schemas",
-  "version": "0.1.58",
+  "version": "0.1.59",
   "description": "Shared Zod schemas and TypeScript types for SS Software projects",
   "author": "BARIS GUR",
   "license": "MIT",
