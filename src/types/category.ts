@@ -7,10 +7,8 @@ import { ADD_CATEGORY, MOVE_CATEGORY, REORDER_CATEGORY } from '../schemas';
 export type ICategory = z.infer<typeof CategorySchema>;
 export const CategorySchema = ADD_CATEGORY()
   .extend({
-    slug: z.string().optional(),
     ancestorsId: z.array(z.string()),
     pathNames: z.array(z.string()),
-    order: z.number(),
     productCount: z.number(),
   })
   .extend(MongoSchema.shape);
