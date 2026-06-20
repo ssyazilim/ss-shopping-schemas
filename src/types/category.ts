@@ -2,19 +2,21 @@ import { z } from 'zod';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import { ImageSchema } from './product';
-import { ADD_CATEGORY, MOVE_CATEGORY, REORDER_CATEGORY } from '../schemas';
+import { ADD_CATEGORY } from '../schemas';
 
-export type ICategory = z.infer<typeof CategorySchema>;
+export type ICategory = Omit<z.infer<typeof CategorySchema>, 'parentId' | 'ancestorsId'> & {
+  parentId: ICategoryList | null | string;
+  ancestorsId: ICategoryList[] | string[];
+};
+type ICategoryList = Pick<ICategory, '_id' | 'name' | 'parentId' | 'ancestorsId' | 'order'>;
 export const CategorySchema = ADD_CATEGORY()
   .extend({
     ancestorsId: z.array(z.string()),
     pathNames: z.array(z.string()),
+    order: z.number(),
     productCount: z.number(),
   })
   .extend(MongoSchema.shape);
-
-export type ICategoryMove = z.infer<ReturnType<typeof MOVE_CATEGORY>>;
-export type ICategoryReorder = z.infer<ReturnType<typeof REORDER_CATEGORY>>;
 
 export type ICategoryYML = z.infer<typeof CategoryYMLSchema>;
 export const CategoryYMLSchema = z.object({

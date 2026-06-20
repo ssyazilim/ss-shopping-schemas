@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { CategorySchema, MoveCategorySchema, ReorderCategorySchema } from './schema';
+import { CategorySchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
 registry.registerPath({
@@ -58,27 +58,5 @@ registry.registerPath({
     params: z.object({ categoryId: z.string() }),
     body: buildRequestBody(CategorySchema),
   },
-  responses,
-});
-
-registry.registerPath({
-  method: 'patch',
-  path: '/admin/category/move',
-  tags: ['Category'],
-  summary: 'Move a category to a new parent and position (drag & drop)',
-  operationId: 'moveCategory',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(MoveCategorySchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'patch',
-  path: '/admin/category/reorder',
-  tags: ['Category'],
-  summary: 'Reorder categories under the same parent (drag & drop)',
-  operationId: 'reorderCategories',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ReorderCategorySchema) },
   responses,
 });
