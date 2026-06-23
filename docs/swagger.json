@@ -7373,191 +7373,219 @@
         ]
       },
       "addVariantsMulti": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 254,
-              "examples": [
-                "Siyah"
-              ]
-            },
-            "images": {
+        "type": "object",
+        "properties": {
+          "variantsType": {
+            "type": "array",
+            "items": {
               "type": "object",
               "properties": {
-                "staticImages": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "image": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "image"
-                    ]
-                  }
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 254,
+                  "examples": [
+                    "Renk"
+                  ]
                 },
-                "dynamicImages": {
+                "variants": {
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254,
-                    "examples": [
-                      "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                    "minLength": 1,
+                    "maxLength": 254
+                  },
+                  "examples": [
+                    [
+                      "Siyah",
+                      "Beyaz"
                     ]
-                  }
+                  ]
                 }
               },
               "required": [
-                "staticImages",
-                "dynamicImages"
+                "name",
+                "variants"
               ]
-            },
-            "price": {
+            }
+          },
+          "variants": {
+            "type": "array",
+            "items": {
               "type": "object",
               "properties": {
-                "currency": {
+                "name": {
                   "type": "string",
-                  "minLength": 2,
-                  "maxLength": 4,
+                  "minLength": 1,
+                  "maxLength": 254,
                   "examples": [
-                    "TRY"
+                    "Siyah"
                   ]
                 },
-                "purchase": {
-                  "type": "number",
+                "images": {
+                  "type": "object",
+                  "properties": {
+                    "staticImages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "image": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "image"
+                        ]
+                      }
+                    },
+                    "dynamicImages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254,
+                        "examples": [
+                          "https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "staticImages",
+                    "dynamicImages"
+                  ]
+                },
+                "price": {
+                  "type": "object",
+                  "properties": {
+                    "currency": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 4,
+                      "examples": [
+                        "TRY"
+                      ]
+                    },
+                    "purchase": {
+                      "type": "number",
+                      "minimum": 0,
+                      "examples": [
+                        1000
+                      ]
+                    },
+                    "sell": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "examples": [
+                        1500
+                      ]
+                    },
+                    "dealerCode": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254,
+                      "examples": [
+                        "SURAT"
+                      ]
+                    },
+                    "shipping": {
+                      "type": "number",
+                      "minimum": 0,
+                      "examples": [
+                        150
+                      ]
+                    },
+                    "discount": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "examples": [
+                        10
+                      ]
+                    },
+                    "tax": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "examples": [
+                        20
+                      ]
+                    }
+                  },
+                  "required": [
+                    "currency",
+                    "purchase",
+                    "sell",
+                    "dealerCode",
+                    "shipping",
+                    "discount",
+                    "tax"
+                  ]
+                },
+                "stockQuantity": {
+                  "type": "integer",
                   "minimum": 0,
                   "examples": [
-                    1000
+                    100
                   ]
                 },
-                "sell": {
-                  "type": "number",
-                  "exclusiveMinimum": 0,
-                  "examples": [
-                    1500
-                  ]
-                },
-                "dealerCode": {
+                "sku": {
                   "type": "string",
                   "minLength": 2,
                   "maxLength": 254,
                   "examples": [
-                    "SURAT"
+                    "4SN106C"
                   ]
                 },
-                "shipping": {
-                  "type": "number",
-                  "minimum": 0,
+                "gtin": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 254
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        ""
+                      ]
+                    }
+                  ],
                   "examples": [
-                    150
+                    "0123456789012"
                   ]
                 },
-                "discount": {
+                "desi": {
                   "type": "integer",
                   "minimum": 0,
+                  "maximum": 1000,
                   "examples": [
-                    10
-                  ]
-                },
-                "tax": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "examples": [
-                    20
+                    1
                   ]
                 }
               },
               "required": [
-                "currency",
-                "purchase",
-                "sell",
-                "dealerCode",
-                "shipping",
-                "discount",
-                "tax"
-              ]
-            },
-            "stockQuantity": {
-              "type": "integer",
-              "minimum": 0,
-              "examples": [
-                100
-              ]
-            },
-            "sku": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254,
-              "examples": [
-                "4SN106C"
-              ]
-            },
-            "gtin": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    ""
-                  ]
-                }
-              ],
-              "examples": [
-                "0123456789012"
-              ]
-            },
-            "desi": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1000,
-              "examples": [
-                1
-              ]
-            },
-            "productId": {
-              "type": "string",
-              "minLength": 24,
-              "maxLength": 24,
-              "examples": [
-                "66f29aefff9245b28d05482f"
-              ]
-            },
-            "_id": {
-              "type": "string",
-              "examples": [
-                "66f29aefff9245b28d05482e"
+                "name",
+                "images",
+                "price",
+                "stockQuantity",
+                "sku",
+                "desi"
               ]
             }
-          },
-          "required": [
-            "name",
-            "images",
-            "price",
-            "stockQuantity",
-            "sku",
-            "desi",
-            "productId"
-          ]
-        }
+          }
+        },
+        "required": [
+          "variantsType",
+          "variants"
+        ]
       },
       "updateVariant": {
         "type": "object",
@@ -15819,7 +15847,7 @@
         }
       }
     },
-    "/public/products/variants": {
+    "/public/product/variants": {
       "get": {
         "tags": [
           "Product Variant"
@@ -15891,7 +15919,7 @@
         }
       }
     },
-    "/public/product/variants/{productId}": {
+    "/public/product/variant/{productId}": {
       "get": {
         "tags": [
           "Product Variant"
@@ -15932,120 +15960,12 @@
         }
       }
     },
-    "/admin/product/variants": {
-      "post": {
-        "tags": [
-          "Product Variant"
-        ],
-        "summary": "Add a new variants to system",
-        "operationId": "addVariantsMulti",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addVariantsMulti"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addVariantsMulti"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addVariantsMulti"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Product Variant"
-        ],
-        "summary": "Delete a variant or variants in the system",
-        "operationId": "deleteVariant",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/deleteForVariant"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/deleteForVariant"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/deleteForVariant"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/product/variant/{productId}": {
       "post": {
         "tags": [
           "Product Variant"
         ],
-        "summary": "Add a new variant or variants to system",
+        "summary": "Add a new variant to system",
         "operationId": "addVariant",
         "security": [
           {
@@ -16140,6 +16060,116 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/updateVariant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/product/variant": {
+      "delete": {
+        "tags": [
+          "Product Variant"
+        ],
+        "summary": "Delete a variant or variants in the system",
+        "operationId": "deleteVariant",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteForVariant"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteForVariant"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteForVariant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/product/variants/{productId}": {
+      "post": {
+        "tags": [
+          "Product Variant"
+        ],
+        "summary": "Add a new variants to product in the system",
+        "operationId": "addVariantsMulti",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addVariantsMulti"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addVariantsMulti"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addVariantsMulti"
               }
             }
           }
