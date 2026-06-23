@@ -10,7 +10,7 @@ import { responses, buildRequestBody, ListQuerySchema } from '../common';
 
 registry.registerPath({
   method: 'get',
-  path: '/public/products/variants',
+  path: '/public/product/variants',
   tags: ['Product Variant'],
   summary: 'Get all variants in the system',
   operationId: 'getVariants',
@@ -20,7 +20,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'get',
-  path: '/public/product/variants/{productId}',
+  path: '/public/product/variant/{productId}',
   tags: ['Product Variant'],
   summary: 'Get a product variants from the system',
   operationId: 'getProductVariants',
@@ -30,31 +30,9 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'post',
-  path: '/admin/product/variants',
-  tags: ['Product Variant'],
-  summary: 'Add a new variants to system',
-  operationId: 'addVariantsMulti',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddVariantsMultiSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'delete',
-  path: '/admin/product/variants',
-  tags: ['Product Variant'],
-  summary: 'Delete a variant or variants in the system',
-  operationId: 'deleteVariant',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteForVariantSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
   path: '/admin/product/variant/{productId}',
   tags: ['Product Variant'],
-  summary: 'Add a new variant or variants to system',
+  summary: 'Add a new variant to system',
   operationId: 'addVariant',
   security: [{ JWT: [] }],
   request: {
@@ -75,5 +53,27 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     body: buildRequestBody(UpdateVariantSchema),
   },
+  responses,
+});
+
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/product/variant',
+  tags: ['Product Variant'],
+  summary: 'Delete a variant or variants in the system',
+  operationId: 'deleteVariant',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(DeleteForVariantSchema) },
+  responses,
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/admin/product/variants/{productId}',
+  tags: ['Product Variant'],
+  summary: 'Add a new variants to product in the system',
+  operationId: 'addVariantsMulti',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(AddVariantsMultiSchema) },
   responses,
 });

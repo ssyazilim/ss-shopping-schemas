@@ -69,22 +69,6 @@ export const ADD_VARIANT = (locale: ILocale = 'tr') => {
     variant: VARIANT(locale),
   });
 };
-export const ADD_VARIANTS = (locale: ILocale = 'tr') => z.array(ADD_VARIANT(locale));
-export const ADD_VARIANTS_MULTI = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.array(
-    VARIANT().extend({
-      productId: z
-        .string()
-        .length(24, { message: m.public_forms_validations_minLength(24) })
-        .meta({ examples: ['66f29aefff9245b28d05482f'] }),
-      _id: z
-        .string()
-        .optional()
-        .meta({ examples: ['66f29aefff9245b28d05482e'] }),
-    }),
-  );
-};
 export const UPDATE_VARIANT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -108,6 +92,12 @@ export const DELETE_FOR_VARIANT = (locale: ILocale = 'tr') => {
       .meta({ description: 'IDs to delete' }),
     productId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     variantsType: VARIANTS_TYPE(),
+  });
+};
+export const ADD_VARIANTS = (locale: ILocale = 'tr') => {
+  return z.object({
+    variantsType: VARIANTS_TYPE(locale),
+    variants: z.array(VARIANT(locale)),
   });
 };
 
