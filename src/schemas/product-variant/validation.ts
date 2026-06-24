@@ -72,16 +72,13 @@ export const ADD_VARIANT = (locale: ILocale = 'tr') => {
 export const UPDATE_VARIANT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    variantsType: VARIANTS_TYPE(),
-    _id: z
-      .string()
-      .optional()
-      .meta({ examples: ['66f27bdc8a01cf36d27cbe1c'] }),
-    name: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Siyah'] }),
+    variantsType: VARIANTS_TYPE(locale),
+    variant: VARIANT(locale).extend({
+      _id: z
+        .string()
+        .length(24, { message: m.public_forms_validations_minLength(24) })
+        .meta({ examples: ['66f27bdc8a01cf36d27cbe1c'] }),
+    }),
   });
 };
 export const DELETE_FOR_VARIANT = (locale: ILocale = 'tr') => {

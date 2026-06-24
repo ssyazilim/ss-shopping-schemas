@@ -10,7 +10,7 @@ import { responses, buildRequestBody, ListQuerySchema } from '../common';
 
 registry.registerPath({
   method: 'get',
-  path: '/public/product/variants',
+  path: '/public/variants',
   tags: ['Product Variant'],
   summary: 'Get all variants in the system',
   operationId: 'getVariants',
@@ -20,7 +20,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'get',
-  path: '/public/product/variant/{productId}',
+  path: '/public/variant/{productId}',
   tags: ['Product Variant'],
   summary: 'Get a product variants from the system',
   operationId: 'getProductVariants',
@@ -30,7 +30,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'post',
-  path: '/admin/product/variant/{productId}',
+  path: '/admin/variant/{productId}',
   tags: ['Product Variant'],
   summary: 'Add a new variant to system',
   operationId: 'addVariant',
@@ -44,7 +44,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'patch',
-  path: '/admin/product/variant/{productId}',
+  path: '/admin/variant/{productId}',
   tags: ['Product Variant'],
   summary: 'Update a variant in the system',
   operationId: 'updateVariant',
@@ -58,7 +58,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'delete',
-  path: '/admin/product/variant',
+  path: '/admin/variant',
   tags: ['Product Variant'],
   summary: 'Delete a variant or variants in the system',
   operationId: 'deleteVariant',
@@ -69,7 +69,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'post',
-  path: '/admin/product/variants/{productId}',
+  path: '/admin/variants/{productId}',
   tags: ['Product Variant'],
   summary: 'Add a new variants to product in the system',
   operationId: 'addVariantsMulti',
