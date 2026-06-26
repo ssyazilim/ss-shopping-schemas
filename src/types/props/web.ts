@@ -12,6 +12,7 @@ import type { ICard } from '../card';
 import type { IImageData } from '../common';
 import type { ILink, INavigation, ISecondaryNavigation } from '../menu';
 import type { IInputType, IInputMode } from './admin';
+import { IDealerPricesWithDesi } from '../geliver';
 
 /*************************
  *       TYPES           *
@@ -71,7 +72,7 @@ export interface PPTabPanel {
 
 export interface PPSlider {
   products?: IProduct[];
-  dealerPrices?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
   productSettings?: IProductSettings;
   shippingOptions?: IShippingOptions;
 }
@@ -89,7 +90,7 @@ export interface PPReceipt {
 }
 
 export interface PPProductList {
-  dealerPrices?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
   products?: IProduct[];
   totalCount?: number;
   totalPage?: number;
@@ -98,13 +99,13 @@ export interface PPProductList {
 export interface PPQuickView {
   show?: boolean;
   item?: IProduct;
-  dealerPrices?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
   productSettings?: IProductSettings;
   shippingOptions?: IShippingOptions;
 }
 
 export interface PPDataList {
-  items?: unknown[];
+  items?: any[];
   selectedType?: string;
   type?: string;
 }
@@ -174,7 +175,7 @@ export interface PPSearchBar {
 }
 
 export interface PPAccordion {
-  data?: { _id?: string; [key: string]: unknown }[];
+  data?: { _id?: string; [key: string]: any }[];
   type?: 'default' | 'questions' | 'agreements';
 }
 
@@ -262,14 +263,14 @@ export interface PPCardList {
 export interface PPAddReview {
   productId?: string;
   isAdd?: boolean;
-  selectedData?: { _id?: string; [key: string]: unknown };
+  selectedData?: { _id?: string; [key: string]: any };
   activeStatus?: string;
 }
 
 export interface PPAddQuestion {
   productId?: string;
   isAdd?: boolean;
-  selectedData?: { _id?: string; [key: string]: unknown };
+  selectedData?: { _id?: string; [key: string]: any };
   activeStatus?: string;
 }
 
@@ -314,7 +315,7 @@ export interface PPFileUpload {
 }
 
 export interface PPSelectCombo {
-  data?: { name?: string; [key: string]: unknown }[];
+  data?: { name?: string; [key: string]: any }[];
   modelValue?: string;
   type?: string;
   uniqueId?: string;
@@ -330,7 +331,7 @@ export interface PPSelectCombo {
 }
 
 export interface PPSelectDefault {
-  data?: { name?: string; [key: string]: unknown }[];
+  data?: { name?: string; [key: string]: any }[];
   modelValue?: string;
   uniqueId?: string;
   autocomplete?: string;
@@ -402,7 +403,7 @@ export interface PPRadioListSmall {
 }
 
 export interface PPRadioListNoButton {
-  data?: unknown[];
+  data?: any[];
   modelValue?: string;
   formClass?: string;
   labelTitle?: string;
@@ -410,7 +411,7 @@ export interface PPRadioListNoButton {
 }
 
 export interface PPSelectCheck {
-  data?: { name?: string; [key: string]: unknown }[];
+  data?: { name?: string; [key: string]: any }[];
   modelValue?: string;
   type?: string;
   labelTitle?: string;
@@ -503,7 +504,7 @@ export interface PPHelpersBrandSelector {
 
 export interface PPSidebarMobile {
   mobileFiltersOpen?: boolean;
-  filters?: unknown[];
+  filters?: any[];
   selectedCategory?: ICategory[];
   brands?: IBrand[];
 }
@@ -511,19 +512,19 @@ export interface PPSidebarMobile {
 export interface PPSidebarTopSection {
   categoryTree?: string[];
   mobileFiltersOpen?: boolean;
-  pagination?: { name?: string; [key: string]: unknown }[];
+  pagination?: { name?: string; [key: string]: any }[];
   sortOptions?: { id?: number; name?: string; href?: string; current?: boolean }[];
 }
 
 export interface PPSidebarMain {
-  dealerPrices?: unknown[];
-  filters?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
+  filters?: any[];
   selectedCategory?: ICategory[];
   categoryTree?: string[];
   products?: IProduct[];
   brands?: IBrand[];
   sortOptions?: { id?: number; name?: string; href?: string; current?: boolean }[];
-  pagination?: { name?: string; [key: string]: unknown }[];
+  pagination?: { name?: string; [key: string]: any }[];
   totalCount?: number;
   totalPage?: number;
   isLoading?: boolean;
@@ -601,7 +602,7 @@ export interface PPTablesPagination {
 }
 
 export interface PPTablesSimple {
-  data?: { _id?: string; [key: string]: unknown }[];
+  data?: { _id?: string; [key: string]: any }[];
   type?: string;
   activeStatus?: string;
 }
@@ -621,7 +622,7 @@ export interface PPHelpersImageReview {
 
 export interface PPHelpersPrice {
   type?: string;
-  dealerPrices?: unknown[];
+  dealerPrices?: IDealerPricesWithDesi[];
   item?: IProduct;
   productSettings?: IProductSettings;
   shippingOptions?: IShippingOptions;

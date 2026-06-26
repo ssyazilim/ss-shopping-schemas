@@ -21,11 +21,11 @@ export const CommentSchema = COMMENT_POST()
   .extend(MongoSchema.shape);
 
 export type IPost = Omit<z.infer<typeof PostSchema>, 'userId'> & {
-  userId: string[] | IUser[];
+  userId: string | IUser;
 };
 export const PostSchema = ADD_POST()
   .extend({
-    userId: z.array(z.string()),
+    userId: z.string(),
     viewCount: z.number(),
     images: z.array(z.string()).optional(),
     like: z.number(),
