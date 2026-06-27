@@ -41,8 +41,6 @@ export const ADD_COMPANY_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['+905446627836'] }),
     email: z
       .email({ message: m.public_forms_validations_email })
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['varyantrestaurant@hotmail.com'] }),
     country: z
       .string()
@@ -198,13 +196,9 @@ export const ADD_COMPANY_MAIL_OPTIONS = (locale: ILocale = 'tr') => {
     rejectUnauthorized: z.boolean().meta({ examples: true }),
     mainMail: z
       .email({ message: m.public_forms_validations_email })
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['erbil.gur@ssyazilim.com'] }),
     secondMail: z
       .email({ message: m.public_forms_validations_email })
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['hande.kaya@ssyazilim.com'] }),
     from: z
       .string()

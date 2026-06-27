@@ -137,8 +137,6 @@ export const ADD_BUYER = (locale: ILocale = 'tr') => {
   return z.object({
     email: z
       .email({ message: m.public_forms_validations_email })
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['no-reply@ssyazilim.com'] }),
     identityNumber: z
       .string()

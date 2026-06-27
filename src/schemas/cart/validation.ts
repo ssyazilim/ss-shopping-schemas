@@ -9,10 +9,10 @@ export const SET_QUANTITY = (locale: ILocale = 'tr') => {
   return z.object({
     itemId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     quantity: z
-      .number()
-      .int()
-      .min(1, { message: m.public_forms_validations_minLength(1) })
-      .meta({ examples: [1] }),
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .refine((n) => n !== 0, { message: m.public_forms_validations_mustNumber })
+      .meta({ examples: [1, -1] }),
   });
 };
 
@@ -21,6 +21,10 @@ export const ADD_CART = (locale: ILocale = 'tr') => {
   return z.object({
     productId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     variantId: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
-    quantity: z.number().int(),
+    quantity: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .refine((n) => n !== 0, { message: m.public_forms_validations_mustNumber })
+      .meta({ examples: [1, -1] }),
   });
 };

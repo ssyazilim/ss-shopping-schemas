@@ -22,7 +22,6 @@ export const CONTACT_ME = (locale: ILocale = 'tr') => {
     agreed: z.literal(true, { error: m.public_forms_validations_required }),
   });
 };
-
 export const CONTACT_ME_ERROR = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -46,7 +45,6 @@ export const CONTACT_ME_ERROR = (locale: ILocale = 'tr') => {
       .max(2000, { message: m.public_forms_validations_maxLength(2000) }),
   });
 };
-
 export const CONTACT_ME_RESUME = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
@@ -63,7 +61,6 @@ export const CONTACT_ME_RESUME = (locale: ILocale = 'tr') => {
     fileName: z.string(),
   });
 };
-
 export const FILE = z.object({
   file: z.any().meta({ type: 'string', format: 'binary' }),
 });
@@ -75,3 +72,19 @@ export const CHECK_SMTP = z.object({
   port: z.number().meta({ examples: [465] }),
   from: z.string().meta({ examples: ['SS-TEST | <no-reply@ssyazilim.com>'] }),
 });
+export const CHECK_PRICE_FILTER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z
+    .object({
+      minPrice: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+      maxPrice: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+    })
+    .refine((data) => data.minPrice <= data.maxPrice, {
+      message: m.public_forms_validations_minPriceGreaterThanMax,
+      path: ['minPrice'],
+    });
+};

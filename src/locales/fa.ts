@@ -12,4 +12,5 @@ export const notifications: INotifications = {
   public_forms_validations_url: 'لطفاً یک آدرس URL معتبر وارد کنید!',
   public_forms_validations_minLength: (min: number) => `حداقل! ${min} کاراکتر`,
   public_forms_validations_maxLength: (max: number) => `حداکثر! ${max} کاراکتر`,
+  public_forms_validations_minPriceGreaterThanMax: 'مقدار حداقل باید کمتر از مقدار حداکثر باشد!',
 };
