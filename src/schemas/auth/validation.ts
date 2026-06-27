@@ -41,6 +41,12 @@ export const ADD_USER = (locale: ILocale = 'tr') => {
       .min(8, m.public_forms_validations_minLength(8))
       .max(64, m.public_forms_validations_maxLength(64))
       .meta({ examples: ['Passw0rd'] }),
+    rePassword: z
+      .string()
+      .min(8, m.public_forms_validations_minLength(8))
+      .max(64, m.public_forms_validations_maxLength(64))
+      .meta({ examples: ['Passw0rd'] }),
+    activationType: z.enum(['phone', 'email']).meta({ examples: ['email'] }),
   });
 };
 
@@ -78,19 +84,29 @@ export const PASSWORD_RESET = (locale: ILocale = 'tr') => {
 
 export const PASSWORD_RESET_COMPLETE = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    key: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) }),
-    email: z.email({ message: m.public_forms_validations_email }),
-    newPassword: z
-      .string({ message: m.public_forms_validations_required })
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64)),
-    rePassword: z
-      .string({ message: m.public_forms_validations_required })
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64)),
-  });
+  return z
+    .object({
+      key: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      email: z.email({ message: m.public_forms_validations_email }),
+      newPassword: z
+        .string({ message: m.public_forms_validations_required })
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+      rePassword: z
+        .string({ message: m.public_forms_validations_required })
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+    })
+    .superRefine((data, ctx) => {
+      if (data.newPassword !== data.rePassword) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['rePassword'],
+          message: m.public_forms_validations_sameAs,
+        });
+      }
+    });
 };
