@@ -57,7 +57,9 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Ufuk Sarı'] }),
-    email: z.email().meta({ examples: ['no-reply@ssyazilim.com'] }),
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .meta({ examples: ['no-reply@ssyazilim.com'] }),
     phone: z
       .e164({ message: m.public_forms_validations_phoneNumber })
       .meta({ examples: ['+905309464864'] }),
@@ -135,7 +137,9 @@ export const SHIPPING_RECIPIENT_ADDRESS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Oğuzhan Altay'] }),
-    email: z.email().meta({ examples: ['oguzhanaltay@gmail.com'] }),
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .meta({ examples: ['oguzhanaltay@gmail.com'] }),
     phone: z
       .e164({ message: m.public_forms_validations_phoneNumber })
       .meta({ examples: ['+905447929292'] }),
@@ -219,7 +223,7 @@ export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['İzzet Sarı'] }),
-    email: z.email().optional(),
+    email: z.email({ message: m.public_forms_validations_email }).optional(),
     phone: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

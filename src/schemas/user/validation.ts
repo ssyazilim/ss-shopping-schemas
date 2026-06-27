@@ -57,7 +57,7 @@ export const CHANGE_PERSONAL_INFO = (locale: ILocale = 'tr') => {
       .string()
       .min(2, m.public_forms_validations_minLength(2))
       .max(254, m.public_forms_validations_maxLength(254)),
-    email: z.email(),
+    email: z.email({ message: m.public_forms_validations_email }),
     phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
   });
 };
