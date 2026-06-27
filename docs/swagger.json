@@ -271,8 +271,6 @@
         "properties": {
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "test@ssyazilim.com"
@@ -311,8 +309,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "test@ssyazilim.com"
@@ -377,8 +373,6 @@
         "properties": {
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email"
           }
         },
@@ -396,8 +390,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email"
           },
           "newPassword": {
@@ -854,8 +846,6 @@
         "properties": {
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "no-reply@ssyazilim.com"
@@ -931,7 +921,11 @@
             "maxLength": 24
           },
           "quantity": {
-            "type": "integer"
+            "type": "integer",
+            "examples": [
+              1,
+              -1
+            ]
           }
         },
         "required": [
@@ -950,9 +944,9 @@
           },
           "quantity": {
             "type": "integer",
-            "minimum": 1,
             "examples": [
-              1
+              1,
+              -1
             ]
           }
         },
@@ -1243,8 +1237,6 @@
           },
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "varyantrestaurant@hotmail.com"
@@ -1763,8 +1755,6 @@
           },
           "mainMail": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "erbil.gur@ssyazilim.com"
@@ -1772,8 +1762,6 @@
           },
           "secondMail": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "hande.kaya@ssyazilim.com"
@@ -2058,8 +2046,6 @@
               },
               "email": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "varyantrestaurant@hotmail.com"
@@ -2419,8 +2405,6 @@
               },
               "mainMail": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "erbil.gur@ssyazilim.com"
@@ -2428,8 +2412,6 @@
               },
               "secondMail": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "hande.kaya@ssyazilim.com"
@@ -2760,8 +2742,6 @@
               },
               "email": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "varyantrestaurant@hotmail.com"
@@ -3059,8 +3039,6 @@
               },
               "mainMail": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "erbil.gur@ssyazilim.com"
@@ -3068,8 +3046,6 @@
               },
               "secondMail": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "hande.kaya@ssyazilim.com"
@@ -4372,8 +4348,6 @@
         "properties": {
           "email": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 254,
             "format": "email",
             "examples": [
               "no-reply@ssyazilim.com"
@@ -4862,8 +4836,6 @@
             "properties": {
               "email": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "no-reply@ssyazilim.com"
@@ -5379,8 +5351,6 @@
             "properties": {
               "email": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "no-reply@ssyazilim.com"
@@ -5851,8 +5821,6 @@
             "properties": {
               "email": {
                 "type": "string",
-                "minLength": 6,
-                "maxLength": 254,
                 "format": "email",
                 "examples": [
                   "no-reply@ssyazilim.com"
