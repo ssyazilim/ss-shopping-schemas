@@ -327,13 +327,33 @@
             "examples": [
               "Passw0rd"
             ]
+          },
+          "rePassword": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "examples": [
+              "Passw0rd"
+            ]
+          },
+          "activationType": {
+            "type": "string",
+            "enum": [
+              "phone",
+              "email"
+            ],
+            "examples": [
+              "email"
+            ]
           }
         },
         "required": [
           "name",
           "email",
           "phoneNumber",
-          "password"
+          "password",
+          "rePassword",
+          "activationType"
         ]
       },
       "checkKey": {
