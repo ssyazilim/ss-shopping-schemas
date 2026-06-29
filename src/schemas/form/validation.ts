@@ -58,7 +58,10 @@ export const CONTACT_ME_RESUME = (locale: ILocale = 'tr') => {
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
     email: z.email({ message: m.public_forms_validations_email }),
     phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
-    fileName: z.string(),
+    fileName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const FILE = z.object({
