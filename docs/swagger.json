@@ -3771,7 +3771,9 @@
             "type": "string"
           },
           "fileName": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254
           }
         },
         "required": [
