@@ -481,3 +481,23 @@ export const ADD_PAYMENT_CASH = (locale: ILocale = 'tr') => {
     email: z.email({ message: m.public_forms_validations_email }),
   });
 };
+export const ADD_IYZICO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    name: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    surname: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    identityNumber: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
+    email: z.email({ message: m.public_forms_validations_email }),
+    checkApprove: z.literal(true, { message: m.public_forms_validations_required }),
+  });
+};
