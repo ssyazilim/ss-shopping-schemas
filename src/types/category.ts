@@ -4,11 +4,19 @@ import { MongoSchema } from './common';
 import { ImageSchema } from './product';
 import { ADD_CATEGORY } from '../schemas';
 
+export type IParentId = z.infer<typeof IParentIdSchema>;
+export const IParentIdSchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  parentId: z.string(),
+  ancestorsId: z.array(z.string()),
+  order: z.number(),
+});
+
 export type ICategory = Omit<z.infer<typeof CategorySchema>, 'parentId' | 'ancestorsId'> & {
-  parentId: ICategoryList | null | string;
-  ancestorsId: ICategoryList[] | string[];
+  parentId: IParentId | null | string;
+  ancestorsId: IParentId[] | string[];
 };
-type ICategoryList = Pick<ICategory, '_id' | 'name' | 'parentId' | 'ancestorsId' | 'order'>;
 export const CategorySchema = ADD_CATEGORY()
   .extend({
     ancestorsId: z.array(z.string()),
@@ -39,7 +47,7 @@ export const TagsSchema = z.object({
 const CategoryMenuBaseSchema = z.object({
   _id: z.string(),
   name: z.string(),
-  parentId: z.string(),
+  parentId: IParentIdSchema.nullable(),
   pathNames: z.array(z.string()),
   order: z.number(),
   images: ImageSchema,
