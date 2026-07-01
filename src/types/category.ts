@@ -39,8 +39,9 @@ export const TagsSchema = z.object({
 const CategoryMenuBaseSchema = z.object({
   _id: z.string(),
   name: z.string(),
-  parent: z.string(),
-  categoryTree: z.array(z.string()),
+  parentId: z.string(),
+  pathNames: z.array(z.string()),
+  order: z.number(),
   images: ImageSchema,
 });
 export type ICategoryMenu = z.infer<typeof CategoryMenuBaseSchema> & {
