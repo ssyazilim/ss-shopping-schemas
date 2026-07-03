@@ -18,7 +18,7 @@ export const IMAGES = (locale: ILocale = 'tr') => {
           .min(2, { message: m.public_forms_validations_minLength(2) })
           .max(254, { message: m.public_forms_validations_maxLength(254) }),
       }),
-    ),
+    ).meta({ examples: [] }),
     dynamicImages: z.array(
       z
         .string()
