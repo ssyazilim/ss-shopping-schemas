@@ -67,7 +67,7 @@ const document = generator.generateDocument({
   servers: [
     { url: 'http://localhost:5000/api' },
     { url: 'https://api.bastakshop.com/api' },
-    { url: 'https://api.sagmanhurda.com/api' },
+    { url: 'https://api.kimyakent.com/api' },
     { url: 'https://api.ulusanelektrik.com/api' },
   ],
 });
