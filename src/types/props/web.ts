@@ -412,7 +412,7 @@ export interface PPRadioListNoButton {
 
 export interface PPSelectCheck {
   data?: { name?: string; [key: string]: any }[];
-  modelValue?: string;
+  modelValue?: string | number;
   type?: string;
   labelTitle?: string;
   inputClass?: string;
@@ -429,7 +429,7 @@ export interface PPButton {
 }
 
 export interface PPRadioList {
-  data?: { _id: string | number; disabled: boolean; [key: string]: any }[];
+  data?: { _id: string | number; disabled?: boolean; [key: string]: any }[];
   modelValue?: object;
   type?: string;
   selectedIndex?: number;

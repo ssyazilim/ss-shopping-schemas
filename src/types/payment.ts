@@ -6,6 +6,7 @@ import {
   ADD_PAYMENT_USER,
   ADD_SHIPMENT,
   SAVE_PAYMENT,
+  ADD_PAYMENT_INFORMATIONS,
 } from '../schemas/payment/validation';
 import { MongoSchema } from './common';
 import { ImageSchema } from './product';
@@ -13,6 +14,9 @@ import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import type { IProduct } from './product';
 import type { IVariant } from './variant';
 import type { IUser } from './user';
+
+export type IBuyerStore = z.infer<typeof AddPaymentInformationsSchema>;
+export const AddPaymentInformationsSchema = ADD_PAYMENT_INFORMATIONS();
 
 export type IPaymentStatus = z.infer<typeof PaymentStatusSchema>;
 export const PaymentStatusSchema = z.string();
