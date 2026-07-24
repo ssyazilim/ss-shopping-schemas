@@ -489,7 +489,7 @@
               "07500"
             ]
           },
-          "line": {
+          "address": {
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
@@ -506,7 +506,7 @@
           "city",
           "district",
           "zipCode",
-          "line"
+          "address"
         ]
       },
       "updateAddress": {
@@ -568,7 +568,7 @@
               "07500"
             ]
           },
-          "line": {
+          "address": {
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
@@ -12856,7 +12856,7 @@
         "operationId": "sendSMS",
         "security": [
           {
-            "X-API-KEY": []
+            "JWT": []
           }
         ],
         "requestBody": {
@@ -17751,6 +17751,37 @@
         }
       }
     },
+    "/public/shipping/templates": {
+      "get": {
+        "tags": [
+          "Shipping"
+        ],
+        "summary": "List shipment templates",
+        "operationId": "getShippingTemplates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/shipping/address": {
       "post": {
         "tags": [
@@ -17758,6 +17789,11 @@
         ],
         "summary": "Create a shipping address",
         "operationId": "addShippingAddress",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -17985,7 +18021,7 @@
         }
       }
     },
-    "/admin/shipping/addresses": {
+    "/public/shipping/addresses": {
       "get": {
         "tags": [
           "Shipping"
@@ -18627,42 +18663,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/shipping/templates": {
-      "get": {
-        "tags": [
-          "Shipping"
-        ],
-        "summary": "List shipment templates",
-        "operationId": "getShippingTemplates",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
