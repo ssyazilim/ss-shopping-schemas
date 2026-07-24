@@ -51,11 +51,21 @@ registry.registerPath({
 });
 
 registry.registerPath({
+  method: 'get',
+  path: '/public/shipping/templates',
+  tags: ['Shipping'],
+  summary: 'List shipment templates',
+  operationId: 'getShippingTemplates',
+  responses,
+});
+
+registry.registerPath({
   method: 'post',
   path: '/public/shipping/address',
   tags: ['Shipping'],
   summary: 'Create a shipping address',
   operationId: 'addShippingAddress',
+  security: [{ 'X-API-KEY': [] }],
   request: { body: buildRequestBody(AddShippingAddressSchema) },
   responses,
 });
@@ -117,7 +127,7 @@ registry.registerPath({
 
 registry.registerPath({
   method: 'get',
-  path: '/admin/shipping/addresses',
+  path: '/public/shipping/addresses',
   tags: ['Shipping'],
   summary: 'List shipping addresses',
   operationId: 'getShippingAddresses',
@@ -282,16 +292,6 @@ registry.registerPath({
   operationId: 'createShippingShipment',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(CreateShippingShipmentSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'get',
-  path: '/admin/shipping/templates',
-  tags: ['Shipping'],
-  summary: 'List shipment templates',
-  operationId: 'getShippingTemplates',
-  security: [{ JWT: [] }],
   responses,
 });
 

@@ -9,7 +9,7 @@ registry.registerPath({
   tags: ['Gsm'],
   summary: 'Send a sms for specific turkish number',
   operationId: 'sendSMS',
-  security: [{ 'X-API-KEY': [] }],
+  security: [{ JWT: [] }],
   request: { body: buildRequestBody(SendSmsSchema) },
   responses,
 });
