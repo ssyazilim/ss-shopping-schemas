@@ -8,6 +8,7 @@ import {
 } from './schema';
 import { responses, buildRequestBody, ListQuerySchema } from '../common';
 
+// GET /public/variants
 registry.registerPath({
   method: 'get',
   path: '/public/variants',
@@ -18,6 +19,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/variant/{productId}
 registry.registerPath({
   method: 'get',
   path: '/public/variant/{productId}',
@@ -28,6 +30,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/variant/{productId}
 registry.registerPath({
   method: 'post',
   path: '/admin/variant/{productId}',
@@ -42,6 +45,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/variant/{productId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/variant/{productId}',
@@ -56,6 +60,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/variant
 registry.registerPath({
   method: 'delete',
   path: '/admin/variant',
@@ -67,6 +72,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/variants/{productId}
 registry.registerPath({
   method: 'post',
   path: '/admin/variants/{productId}',

@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { AnalyzeSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
+// POST /public/traffic/analyze
 registry.registerPath({
   method: 'post',
   path: '/public/traffic/analyze',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/traffic/analyze-traffic
 registry.registerPath({
   method: 'get',
   path: '/admin/traffic/analyze-traffic',
@@ -35,6 +37,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/traffic/analyze-organic-traffic
 registry.registerPath({
   method: 'get',
   path: '/admin/traffic/analyze-organic-traffic',
@@ -57,6 +60,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/traffic/analyze-organic-traffic
 registry.registerPath({
   method: 'delete',
   path: '/admin/traffic/analyze-organic-traffic',

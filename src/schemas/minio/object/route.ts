@@ -10,6 +10,7 @@ import {
 } from './schema';
 import { responses, buildRequestBody } from '../../common';
 
+// GET /admin/minio/object/check-metadata
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/object/check-metadata',
@@ -26,6 +27,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/object
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/object',
@@ -42,6 +44,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/object
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object',
@@ -59,6 +62,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/minio/object
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/object',
@@ -70,6 +74,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/minio/object/objects
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/object/objects',
@@ -81,6 +86,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/object/copy
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/copy',
@@ -92,6 +98,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/object/presigned-url
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/presigned-url',
@@ -103,6 +110,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/object/presigned-get-object
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/presigned-get-object',
@@ -114,6 +122,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/object/presigned-put-object
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/presigned-put-object',

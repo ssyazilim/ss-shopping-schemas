@@ -7,6 +7,7 @@ const addressIdParam = z.object({
   addressId: z.string(),
 });
 
+// GET /public/address
 registry.registerPath({
   method: 'get',
   path: '/public/address',
@@ -17,6 +18,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/address
 registry.registerPath({
   method: 'post',
   path: '/public/address',
@@ -28,6 +30,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/address/{addressId}
 registry.registerPath({
   method: 'get',
   path: '/public/address/{addressId}',
@@ -39,6 +42,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /public/address/{addressId}
 registry.registerPath({
   method: 'patch',
   path: '/public/address/{addressId}',
@@ -53,6 +57,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /public/address/{addressId}
 registry.registerPath({
   method: 'delete',
   path: '/public/address/{addressId}',
@@ -64,6 +69,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/addresses
 registry.registerPath({
   method: 'get',
   path: '/admin/addresses',

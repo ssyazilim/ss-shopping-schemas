@@ -74,9 +74,9 @@ export const PRICE = (locale: ILocale = 'tr') => {
 
 export const PRODUCT_PROPERTIES = () => {
   return z.object({
-    hidePrice: z.boolean().meta({ examples: [false] }), // prettier-ignore
-    isFeatured: z.boolean().meta({ examples: [false] }), // prettier-ignore
-    isShippingFree: z.boolean().meta({ examples: [false] }), // prettier-ignore
+    hidePrice: z.boolean().meta({ examples: [false] }),
+    isFeatured: z.boolean().meta({ examples: [false] }),
+    isShippingFree: z.boolean().meta({ examples: [false] }),
   });
 };
 export const ADD_PRODUCT = (locale: ILocale = 'tr') => {

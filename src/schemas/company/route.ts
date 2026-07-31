@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { AddCompanySchema, UpdateCompanySchema, CompanyPaymentSchema } from './schema';
 import { responses, buildRequestBody, DeleteModelSchema } from '../common';
 
+// GET /public/company
 registry.registerPath({
   method: 'get',
   path: '/public/company',
@@ -12,6 +13,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/company
 registry.registerPath({
   method: 'post',
   path: '/admin/company',
@@ -23,6 +25,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/company/{companyId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/company/{companyId}',
@@ -37,6 +40,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/company/payment/{companyId}
 registry.registerPath({
   method: 'post',
   path: '/admin/company/payment/{companyId}',
@@ -51,6 +55,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/company/payment/{companyId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/company/payment/{companyId}',
@@ -65,6 +70,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/company/payment/{companyId}
 registry.registerPath({
   method: 'delete',
   path: '/admin/company/payment/{companyId}',

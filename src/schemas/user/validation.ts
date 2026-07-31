@@ -22,7 +22,7 @@ export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
       .meta({ examples: ['senocak-a@hotmail.com'] }),
     phoneNumber: z
       .e164({ message: m.public_forms_validations_phoneNumber })
-      .meta({ examples: ['905425496142'] }),
+      .meta({ examples: ['+905425496142'] }),
     password: z
       .string()
       .min(8, m.public_forms_validations_minLength(8))

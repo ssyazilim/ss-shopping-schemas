@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { registry } from '../registry';
 import { responses } from '../common';
 
+// GET /public/currencies
 registry.registerPath({
   method: 'get',
   path: '/public/currencies',
@@ -11,6 +12,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/currencies/exchange
 registry.registerPath({
   method: 'get',
   path: '/public/currencies/exchange',

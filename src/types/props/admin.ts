@@ -1,3 +1,4 @@
+import type Iyzipay from 'iyzipay';
 import type { IAgreement } from '../agreement';
 import type { IBrand } from '../brand';
 import type { ICategory } from '../category';
@@ -24,7 +25,6 @@ import type {
   IDealerPricesWithDesi,
   IPackageTemplate,
 } from '../geliver';
-import type { IItemTransactions, IPaymentResultForIyzico } from '../iyzico';
 import type { IPayment, IPaymentBasketItems } from '../payment';
 import type { IPost, IPostCounts } from '../post';
 import type { IPrice, IProduct, IProductAndVariant, IStaticImage, IType } from '../product';
@@ -250,12 +250,12 @@ export interface PInfoRow {
 export interface PMain {
   currency?: string;
   payment?: IPayment;
-  paymentResultIyzico?: IPaymentResultForIyzico;
+  paymentResultIyzico?: Iyzipay.PaymentResult;
 }
 
 export interface PCard {
   currency?: string;
-  itemTransactions?: IItemTransactions[];
+  itemTransactions?: Iyzipay.PaymentResult['itemTransactions'];
 }
 
 export interface PCash {
@@ -270,7 +270,7 @@ export interface POrderAddress {
 }
 
 export interface PCardInformation {
-  paymentResultIyzico?: IPaymentResultForIyzico;
+  paymentResultIyzico?: Iyzipay.PaymentResult;
 }
 
 export interface PTableGroup {

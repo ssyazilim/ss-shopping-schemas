@@ -9,6 +9,7 @@ import {
   PasswordResetCompleteUserSchema,
 } from './schema';
 
+// POST /public/auth/login
 registry.registerPath({
   method: 'post',
   path: '/public/auth/login',
@@ -19,6 +20,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/auth/register
 registry.registerPath({
   method: 'post',
   path: '/public/auth/register',
@@ -29,6 +31,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/auth/register-verification
 registry.registerPath({
   method: 'post',
   path: '/public/auth/register-verification',
@@ -39,6 +42,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/auth/register-activate
 registry.registerPath({
   method: 'post',
   path: '/public/auth/register-activate',
@@ -49,6 +53,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/auth/refresh-code
 registry.registerPath({
   method: 'post',
   path: '/public/auth/refresh-code',
@@ -59,6 +64,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/auth/password-reset
 registry.registerPath({
   method: 'post',
   path: '/public/auth/password-reset',
@@ -69,6 +75,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/auth/password-reset-complete
 registry.registerPath({
   method: 'post',
   path: '/public/auth/password-reset-complete',

@@ -34,6 +34,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "generate:openapi": "tsx src/openapi/generate.ts",
+    "swagger": "npm run generate:openapi && cp openapi.json docs/swagger.json && serve docs --listen 1000",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "format": "prettier --write src",
@@ -41,6 +42,7 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^8.5.0",
+    "@types/iyzipay": "^2.0.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -49,6 +51,7 @@
     "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.3",
+    "serve": "^14.2.5",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",

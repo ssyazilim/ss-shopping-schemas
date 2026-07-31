@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { AddBrandSchema, UpdateBrandSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
+// GET /public/brands
 registry.registerPath({
   method: 'get',
   path: '/public/brands',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/brand/{brandId}
 registry.registerPath({
   method: 'get',
   path: '/public/brand/{brandId}',
@@ -23,6 +25,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/brand
 registry.registerPath({
   method: 'post',
   path: '/admin/brand',
@@ -34,6 +37,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/brand
 registry.registerPath({
   method: 'delete',
   path: '/admin/brand',
@@ -45,6 +49,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/brand/{brandId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/brand/{brandId}',

@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { AddExternalSchema, UpdateExternalSchema } from './schema';
 import { responses, buildRequestBody } from '../common';
 
+// GET /public/external
 registry.registerPath({
   method: 'get',
   path: '/public/external',
@@ -12,6 +13,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/external/{key}
 registry.registerPath({
   method: 'get',
   path: '/public/external/{key}',
@@ -22,6 +24,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/external
 registry.registerPath({
   method: 'post',
   path: '/admin/external',
@@ -33,6 +36,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/external/{externalId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/external/{externalId}',

@@ -7,6 +7,7 @@ const QuestionListQuerySchema = ListQuerySchema.extend({
   status: z.enum(['pending', 'approved', 'rejected']).optional().default('pending'),
 });
 
+// GET /public/questions/{productId}
 registry.registerPath({
   method: 'get',
   path: '/public/questions/{productId}',
@@ -20,6 +21,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/questions
 registry.registerPath({
   method: 'get',
   path: '/public/questions',
@@ -31,6 +33,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/question/{productId}
 registry.registerPath({
   method: 'post',
   path: '/public/question/{productId}',
@@ -45,6 +48,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /public/question/{questionId}
 registry.registerPath({
   method: 'patch',
   path: '/public/question/{questionId}',
@@ -59,6 +63,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /public/question/{questionId}
 registry.registerPath({
   method: 'delete',
   path: '/public/question/{questionId}',
@@ -70,6 +75,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/questions
 registry.registerPath({
   method: 'get',
   path: '/admin/questions',
@@ -81,6 +87,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/question/{userId}/{productId}
 registry.registerPath({
   method: 'post',
   path: '/admin/question/{userId}/{productId}',
@@ -95,6 +102,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/question/{questionId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/question/{questionId}',
@@ -109,6 +117,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/question
 registry.registerPath({
   method: 'delete',
   path: '/admin/question',

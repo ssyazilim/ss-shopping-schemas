@@ -3,6 +3,7 @@ import { registry } from '../../registry';
 import { AddBucketVersionSchema, AddBucketConfigSchema } from './schema';
 import { responses, buildRequestBody } from '../../common';
 
+// GET /admin/minio/buckets
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/buckets',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/bucket/{bucketName}
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket/{bucketName}',
@@ -24,6 +26,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/bucket/{bucketName}
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/bucket/{bucketName}',
@@ -35,6 +38,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/minio/bucket/{bucketName}
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/bucket/{bucketName}',
@@ -46,6 +50,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/bucket-operations/incompleted-uploads
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-operations/incompleted-uploads',
@@ -69,6 +74,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/bucket-operations
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-operations',
@@ -99,6 +105,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/bucket-version/{bucketName}
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-version/{bucketName}',
@@ -110,6 +117,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/bucket-version
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/bucket-version',
@@ -121,6 +129,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/bucket-config/{bucketName}
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-config/{bucketName}',
@@ -132,6 +141,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/minio/bucket-config/{bucketName}
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/bucket-config/{bucketName}',
@@ -143,6 +153,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/minio/bucket-config
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/bucket-config',

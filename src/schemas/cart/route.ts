@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { AddToCartSchema, SetQuantitySchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DateRangeQuerySchema } from '../common';
 
+// GET /public/cart
 registry.registerPath({
   method: 'get',
   path: '/public/cart',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/cart
 registry.registerPath({
   method: 'post',
   path: '/public/cart',
@@ -23,6 +25,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/cart/product/update
 registry.registerPath({
   method: 'post',
   path: '/public/cart/product/update',
@@ -34,6 +37,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/cart/set-quantity
 registry.registerPath({
   method: 'post',
   path: '/public/cart/set-quantity',
@@ -45,6 +49,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/carts
 registry.registerPath({
   method: 'get',
   path: '/admin/carts',
@@ -56,6 +61,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/cart/{cartId}
 registry.registerPath({
   method: 'get',
   path: '/admin/cart/{cartId}',

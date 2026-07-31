@@ -12,6 +12,7 @@ import {
 } from './schema';
 import { responses, buildRequestBody } from '../common';
 
+// GET /public/shipping/prices
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/prices',
@@ -50,6 +51,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/shipping/templates
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/templates',
@@ -59,27 +61,7 @@ registry.registerPath({
   responses,
 });
 
-registry.registerPath({
-  method: 'post',
-  path: '/public/shipping/address',
-  tags: ['Shipping'],
-  summary: 'Create a shipping address',
-  operationId: 'addShippingAddress',
-  security: [{ 'X-API-KEY': [] }],
-  request: { body: buildRequestBody(AddShippingAddressSchema) },
-  responses,
-});
-
-registry.registerPath({
-  method: 'post',
-  path: '/public/shipping/shipment',
-  tags: ['Shipping'],
-  summary: 'Create a shipment',
-  operationId: 'addShippingShipment',
-  request: { body: buildRequestBody(AddShippingShipmentSchema) },
-  responses,
-});
-
+// GET /public/shipping/shipment/labelPDF/{shipmentId}
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/shipment/labelPDF/{shipmentId}',
@@ -97,6 +79,7 @@ registry.registerPath({
   },
 });
 
+// GET /public/shipping/shipment/labelHTML/{shipmentId}
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/shipment/labelHTML/{shipmentId}',
@@ -114,24 +97,26 @@ registry.registerPath({
   },
 });
 
+// POST /public-key/shipping/address
 registry.registerPath({
-  method: 'get',
-  path: '/admin/shipping/balance/{organizationId}',
+  method: 'post',
+  path: '/public-key/shipping/address',
   tags: ['Shipping'],
-  summary: 'Get organisation balance information',
-  operationId: 'getShippingBalance',
-  security: [{ JWT: [] }],
-  request: { params: z.object({ organizationId: z.string() }) },
+  summary: 'Create a shipping address',
+  operationId: 'addShippingAddress',
+  security: [{ 'X-API-KEY': [] }],
+  request: { body: buildRequestBody(AddShippingAddressSchema) },
   responses,
 });
 
+// GET /public-key/shipping/addresses
 registry.registerPath({
   method: 'get',
-  path: '/public/shipping/addresses',
+  path: '/public-key/shipping/addresses',
   tags: ['Shipping'],
   summary: 'List shipping addresses',
   operationId: 'getShippingAddresses',
-  security: [{ JWT: [] }],
+  security: [{ 'X-API-KEY': [] }],
   request: {
     query: z.object({
       page: z
@@ -150,6 +135,43 @@ registry.registerPath({
   responses,
 });
 
+// POST /public-key/shipping/shipment
+registry.registerPath({
+  method: 'post',
+  path: '/public-key/shipping/shipment',
+  tags: ['Shipping'],
+  summary: 'Create a shipment',
+  operationId: 'addShippingShipment',
+  security: [{ 'X-API-KEY': [] }],
+  request: { body: buildRequestBody(AddShippingShipmentSchema) },
+  responses,
+});
+
+// POST /public-key/shipping/shipment/accept/{offerId}
+registry.registerPath({
+  method: 'post',
+  path: '/admin/shipping/shipment/accept/{offerId}',
+  tags: ['Shipping'],
+  summary: 'Accept an offer (purchase label)',
+  operationId: 'acceptShippingOffer',
+  security: [{ 'X-API-KEY': [] }],
+  request: { params: z.object({ offerId: z.string() }) },
+  responses,
+});
+
+// GET /admin/shipping/balance/{organizationId}
+registry.registerPath({
+  method: 'get',
+  path: '/admin/shipping/balance/{organizationId}',
+  tags: ['Shipping'],
+  summary: 'Get organisation balance information',
+  operationId: 'getShippingBalance',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ organizationId: z.string() }) },
+  responses,
+});
+
+// GET /admin/shipping/address/{addressId}
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/address/{addressId}',
@@ -161,6 +183,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/shipping/address/{addressId}
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/address/{addressId}',
@@ -172,6 +195,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/shipping/shipments
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/shipments',
@@ -198,6 +222,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/shipping/shipment/{shipmentId}
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/shipment/{shipmentId}',
@@ -209,6 +234,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/shipping/shipment/update-package/{shipmentId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/shipping/shipment/update-package/{shipmentId}',
@@ -223,6 +249,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/shipping/shipment/cancel/{shipmentId}
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/shipment/cancel/{shipmentId}',
@@ -234,6 +261,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/shipment/clone/{shipmentId}
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/clone/{shipmentId}',
@@ -245,6 +273,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/shipment/return/{shipmentId}
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/return/{shipmentId}',
@@ -259,17 +288,7 @@ registry.registerPath({
   responses,
 });
 
-registry.registerPath({
-  method: 'post',
-  path: '/admin/shipping/shipment/accept/{offerId}',
-  tags: ['Shipping'],
-  summary: 'Accept an offer (purchase label)',
-  operationId: 'acceptShippingOffer',
-  security: [{ JWT: [] }],
-  request: { params: z.object({ offerId: z.string() }) },
-  responses,
-});
-
+// POST /admin/shipping/shipment/accept-return/{shipmentId}
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/accept-return/{shipmentId}',
@@ -284,6 +303,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/shipment/create
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/create',
@@ -295,6 +315,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/template
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/template',
@@ -306,6 +327,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/shipping/template/{templateId}
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/template/{templateId}',
@@ -317,6 +339,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/shipping/providers
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/providers',
@@ -327,6 +350,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/provider
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/provider',
@@ -338,6 +362,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/shipping/provider/{providerAccountId}
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/provider/{providerAccountId}',
@@ -349,6 +374,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/shipping/webhooks
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/webhooks',
@@ -359,6 +385,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/webhook
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/webhook',
@@ -370,6 +397,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/shipping/webhook/test
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/webhook/test',
@@ -381,6 +409,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/shipping/webhook/{webhookId}
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/webhook/{webhookId}',

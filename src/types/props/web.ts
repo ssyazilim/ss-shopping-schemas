@@ -1,8 +1,8 @@
+import type Iyzipay from 'iyzipay';
 import type { IAddress } from '../address';
 import type { IBrand } from '../brand';
 import type { ICategory, ICategoryMenu } from '../category';
 import type { ICompany, IProductSettings, IShippingOptions } from '../company';
-import type { IPaymentResultForIyzico } from '../iyzico';
 import type { IPayment, IPaymentBasketItems } from '../payment';
 import type { IPost } from '../post';
 import type { IProduct } from '../product';
@@ -12,7 +12,7 @@ import type { ICard } from '../card';
 import type { IImageData } from '../common';
 import type { ILink, INavigation, ISecondaryNavigation } from '../menu';
 import type { IInputType, IInputMode } from './admin';
-import { IDealerPricesWithDesi } from '../geliver';
+import type { IDealerPricesWithDesi } from '../geliver';
 
 /*************************
  *       TYPES           *
@@ -20,7 +20,7 @@ import { IDealerPricesWithDesi } from '../geliver';
 
 export interface PPFooter {
   selectedIndex?: number;
-  paymentResultIyzico?: IPaymentResultForIyzico;
+  paymentResultIyzico?: Iyzipay.PaymentResult;
   billingAddress?: IPayment['billingAddress'];
   basketItems?: IPaymentBasketItems[];
   shipment?: IPayment['shipment'];

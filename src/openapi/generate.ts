@@ -2,14 +2,11 @@ import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 import { writeFileSync } from 'node:fs';
 import { registry } from '../schemas';
 
-// When all schema files are imported, they are registered in the registry.
-// This script collects them and produces openapi.json
-
 registry.registerComponent('securitySchemes', 'JWT', {
-  type: 'apiKey',
-  name: 'Authorization',
-  in: 'header',
-  description: "Provide your token key in the 'Bearer <YOUR_TOKEN>' header",
+  type: 'http',
+  scheme: 'Bearer',
+  bearerFormat: 'JWT',
+  description: 'Provide your JWT token. The Bearer prefix is added automatically.',
 });
 
 registry.registerComponent('securitySchemes', 'X-API-KEY', {
@@ -50,6 +47,7 @@ const document = generator.generateDocument({
     { name: 'Minio Bucket S3', description: 'Simple Storage Service for the bucket operations' },
     { name: 'Minio Object S3', description: 'Simple Storage Service for the object operations' },
     { name: 'Payment', description: 'User payment information' },
+    { name: 'Payment Iyzico', description: 'Iyzico payment operations' },
     { name: 'Post', description: 'Posts for the system' },
     { name: 'Product', description: 'Products for the system' },
     { name: 'Product Variant', description: 'Variants for the products' },
@@ -65,7 +63,7 @@ const document = generator.generateDocument({
     url: 'https://swagger.io',
   },
   servers: [
-    { url: 'http://localhost:5000/api' },
+    { url: 'http://localhost:5001/api' },
     { url: 'https://api.bastakshop.com/api' },
     { url: 'https://api.kimyakent.com/api' },
     { url: 'https://api.ulusanelektrik.com/api' },

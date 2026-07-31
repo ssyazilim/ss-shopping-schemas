@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { TranslationSchema, UpdateTranslationSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
+// GET /public/translations
 registry.registerPath({
   method: 'get',
   path: '/public/translations',
@@ -20,6 +21,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/translation/{code}
 registry.registerPath({
   method: 'get',
   path: '/public/translation/{code}',
@@ -34,6 +36,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/translation
 registry.registerPath({
   method: 'get',
   path: '/admin/translation',
@@ -51,6 +54,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/translation
 registry.registerPath({
   method: 'post',
   path: '/admin/translation',
@@ -62,6 +66,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/translation
 registry.registerPath({
   method: 'delete',
   path: '/admin/translation',
@@ -73,6 +78,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/translation/{translationId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/translation/{translationId}',

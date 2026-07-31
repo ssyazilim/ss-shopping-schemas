@@ -8,6 +8,7 @@ import {
 } from './schema';
 import { responses, buildRequestBody } from '../common';
 
+// POST /public/contact/send-message
 registry.registerPath({
   method: 'post',
   path: '/public/contact/send-message',
@@ -18,6 +19,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/contact/upload-file
 registry.registerPath({
   method: 'post',
   path: '/public/contact/upload-file',
@@ -34,6 +36,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/contact/send-resume
 registry.registerPath({
   method: 'post',
   path: '/public/contact/send-resume',
@@ -44,6 +47,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/contact/send-error-message
 registry.registerPath({
   method: 'post',
   path: '/public/contact/send-error-message',
@@ -54,6 +58,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/contact/check-smtp
 registry.registerPath({
   method: 'post',
   path: '/admin/contact/check-smtp',

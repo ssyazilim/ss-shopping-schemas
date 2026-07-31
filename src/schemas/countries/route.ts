@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { registry } from '../registry';
 import { responses } from '../common';
 
+// GET /public/country
 registry.registerPath({
   method: 'get',
   path: '/public/country',
@@ -11,6 +12,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/country/{countryCode}
 registry.registerPath({
   method: 'get',
   path: '/public/country/{countryCode}',
@@ -21,6 +23,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/country/{countryCode}/city/{cityCode}
 registry.registerPath({
   method: 'get',
   path: '/public/country/{countryCode}/city/{cityCode}',
@@ -36,6 +39,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/geliver/country/{countryCode}
 registry.registerPath({
   method: 'get',
   path: '/public/geliver/country/{countryCode}',
@@ -46,6 +50,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/geliver/country/{countryCode}/city/{cityCode}
 registry.registerPath({
   method: 'get',
   path: '/public/geliver/country/{countryCode}/city/{cityCode}',

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const EXTERNAL_IYZICO = z.object({
-  lang: z.string().meta({ examples: ['tr'] }),
+  lang: z.string().meta({ examples: ['en'] }),
   url: z.url().meta({ examples: ['https://sandbox-api.iyzipay.com'] }),
   apiKey: z.string(),
   secretKey: z.string(),

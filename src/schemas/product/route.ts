@@ -4,6 +4,7 @@ import { ProductSchema, EditProductSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 import { UpdateTaxSchema } from '../payment/schema';
 
+// GET /public/products
 registry.registerPath({
   method: 'get',
   path: '/public/products',
@@ -22,6 +23,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/items/best-seller
 registry.registerPath({
   method: 'get',
   path: '/public/items/best-seller',
@@ -40,6 +42,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/products/XML/google
 registry.registerPath({
   method: 'get',
   path: '/public/products/XML/google',
@@ -49,6 +52,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/products/XML/yandex
 registry.registerPath({
   method: 'get',
   path: '/public/products/XML/yandex',
@@ -58,6 +62,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/product/{productId}
 registry.registerPath({
   method: 'get',
   path: '/public/product/{productId}',
@@ -76,6 +81,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/products/count
 registry.registerPath({
   method: 'get',
   path: '/admin/products/count',
@@ -86,6 +92,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/products/update-sku
 registry.registerPath({
   method: 'get',
   path: '/admin/products/update-sku',
@@ -96,6 +103,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/products/update-tax
 registry.registerPath({
   method: 'patch',
   path: '/admin/products/update-tax',
@@ -107,6 +115,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/product
 registry.registerPath({
   method: 'post',
   path: '/admin/product',
@@ -118,6 +127,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/product
 registry.registerPath({
   method: 'delete',
   path: '/admin/product',
@@ -129,6 +139,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/product/{productId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/product/{productId}',

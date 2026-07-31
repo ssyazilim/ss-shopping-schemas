@@ -3,6 +3,7 @@ import { GeminiPromptSchema, TranslateSchema } from './schema';
 import { PasswordResetUserSchema } from '../auth/schema';
 import { responses, buildRequestBody } from '../common';
 
+// POST /public/google/translate
 registry.registerPath({
   method: 'post',
   path: '/public/google/translate',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/google/subscribe
 registry.registerPath({
   method: 'post',
   path: '/public/google/subscribe',
@@ -23,6 +25,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/google/gemini-prompt
 registry.registerPath({
   method: 'post',
   path: '/admin/google/gemini-prompt',

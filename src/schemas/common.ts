@@ -38,6 +38,7 @@ export const ApiSuccessSchema = registry.register(
   z.object({
     success: z.object({
       message: z.string().meta({ description: 'Success message' }),
+      data: z.any(),
     }),
   }),
 );
@@ -73,20 +74,12 @@ export function buildRequestBody(schema: z.ZodType) {
   };
 }
 
-// Makes a field (and its nested objects) optional; It doesn't wrap itself — the caller adds .optional().
 function toDeepPartial(field: z.ZodType): z.ZodType {
   if (field instanceof z.ZodOptional) return toDeepPartial(field.unwrap() as z.ZodType);
   if (field instanceof z.ZodObject) return deepPartial(field);
   return field;
 }
 
-/**
- * Makes ALL fields of a ZodObject (in depth, including nested objects) optional.
- * For PATCH/partial update schemes: You provide the create scheme, all are optional.
- * No .deepPartial() in Zod 4; .partial() is superficial (leaves internal objects solid) + export
- * There is a risk of TS2742 in the given schemes. That's why we install it manually, recursively.
- * Since the result is ZodObject, you can chain .strict() when using it.
- */
 export function deepPartial(schema: z.ZodObject): z.ZodObject {
   const shape = schema.shape as Record<string, z.ZodType>;
   const out: Record<string, z.ZodType> = {};

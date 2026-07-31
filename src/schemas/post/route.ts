@@ -4,6 +4,7 @@ import { registry } from '../registry';
 import { PostSchema, LikePostSchema, CommentPostSchema } from './schema';
 import { responses, buildRequestBody, DeleteModelSchema, ListQuerySchema } from '../common';
 
+// GET /public/posts/total
 registry.registerPath({
   method: 'get',
   path: '/public/posts/total',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/posts
 registry.registerPath({
   method: 'get',
   path: '/public/posts',
@@ -34,6 +36,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/post/{postId}
 registry.registerPath({
   method: 'get',
   path: '/public/post/{postId}',
@@ -52,6 +55,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/post/{postId}/like
 registry.registerPath({
   method: 'post',
   path: '/public/post/{postId}/like',
@@ -66,6 +70,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/post/{postId}/comment
 registry.registerPath({
   method: 'post',
   path: '/public/post/{postId}/comment',
@@ -80,6 +85,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/post
 registry.registerPath({
   method: 'post',
   path: '/admin/post',
@@ -91,6 +97,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/post
 registry.registerPath({
   method: 'delete',
   path: '/admin/post',
@@ -102,6 +109,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/post/{postId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/post/{postId}',

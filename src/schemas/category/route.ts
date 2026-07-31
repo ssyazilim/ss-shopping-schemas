@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { CategorySchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
+// GET /public/categories
 registry.registerPath({
   method: 'get',
   path: '/public/categories',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/categories/google/{locale}
 registry.registerPath({
   method: 'get',
   path: '/public/categories/google/{locale}',
@@ -25,6 +27,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/category
 registry.registerPath({
   method: 'post',
   path: '/admin/category',
@@ -36,6 +39,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/category
 registry.registerPath({
   method: 'delete',
   path: '/admin/category',
@@ -47,6 +51,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/category/{categoryId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/category/{categoryId}',

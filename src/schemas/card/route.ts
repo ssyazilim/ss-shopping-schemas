@@ -1,19 +1,8 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddCardSchema } from './schema';
-import { responses, buildRequestBody } from '../common';
+import { responses } from '../common';
 
-registry.registerPath({
-  method: 'get',
-  path: '/public/check-card/{userKey}',
-  tags: ['Card'],
-  summary: 'Get a special card for the user',
-  operationId: 'getCardWithDetail',
-  security: [{ JWT: [] }],
-  request: { params: z.object({ userKey: z.string() }) },
-  responses,
-});
-
+// GET /public/card
 registry.registerPath({
   method: 'get',
   path: '/public/card',
@@ -25,17 +14,7 @@ registry.registerPath({
   responses,
 });
 
-registry.registerPath({
-  method: 'post',
-  path: '/public/card',
-  tags: ['Card'],
-  summary: 'Add a new card to the system',
-  operationId: 'addCard',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddCardSchema) },
-  responses,
-});
-
+// GET /admin/cards
 registry.registerPath({
   method: 'get',
   path: '/admin/cards',
@@ -43,16 +22,5 @@ registry.registerPath({
   summary: 'Get all cards for the user',
   operationId: 'getCards',
   security: [{ JWT: [] }],
-  responses,
-});
-
-registry.registerPath({
-  method: 'delete',
-  path: '/public/card/{cardId}',
-  tags: ['Card'],
-  summary: 'Delete a card from the system',
-  operationId: 'deleteCard',
-  security: [{ JWT: [] }],
-  request: { params: z.object({ cardId: z.string() }) },
   responses,
 });

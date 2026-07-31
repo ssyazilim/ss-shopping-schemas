@@ -7,6 +7,7 @@ const ReviewListQuerySchema = ListQuerySchema.extend({
   status: z.enum(['pending', 'approved', 'rejected']).optional().default('pending'),
 });
 
+// GET /public/reviews/{productId}
 registry.registerPath({
   method: 'get',
   path: '/public/reviews/{productId}',
@@ -20,6 +21,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/reviews
 registry.registerPath({
   method: 'get',
   path: '/public/reviews',
@@ -31,6 +33,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /public/review/{productId}
 registry.registerPath({
   method: 'post',
   path: '/public/review/{productId}',
@@ -45,6 +48,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /public/review/{reviewId}
 registry.registerPath({
   method: 'patch',
   path: '/public/review/{reviewId}',
@@ -59,6 +63,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /public/review/{reviewId}
 registry.registerPath({
   method: 'delete',
   path: '/public/review/{reviewId}',
@@ -70,6 +75,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/reviews
 registry.registerPath({
   method: 'get',
   path: '/admin/reviews',
@@ -81,6 +87,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/review/{userId}/{productId}
 registry.registerPath({
   method: 'post',
   path: '/admin/review/{userId}/{productId}',
@@ -95,6 +102,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/review/{reviewId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/review/{reviewId}',
@@ -109,6 +117,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/review
 registry.registerPath({
   method: 'delete',
   path: '/admin/review',

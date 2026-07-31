@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { EditUserSchema, DeleteUserSchema, CustomerSchema, UpdateCustomerSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
+// GET /public/user/{userId}
 registry.registerPath({
   method: 'get',
   path: '/public/user/{userId}',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /public/user
 registry.registerPath({
   method: 'patch',
   path: '/public/user',
@@ -24,6 +26,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /public/user
 registry.registerPath({
   method: 'delete',
   path: '/public/user',
@@ -35,6 +38,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/users
 registry.registerPath({
   method: 'get',
   path: '/admin/users',
@@ -46,6 +50,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/user
 registry.registerPath({
   method: 'post',
   path: '/admin/user',
@@ -57,6 +62,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/user
 registry.registerPath({
   method: 'delete',
   path: '/admin/user',
@@ -68,6 +74,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/user/{userId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/user/{userId}',

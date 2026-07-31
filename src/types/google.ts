@@ -9,7 +9,7 @@ export const DestinationSchema = z.enum([
   'Free_listings',
   'Free_local_listings',
   'YouTube_Shopping',
-]); // prettier-ignore
+]);
 
 export type IGoogleShipping = z.infer<typeof GoogleShippingSchema>;
 export const GoogleShippingSchema = z.object({

@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { SendSmsSchema } from './schema';
 import { responses, buildRequestBody } from '../common';
 
+// POST /public/gsm/send-sms
 registry.registerPath({
   method: 'post',
   path: '/public/gsm/send-sms',
@@ -14,6 +15,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/gsm/check-report
 registry.registerPath({
   method: 'get',
   path: '/admin/gsm/check-report',
@@ -25,6 +27,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/gsm/check-balance
 registry.registerPath({
   method: 'get',
   path: '/admin/gsm/check-balance',
@@ -36,6 +39,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/gsm/list-headers
 registry.registerPath({
   method: 'get',
   path: '/admin/gsm/list-headers',

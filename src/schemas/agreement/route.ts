@@ -3,6 +3,7 @@ import { registry } from '../registry';
 import { AddAgreementSchema, UpdateAgreementSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
 
+// GET /public/agreements
 registry.registerPath({
   method: 'get',
   path: '/public/agreements',
@@ -13,6 +14,7 @@ registry.registerPath({
   responses,
 });
 
+// GET /public/agreement/{locale}/{name}
 registry.registerPath({
   method: 'get',
   path: '/public/agreement/{locale}/{name}',
@@ -28,6 +30,7 @@ registry.registerPath({
   responses,
 });
 
+// POST /admin/agreement
 registry.registerPath({
   method: 'post',
   path: '/admin/agreement',
@@ -39,6 +42,7 @@ registry.registerPath({
   responses,
 });
 
+// DELETE /admin/agreement
 registry.registerPath({
   method: 'delete',
   path: '/admin/agreement',
@@ -50,6 +54,7 @@ registry.registerPath({
   responses,
 });
 
+// PATCH /admin/agreement/{agreementId}
 registry.registerPath({
   method: 'patch',
   path: '/admin/agreement/{agreementId}',

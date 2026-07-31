@@ -84,6 +84,10 @@
       "description": "User payment information"
     },
     {
+      "name": "Payment Iyzico",
+      "description": "Iyzico payment operations"
+    },
+    {
       "name": "Post",
       "description": "Posts for the system"
     },
@@ -126,7 +130,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5000/api"
+      "url": "http://localhost:5001/api"
     },
     {
       "url": "https://api.bastakshop.com/api"
@@ -141,10 +145,10 @@
   "components": {
     "securitySchemes": {
       "JWT": {
-        "type": "apiKey",
-        "name": "Authorization",
-        "in": "header",
-        "description": "Provide your token key in the 'Bearer <YOUR_TOKEN>' header"
+        "type": "http",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT",
+        "description": "Provide your JWT token. The Bearer prefix is added automatically."
       },
       "X-API-KEY": {
         "type": "apiKey",
@@ -220,7 +224,8 @@
               "message": {
                 "type": "string",
                 "description": "Success message"
-              }
+              },
+              "data": {}
             },
             "required": [
               "message"
@@ -863,72 +868,6 @@
             ]
           }
         }
-      },
-      "AddCard": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "format": "email",
-            "examples": [
-              "no-reply@ssyazilim.com"
-            ]
-          },
-          "card": {
-            "type": "object",
-            "properties": {
-              "cardAlias": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "ALISARI"
-                ]
-              },
-              "cardHolderName": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "ALI SARI"
-                ]
-              },
-              "cardNumber": {
-                "type": "string",
-                "examples": [
-                  "5170410000000004"
-                ]
-              },
-              "expireMonth": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 2,
-                "examples": [
-                  "10"
-                ]
-              },
-              "expireYear": {
-                "type": "string",
-                "minLength": 4,
-                "maxLength": 4,
-                "examples": [
-                  "2030"
-                ]
-              }
-            },
-            "required": [
-              "cardAlias",
-              "cardHolderName",
-              "cardNumber",
-              "expireMonth",
-              "expireYear"
-            ]
-          }
-        },
-        "required": [
-          "email",
-          "card"
-        ]
       },
       "AddToCart": {
         "type": "object",
@@ -3246,7 +3185,7 @@
           "lang": {
             "type": "string",
             "examples": [
-              "tr"
+              "en"
             ]
           },
           "url": {
@@ -3385,7 +3324,7 @@
               "lang": {
                 "type": "string",
                 "examples": [
-                  "tr"
+                  "en"
                 ]
               },
               "url": {
@@ -3540,7 +3479,7 @@
               "lang": {
                 "type": "string",
                 "examples": [
-                  "tr"
+                  "en"
                 ]
               },
               "url": {
@@ -4313,7 +4252,7 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "Halil"
+              "Varyant"
             ]
           },
           "surname": {
@@ -4321,7 +4260,7 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "Gür"
+              "Restaurant A.Ş"
             ]
           },
           "country": {
@@ -4387,8 +4326,8 @@
           },
           "identityNumber": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
+            "minLength": 11,
+            "maxLength": 11,
             "examples": [
               "19342410262"
             ]
@@ -4448,83 +4387,6 @@
           "city",
           "district",
           "zipCode"
-        ]
-      },
-      "paymentCard": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "ALI"
-            ]
-          },
-          "surname": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "SARI"
-            ]
-          },
-          "cardNumber": {
-            "type": "string",
-            "minLength": 16,
-            "maxLength": 16,
-            "examples": [
-              "5890040000000016"
-            ]
-          },
-          "expireMonth": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 2,
-            "examples": [
-              "11"
-            ]
-          },
-          "expireYear": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 4,
-            "examples": [
-              "2026"
-            ]
-          },
-          "cvc": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 4,
-            "examples": [
-              "704"
-            ]
-          },
-          "installment": {
-            "type": "integer",
-            "minimum": 0,
-            "examples": [
-              1
-            ]
-          },
-          "registerCard": {
-            "type": "integer",
-            "minimum": 0,
-            "examples": [
-              0
-            ]
-          }
-        },
-        "required": [
-          "name",
-          "surname",
-          "cardNumber",
-          "expireMonth",
-          "expireYear",
-          "cvc",
-          "installment",
-          "registerCard"
         ]
       },
       "shippingAddress": {
@@ -4763,7 +4625,7 @@
           "phoneNumber": {
             "type": "string",
             "examples": [
-              "905527406607"
+              "+905527406607"
             ]
           },
           "email": {
@@ -4781,525 +4643,6 @@
           "contactName",
           "phoneNumber",
           "email"
-        ]
-      },
-      "addPayment": {
-        "type": "object",
-        "properties": {
-          "paymentCard": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "ALI"
-                ]
-              },
-              "surname": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "SARI"
-                ]
-              },
-              "cardNumber": {
-                "type": "string",
-                "minLength": 16,
-                "maxLength": 16,
-                "examples": [
-                  "5890040000000016"
-                ]
-              },
-              "expireMonth": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 2,
-                "examples": [
-                  "11"
-                ]
-              },
-              "expireYear": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 4,
-                "examples": [
-                  "2026"
-                ]
-              },
-              "cvc": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 4,
-                "examples": [
-                  "704"
-                ]
-              },
-              "installment": {
-                "type": "integer",
-                "minimum": 0,
-                "examples": [
-                  1
-                ]
-              },
-              "registerCard": {
-                "type": "integer",
-                "minimum": 0,
-                "examples": [
-                  0
-                ]
-              }
-            },
-            "required": [
-              "name",
-              "surname",
-              "cardNumber",
-              "expireMonth",
-              "expireYear",
-              "cvc",
-              "installment",
-              "registerCard"
-            ]
-          },
-          "buyer": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string",
-                "format": "email",
-                "examples": [
-                  "no-reply@ssyazilim.com"
-                ]
-              },
-              "identityNumber": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "19342410262"
-                ]
-              },
-              "registrationAddress": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
-                ]
-              },
-              "country": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Türkiye"
-                ]
-              },
-              "city": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Antalya"
-                ]
-              },
-              "district": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Serik"
-                ]
-              },
-              "zipCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "07500"
-                ]
-              },
-              "message": {
-                "type": "string",
-                "examples": [
-                  "Hediye paketi olsun!"
-                ]
-              }
-            },
-            "required": [
-              "email",
-              "identityNumber",
-              "registrationAddress",
-              "country",
-              "city",
-              "district",
-              "zipCode"
-            ]
-          },
-          "shippingAddress": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Ayşe"
-                ]
-              },
-              "surname": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Sarı"
-                ]
-              },
-              "country": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Türkiye"
-                ]
-              },
-              "city": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Antalya"
-                ]
-              },
-              "district": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Serik"
-                ]
-              },
-              "address": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
-                ]
-              },
-              "zipCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "07500"
-                ]
-              }
-            },
-            "required": [
-              "name",
-              "surname",
-              "country",
-              "city",
-              "district",
-              "address",
-              "zipCode"
-            ]
-          },
-          "billingAddress": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Halil"
-                ]
-              },
-              "surname": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Gür"
-                ]
-              },
-              "country": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Türkiye"
-                ]
-              },
-              "city": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Antalya"
-                ]
-              },
-              "district": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Konyaaltı"
-                ]
-              },
-              "address": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
-                ]
-              },
-              "zipCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "07500"
-                ]
-              }
-            },
-            "required": [
-              "name",
-              "surname",
-              "country",
-              "city",
-              "district",
-              "address",
-              "zipCode"
-            ]
-          },
-          "basketItems": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "productId": {
-                  "type": "string",
-                  "minLength": 24,
-                  "maxLength": 24,
-                  "examples": [
-                    "674094c121add706a8980816"
-                  ]
-                },
-                "variantId": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "minLength": 24,
-                  "maxLength": 24,
-                  "examples": [
-                    null
-                  ]
-                },
-                "name": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "Alluve Lilac Superslims - 20 Cigarettes"
-                  ]
-                },
-                "price": {
-                  "type": "number",
-                  "exclusiveMinimum": 0,
-                  "examples": 500
-                },
-                "quantity": {
-                  "type": "integer",
-                  "exclusiveMinimum": 0,
-                  "examples": 1
-                },
-                "category1": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "Sigaralar"
-                  ]
-                },
-                "category2": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "product"
-                  ]
-                },
-                "itemType": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "PHYSICAL"
-                  ]
-                },
-                "tax": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "examples": [
-                    20
-                  ]
-                }
-              },
-              "required": [
-                "productId",
-                "variantId",
-                "name",
-                "price",
-                "quantity",
-                "category1",
-                "category2",
-                "itemType",
-                "tax"
-              ]
-            }
-          },
-          "shipment": {
-            "type": "object",
-            "properties": {
-              "method": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "standard"
-                ]
-              },
-              "statusCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "awaiting"
-                ]
-              },
-              "orderId": {
-                "type": "string",
-                "examples": [
-                  "8959beed-0296-4ca7-8112-563829252bfa"
-                ]
-              },
-              "orderNumber": {
-                "type": "string",
-                "examples": [
-                  "ABC12333322"
-                ]
-              },
-              "orderOrganizationId": {
-                "type": "string",
-                "examples": [
-                  ""
-                ]
-              },
-              "offerId": {
-                "type": "string",
-                "examples": [
-                  "8e8cd00c-6fc4-4ae1-af46-013d78309287"
-                ]
-              },
-              "offerProviderCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "GELIVER"
-                ]
-              },
-              "offerTotalAmount": {
-                "type": "number",
-                "minimum": 0,
-                "examples": [
-                  0
-                ]
-              },
-              "desi": {
-                "type": "number",
-                "minimum": 0,
-                "examples": [
-                  1
-                ]
-              },
-              "barcode": {
-                "type": "string",
-                "examples": [
-                  "88242290375"
-                ]
-              },
-              "trackingId": {
-                "type": "string",
-                "examples": [
-                  "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-                ]
-              },
-              "trackingNumber": {
-                "type": "string",
-                "examples": [
-                  "21634385"
-                ]
-              },
-              "trackingUrl": {
-                "type": "string",
-                "examples": [
-                  "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-                ]
-              },
-              "trackingStatusCode": {
-                "type": "string",
-                "examples": [
-                  "PRE_TRANSIT"
-                ]
-              },
-              "trackingStatusUpdate": {
-                "type": "string",
-                "examples": [
-                  "2026-01-30T12:09:13.3327+03:00"
-                ]
-              },
-              "labelFileType": {
-                "type": "string",
-                "examples": [
-                  "PROVIDER_PDF"
-                ]
-              },
-              "labelUrl": {
-                "type": "string",
-                "examples": [
-                  "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
-                ]
-              },
-              "labelResponsiveUrl": {
-                "type": "string",
-                "examples": [
-                  "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
-                ]
-              }
-            },
-            "required": [
-              "method",
-              "statusCode",
-              "offerProviderCode",
-              "offerTotalAmount",
-              "desi"
-            ]
-          }
-        },
-        "required": [
-          "paymentCard",
-          "buyer",
-          "shippingAddress",
-          "billingAddress",
-          "basketItems"
         ]
       },
       "savePayment": {
@@ -5358,7 +4701,7 @@
               "phoneNumber": {
                 "type": "string",
                 "examples": [
-                  "905527406607"
+                  "+905527406607"
                 ]
               },
               "email": {
@@ -5390,8 +4733,8 @@
               },
               "identityNumber": {
                 "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
+                "minLength": 11,
+                "maxLength": 11,
                 "examples": [
                   "19342410262"
                 ]
@@ -5531,7 +4874,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Halil"
+                  "Varyant"
                 ]
               },
               "surname": {
@@ -5539,7 +4882,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Gür"
+                  "Restaurant A.Ş"
                 ]
               },
               "country": {
@@ -5820,112 +5163,258 @@
           "shipment"
         ]
       },
-      "checkHTMLForIyzico": {
+      "updateTax": {
         "type": "object",
         "properties": {
-          "paymentCard": {
+          "tax": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              20
+            ]
+          }
+        },
+        "required": [
+          "tax"
+        ]
+      },
+      "paymentCard": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "ALI"
+            ]
+          },
+          "surname": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "SARI"
+            ]
+          },
+          "cardNumber": {
+            "type": "string",
+            "minLength": 16,
+            "maxLength": 16,
+            "examples": [
+              "5890040000000016"
+            ]
+          },
+          "expireMonth": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2,
+            "examples": [
+              "11"
+            ]
+          },
+          "expireYear": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 4,
+            "examples": [
+              "2026"
+            ]
+          },
+          "cvc": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 4,
+            "examples": [
+              "704"
+            ]
+          },
+          "installment": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              1
+            ]
+          },
+          "registerCard": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              0
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "surname",
+          "cardNumber",
+          "expireMonth",
+          "expireYear",
+          "cvc",
+          "installment",
+          "registerCard"
+        ]
+      },
+      "AddCard": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "examples": [
+              "no-reply@ssyazilim.com"
+            ]
+          },
+          "card": {
             "type": "object",
             "properties": {
-              "name": {
+              "cardAlias": {
                 "type": "string",
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Ali"
+                  "ALISARI"
                 ]
               },
-              "surname": {
+              "cardHolderName": {
                 "type": "string",
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "SARI"
+                  "ALI SARI"
+                ]
+              },
+              "cardNumber": {
+                "type": "string",
+                "examples": [
+                  "5170410000000004"
+                ]
+              },
+              "expireMonth": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2,
+                "examples": [
+                  "10"
+                ]
+              },
+              "expireYear": {
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4,
+                "examples": [
+                  "2030"
                 ]
               }
             },
             "required": [
-              "name",
-              "surname"
+              "cardAlias",
+              "cardHolderName",
+              "cardNumber",
+              "expireMonth",
+              "expireYear"
+            ]
+          }
+        },
+        "required": [
+          "email",
+          "card"
+        ]
+      },
+      "addPayment": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "examples": [
+              1500.65
+            ]
+          },
+          "paidPrice": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "examples": [
+              1800.65
+            ]
+          },
+          "installments": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "examples": [
+              1
+            ]
+          },
+          "paymentCard": {
+            "type": "object",
+            "properties": {
+              "cardAlias": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "ALISARI"
+                ]
+              },
+              "cardHolderName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "ALI SARI"
+                ]
+              },
+              "cardNumber": {
+                "type": "string",
+                "examples": [
+                  "5170410000000004"
+                ]
+              },
+              "expireMonth": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2,
+                "examples": [
+                  "10"
+                ]
+              },
+              "expireYear": {
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4,
+                "examples": [
+                  "2030"
+                ]
+              },
+              "cvc": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 4,
+                "examples": [
+                  "123"
+                ]
+              }
+            },
+            "required": [
+              "cardAlias",
+              "cardHolderName",
+              "cardNumber",
+              "expireMonth",
+              "expireYear",
+              "cvc"
             ]
           },
           "buyer": {
             "type": "object",
             "properties": {
-              "email": {
+              "id": {
                 "type": "string",
-                "format": "email",
+                "minLength": 24,
+                "maxLength": 24,
                 "examples": [
-                  "no-reply@ssyazilim.com"
+                  "674094c121add706a8980819"
                 ]
               },
-              "identityNumber": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "19342410262"
-                ]
-              },
-              "registrationAddress": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
-                ]
-              },
-              "country": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Türkiye"
-                ]
-              },
-              "city": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Antalya"
-                ]
-              },
-              "district": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Serik"
-                ]
-              },
-              "zipCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "07500"
-                ]
-              },
-              "message": {
-                "type": "string",
-                "examples": [
-                  "Hediye paketi olsun!"
-                ]
-              }
-            },
-            "required": [
-              "email",
-              "identityNumber",
-              "registrationAddress",
-              "country",
-              "city",
-              "district",
-              "zipCode"
-            ]
-          },
-          "shippingAddress": {
-            "type": "object",
-            "properties": {
               "name": {
                 "type": "string",
                 "minLength": 2,
@@ -5942,6 +5431,21 @@
                   "Sarı"
                 ]
               },
+              "identityNumber": {
+                "type": "string",
+                "minLength": 11,
+                "maxLength": 11,
+                "examples": [
+                  "19342410262"
+                ]
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "examples": [
+                  "no-reply@ssyazilim.com"
+                ]
+              },
               "country": {
                 "type": "string",
                 "minLength": 2,
@@ -5958,12 +5462,67 @@
                   "Antalya"
                 ]
               },
-              "district": {
+              "registrationAddress": {
                 "type": "string",
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Serik"
+                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
+                ]
+              },
+              "ip": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "ip"
+                  },
+                  {
+                    "type": "string",
+                    "format": "ip"
+                  }
+                ],
+                "examples": [
+                  "95.70.235.104"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "surname",
+              "identityNumber",
+              "email",
+              "country",
+              "city",
+              "registrationAddress",
+              "ip"
+            ]
+          },
+          "shippingAddress": {
+            "type": "object",
+            "properties": {
+              "contactName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ayşe"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
                 ]
               },
               "address": {
@@ -5973,43 +5532,24 @@
                 "examples": [
                   "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
                 ]
-              },
-              "zipCode": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "07500"
-                ]
               }
             },
             "required": [
-              "name",
-              "surname",
+              "contactName",
               "country",
               "city",
-              "district",
-              "address",
-              "zipCode"
+              "address"
             ]
           },
           "billingAddress": {
             "type": "object",
             "properties": {
-              "name": {
+              "contactName": {
                 "type": "string",
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Halil"
-                ]
-              },
-              "surname": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Gür"
+                  "Varyant Restaurant"
                 ]
               },
               "country": {
@@ -6026,14 +5566,6 @@
                 "maxLength": 254,
                 "examples": [
                   "Antalya"
-                ]
-              },
-              "district": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "Konyaaltı"
                 ]
               },
               "address": {
@@ -6054,11 +5586,9 @@
               }
             },
             "required": [
-              "name",
-              "surname",
+              "contactName",
               "country",
               "city",
-              "district",
               "address",
               "zipCode"
             ]
@@ -6068,7 +5598,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "productId": {
+                "id": {
                   "type": "string",
                   "minLength": 24,
                   "maxLength": 24,
@@ -6076,41 +5606,27 @@
                     "674094c121add706a8980816"
                   ]
                 },
-                "variantId": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "minLength": 24,
-                  "maxLength": 24,
-                  "examples": [
-                    null
-                  ]
-                },
                 "name": {
                   "type": "string",
                   "minLength": 2,
                   "maxLength": 254,
                   "examples": [
-                    "Alluve Lilac Superslims - 20 Cigarettes"
+                    "Samsung Galaxy A16 4 Gb Ram 128 Gb Gri"
                   ]
                 },
                 "price": {
                   "type": "number",
                   "exclusiveMinimum": 0,
-                  "examples": 500
-                },
-                "quantity": {
-                  "type": "integer",
-                  "exclusiveMinimum": 0,
-                  "examples": 1
+                  "examples": [
+                    1500.65
+                  ]
                 },
                 "category1": {
                   "type": "string",
                   "minLength": 2,
                   "maxLength": 254,
                   "examples": [
-                    "Sigaralar"
+                    "Cep telefonu & Aksesuar"
                   ]
                 },
                 "category2": {
@@ -6128,30 +5644,361 @@
                   "examples": [
                     "PHYSICAL"
                   ]
-                },
-                "tax": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "examples": [
-                    20
-                  ]
                 }
               },
               "required": [
-                "productId",
-                "variantId",
+                "id",
                 "name",
                 "price",
-                "quantity",
                 "category1",
                 "category2",
-                "itemType",
-                "tax"
+                "itemType"
               ]
             }
           }
         },
         "required": [
+          "price",
+          "paidPrice",
+          "installments",
+          "paymentCard",
+          "buyer",
+          "shippingAddress",
+          "billingAddress",
+          "basketItems"
+        ]
+      },
+      "checkHTMLForIyzico": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "examples": [
+              1500.65
+            ]
+          },
+          "paidPrice": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "examples": [
+              1800.65
+            ]
+          },
+          "installments": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "examples": [
+              1
+            ]
+          },
+          "paymentCard": {
+            "type": "object",
+            "properties": {
+              "cardAlias": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "ALISARI"
+                ]
+              },
+              "cardHolderName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "ALI SARI"
+                ]
+              },
+              "cardNumber": {
+                "type": "string",
+                "examples": [
+                  "5170410000000004"
+                ]
+              },
+              "expireMonth": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2,
+                "examples": [
+                  "10"
+                ]
+              },
+              "expireYear": {
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4,
+                "examples": [
+                  "2030"
+                ]
+              }
+            },
+            "required": [
+              "cardAlias",
+              "cardHolderName",
+              "cardNumber",
+              "expireMonth",
+              "expireYear"
+            ]
+          },
+          "buyer": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 24,
+                "maxLength": 24,
+                "examples": [
+                  "674094c121add706a8980819"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ayşe"
+                ]
+              },
+              "surname": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Sarı"
+                ]
+              },
+              "identityNumber": {
+                "type": "string",
+                "minLength": 11,
+                "maxLength": 11,
+                "examples": [
+                  "19342410262"
+                ]
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "examples": [
+                  "no-reply@ssyazilim.com"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
+                ]
+              },
+              "registrationAddress": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
+                ]
+              },
+              "ip": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "ip"
+                  },
+                  {
+                    "type": "string",
+                    "format": "ip"
+                  }
+                ],
+                "examples": [
+                  "95.70.235.104"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "surname",
+              "identityNumber",
+              "email",
+              "country",
+              "city",
+              "registrationAddress",
+              "ip"
+            ]
+          },
+          "shippingAddress": {
+            "type": "object",
+            "properties": {
+              "contactName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ayşe"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
+                ]
+              },
+              "address": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
+                ]
+              }
+            },
+            "required": [
+              "contactName",
+              "country",
+              "city",
+              "address"
+            ]
+          },
+          "billingAddress": {
+            "type": "object",
+            "properties": {
+              "contactName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Varyant Restaurant"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
+                ]
+              },
+              "address": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
+                ]
+              },
+              "zipCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "07500"
+                ]
+              }
+            },
+            "required": [
+              "contactName",
+              "country",
+              "city",
+              "address",
+              "zipCode"
+            ]
+          },
+          "basketItems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    "674094c121add706a8980816"
+                  ]
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "Samsung Galaxy A16 4 Gb Ram 128 Gb Gri"
+                  ]
+                },
+                "price": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "examples": [
+                    1500.65
+                  ]
+                },
+                "category1": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "Cep telefonu & Aksesuar"
+                  ]
+                },
+                "category2": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "product"
+                  ]
+                },
+                "itemType": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 254,
+                  "examples": [
+                    "PHYSICAL"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "price",
+                "category1",
+                "category2",
+                "itemType"
+              ]
+            }
+          }
+        },
+        "required": [
+          "price",
+          "paidPrice",
+          "installments",
           "paymentCard",
           "buyer",
           "shippingAddress",
@@ -6220,21 +6067,6 @@
         },
         "required": [
           "paymentId"
-        ]
-      },
-      "updateTax": {
-        "type": "object",
-        "properties": {
-          "tax": {
-            "type": "integer",
-            "minimum": 0,
-            "examples": [
-              20
-            ]
-          }
-        },
-        "required": [
-          "tax"
         ]
       },
       "post": {
@@ -9185,7 +9017,7 @@
           "phoneNumber": {
             "type": "string",
             "examples": [
-              "905425496142"
+              "+905425496142"
             ]
           },
           "password": {
@@ -9271,7 +9103,7 @@
           "phoneNumber": {
             "type": "string",
             "examples": [
-              "905425496142"
+              "+905425496142"
             ]
           },
           "password": {
@@ -9354,7 +9186,7 @@
             "phoneNumber": {
               "type": "string",
               "examples": [
-                "905425496142"
+                "+905425496142"
               ]
             },
             "password": {
@@ -9436,7 +9268,7 @@
           "phoneNumber": {
             "type": "string",
             "examples": [
-              "905425496142"
+              "+905425496142"
             ]
           },
           "password": {
@@ -10739,52 +10571,6 @@
         }
       }
     },
-    "/public/check-card/{userKey}": {
-      "get": {
-        "tags": [
-          "Card"
-        ],
-        "summary": "Get a special card for the user",
-        "operationId": "getCardWithDetail",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "userKey",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/public/card": {
       "get": {
         "tags": [
@@ -10829,59 +10615,6 @@
             }
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Card"
-        ],
-        "summary": "Add a new card to the system",
-        "operationId": "addCard",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCard"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCard"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCard"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/admin/cards": {
@@ -10894,52 +10627,6 @@
         "security": [
           {
             "JWT": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/card/{cardId}": {
-      "delete": {
-        "tags": [
-          "Card"
-        ],
-        "summary": "Delete a card from the system",
-        "operationId": "deleteCard",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "cardId",
-            "in": "path"
           }
         ],
         "responses": {
@@ -14121,13 +13808,18 @@
         }
       }
     },
-    "/public/payment": {
+    "/public-key/payment": {
       "get": {
         "tags": [
           "Payment"
         ],
         "summary": "Get User payment in system",
         "operationId": "getPayment",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -14135,6 +13827,14 @@
             },
             "required": false,
             "name": "orderId",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "name": "paymentId",
             "in": "query"
           },
           {
@@ -14175,6 +13875,11 @@
         ],
         "summary": "Save payment result to the system",
         "operationId": "savePayment",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -14194,170 +13899,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/check/{paymentId}": {
-      "get": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Check payment for the IYZICO Service",
-        "operationId": "checkPaymentId",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "paymentId",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/IYZICO/{locale}": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Check HTML Code for IYZICO Service",
-        "operationId": "checkHTMLCodeForIYZICO",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "tr"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/checkHTMLForIyzico"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/checkHTMLForIyzico"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/checkHTMLForIyzico"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/IYZICO/{token}/{locale}": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Complete payment for IYZICO Service",
-        "operationId": "completePaymentForIyzico",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "token",
-            "in": "path"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "tr"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -14394,412 +13935,6 @@
             "JWT": []
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/{locale}": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Add payment to the IYZICO Service",
-        "operationId": "paymentForUser",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "tr"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addPayment"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addPayment"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addPayment"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/3D/{locale}": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Check HTML Code for the 3D Service",
-        "operationId": "check3DForUser",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "tr"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addPayment"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addPayment"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addPayment"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/3D/{paymentId}/{locale}": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Complete payment for 3D Service",
-        "operationId": "completePayment3DForIyzico",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "paymentId",
-            "in": "path"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "tr"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/completePayment3D"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/completePayment3D"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/completePayment3D"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/check/card": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Check card from IYZICO system",
-        "operationId": "checkCard",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCard"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCard"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddCard"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/check/installment": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Check installment for the IYZICO Service",
-        "operationId": "installmentForUser",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/checkInstallment"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/checkInstallment"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/checkInstallment"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/payment/cancel/{locale}": {
-      "post": {
-        "tags": [
-          "Payment"
-        ],
-        "summary": "Cancel payment for the suddenly payment",
-        "operationId": "cancelPayment",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "tr"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/cancelPayment"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/cancelPayment"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/cancelPayment"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -14961,6 +14096,731 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/DeleteModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public-key/payment-iyzico/check/{paymentId}": {
+      "get": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Check payment for the IYZICO Service",
+        "operationId": "checkIyzicoPayment",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "paymentId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public-key/payment-iyzico/IYZICO/{locale}": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "The payment form initiates a session and returns checkoutFormContent, paymentPageUrl, and the transaction token to display the payment page",
+        "operationId": "checkIyzicoHtml",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "tr"
+              ],
+              "examples": [
+                "tr"
+              ]
+            },
+            "required": true,
+            "name": "locale",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkHTMLForIyzico"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/checkHTMLForIyzico"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/checkHTMLForIyzico"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public-key/payment-iyzico/IYZICO/{token}/{locale}": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "After the CF payment form is completed, it queries the results using the token",
+        "operationId": "retrieveIyzicoForm",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "tr"
+              ],
+              "examples": [
+                "tr"
+              ]
+            },
+            "required": true,
+            "name": "locale",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/NON-3D/{locale}": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "The Payment Creation API is responsible for processing the customer’s card payments. When this service is used, iyzico provides an immediate response regarding the success of the transaction",
+        "operationId": "createIyzicoPayment",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "tr"
+              ],
+              "examples": [
+                "tr"
+              ]
+            },
+            "required": true,
+            "name": "locale",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addPayment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addPayment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addPayment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/3D/{locale}": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "It initiates a 3D Secure session and returns the `htmlContent` value for 3DS authentication",
+        "operationId": "createIyzico3DPayment",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "tr"
+              ],
+              "examples": [
+                "tr"
+              ]
+            },
+            "required": true,
+            "name": "locale",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addPayment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addPayment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addPayment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/3D/{paymentId}/{token}": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "After 3DS verification, a request must be sent to this endpoint to complete the payment transaction. This service is triggered using the information received after the verification step and concludes the transaction as either successful or unsuccessful",
+        "operationId": "completeIyzico3DPayment",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "paymentId",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/completePayment3D"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/completePayment3D"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/completePayment3D"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/check/installment": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Check installments with the IYZICO Service",
+        "operationId": "checkIyzicoInstallment",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkInstallment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/checkInstallment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/checkInstallment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/cancel/{locale}": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Used to cancel a payment transaction",
+        "operationId": "cancelIyzicoPayment",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "tr"
+              ],
+              "examples": [
+                "tr"
+              ]
+            },
+            "required": true,
+            "name": "locale",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/cancelPayment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/cancelPayment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/cancelPayment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/check-card/{userKey}": {
+      "get": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Get a special card for the user",
+        "operationId": "getCardWithDetail",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "userKey",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/add-card": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Add a new card to the system",
+        "operationId": "addCard",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCard"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCard"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCard"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/delete-card/{cardId}": {
+      "delete": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Delete a card from the system",
+        "operationId": "deleteCard",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "cardId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/payment-iyzico/validate-card": {
+      "post": {
+        "tags": [
+          "Payment Iyzico"
+        ],
+        "summary": "Check a card with the IYZICO Service",
+        "operationId": "checkIyzicoCard",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCard"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCard"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCard"
               }
             }
           }
@@ -17782,111 +17642,6 @@
         }
       }
     },
-    "/public/shipping/address": {
-      "post": {
-        "tags": [
-          "Shipping"
-        ],
-        "summary": "Create a shipping address",
-        "operationId": "addShippingAddress",
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addShippingAddress"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addShippingAddress"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addShippingAddress"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/public/shipping/shipment": {
-      "post": {
-        "tags": [
-          "Shipping"
-        ],
-        "summary": "Create a shipment",
-        "operationId": "addShippingShipment",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addShippingShipment"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/addShippingShipment"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/addShippingShipment"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/public/shipping/shipment/labelPDF/{shipmentId}": {
       "get": {
         "tags": [
@@ -17975,28 +17730,37 @@
         }
       }
     },
-    "/admin/shipping/balance/{organizationId}": {
-      "get": {
+    "/public-key/shipping/address": {
+      "post": {
         "tags": [
           "Shipping"
         ],
-        "summary": "Get organisation balance information",
-        "operationId": "getShippingBalance",
+        "summary": "Create a shipping address",
+        "operationId": "addShippingAddress",
         "security": [
           {
-            "JWT": []
+            "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addShippingAddress"
+              }
             },
-            "required": true,
-            "name": "organizationId",
-            "in": "path"
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addShippingAddress"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addShippingAddress"
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -18021,7 +17785,7 @@
         }
       }
     },
-    "/public/shipping/addresses": {
+    "/public-key/shipping/addresses": {
       "get": {
         "tags": [
           "Shipping"
@@ -18030,7 +17794,7 @@
         "operationId": "getShippingAddresses",
         "security": [
           {
-            "JWT": []
+            "X-API-KEY": []
           }
         ],
         "parameters": [
@@ -18066,6 +17830,153 @@
             "required": false,
             "name": "isRecipientAddress",
             "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public-key/shipping/shipment": {
+      "post": {
+        "tags": [
+          "Shipping"
+        ],
+        "summary": "Create a shipment",
+        "operationId": "addShippingShipment",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addShippingShipment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/addShippingShipment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/addShippingShipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/shipping/shipment/accept/{offerId}": {
+      "post": {
+        "tags": [
+          "Shipping"
+        ],
+        "summary": "Accept an offer (purchase label)",
+        "operationId": "acceptShippingOffer",
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "offerId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/shipping/balance/{organizationId}": {
+      "get": {
+        "tags": [
+          "Shipping"
+        ],
+        "summary": "Get organisation balance information",
+        "operationId": "getShippingBalance",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "organizationId",
+            "in": "path"
           }
         ],
         "responses": {
@@ -18497,52 +18408,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/shipping/shipment/accept/{offerId}": {
-      "post": {
-        "tags": [
-          "Shipping"
-        ],
-        "summary": "Accept an offer (purchase label)",
-        "operationId": "acceptShippingOffer",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "offerId",
-            "in": "path"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
