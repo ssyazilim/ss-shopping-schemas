@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { registry } from '../registry';
 import { ProductSchema, EditProductSchema } from './schema';
 import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
-import { UpdateTaxSchema } from '../payment/schema';
+import { UpdateTaxSchema } from '../company/schema';
 
 // GET /public/products
 registry.registerPath({

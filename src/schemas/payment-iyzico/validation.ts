@@ -1,12 +1,6 @@
 import { z } from 'zod';
 import { ILocale } from '../../locales';
 import * as locales from '../../locales';
-import {
-  ADD_BASKET_ITEM,
-  ADD_BILLING_ADDRESS,
-  ADD_BUYER,
-  ADD_SHIPPING_ADDRESS,
-} from '../payment/validation';
 import { isValidCard } from '../../utils/validations';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
@@ -141,101 +135,6 @@ export const ADD_BUYER_IYZICO = (locale: ILocale = 'tr') => {
     ip: z.union([z.ipv4(), z.ipv6()]).meta({ examples: ['95.70.235.104'] }),
   });
 };
-export const ADD_PAYMENT_CARD_IYZICO = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    cardAlias: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ALISARI'] }),
-    cardHolderName: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ALI SARI'] }),
-    cardNumber: z
-      .string()
-      .refine(isValidCard, { message: m.public_forms_validations_cardNumber })
-      .meta({ examples: ['5170410000000004'] }),
-    expireMonth: z
-      .string()
-      .min(1, { message: m.public_forms_validations_minLength(2) })
-      .max(2, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['10'] }),
-    expireYear: z
-      .string()
-      .min(4, { message: m.public_forms_validations_minLength(2) })
-      .max(4, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['2030'] }),
-  });
-};
-export const ADD_CARD_IYZICO = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['no-reply@ssyazilim.com'] }),
-    card: ADD_PAYMENT_CARD_IYZICO(locale),
-  });
-};
-export const ADD_PAYMENT_IYZICO = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    price: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1500.65] }),
-    paidPrice: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1800.65] }),
-    installments: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1] }),
-    paymentCard: ADD_PAYMENT_CARD_IYZICO(locale),
-    buyer: ADD_BUYER_IYZICO(locale),
-    shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
-    billingAddress: ADD_BILLING_ADDRESS_IYZICO(locale),
-    basketItems: z.array(ADD_BASKET_ITEM_IYZICO(locale)),
-  });
-};
-
-export const ADD_PAYMENT_CARD_IYZICO_NON_3D = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return ADD_PAYMENT_CARD_IYZICO(locale).extend({
-    cvc: z
-      .string()
-      .min(3, { message: m.public_forms_validations_minLength(3) })
-      .max(4, { message: m.public_forms_validations_maxLength(4) })
-      .meta({ examples: ['123'] }),
-  });
-};
-export const ADD_PAYMENT_IYZICO_NON_3D = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    price: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1500.65] }),
-    paidPrice: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1800.65] }),
-    installments: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1] }),
-    paymentCard: ADD_PAYMENT_CARD_IYZICO_NON_3D(locale),
-    buyer: ADD_BUYER_IYZICO(locale),
-    shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
-    billingAddress: ADD_BILLING_ADDRESS_IYZICO(locale),
-    basketItems: z.array(ADD_BASKET_ITEM_IYZICO(locale)),
-  });
-};
 
 export const ADD_PAYMENT_CARD = (locale: ILocale = 'tr') => {
   const m = messages[locale];
@@ -282,6 +181,101 @@ export const ADD_PAYMENT_CARD = (locale: ILocale = 'tr') => {
       .meta({ examples: [0] }),
   });
 };
+export const ADD_PAYMENT_CARD_IYZICO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    cardAlias: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['ALISARI'] }),
+    cardHolderName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['ALI SARI'] }),
+    cardNumber: z
+      .string()
+      .refine(isValidCard, { message: m.public_forms_validations_cardNumber })
+      .meta({ examples: ['5170410000000004'] }),
+    expireMonth: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(2) })
+      .max(2, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['10'] }),
+    expireYear: z
+      .string()
+      .min(4, { message: m.public_forms_validations_minLength(2) })
+      .max(4, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['2030'] }),
+  });
+};
+export const ADD_CARD_IYZICO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .meta({ examples: ['no-reply@ssyazilim.com'] }),
+    card: ADD_PAYMENT_CARD_IYZICO(locale),
+  });
+};
+export const ADD_PAYMENT_CARD_IYZICO_NON_3D = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return ADD_PAYMENT_CARD_IYZICO(locale).extend({
+    cvc: z
+      .string()
+      .min(3, { message: m.public_forms_validations_minLength(3) })
+      .max(4, { message: m.public_forms_validations_maxLength(4) })
+      .meta({ examples: ['123'] }),
+  });
+};
+
+export const ADD_PAYMENT_IYZICO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    price: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1500.65] }),
+    paidPrice: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1800.65] }),
+    installments: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1] }),
+    paymentCard: ADD_PAYMENT_CARD_IYZICO(locale),
+    buyer: ADD_BUYER_IYZICO(locale),
+    shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
+    billingAddress: ADD_BILLING_ADDRESS_IYZICO(locale),
+    basketItems: z.array(ADD_BASKET_ITEM_IYZICO(locale)),
+  });
+};
+export const ADD_PAYMENT_IYZICO_NON_3D = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    price: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1500.65] }),
+    paidPrice: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1800.65] }),
+    installments: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .positive({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [1] }),
+    paymentCard: ADD_PAYMENT_CARD_IYZICO_NON_3D(locale),
+    buyer: ADD_BUYER_IYZICO(locale),
+    shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
+    billingAddress: ADD_BILLING_ADDRESS_IYZICO(locale),
+    basketItems: z.array(ADD_BASKET_ITEM_IYZICO(locale)),
+  });
+};
 
 export const CHECK_HTML_FOR_IYZICO = (locale: ILocale = 'tr') => {
   const m = messages[locale];
@@ -298,10 +292,10 @@ export const CHECK_HTML_FOR_IYZICO = (locale: ILocale = 'tr') => {
         .max(254, { message: m.public_forms_validations_maxLength(254) })
         .meta({ examples: ['SARI'] }),
     }),
-    buyer: ADD_BUYER(locale),
-    shippingAddress: ADD_SHIPPING_ADDRESS(locale),
-    billingAddress: ADD_BILLING_ADDRESS(locale),
-    basketItems: z.array(ADD_BASKET_ITEM(locale)),
+    buyer: ADD_BUYER_IYZICO(locale),
+    shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
+    billingAddress: ADD_BILLING_ADDRESS_IYZICO(locale),
+    basketItems: z.array(ADD_BASKET_ITEM_IYZICO(locale)),
   });
 };
 export const COMPLETE_PAYMENT_3D = (locale: ILocale = 'tr') => {
@@ -338,6 +332,28 @@ export const CANCEL_PAYMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     paymentId: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+  });
+};
+export const REFUND_PAYMENT = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    paymentId: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    conversationId: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    price: z
+      .string()
+      .min(1, { message: m.public_forms_validations_minLength(1) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['2500'] }),
+    currency: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),

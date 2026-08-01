@@ -3,7 +3,7 @@ import type { IAddress } from '../address';
 import type { IBrand } from '../brand';
 import type { ICategory, ICategoryMenu } from '../category';
 import type { ICompany, IProductSettings, IShippingOptions } from '../company';
-import type { IPayment, IPaymentBasketItems } from '../payment';
+import type { IOrder, IOrderBasketItem } from '../order';
 import type { IPost } from '../post';
 import type { IProduct } from '../product';
 import type { IQuestion } from '../question';
@@ -21,15 +21,15 @@ import type { IDealerPricesWithDesi } from '../geliver';
 export interface PPFooter {
   selectedIndex?: number;
   paymentResultIyzico?: Iyzipay.PaymentResult;
-  billingAddress?: IPayment['billingAddress'];
-  basketItems?: IPaymentBasketItems[];
-  shipment?: IPayment['shipment'];
+  billingAddress?: IOrder['billingAddress'];
+  basketItems?: IOrderBasketItem[];
+  shipment?: IOrder['shipment'];
 }
 
 export interface PPDetails {
-  paymentUser?: IPayment['paymentUser'];
-  shippingAddress?: IPayment['shippingAddress'];
-  basketItems?: IPaymentBasketItems[];
+  orderUser?: IOrder['user'];
+  shippingAddress?: IOrder['shippingAddress'];
+  basketItems?: IOrderBasketItem[];
 }
 
 export interface PPCashInformation {
@@ -86,7 +86,7 @@ export interface PPImageSlider {
 }
 
 export interface PPReceipt {
-  payment?: IPayment | Omit<IPayment, 'status' | 'method'>;
+  order?: IOrder;
 }
 
 export interface PPProductList {
@@ -608,7 +608,7 @@ export interface PPTablesSimple {
 }
 
 export interface PPTablesOrder {
-  payments?: IPayment[];
+  orders?: IOrder[];
 }
 
 export interface PPHelpersImageCard {

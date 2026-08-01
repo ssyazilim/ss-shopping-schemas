@@ -4,37 +4,55 @@ import * as locales from '../../locales';
 
 const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
-export const ADD_PAYMENT_USER = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_USER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     id: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
+      .nullable()
       .meta({ examples: ['66ae616a9d86f0da5d4d25f6'] }),
-    paymentId: z
-      .string()
-      .min(6, { message: m.public_forms_validations_minLength(6) })
-      .max(12, { message: m.public_forms_validations_maxLength(12) })
-      .meta({ examples: ['22629933'] }),
-    token: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['649eb03e-cfd2-4f24-86b0-95628a37a029'] }),
     contactName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Halil Erbil Gür'] }),
+      .meta({ examples: ['Bayram Sarı'] }),
     phoneNumber: z
       .e164({ message: m.public_forms_validations_phoneNumber })
-      .meta({ examples: ['+905527406607'] }),
-    email: z.email().meta({ examples: ['halilerbilgur@gmail.com'] }),
+      .meta({ examples: ['+905549374713'] }),
+    email: z
+      .email({ message: m.public_forms_validations_email })
+      .meta({ examples: ['arda164@hotmail.com'] }),
   });
 };
-export const ADD_BUYER = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_PAYMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
+    method: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['checkout_form'] }),
+    status: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['pending'] }),
+    provider: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['iyzico'] }),
+  });
+};
+export const ADD_ORDER_BUYER = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    contactName: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['Ayşe Sarı'] }),
     email: z
       .email({ message: m.public_forms_validations_email })
       .meta({ examples: ['no-reply@ssyazilim.com'] }),
@@ -70,10 +88,10 @@ export const ADD_BUYER = (locale: ILocale = 'tr') => {
     message: z
       .string()
       .optional()
-      .meta({ examples: ['Hediye paketi olsun!'] }),
+      .meta({ examples: ['Hediye paketi olsun.'] }),
   });
 };
-export const ADD_SHIPPING_ADDRESS = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_SHIPPING = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     name: z
@@ -113,7 +131,7 @@ export const ADD_SHIPPING_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['07500'] }),
   });
 };
-export const ADD_BILLING_ADDRESS = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_BILLING = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     name: z
@@ -125,7 +143,7 @@ export const ADD_BILLING_ADDRESS = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Restaurant A.Ş'] }),
+      .meta({ examples: ['Restauran A.S'] }),
     country: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -153,7 +171,7 @@ export const ADD_BILLING_ADDRESS = (locale: ILocale = 'tr') => {
       .meta({ examples: ['07500'] }),
   });
 };
-export const ADD_BASKET_ITEM = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_BASKET_ITEM = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     productId: z
@@ -163,45 +181,16 @@ export const ADD_BASKET_ITEM = (locale: ILocale = 'tr') => {
     variantId: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
-      .nullable()
-      .meta({ examples: [null] }),
-    name: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Alluve Lilac Superslims - 20 Cigarettes'] }),
-    price: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: 500 }),
+      .optional()
+      .meta({ examples: ['674094c121add706a8980817'] }),
     quantity: z
       .number()
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: 1 }),
-    category1: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Sigaralar'] }),
-    category2: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['product'] }),
-    itemType: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['PHYSICAL'] }),
-    tax: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: [20] }),
+      .int()
+      .min(1)
+      .meta({ examples: [1] }),
   });
 };
-export const ADD_SHIPMENT = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     method: z
@@ -214,22 +203,6 @@ export const ADD_SHIPMENT = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['awaiting'] }),
-    orderId: z
-      .string()
-      .optional()
-      .meta({ examples: ['8959beed-0296-4ca7-8112-563829252bfa'] }),
-    orderNumber: z
-      .string()
-      .optional()
-      .meta({ examples: ['ABC12333322'] }),
-    orderOrganizationId: z
-      .string()
-      .optional()
-      .meta({ examples: [''] }),
-    offerId: z
-      .string()
-      .optional()
-      .meta({ examples: ['8e8cd00c-6fc4-4ae1-af46-013d78309287'] }),
     offerProviderCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -243,83 +216,42 @@ export const ADD_SHIPMENT = (locale: ILocale = 'tr') => {
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .meta({ examples: [1] }),
-    barcode: z
-      .string()
-      .optional()
-      .meta({ examples: ['88242290375'] }),
-    trackingId: z
-      .string()
-      .optional()
-      .meta({ examples: ['1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'] }),
-    trackingNumber: z
-      .string()
-      .optional()
-      .meta({ examples: ['21634385'] }),
-    trackingUrl: z
-      .string()
-      .optional()
-      .meta({ examples: ['https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'] }),
-    trackingStatusCode: z
-      .string()
-      .optional()
-      .meta({ examples: ['PRE_TRANSIT'] }),
-    trackingStatusUpdate: z
-      .string()
-      .optional()
-      .meta({ examples: ['2026-01-30T12:09:13.3327+03:00'] }),
-    labelFileType: z
-      .string()
-      .optional()
-      .meta({ examples: ['PROVIDER_PDF'] }),
-    labelUrl: z
-      .string()
-      .optional()
-      .meta({
-        examples: ['https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf'],
-      }),
-    labelResponsiveUrl: z
-      .string()
-      .optional()
-      .meta({
-        examples: [
-          'https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b',
-        ],
-      }),
   });
 };
-export const SAVE_PAYMENT = (locale: ILocale = 'tr') => {
+
+export const SAVE_ORDER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    method: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [0] }),
+    orderNumber: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['1234567890'] }),
+    language: z
+      .string()
+      .length(2, { message: m.public_forms_validations_minLength(2) })
+      .meta({ examples: ['en'] }),
     status: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['pending'] }),
-    paymentUser: ADD_PAYMENT_USER(locale),
-    buyer: ADD_BUYER(locale),
-    shippingAddress: ADD_SHIPPING_ADDRESS(locale),
-    billingAddress: ADD_BILLING_ADDRESS(locale),
-    basketItems: z.array(ADD_BASKET_ITEM(locale)),
-    shipment: ADD_SHIPMENT(),
-  });
-};
-export const UPDATE_TAX = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z.object({
-    tax: z
-      .number({ message: m.public_forms_validations_mustNumber })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [20] }),
+      .meta({ examples: ['awaiting'] }),
+    fulfillmentStatus: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['unfulfilled'] }),
+    user: ADD_ORDER_USER(locale),
+    payment: ADD_ORDER_PAYMENT(locale),
+    buyer: ADD_ORDER_BUYER(locale),
+    shippingAddress: ADD_ORDER_SHIPPING(locale),
+    billingAddress: ADD_ORDER_BILLING(locale),
+    basketItems: z.array(ADD_ORDER_BASKET_ITEM(locale)),
+    shipment: ADD_ORDER_SHIPMENT(locale),
   });
 };
 
-export const ADD_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_INFORMATIONS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     contactName: z
@@ -351,7 +283,7 @@ export const ADD_PAYMENT_INFORMATIONS = (locale: ILocale = 'tr') => {
     message: z.string().optional(),
   });
 };
-export const ADD_PAYMENT_CASH = (locale: ILocale = 'tr') => {
+export const ADD_ORDER_CASH = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
     name: z

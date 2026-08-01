@@ -343,6 +343,17 @@ export const ADD_COMPANY = (locale: ILocale = 'tr') => {
   });
 };
 
+export const UPDATE_TAX = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    tax: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
+      .meta({ examples: [20] }),
+  });
+};
+
 export const ADD_SOCIAL_MEDIA_LINKS = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({

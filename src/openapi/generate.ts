@@ -46,7 +46,7 @@ const document = generator.generateDocument({
     { name: 'Gsm', description: 'GSM service operations for the system' },
     { name: 'Minio Bucket S3', description: 'Simple Storage Service for the bucket operations' },
     { name: 'Minio Object S3', description: 'Simple Storage Service for the object operations' },
-    { name: 'Payment', description: 'User payment information' },
+    { name: 'Order', description: 'User order information' },
     { name: 'Payment Iyzico', description: 'Iyzico payment operations' },
     { name: 'Post', description: 'Posts for the system' },
     { name: 'Product', description: 'Products for the system' },

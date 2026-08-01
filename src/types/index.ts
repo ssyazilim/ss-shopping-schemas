@@ -15,7 +15,7 @@ export * from './gsm';
 export * from './iyzico';
 export * from './menu';
 export * from './minio';
-export * from './payment';
+export * from './order';
 export * from './post';
 export * from './props';
 export * from './geliver';

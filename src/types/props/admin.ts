@@ -25,7 +25,7 @@ import type {
   IDealerPricesWithDesi,
   IPackageTemplate,
 } from '../geliver';
-import type { IPayment, IPaymentBasketItems } from '../payment';
+import type { IOrder, IOrderBasketItem } from '../order';
 import type { IPost, IPostCounts } from '../post';
 import type { IPrice, IProduct, IProductAndVariant, IStaticImage, IType } from '../product';
 import type { IQuestion } from '../question';
@@ -175,15 +175,15 @@ export interface PBestSeller {
   activeType?: string;
   label1?: string;
   label2?: string;
-  basketItems?: IPaymentBasketItems[];
-  basketItems2?: IPaymentBasketItems[];
+  basketItems?: IOrderBasketItem[];
+  basketItems2?: IOrderBasketItem[];
 }
 
 export interface PLine {
   currency?: string;
   dateButtons?: IDateButton[];
-  basketItems?: IPaymentBasketItems[];
-  basketItems2?: IPaymentBasketItems[];
+  basketItems?: IOrderBasketItem[];
+  basketItems2?: IOrderBasketItem[];
 }
 
 export interface PDoughnut {
@@ -201,8 +201,8 @@ export interface PFunnel {
 
 export interface PStatSection {
   totalCount?: number;
-  basketItems?: IPaymentBasketItems[];
-  basketItems2?: IPaymentBasketItems[];
+  basketItems?: IOrderBasketItem[];
+  basketItems2?: IOrderBasketItem[];
 }
 
 export interface PTopSection {
@@ -249,7 +249,7 @@ export interface PInfoRow {
 
 export interface PMain {
   currency?: string;
-  payment?: IPayment;
+  order?: IOrder;
   paymentResultIyzico?: Iyzipay.PaymentResult;
 }
 
@@ -260,12 +260,12 @@ export interface PCard {
 
 export interface PCash {
   currency?: string;
-  payment?: IPayment;
+  order?: IOrder;
 }
 
 export interface POrderAddress {
   currency?: string;
-  payment?: IPayment;
+  order?: IOrder;
   templates?: IPackageTemplate[];
 }
 
@@ -274,7 +274,7 @@ export interface PCardInformation {
 }
 
 export interface PTableGroup {
-  item?: IPayment;
+  item?: IOrder;
   type?: string;
 }
 
@@ -809,7 +809,7 @@ export interface PShipmentAdd {
 }
 
 export interface PShipping {
-  payment?: IPayment;
+  order?: IOrder;
   cities?: IGeliverCity[];
 }
 

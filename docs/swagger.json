@@ -80,8 +80,8 @@
       "description": "Simple Storage Service for the object operations"
     },
     {
-      "name": "Payment",
-      "description": "User payment information"
+      "name": "Order",
+      "description": "User order information"
     },
     {
       "name": "Payment Iyzico",
@@ -1878,6 +1878,21 @@
           "method",
           "shipment",
           "free"
+        ]
+      },
+      "UpdateTax": {
+        "type": "object",
+        "properties": {
+          "tax": {
+            "type": "integer",
+            "minimum": 0,
+            "examples": [
+              20
+            ]
+          }
+        },
+        "required": [
+          "tax"
         ]
       },
       "AddCompany": {
@@ -4157,166 +4172,94 @@
           "objectName"
         ]
       },
-      "basketItems": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "productId": {
-              "type": "string",
-              "minLength": 24,
-              "maxLength": 24,
-              "examples": [
-                "674094c121add706a8980816"
-              ]
-            },
-            "variantId": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "minLength": 24,
-              "maxLength": 24,
-              "examples": [
-                null
-              ]
-            },
-            "name": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254,
-              "examples": [
-                "Alluve Lilac Superslims - 20 Cigarettes"
-              ]
-            },
-            "price": {
-              "type": "number",
-              "exclusiveMinimum": 0,
-              "examples": 500
-            },
-            "quantity": {
-              "type": "integer",
-              "exclusiveMinimum": 0,
-              "examples": 1
-            },
-            "category1": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254,
-              "examples": [
-                "Sigaralar"
-              ]
-            },
-            "category2": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254,
-              "examples": [
-                "product"
-              ]
-            },
-            "itemType": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254,
-              "examples": [
-                "PHYSICAL"
-              ]
-            },
-            "tax": {
-              "type": "integer",
-              "minimum": 0,
-              "examples": [
-                20
-              ]
-            }
-          },
-          "required": [
-            "productId",
-            "variantId",
-            "name",
-            "price",
-            "quantity",
-            "category1",
-            "category2",
-            "itemType",
-            "tax"
-          ]
-        }
-      },
-      "billingAddress": {
+      "orderUser": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 24,
+            "maxLength": 24,
             "examples": [
-              "Varyant"
+              "66ae616a9d86f0da5d4d25f6"
             ]
           },
-          "surname": {
+          "contactName": {
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "Restaurant A.Ş"
+              "Bayram Sarı"
             ]
           },
-          "country": {
+          "phoneNumber": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
             "examples": [
-              "Türkiye"
+              "+905549374713"
             ]
           },
-          "city": {
+          "email": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
+            "format": "email",
             "examples": [
-              "Antalya"
-            ]
-          },
-          "district": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Konyaaltı"
-            ]
-          },
-          "address": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
-            ]
-          },
-          "zipCode": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "07500"
+              "arda164@hotmail.com"
             ]
           }
         },
         "required": [
-          "name",
-          "surname",
-          "country",
-          "city",
-          "district",
-          "address",
-          "zipCode"
+          "id",
+          "contactName",
+          "phoneNumber",
+          "email"
         ]
       },
-      "buyer": {
+      "orderPayment": {
         "type": "object",
         "properties": {
+          "method": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "checkout_form"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "pending"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "iyzico"
+            ]
+          }
+        },
+        "required": [
+          "method",
+          "status",
+          "provider"
+        ]
+      },
+      "orderBuyer": {
+        "type": "object",
+        "properties": {
+          "contactName": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Ayşe Sarı"
+            ]
+          },
           "email": {
             "type": "string",
             "format": "email",
@@ -4375,11 +4318,12 @@
           "message": {
             "type": "string",
             "examples": [
-              "Hediye paketi olsun!"
+              "Hediye paketi olsun."
             ]
           }
         },
         "required": [
+          "contactName",
           "email",
           "identityNumber",
           "registrationAddress",
@@ -4389,77 +4333,39 @@
           "zipCode"
         ]
       },
-      "shippingAddress": {
+      "orderBasketItem": {
         "type": "object",
         "properties": {
-          "name": {
+          "productId": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
+            "minLength": 24,
+            "maxLength": 24,
             "examples": [
-              "Ayşe"
+              "674094c121add706a8980816"
             ]
           },
-          "surname": {
+          "variantId": {
             "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
+            "minLength": 24,
+            "maxLength": 24,
             "examples": [
-              "Sarı"
+              "674094c121add706a8980817"
             ]
           },
-          "country": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
+          "quantity": {
+            "type": "integer",
+            "minimum": 1,
             "examples": [
-              "Türkiye"
-            ]
-          },
-          "city": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Antalya"
-            ]
-          },
-          "district": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Serik"
-            ]
-          },
-          "address": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
-            ]
-          },
-          "zipCode": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "07500"
+              1
             ]
           }
         },
         "required": [
-          "name",
-          "surname",
-          "country",
-          "city",
-          "district",
-          "address",
-          "zipCode"
+          "productId",
+          "quantity"
         ]
       },
-      "shipment": {
+      "orderShipment": {
         "type": "object",
         "properties": {
           "method": {
@@ -4476,30 +4382,6 @@
             "maxLength": 254,
             "examples": [
               "awaiting"
-            ]
-          },
-          "orderId": {
-            "type": "string",
-            "examples": [
-              "8959beed-0296-4ca7-8112-563829252bfa"
-            ]
-          },
-          "orderNumber": {
-            "type": "string",
-            "examples": [
-              "ABC12333322"
-            ]
-          },
-          "orderOrganizationId": {
-            "type": "string",
-            "examples": [
-              ""
-            ]
-          },
-          "offerId": {
-            "type": "string",
-            "examples": [
-              "8e8cd00c-6fc4-4ae1-af46-013d78309287"
             ]
           },
           "offerProviderCode": {
@@ -4523,60 +4405,6 @@
             "examples": [
               1
             ]
-          },
-          "barcode": {
-            "type": "string",
-            "examples": [
-              "88242290375"
-            ]
-          },
-          "trackingId": {
-            "type": "string",
-            "examples": [
-              "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-            ]
-          },
-          "trackingNumber": {
-            "type": "string",
-            "examples": [
-              "21634385"
-            ]
-          },
-          "trackingUrl": {
-            "type": "string",
-            "examples": [
-              "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-            ]
-          },
-          "trackingStatusCode": {
-            "type": "string",
-            "examples": [
-              "PRE_TRANSIT"
-            ]
-          },
-          "trackingStatusUpdate": {
-            "type": "string",
-            "examples": [
-              "2026-01-30T12:09:13.3327+03:00"
-            ]
-          },
-          "labelFileType": {
-            "type": "string",
-            "examples": [
-              "PROVIDER_PDF"
-            ]
-          },
-          "labelUrl": {
-            "type": "string",
-            "examples": [
-              "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
-            ]
-          },
-          "labelResponsiveUrl": {
-            "type": "string",
-            "examples": [
-              "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
-            ]
           }
         },
         "required": [
@@ -4587,72 +4415,23 @@
           "desi"
         ]
       },
-      "paymentUser": {
+      "saveOrder": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "minLength": 24,
-            "maxLength": 24,
-            "examples": [
-              "66ae616a9d86f0da5d4d25f6"
-            ]
-          },
-          "paymentId": {
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 12,
-            "examples": [
-              "22629933"
-            ]
-          },
-          "token": {
+          "orderNumber": {
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "649eb03e-cfd2-4f24-86b0-95628a37a029"
+              "1234567890"
             ]
           },
-          "contactName": {
+          "language": {
             "type": "string",
             "minLength": 2,
-            "maxLength": 254,
+            "maxLength": 2,
             "examples": [
-              "Halil Erbil Gür"
-            ]
-          },
-          "phoneNumber": {
-            "type": "string",
-            "examples": [
-              "+905527406607"
-            ]
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "examples": [
-              "halilerbilgur@gmail.com"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "paymentId",
-          "token",
-          "contactName",
-          "phoneNumber",
-          "email"
-        ]
-      },
-      "savePayment": {
-        "type": "object",
-        "properties": {
-          "method": {
-            "type": "integer",
-            "minimum": 0,
-            "examples": [
-              0
+              "en"
             ]
           },
           "status": {
@@ -4660,34 +4439,29 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "pending"
+              "awaiting"
             ]
           },
-          "paymentUser": {
+          "fulfillmentStatus": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "unfulfilled"
+            ]
+          },
+          "user": {
             "type": "object",
             "properties": {
               "id": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "minLength": 24,
                 "maxLength": 24,
                 "examples": [
                   "66ae616a9d86f0da5d4d25f6"
-                ]
-              },
-              "paymentId": {
-                "type": "string",
-                "minLength": 6,
-                "maxLength": 12,
-                "examples": [
-                  "22629933"
-                ]
-              },
-              "token": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "649eb03e-cfd2-4f24-86b0-95628a37a029"
                 ]
               },
               "contactName": {
@@ -4695,35 +4469,75 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Halil Erbil Gür"
+                  "Bayram Sarı"
                 ]
               },
               "phoneNumber": {
                 "type": "string",
                 "examples": [
-                  "+905527406607"
+                  "+905549374713"
                 ]
               },
               "email": {
                 "type": "string",
                 "format": "email",
                 "examples": [
-                  "halilerbilgur@gmail.com"
+                  "arda164@hotmail.com"
                 ]
               }
             },
             "required": [
               "id",
-              "paymentId",
-              "token",
               "contactName",
               "phoneNumber",
               "email"
             ]
           },
+          "payment": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "checkout_form"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "pending"
+                ]
+              },
+              "provider": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "iyzico"
+                ]
+              }
+            },
+            "required": [
+              "method",
+              "status",
+              "provider"
+            ]
+          },
           "buyer": {
             "type": "object",
             "properties": {
+              "contactName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ayşe Sarı"
+                ]
+              },
               "email": {
                 "type": "string",
                 "format": "email",
@@ -4782,11 +4596,12 @@
               "message": {
                 "type": "string",
                 "examples": [
-                  "Hediye paketi olsun!"
+                  "Hediye paketi olsun."
                 ]
               }
             },
             "required": [
+              "contactName",
               "email",
               "identityNumber",
               "registrationAddress",
@@ -4882,7 +4697,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "Restaurant A.Ş"
+                  "Restauran A.S"
                 ]
               },
               "country": {
@@ -4950,76 +4765,24 @@
                   ]
                 },
                 "variantId": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
+                  "type": "string",
                   "minLength": 24,
                   "maxLength": 24,
                   "examples": [
-                    null
+                    "674094c121add706a8980817"
                   ]
-                },
-                "name": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "Alluve Lilac Superslims - 20 Cigarettes"
-                  ]
-                },
-                "price": {
-                  "type": "number",
-                  "exclusiveMinimum": 0,
-                  "examples": 500
                 },
                 "quantity": {
                   "type": "integer",
-                  "exclusiveMinimum": 0,
-                  "examples": 1
-                },
-                "category1": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
+                  "minimum": 1,
                   "examples": [
-                    "Sigaralar"
-                  ]
-                },
-                "category2": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "product"
-                  ]
-                },
-                "itemType": {
-                  "type": "string",
-                  "minLength": 2,
-                  "maxLength": 254,
-                  "examples": [
-                    "PHYSICAL"
-                  ]
-                },
-                "tax": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "examples": [
-                    20
+                    1
                   ]
                 }
               },
               "required": [
                 "productId",
-                "variantId",
-                "name",
-                "price",
-                "quantity",
-                "category1",
-                "category2",
-                "itemType",
-                "tax"
+                "quantity"
               ]
             }
           },
@@ -5040,30 +4803,6 @@
                 "maxLength": 254,
                 "examples": [
                   "awaiting"
-                ]
-              },
-              "orderId": {
-                "type": "string",
-                "examples": [
-                  "8959beed-0296-4ca7-8112-563829252bfa"
-                ]
-              },
-              "orderNumber": {
-                "type": "string",
-                "examples": [
-                  "ABC12333322"
-                ]
-              },
-              "orderOrganizationId": {
-                "type": "string",
-                "examples": [
-                  ""
-                ]
-              },
-              "offerId": {
-                "type": "string",
-                "examples": [
-                  "8e8cd00c-6fc4-4ae1-af46-013d78309287"
                 ]
               },
               "offerProviderCode": {
@@ -5087,60 +4826,6 @@
                 "examples": [
                   1
                 ]
-              },
-              "barcode": {
-                "type": "string",
-                "examples": [
-                  "88242290375"
-                ]
-              },
-              "trackingId": {
-                "type": "string",
-                "examples": [
-                  "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-                ]
-              },
-              "trackingNumber": {
-                "type": "string",
-                "examples": [
-                  "21634385"
-                ]
-              },
-              "trackingUrl": {
-                "type": "string",
-                "examples": [
-                  "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-                ]
-              },
-              "trackingStatusCode": {
-                "type": "string",
-                "examples": [
-                  "PRE_TRANSIT"
-                ]
-              },
-              "trackingStatusUpdate": {
-                "type": "string",
-                "examples": [
-                  "2026-01-30T12:09:13.3327+03:00"
-                ]
-              },
-              "labelFileType": {
-                "type": "string",
-                "examples": [
-                  "PROVIDER_PDF"
-                ]
-              },
-              "labelUrl": {
-                "type": "string",
-                "examples": [
-                  "https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf"
-                ]
-              },
-              "labelResponsiveUrl": {
-                "type": "string",
-                "examples": [
-                  "https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b"
-                ]
               }
             },
             "required": [
@@ -5153,29 +4838,17 @@
           }
         },
         "required": [
-          "method",
+          "orderNumber",
+          "language",
           "status",
-          "paymentUser",
+          "fulfillmentStatus",
+          "user",
+          "payment",
           "buyer",
           "shippingAddress",
           "billingAddress",
           "basketItems",
           "shipment"
-        ]
-      },
-      "updateTax": {
-        "type": "object",
-        "properties": {
-          "tax": {
-            "type": "integer",
-            "minimum": 0,
-            "examples": [
-              20
-            ]
-          }
-        },
-        "required": [
-          "tax"
         ]
       },
       "paymentCard": {
@@ -13808,13 +13481,13 @@
         }
       }
     },
-    "/public-key/payment": {
+    "/public-key/order": {
       "get": {
         "tags": [
-          "Payment"
+          "Order"
         ],
-        "summary": "Get User payment in system",
-        "operationId": "getPayment",
+        "summary": "Get User order in system",
+        "operationId": "getOrder",
         "security": [
           {
             "X-API-KEY": []
@@ -13835,14 +13508,6 @@
             },
             "required": false,
             "name": "paymentId",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": false,
-            "name": "orderToken",
             "in": "query"
           }
         ],
@@ -13871,10 +13536,10 @@
       },
       "post": {
         "tags": [
-          "Payment"
+          "Order"
         ],
-        "summary": "Save payment result to the system",
-        "operationId": "savePayment",
+        "summary": "Save order to the system",
+        "operationId": "saveOrder",
         "security": [
           {
             "X-API-KEY": []
@@ -13884,17 +13549,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/savePayment"
+                "$ref": "#/components/schemas/saveOrder"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/savePayment"
+                "$ref": "#/components/schemas/saveOrder"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/savePayment"
+                "$ref": "#/components/schemas/saveOrder"
               }
             }
           }
@@ -13923,13 +13588,13 @@
         }
       }
     },
-    "/public/payments": {
+    "/public/orders": {
       "get": {
         "tags": [
-          "Payment"
+          "Order"
         ],
-        "summary": "Get User Payments in the system",
-        "operationId": "getPaymentsForTheUser",
+        "summary": "Get User Orders in the system",
+        "operationId": "getOrdersForTheUser",
         "security": [
           {
             "JWT": []
@@ -13959,13 +13624,13 @@
         }
       }
     },
-    "/admin/payments": {
+    "/admin/orders": {
       "get": {
         "tags": [
-          "Payment"
+          "Order"
         ],
-        "summary": "Get all payments in the system",
-        "operationId": "getPaymentsAdmin",
+        "summary": "Get all orders in the system",
+        "operationId": "getOrdersAdmin",
         "security": [
           {
             "JWT": []
@@ -13975,9 +13640,8 @@
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                1
-              ]
+              "minimum": 1,
+              "default": 1
             },
             "required": false,
             "name": "page",
@@ -13986,9 +13650,9 @@
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                10
-              ]
+              "minimum": 1,
+              "maximum": 100,
+              "default": 25
             },
             "required": false,
             "name": "limit",
@@ -13997,17 +13661,16 @@
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "updatedAt,desc"
-              ]
+              "default": "updatedAt,desc"
             },
-            "required": true,
+            "required": false,
             "name": "sort",
             "in": "query"
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": ""
             },
             "required": false,
             "name": "text",
@@ -14072,10 +13735,10 @@
       },
       "delete": {
         "tags": [
-          "Payment"
+          "Order"
         ],
-        "summary": "Delete a payment or payments in the system",
-        "operationId": "deletePayments",
+        "summary": "Delete a order or orders in the system",
+        "operationId": "deleteOrders",
         "security": [
           {
             "JWT": []
@@ -15666,17 +15329,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/updateTax"
+                "$ref": "#/components/schemas/UpdateTax"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/updateTax"
+                "$ref": "#/components/schemas/UpdateTax"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/updateTax"
+                "$ref": "#/components/schemas/UpdateTax"
               }
             }
           }
