@@ -37,7 +37,10 @@ export const CompanyPropertiesOrderSettingsSchema = registry.register(
   'CompanyPropertiesOrderSettings',
   ADD_COMPANY_PROPERTIES_ORDER_SETTINGS(),
 );
-export const CompanyPropertiesSchema = registry.register('CompanyProperties', ADD_COMPANY_PROPERTIES());
+export const CompanyPropertiesSchema = registry.register(
+  'CompanyProperties',
+  ADD_COMPANY_PROPERTIES(),
+);
 export const CompanyMailOptionsSchema = registry.register(
   'CompanyMailOptions',
   ADD_COMPANY_MAIL_OPTIONS(),
