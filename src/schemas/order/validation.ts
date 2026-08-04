@@ -11,7 +11,7 @@ export const ADD_ORDER_USER = (locale: ILocale = 'tr') => {
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
       .nullable()
-      .meta({ examples: ['66ae616a9d86f0da5d4d25f6'] }),
+      .meta({ examples: [null] }),
     contactName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -32,7 +32,7 @@ export const ADD_ORDER_PAYMENT = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['checkout_form'] }),
+      .meta({ examples: ['cash'] }),
     status: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -177,12 +177,12 @@ export const ADD_ORDER_BASKET_ITEM = (locale: ILocale = 'tr') => {
     productId: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
-      .meta({ examples: ['674094c121add706a8980816'] }),
+      .meta({ examples: ['6960bf13ad01e3ca157174cb'] }),
     variantId: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
       .optional()
-      .meta({ examples: ['674094c121add706a8980817'] }),
+      .meta({ examples: ['69a684c0f550d1c854bb6ec9'] }),
     quantity: z
       .number()
       .int()
@@ -207,11 +207,11 @@ export const ADD_ORDER_SHIPMENT = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['GELIVER'] }),
+      .meta({ examples: ['SURAT'] }),
     offerTotalAmount: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [0] }),
+      .meta({ examples: [150.5] }),
     desi: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
@@ -222,25 +222,20 @@ export const ADD_ORDER_SHIPMENT = (locale: ILocale = 'tr') => {
 export const SAVE_ORDER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    orderNumber: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['1234567890'] }),
-    language: z
-      .string()
-      .length(2, { message: m.public_forms_validations_minLength(2) })
-      .meta({ examples: ['en'] }),
     status: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['awaiting'] }),
-    fulfillmentStatus: z
+    orderNumber: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['unfulfilled'] }),
+      .meta({ examples: ['ORD-20260803-A1B2C3D4E5'] }),
+    language: z
+      .string()
+      .length(2, { message: m.public_forms_validations_minLength(2) })
+      .meta({ examples: ['en'] }),
     user: ADD_ORDER_USER(locale),
     payment: ADD_ORDER_PAYMENT(locale),
     buyer: ADD_ORDER_BUYER(locale),

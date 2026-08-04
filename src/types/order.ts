@@ -119,17 +119,29 @@ export const OrderSchema = SAVE_ORDER()
   })
   .extend(MongoSchema.shape);
 
+export type IOrderContext = z.infer<typeof OrderContextSchema>;
+export const OrderContextSchema = z.object({
+  ipAddress: z.string(),
+  userAgent: z.string(),
+  isTax: z.boolean(),
+});
+
 /*************************
  *       CONSTANTS       *
  *************************/
 export const ORDER_STATUSES = [
-  'pending_payment',
-  'paid',
-  'processing',
-  'ready_to_ship',
+  'awaiting',
+  'picking',
+  'created',
+  'invoiced',
   'shipped',
-  'delivered',
+  'atCollectionPoint',
   'cancelled',
+  'unpacked',
+  'unsupplied',
+  'delivered',
+  'unDelivered',
+  'returned',
 ] as const;
 export const PAYMENT_STATUSES = [
   'pending',
@@ -138,14 +150,7 @@ export const PAYMENT_STATUSES = [
   'cancelled',
   'partially_refunded',
   'refunded',
-] as const;
-export const FULFILLMENT_STATUSES = [
-  'unfulfilled',
-  'preparing',
-  'ready_to_ship',
-  'shipped',
-  'delivered',
-  'cancelled',
+  'confirmed',
 ] as const;
 export const PAYMENT_METHODS = [
   'checkout_form',
@@ -154,7 +159,7 @@ export const PAYMENT_METHODS = [
   'bank_transfer',
   'cash',
 ] as const;
-export const SHIPPING_METHODS = [
+export const SHIPPING_STATUS = [
   'information',
   'received',
   'pickup_scheduled',

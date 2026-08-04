@@ -148,7 +148,7 @@
         "type": "http",
         "scheme": "Bearer",
         "bearerFormat": "JWT",
-        "description": "Provide your JWT token. The Bearer prefix is added automatically."
+        "description": "Provide your JWT token in the Authorization header as a Bearer token"
       },
       "X-API-KEY": {
         "type": "apiKey",
@@ -4183,7 +4183,7 @@
             "minLength": 24,
             "maxLength": 24,
             "examples": [
-              "66ae616a9d86f0da5d4d25f6"
+              null
             ]
           },
           "contactName": {
@@ -4223,7 +4223,7 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "checkout_form"
+              "cash"
             ]
           },
           "status": {
@@ -4341,7 +4341,7 @@
             "minLength": 24,
             "maxLength": 24,
             "examples": [
-              "674094c121add706a8980816"
+              "6960bf13ad01e3ca157174cb"
             ]
           },
           "variantId": {
@@ -4349,7 +4349,7 @@
             "minLength": 24,
             "maxLength": 24,
             "examples": [
-              "674094c121add706a8980817"
+              "69a684c0f550d1c854bb6ec9"
             ]
           },
           "quantity": {
@@ -4389,14 +4389,14 @@
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "GELIVER"
+              "SURAT"
             ]
           },
           "offerTotalAmount": {
             "type": "number",
             "minimum": 0,
             "examples": [
-              0
+              150.5
             ]
           },
           "desi": {
@@ -4418,22 +4418,6 @@
       "saveOrder": {
         "type": "object",
         "properties": {
-          "orderNumber": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "1234567890"
-            ]
-          },
-          "language": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 2,
-            "examples": [
-              "en"
-            ]
-          },
           "status": {
             "type": "string",
             "minLength": 2,
@@ -4442,12 +4426,20 @@
               "awaiting"
             ]
           },
-          "fulfillmentStatus": {
+          "orderNumber": {
             "type": "string",
             "minLength": 2,
             "maxLength": 254,
             "examples": [
-              "unfulfilled"
+              "ORD-20260803-A1B2C3D4E5"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "examples": [
+              "en"
             ]
           },
           "user": {
@@ -4461,7 +4453,7 @@
                 "minLength": 24,
                 "maxLength": 24,
                 "examples": [
-                  "66ae616a9d86f0da5d4d25f6"
+                  null
                 ]
               },
               "contactName": {
@@ -4501,7 +4493,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "checkout_form"
+                  "cash"
                 ]
               },
               "status": {
@@ -4761,7 +4753,7 @@
                   "minLength": 24,
                   "maxLength": 24,
                   "examples": [
-                    "674094c121add706a8980816"
+                    "6960bf13ad01e3ca157174cb"
                   ]
                 },
                 "variantId": {
@@ -4769,7 +4761,7 @@
                   "minLength": 24,
                   "maxLength": 24,
                   "examples": [
-                    "674094c121add706a8980817"
+                    "69a684c0f550d1c854bb6ec9"
                   ]
                 },
                 "quantity": {
@@ -4810,14 +4802,14 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "GELIVER"
+                  "SURAT"
                 ]
               },
               "offerTotalAmount": {
                 "type": "number",
                 "minimum": 0,
                 "examples": [
-                  0
+                  150.5
                 ]
               },
               "desi": {
@@ -4838,10 +4830,9 @@
           }
         },
         "required": [
+          "status",
           "orderNumber",
           "language",
-          "status",
-          "fulfillmentStatus",
           "user",
           "payment",
           "buyer",

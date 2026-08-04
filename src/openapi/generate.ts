@@ -6,7 +6,7 @@ registry.registerComponent('securitySchemes', 'JWT', {
   type: 'http',
   scheme: 'Bearer',
   bearerFormat: 'JWT',
-  description: 'Provide your JWT token. The Bearer prefix is added automatically.',
+  description: 'Provide your JWT token in the Authorization header as a Bearer token',
 });
 
 registry.registerComponent('securitySchemes', 'X-API-KEY', {
