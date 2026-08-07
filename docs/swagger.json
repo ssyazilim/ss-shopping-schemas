@@ -4365,7 +4365,10 @@
             ]
           },
           "variantId": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "minLength": 24,
             "maxLength": 24,
             "examples": [
@@ -4382,6 +4385,7 @@
         },
         "required": [
           "productId",
+          "variantId",
           "quantity"
         ]
       },
@@ -4444,6 +4448,14 @@
             "maxLength": 254,
             "examples": [
               "awaiting"
+            ]
+          },
+          "orderId": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "2157861776"
             ]
           },
           "orderNumber": {
@@ -4777,7 +4789,10 @@
                   ]
                 },
                 "variantId": {
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "minLength": 24,
                   "maxLength": 24,
                   "examples": [
@@ -4794,6 +4809,7 @@
               },
               "required": [
                 "productId",
+                "variantId",
                 "quantity"
               ]
             }
@@ -4851,6 +4867,7 @@
         },
         "required": [
           "status",
+          "orderId",
           "orderNumber",
           "language",
           "user",
