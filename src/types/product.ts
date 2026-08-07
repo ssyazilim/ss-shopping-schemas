@@ -31,6 +31,10 @@ export const PriceSchema = PRICE().extend({
   sellLocale: z.number().optional(),
   shippingDisplay: z.string().optional(),
   shippingLocale: z.number().optional(),
+  tax: z.number().optional(),
+  taxLocale: z.number().optional(),
+  discount: z.number().optional(),
+  discountLocale: z.number().optional(),
   total: z.number().optional(),
   totalLocale: z.number().optional(),
 });
@@ -97,20 +101,20 @@ export const TopSellingItemSchema = z.object({
 });
 
 export type IProductAndVariant = z.infer<typeof ProductAndVariantSchema>;
-export const ProductAndVariantSchema = z
-  .object({
-    productId: z.string(),
-    quantity: z.number(),
-    title: z.string(),
-    name: z.string(),
-    images: ImageSchema,
-    price: PriceSchema,
-    category: z.string(),
-    stockQuantity: z.number(),
-    sku: z.string(),
-    desi: z.number(),
-  })
-  .extend(MongoSchema.shape);
+export const ProductAndVariantSchema = z.object({
+  id: z.string(),
+  productId: z.string(),
+  variantId: z.string().nullable(),
+  quantity: z.number(),
+  title: z.string(),
+  name: z.string(),
+  images: ImageSchema,
+  price: PriceSchema,
+  category: z.string(),
+  stockQuantity: z.number(),
+  sku: z.string(),
+  desi: z.number(),
+});
 
 export type IBestProducts = z.infer<typeof BestProductsSchema>;
 export const BestProductsSchema = z.object({

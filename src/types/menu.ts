@@ -87,3 +87,14 @@ export const LinkSchema = z.object({
   to: z.string(),
   icon: z.unknown(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const PRESET_RANGES: Record<keyof IPreset2, IPreset> = {
+  yesterday: 'yesterday',
+  week: 'week',
+  month: 'month',
+  year: 'year',
+  today: 'today',
+} as const;

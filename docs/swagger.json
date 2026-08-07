@@ -707,7 +707,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -775,7 +777,9 @@
                       "image"
                     ]
                   },
-                  "examples": []
+                  "examples": [
+                    []
+                  ]
                 },
                 "dynamicImages": {
                   "type": "array",
@@ -842,7 +846,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -969,7 +975,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -1047,7 +1055,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -1122,7 +1132,9 @@
                       "image"
                     ]
                   },
-                  "examples": []
+                  "examples": [
+                    []
+                  ]
                 },
                 "dynamicImages": {
                   "type": "array",
@@ -1934,7 +1946,9 @@
                 "image"
               ]
             },
-            "examples": []
+            "examples": [
+              []
+            ]
           },
           "favicon": {
             "type": "array",
@@ -1957,7 +1971,9 @@
                 "image"
               ]
             },
-            "examples": []
+            "examples": [
+              []
+            ]
           },
           "description": {
             "type": "string",
@@ -2656,7 +2672,9 @@
                 "image"
               ]
             },
-            "examples": []
+            "examples": [
+              []
+            ]
           },
           "favicon": {
             "type": "array",
@@ -2679,7 +2697,9 @@
                 "image"
               ]
             },
-            "examples": []
+            "examples": [
+              []
+            ]
           },
           "description": {
             "type": "string",
@@ -5886,7 +5906,10 @@
             ]
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            ]
           },
           "images": {
             "type": "object",
@@ -5912,7 +5935,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -5939,7 +5964,7 @@
                 "minLength": 2,
                 "maxLength": 4,
                 "examples": [
-                  "TRY"
+                  "USD"
                 ]
               },
               "purchase": {
@@ -5968,17 +5993,17 @@
                 "type": "number",
                 "minimum": 0,
                 "examples": [
-                  150
+                  15
                 ]
               },
-              "discount": {
+              "discountAmount": {
                 "type": "integer",
                 "minimum": 0,
                 "examples": [
                   10
                 ]
               },
-              "tax": {
+              "taxAmount": {
                 "type": "integer",
                 "minimum": 0,
                 "examples": [
@@ -5992,8 +6017,8 @@
               "sell",
               "dealerCode",
               "shipping",
-              "discount",
-              "tax"
+              "discountAmount",
+              "taxAmount"
             ]
           },
           "stockQuantity": {
@@ -6094,7 +6119,10 @@
             ]
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "examples": [
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            ]
           },
           "images": {
             "type": "object",
@@ -6120,7 +6148,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -6147,7 +6177,7 @@
                 "minLength": 2,
                 "maxLength": 4,
                 "examples": [
-                  "TRY"
+                  "USD"
                 ]
               },
               "purchase": {
@@ -6176,17 +6206,17 @@
                 "type": "number",
                 "minimum": 0,
                 "examples": [
-                  150
+                  15
                 ]
               },
-              "discount": {
+              "discountAmount": {
                 "type": "integer",
                 "minimum": 0,
                 "examples": [
                   10
                 ]
               },
-              "tax": {
+              "taxAmount": {
                 "type": "integer",
                 "minimum": 0,
                 "examples": [
@@ -6200,8 +6230,8 @@
               "sell",
               "dealerCode",
               "shipping",
-              "discount",
-              "tax"
+              "discountAmount",
+              "taxAmount"
             ]
           },
           "stockQuantity": {
@@ -6293,7 +6323,10 @@
               ]
             },
             "description": {
-              "type": "string"
+              "type": "string",
+              "examples": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              ]
             },
             "images": {
               "type": "object",
@@ -6319,7 +6352,9 @@
                       "image"
                     ]
                   },
-                  "examples": []
+                  "examples": [
+                    []
+                  ]
                 },
                 "dynamicImages": {
                   "type": "array",
@@ -6346,7 +6381,7 @@
                   "minLength": 2,
                   "maxLength": 4,
                   "examples": [
-                    "TRY"
+                    "USD"
                   ]
                 },
                 "purchase": {
@@ -6375,17 +6410,17 @@
                   "type": "number",
                   "minimum": 0,
                   "examples": [
-                    150
+                    15
                   ]
                 },
-                "discount": {
+                "discountAmount": {
                   "type": "integer",
                   "minimum": 0,
                   "examples": [
                     10
                   ]
                 },
-                "tax": {
+                "taxAmount": {
                   "type": "integer",
                   "minimum": 0,
                   "examples": [
@@ -6399,8 +6434,8 @@
                 "sell",
                 "dealerCode",
                 "shipping",
-                "discount",
-                "tax"
+                "discountAmount",
+                "taxAmount"
               ]
             },
             "stockQuantity": {
@@ -6525,7 +6560,9 @@
                     "image"
                   ]
                 },
-                "examples": []
+                "examples": [
+                  []
+                ]
               },
               "dynamicImages": {
                 "type": "array",
@@ -6552,7 +6589,7 @@
                 "minLength": 2,
                 "maxLength": 4,
                 "examples": [
-                  "TRY"
+                  "USD"
                 ]
               },
               "purchase": {
@@ -6581,17 +6618,17 @@
                 "type": "number",
                 "minimum": 0,
                 "examples": [
-                  150
+                  15
                 ]
               },
-              "discount": {
+              "discountAmount": {
                 "type": "integer",
                 "minimum": 0,
                 "examples": [
                   10
                 ]
               },
-              "tax": {
+              "taxAmount": {
                 "type": "integer",
                 "minimum": 0,
                 "examples": [
@@ -6605,8 +6642,8 @@
               "sell",
               "dealerCode",
               "shipping",
-              "discount",
-              "tax"
+              "discountAmount",
+              "taxAmount"
             ]
           },
           "stockQuantity": {
@@ -6732,7 +6769,9 @@
                         "image"
                       ]
                     },
-                    "examples": []
+                    "examples": [
+                      []
+                    ]
                   },
                   "dynamicImages": {
                     "type": "array",
@@ -6759,7 +6798,7 @@
                     "minLength": 2,
                     "maxLength": 4,
                     "examples": [
-                      "TRY"
+                      "USD"
                     ]
                   },
                   "purchase": {
@@ -6788,17 +6827,17 @@
                     "type": "number",
                     "minimum": 0,
                     "examples": [
-                      150
+                      15
                     ]
                   },
-                  "discount": {
+                  "discountAmount": {
                     "type": "integer",
                     "minimum": 0,
                     "examples": [
                       10
                     ]
                   },
-                  "tax": {
+                  "taxAmount": {
                     "type": "integer",
                     "minimum": 0,
                     "examples": [
@@ -6812,8 +6851,8 @@
                   "sell",
                   "dealerCode",
                   "shipping",
-                  "discount",
-                  "tax"
+                  "discountAmount",
+                  "taxAmount"
                 ]
               },
               "stockQuantity": {
@@ -6947,7 +6986,9 @@
                           "image"
                         ]
                       },
-                      "examples": []
+                      "examples": [
+                        []
+                      ]
                     },
                     "dynamicImages": {
                       "type": "array",
@@ -6974,7 +7015,7 @@
                       "minLength": 2,
                       "maxLength": 4,
                       "examples": [
-                        "TRY"
+                        "USD"
                       ]
                     },
                     "purchase": {
@@ -7003,17 +7044,17 @@
                       "type": "number",
                       "minimum": 0,
                       "examples": [
-                        150
+                        15
                       ]
                     },
-                    "discount": {
+                    "discountAmount": {
                       "type": "integer",
                       "minimum": 0,
                       "examples": [
                         10
                       ]
                     },
-                    "tax": {
+                    "taxAmount": {
                       "type": "integer",
                       "minimum": 0,
                       "examples": [
@@ -7027,8 +7068,8 @@
                     "sell",
                     "dealerCode",
                     "shipping",
-                    "discount",
-                    "tax"
+                    "discountAmount",
+                    "taxAmount"
                   ]
                 },
                 "stockQuantity": {
@@ -7161,7 +7202,9 @@
                         "image"
                       ]
                     },
-                    "examples": []
+                    "examples": [
+                      []
+                    ]
                   },
                   "dynamicImages": {
                     "type": "array",
@@ -7188,7 +7231,7 @@
                     "minLength": 2,
                     "maxLength": 4,
                     "examples": [
-                      "TRY"
+                      "USD"
                     ]
                   },
                   "purchase": {
@@ -7217,17 +7260,17 @@
                     "type": "number",
                     "minimum": 0,
                     "examples": [
-                      150
+                      15
                     ]
                   },
-                  "discount": {
+                  "discountAmount": {
                     "type": "integer",
                     "minimum": 0,
                     "examples": [
                       10
                     ]
                   },
-                  "tax": {
+                  "taxAmount": {
                     "type": "integer",
                     "minimum": 0,
                     "examples": [
@@ -7241,8 +7284,8 @@
                   "sell",
                   "dealerCode",
                   "shipping",
-                  "discount",
-                  "tax"
+                  "discountAmount",
+                  "taxAmount"
                 ]
               },
               "stockQuantity": {

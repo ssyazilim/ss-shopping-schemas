@@ -502,7 +502,7 @@ export const GeliverOfferShipmentSchema = z.object({
   refundInvoiceID: z.string().nullable(),
   productPaymentOnDelivery: z.boolean(),
   orderID: z.string(),
-  order: z.unknown().nullable(),
+  order: GeliverOrderSchema.nullable(),
   senderAddressID: z.string(),
   senderAddress: GeliverAddressAddResponseSchema.nullable(),
   recipientAddressID: z.string(),
@@ -530,7 +530,7 @@ export const GeliverOfferShipmentSchema = z.object({
   isRecipientSmsActivated: z.boolean(),
   packageAcceptedAt: z.string().nullable(),
   tenantId: z.string().nullable(),
-  items: z.array(GeliverItemSchema),
+  items: z.array(GeliverItemSchema).optional(),
   trackingNumber: z.string().optional(),
   trackingUrl: z.string().optional(),
 });

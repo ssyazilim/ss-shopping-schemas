@@ -20,7 +20,7 @@ export const IMAGES = (locale: ILocale = 'tr') => {
             .max(254, { message: m.public_forms_validations_maxLength(254) }),
         }),
       )
-      .meta({ examples: [] }),
+      .meta({ examples: [[]] }),
     dynamicImages: z.array(
       z
         .string()
@@ -41,7 +41,7 @@ export const PRICE = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(4, { message: m.public_forms_validations_maxLength(4) })
-      .meta({ examples: ['TRY'] }),
+      .meta({ examples: ['USD'] }),
     purchase: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
@@ -58,13 +58,13 @@ export const PRICE = (locale: ILocale = 'tr') => {
     shipping: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [150] }),
-    discount: z
+      .meta({ examples: [15] }),
+    discountAmount: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .int({ message: m.public_forms_validations_mustNumberInteger })
       .meta({ examples: [10] }),
-    tax: z
+    taxAmount: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
       .int({ message: m.public_forms_validations_mustNumberInteger })
@@ -88,7 +88,14 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['Lorem ipsum dolor sit amet'] }),
-    description: z.string().optional(),
+    description: z
+      .string()
+      .optional()
+      .meta({
+        examples: [
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        ],
+      }),
     images: IMAGES(locale),
     price: PRICE(locale),
     stockQuantity: z

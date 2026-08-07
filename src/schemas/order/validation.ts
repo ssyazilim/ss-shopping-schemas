@@ -181,7 +181,7 @@ export const ADD_ORDER_BASKET_ITEM = (locale: ILocale = 'tr') => {
     variantId: z
       .string()
       .length(24, { message: m.public_forms_validations_minLength(24) })
-      .optional()
+      .nullable()
       .meta({ examples: ['69a684c0f550d1c854bb6ec9'] }),
     quantity: z
       .number()
@@ -227,6 +227,11 @@ export const SAVE_ORDER = (locale: ILocale = 'tr') => {
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['awaiting'] }),
+    orderId: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['2157861776'] }),
     orderNumber: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -275,7 +280,7 @@ export const ADD_ORDER_INFORMATIONS = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
-    message: z.string().optional(),
+    message: z.string(),
   });
 };
 export const ADD_ORDER_CASH = (locale: ILocale = 'tr') => {

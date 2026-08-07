@@ -43,7 +43,6 @@ export const OrderUserSchema = ADD_ORDER_USER().extend({
 
 export type IOrderPayment = z.infer<typeof OrderPaymentSchema>;
 export const OrderPaymentSchema = ADD_ORDER_PAYMENT().extend({
-  providerPaymentId: z.string().optional(),
   conversationId: z.string().optional(),
   token: z.string().optional(),
 });
@@ -66,8 +65,9 @@ export type IOrderBasketItem = Omit<
 };
 export const OrderBasketItemSchema = ADD_ORDER_BASKET_ITEM()
   .extend({
+    variantId: z.string().length(24).nullable(),
     name: z.string().optional(),
-    price: PriceSchema,
+    price: PriceSchema.optional(),
     category1: z.string().optional(),
     category2: z.string().optional(),
     itemType: z.string().optional(),
@@ -80,11 +80,13 @@ export const OrderShipmentSchema = ADD_ORDER_SHIPMENT().extend({
   orderNumber: z.string().optional(), // ABC12333322
   orderOrganizationId: z.string().optional(), // 5f9d1b07-0296-4ca7-8112-563829252bfa
   offerId: z.string().optional(), // 8e8cd00c-6fc4-4ae1-af46-013d78309287
+  offerAverageEstimatedTime: z.string().optional(), // 02 gün 00 saat
   barcode: z.string().optional(), // 88242290375
   trackingId: z.string().optional(), // 1186e0d8-dd49-4fb9-b5ec-2d6af4146e32
   trackingNumber: z.string().optional(), // 21634385
   trackingUrl: z.string().optional(), // https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32
   trackingStatusCode: z.string().optional(), // https://docs.geliver.io/docs/shipments_and_transaction/tracking_status_codes
+  trackingSubStatusCode: z.string().optional(),
   trackingStatusUpdate: z.string().optional(), // 2026-01-30T12:09:13.3327+03:00
   labelFileType: z.string().optional(), // PROVIDER_PDF
   labelUrl: z.string().optional(), // https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf
@@ -94,18 +96,21 @@ export const OrderShipmentSchema = ADD_ORDER_SHIPMENT().extend({
 export type IOrderTotal = z.infer<typeof OrderTotalSchema>;
 export const OrderTotalSchema = z.object({
   currency: z.string().optional(),
-  subtotal: z.number().optional(),
-  discount: z.number().optional(),
-  tax: z.number().optional(),
-  shipping: z.number().optional(),
-  grandTotal: z.number().optional(),
-  paid: z.number().optional(),
-  refunded: z.number().optional(),
+  subtotalLocale: z.number().optional(),
+  discountLocale: z.number().optional(),
+  taxLocale: z.number().optional(),
+  shippingLocale: z.number().optional(),
+  grandTotalLocale: z.number().optional(),
+  paidLocale: z.number().optional(),
+  refundedLocale: z.number().optional(),
 });
 
 export type ISaveOrder = z.infer<ReturnType<typeof SAVE_ORDER>>;
 
-export type IOrder = Omit<z.infer<typeof OrderSchema>, 'user'> & { user: IOrderUser };
+export type IOrder = Omit<z.infer<typeof OrderSchema>, 'user' | 'basketItems'> & {
+  user: IOrderUser;
+  basketItems: IOrderBasketItem[];
+};
 export const OrderSchema = SAVE_ORDER()
   .extend({
     user: OrderUserSchema,
@@ -115,7 +120,7 @@ export const OrderSchema = SAVE_ORDER()
     billingAddress: OrderBillingSchema,
     basketItems: z.array(OrderBasketItemSchema),
     shipment: OrderShipmentSchema,
-    totals: OrderTotalSchema,
+    totals: OrderTotalSchema.optional(),
   })
   .extend(MongoSchema.shape);
 
@@ -129,6 +134,7 @@ export const OrderContextSchema = z.object({
 /*************************
  *       CONSTANTS       *
  *************************/
+export type IOrderStatuses = (typeof ORDER_STATUSES)[number];
 export const ORDER_STATUSES = [
   'awaiting',
   'picking',
@@ -143,6 +149,8 @@ export const ORDER_STATUSES = [
   'unDelivered',
   'returned',
 ] as const;
+
+export type IPaymentStatuses = (typeof ORDER_STATUSES)[number];
 export const PAYMENT_STATUSES = [
   'pending',
   'paid',
@@ -152,14 +160,18 @@ export const PAYMENT_STATUSES = [
   'refunded',
   'confirmed',
 ] as const;
-export const PAYMENT_METHODS = [
+
+export type IPaymentMethodes = (typeof ORDER_STATUSES)[number];
+export const PAYMENT_METHODES = [
   'checkout_form',
   'non_3ds',
   '3ds',
   'bank_transfer',
   'cash',
 ] as const;
-export const SHIPPING_STATUS = [
+
+export type IShippingStatuses = (typeof ORDER_STATUSES)[number];
+export const SHIPPING_STATUSES = [
   'information',
   'received',
   'pickup_scheduled',
@@ -180,12 +192,14 @@ export const SHIPPING_STATUS = [
   'package_canceled ',
   'other',
 ] as const;
+
 export const DEFAULT_SAVE_ORDER: ISaveOrder = getDefaultsForSchema(SAVE_ORDER());
+export const DEFAULT_ORDER_USER: IOrder['user'] = getDefaultsForSchema(OrderUserSchema);
+export const DEFAULT_ORDER_PAYMENT: IOrder['payment'] = getDefaultsForSchema(OrderPaymentSchema);
 export const DEFAULT_ORDER_BUYER: IOrder['buyer'] = getDefaultsForSchema(OrderBuyerSchema);
 export const DEFAULT_ORDER_SHIPPING: IOrder['shippingAddress'] =
   getDefaultsForSchema(OrderShippingSchema);
 export const DEFAULT_ORDER_BILLING: IOrder['billingAddress'] =
   getDefaultsForSchema(OrderBillingSchema);
 export const DEFAULT_ORDER_SHIPMENT: IOrder['shipment'] = getDefaultsForSchema(OrderShipmentSchema);
-export const DEFAULT_ORDER_USER: IOrderUser = getDefaultsForSchema(OrderUserSchema);
 export const DEFAULT_ORDER: IOrder = getDefaultsForSchema(OrderSchema);
