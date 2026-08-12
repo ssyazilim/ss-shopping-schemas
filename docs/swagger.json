@@ -1842,11 +1842,23 @@
               "geliver": {
                 "type": "object",
                 "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
+                  },
+                  "code": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 254
+                  },
                   "isTest": {
                     "type": "boolean"
                   }
                 },
                 "required": [
+                  "name",
+                  "code",
                   "isTest"
                 ]
               }
@@ -2574,11 +2586,23 @@
                   "geliver": {
                     "type": "object",
                     "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "code": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
                       "isTest": {
                         "type": "boolean"
                       }
                     },
                     "required": [
+                      "name",
+                      "code",
                       "isTest"
                     ]
                   }
@@ -3177,6 +3201,16 @@
                   "geliver": {
                     "type": "object",
                     "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "code": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
                       "isTest": {
                         "type": "boolean"
                       }
@@ -4192,253 +4226,6 @@
           "objectName"
         ]
       },
-      "orderUser": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "minLength": 24,
-            "maxLength": 24,
-            "examples": [
-              null
-            ]
-          },
-          "contactName": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Bayram Sarı"
-            ]
-          },
-          "phoneNumber": {
-            "type": "string",
-            "examples": [
-              "+905549374713"
-            ]
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "examples": [
-              "arda164@hotmail.com"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "contactName",
-          "phoneNumber",
-          "email"
-        ]
-      },
-      "orderPayment": {
-        "type": "object",
-        "properties": {
-          "method": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "cash"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "pending"
-            ]
-          },
-          "provider": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "iyzico"
-            ]
-          }
-        },
-        "required": [
-          "method",
-          "status",
-          "provider"
-        ]
-      },
-      "orderBuyer": {
-        "type": "object",
-        "properties": {
-          "contactName": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Ayşe Sarı"
-            ]
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "examples": [
-              "no-reply@ssyazilim.com"
-            ]
-          },
-          "identityNumber": {
-            "type": "string",
-            "minLength": 11,
-            "maxLength": 11,
-            "examples": [
-              "19342410262"
-            ]
-          },
-          "registrationAddress": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
-            ]
-          },
-          "country": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Türkiye"
-            ]
-          },
-          "city": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Antalya"
-            ]
-          },
-          "district": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "Serik"
-            ]
-          },
-          "zipCode": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "07500"
-            ]
-          },
-          "message": {
-            "type": "string",
-            "examples": [
-              "Hediye paketi olsun."
-            ]
-          }
-        },
-        "required": [
-          "contactName",
-          "email",
-          "identityNumber",
-          "registrationAddress",
-          "country",
-          "city",
-          "district",
-          "zipCode"
-        ]
-      },
-      "orderBasketItem": {
-        "type": "object",
-        "properties": {
-          "productId": {
-            "type": "string",
-            "minLength": 24,
-            "maxLength": 24,
-            "examples": [
-              "6960bf13ad01e3ca157174cb"
-            ]
-          },
-          "variantId": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "minLength": 24,
-            "maxLength": 24,
-            "examples": [
-              "69a684c0f550d1c854bb6ec9"
-            ]
-          },
-          "quantity": {
-            "type": "integer",
-            "minimum": 1,
-            "examples": [
-              1
-            ]
-          }
-        },
-        "required": [
-          "productId",
-          "variantId",
-          "quantity"
-        ]
-      },
-      "orderShipment": {
-        "type": "object",
-        "properties": {
-          "method": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "standard"
-            ]
-          },
-          "statusCode": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "awaiting"
-            ]
-          },
-          "offerProviderCode": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "SURAT"
-            ]
-          },
-          "offerTotalAmount": {
-            "type": "number",
-            "minimum": 0,
-            "examples": [
-              150.5
-            ]
-          },
-          "desi": {
-            "type": "number",
-            "minimum": 0,
-            "examples": [
-              1
-            ]
-          }
-        },
-        "required": [
-          "method",
-          "statusCode",
-          "offerProviderCode",
-          "offerTotalAmount",
-          "desi"
-        ]
-      },
       "saveOrder": {
         "type": "object",
         "properties": {
@@ -4520,6 +4307,15 @@
           "payment": {
             "type": "object",
             "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "examples": [
+                  null
+                ]
+              },
               "method": {
                 "type": "string",
                 "minLength": 2,
@@ -4541,11 +4337,12 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "iyzico"
+                  "manual"
                 ]
               }
             },
             "required": [
+              "id",
               "method",
               "status",
               "provider"
@@ -4822,7 +4619,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "standard"
+                  "automatic"
                 ]
               },
               "statusCode": {
@@ -4830,7 +4627,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "awaiting"
+                  "PRE_TRANSIT"
                 ]
               },
               "offerProviderCode": {
@@ -4838,7 +4635,7 @@
                 "minLength": 2,
                 "maxLength": 254,
                 "examples": [
-                  "SURAT"
+                  "SURAT_STANDART"
                 ]
               },
               "offerTotalAmount": {
@@ -4853,6 +4650,90 @@
                 "minimum": 0,
                 "examples": [
                   1
+                ]
+              },
+              "orderId": {
+                "type": "string",
+                "examples": [
+                  "8959beed-0296-4ca7-8112-563829252bfa"
+                ]
+              },
+              "orderNumber": {
+                "type": "string",
+                "examples": [
+                  "ABC12333322"
+                ]
+              },
+              "orderOrganizationId": {
+                "type": "string",
+                "examples": [
+                  "5f9d1b07-0296-4ca7-8112-563829252bfa"
+                ]
+              },
+              "offerId": {
+                "type": "string",
+                "examples": [
+                  "8e8cd00c-6fc4-4ae1-af46-013d78309287"
+                ]
+              },
+              "offerAverageEstimatedTime": {
+                "type": "string",
+                "examples": [
+                  "02 gün 00 saat"
+                ]
+              },
+              "barcode": {
+                "type": "string",
+                "examples": [
+                  "88242290375"
+                ]
+              },
+              "trackingId": {
+                "type": "string",
+                "examples": [
+                  "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
+                ]
+              },
+              "trackingNumber": {
+                "type": "string",
+                "examples": [
+                  "21634385"
+                ]
+              },
+              "trackingUrl": {
+                "type": "string",
+                "examples": [
+                  "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
+                ]
+              },
+              "trackingStatusCode": {
+                "type": "string"
+              },
+              "trackingSubStatusCode": {
+                "type": "string"
+              },
+              "trackingStatusUpdate": {
+                "type": "string",
+                "examples": [
+                  "2026-01-30T12:09:13.3327+03:00"
+                ]
+              },
+              "labelFileType": {
+                "type": "string",
+                "examples": [
+                  "PROVIDER_PDF"
+                ]
+              },
+              "labelUrl": {
+                "type": "string",
+                "examples": [
+                  "https://labels3.geliver.io/labels/....pdf"
+                ]
+              },
+              "labelResponsiveUrl": {
+                "type": "string",
+                "examples": [
+                  "https://api.geliver.io/api/v1/responsivelabels/..."
                 ]
               }
             },
@@ -4878,6 +4759,527 @@
           "basketItems",
           "shipment"
         ]
+      },
+      "editOrder": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "awaiting"
+            ]
+          },
+          "orderId": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "2157861776"
+            ]
+          },
+          "orderNumber": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "ORD-20260803-A1B2C3D4E5"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "examples": [
+              "en"
+            ]
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 24,
+                "maxLength": 24,
+                "examples": [
+                  null
+                ]
+              },
+              "contactName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Bayram Sarı"
+                ]
+              },
+              "phoneNumber": {
+                "type": "string",
+                "examples": [
+                  "+905549374713"
+                ]
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "examples": [
+                  "arda164@hotmail.com"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "contactName",
+              "phoneNumber",
+              "email"
+            ]
+          },
+          "payment": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "examples": [
+                  null
+                ]
+              },
+              "method": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "cash"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "pending"
+                ]
+              },
+              "provider": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "manual"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "method",
+              "status",
+              "provider"
+            ]
+          },
+          "buyer": {
+            "type": "object",
+            "properties": {
+              "contactName": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ayşe Sarı"
+                ]
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "examples": [
+                  "no-reply@ssyazilim.com"
+                ]
+              },
+              "identityNumber": {
+                "type": "string",
+                "minLength": 11,
+                "maxLength": 11,
+                "examples": [
+                  "19342410262"
+                ]
+              },
+              "registrationAddress": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
+                ]
+              },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
+              "zipCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "07500"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "examples": [
+                  "Hediye paketi olsun."
+                ]
+              }
+            },
+            "required": [
+              "contactName",
+              "email",
+              "identityNumber",
+              "registrationAddress",
+              "country",
+              "city",
+              "district",
+              "zipCode"
+            ]
+          },
+          "shippingAddress": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Ayşe"
+                ]
+              },
+              "surname": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Sarı"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
+                ]
+              },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Serik"
+                ]
+              },
+              "address": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik"
+                ]
+              },
+              "zipCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "07500"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "surname",
+              "country",
+              "city",
+              "district",
+              "address",
+              "zipCode"
+            ]
+          },
+          "billingAddress": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Varyant"
+                ]
+              },
+              "surname": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Restauran A.S"
+                ]
+              },
+              "country": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Türkiye"
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Antalya"
+                ]
+              },
+              "district": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Konyaaltı"
+                ]
+              },
+              "address": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "Bahçelievler Mahallesi, Atatürk Parkı 25/21"
+                ]
+              },
+              "zipCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "07500"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "surname",
+              "country",
+              "city",
+              "district",
+              "address",
+              "zipCode"
+            ]
+          },
+          "basketItems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "string",
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    "6960bf13ad01e3ca157174cb"
+                  ]
+                },
+                "variantId": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "minLength": 24,
+                  "maxLength": 24,
+                  "examples": [
+                    "69a684c0f550d1c854bb6ec9"
+                  ]
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "examples": [
+                    1
+                  ]
+                }
+              },
+              "required": [
+                "productId",
+                "variantId",
+                "quantity"
+              ]
+            }
+          },
+          "shipment": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "automatic"
+                ]
+              },
+              "statusCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "PRE_TRANSIT"
+                ]
+              },
+              "offerProviderCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 254,
+                "examples": [
+                  "SURAT_STANDART"
+                ]
+              },
+              "offerTotalAmount": {
+                "type": "number",
+                "minimum": 0,
+                "examples": [
+                  150.5
+                ]
+              },
+              "desi": {
+                "type": "number",
+                "minimum": 0,
+                "examples": [
+                  1
+                ]
+              },
+              "orderId": {
+                "type": "string",
+                "examples": [
+                  "8959beed-0296-4ca7-8112-563829252bfa"
+                ]
+              },
+              "orderNumber": {
+                "type": "string",
+                "examples": [
+                  "ABC12333322"
+                ]
+              },
+              "orderOrganizationId": {
+                "type": "string",
+                "examples": [
+                  "5f9d1b07-0296-4ca7-8112-563829252bfa"
+                ]
+              },
+              "offerId": {
+                "type": "string",
+                "examples": [
+                  "8e8cd00c-6fc4-4ae1-af46-013d78309287"
+                ]
+              },
+              "offerAverageEstimatedTime": {
+                "type": "string",
+                "examples": [
+                  "02 gün 00 saat"
+                ]
+              },
+              "barcode": {
+                "type": "string",
+                "examples": [
+                  "88242290375"
+                ]
+              },
+              "trackingId": {
+                "type": "string",
+                "examples": [
+                  "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
+                ]
+              },
+              "trackingNumber": {
+                "type": "string",
+                "examples": [
+                  "21634385"
+                ]
+              },
+              "trackingUrl": {
+                "type": "string",
+                "examples": [
+                  "https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
+                ]
+              },
+              "trackingStatusCode": {
+                "type": "string"
+              },
+              "trackingSubStatusCode": {
+                "type": "string"
+              },
+              "trackingStatusUpdate": {
+                "type": "string",
+                "examples": [
+                  "2026-01-30T12:09:13.3327+03:00"
+                ]
+              },
+              "labelFileType": {
+                "type": "string",
+                "examples": [
+                  "PROVIDER_PDF"
+                ]
+              },
+              "labelUrl": {
+                "type": "string",
+                "examples": [
+                  "https://labels3.geliver.io/labels/....pdf"
+                ]
+              },
+              "labelResponsiveUrl": {
+                "type": "string",
+                "examples": [
+                  "https://api.geliver.io/api/v1/responsivelabels/..."
+                ]
+              }
+            },
+            "required": [
+              "method",
+              "statusCode",
+              "offerProviderCode",
+              "offerTotalAmount",
+              "desi"
+            ]
+          }
+        }
       },
       "paymentCard": {
         "type": "object",
@@ -13810,6 +14212,71 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/DeleteModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/order/{id}": {
+      "patch": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Update order in the system",
+        "operationId": "updateOrder",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/editOrder"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/editOrder"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/editOrder"
               }
             }
           }

@@ -28,6 +28,9 @@ export const PackageTemplateSchema = z.object({
 
 export type IDealerPricesWithDesi = z.infer<typeof DealerPricesWithDesiSchema>;
 export const DealerPricesWithDesiSchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  logo: z.string(),
   desi: z.string(),
   providerCode: z.string(),
   amount: z.string(),

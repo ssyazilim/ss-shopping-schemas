@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { SaveOrderSchema } from './schema';
+import { OrderSchema, EditOrderSchema } from './schema';
 import {
   responses,
   buildRequestBody,
@@ -42,7 +42,7 @@ registry.registerPath({
   summary: 'Save order to the system',
   operationId: 'saveOrder',
   security: [{ 'X-API-KEY': [] }],
-  request: { body: buildRequestBody(SaveOrderSchema) },
+  request: { body: buildRequestBody(OrderSchema) },
   responses,
 });
 
@@ -66,6 +66,21 @@ registry.registerPath({
   operationId: 'getOrdersAdmin',
   security: [{ JWT: [] }],
   request: { query: OrderListQuerySchema },
+  responses,
+});
+
+// UPDATE /admin/order/{id}
+registry.registerPath({
+  method: 'patch',
+  path: '/admin/order/{id}',
+  tags: ['Order'],
+  summary: 'Update order in the system',
+  operationId: 'updateOrder',
+  security: [{ JWT: [] }],
+  request: {
+    params: z.object({ id: z.string() }),
+    body: buildRequestBody(EditOrderSchema),
+  },
   responses,
 });
 

@@ -42,12 +42,12 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^8.5.0",
-    "@types/iyzipay": "^2.0.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.6.0",
+    "@types/iyzipay": "^2.0.3",
     "eslint": "^10.3.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.3",

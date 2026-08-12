@@ -10,6 +10,14 @@ export const PaymentCardSchema = z.object({
   registerCard: z.union([z.literal(0), z.literal(1)]).optional(),
 });
 
+export type IRefundV2Result = z.infer<typeof RefundV2RequestSchema>;
+export const RefundV2ResultSchema = z.object({
+  authCode: z.string().optional(),
+  refundHostReference: z.string().optional(),
+  retryable: z.string().optional(),
+  signature: z.string().optional(),
+});
+
 export type IRefundV2Request = z.infer<typeof RefundV2RequestSchema>;
 export const RefundV2RequestSchema = z.object({
   locale: z.enum(['tr', 'en']).optional(),

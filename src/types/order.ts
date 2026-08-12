@@ -75,23 +75,7 @@ export const OrderBasketItemSchema = ADD_ORDER_BASKET_ITEM()
   .extend(MongoSchema.shape);
 
 export type IOrderShipment = z.infer<typeof OrderShipmentSchema>;
-export const OrderShipmentSchema = ADD_ORDER_SHIPMENT().extend({
-  orderId: z.string().optional(), // 8959beed-0296-4ca7-8112-563829252bfa
-  orderNumber: z.string().optional(), // ABC12333322
-  orderOrganizationId: z.string().optional(), // 5f9d1b07-0296-4ca7-8112-563829252bfa
-  offerId: z.string().optional(), // 8e8cd00c-6fc4-4ae1-af46-013d78309287
-  offerAverageEstimatedTime: z.string().optional(), // 02 gün 00 saat
-  barcode: z.string().optional(), // 88242290375
-  trackingId: z.string().optional(), // 1186e0d8-dd49-4fb9-b5ec-2d6af4146e32
-  trackingNumber: z.string().optional(), // 21634385
-  trackingUrl: z.string().optional(), // https://app.geliver.io/tracking/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32
-  trackingStatusCode: z.string().optional(), // https://docs.geliver.io/docs/shipments_and_transaction/tracking_status_codes
-  trackingSubStatusCode: z.string().optional(),
-  trackingStatusUpdate: z.string().optional(), // 2026-01-30T12:09:13.3327+03:00
-  labelFileType: z.string().optional(), // PROVIDER_PDF
-  labelUrl: z.string().optional(), // https://labels3.geliver.io/labels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32.pdf
-  labelResponsiveUrl: z.string().optional(), // https://api.geliver.io/api/v1/responsivelabels/1186e0d8-dd49-4fb9-b5ec-2d6af4146e32/1f6b
-});
+export const OrderShipmentSchema = ADD_ORDER_SHIPMENT();
 
 export type IOrderTotal = z.infer<typeof OrderTotalSchema>;
 export const OrderTotalSchema = z.object({
@@ -170,10 +154,48 @@ export const PAYMENT_METHODES = [
   'cash',
 ] as const;
 
-export type IShippingStatuses = (typeof ORDER_STATUSES)[number];
-export const SHIPPING_STATUSES = [
-  'information',
-  'received',
+export type IPaymentProviders = (typeof PAYMENT_PROVIDERS)[number];
+export const PAYMENT_PROVIDERS = ['manual', 'iyzico'];
+
+export type IProviderServiceCodes = (typeof PROVIDER_SERVICE_CODES)[number];
+export const PROVIDER_SERVICE_CODES = [
+  'SURAT_STANDART',
+  'YURTICI_STANDART',
+  'PTT_STANDART',
+  'PTT_KAPIDA_ODEME',
+  'DHL_STANDART',
+  'HEPSIJET_STANDART',
+  'KOLAYGELSIN_STANDART',
+  'PAKETTAXI_STANDART',
+  'ARAS_STANDART',
+  'GELIVER_STANDART',
+];
+
+export type IShippingStatusCodes = (typeof SHIPPING_STATUS_CODES)[number];
+export const SHIPPING_STATUS_CODES = [
+  'GOT_OFFERS',
+  'TRACKING_CODE_CREATED',
+  'SHIPPED',
+  'DELIVERED',
+  'RETURNED',
+  'CANCELLED',
+  'FAILED',
+];
+
+export type ITrackingStatusCodes = (typeof TRACKING_STATUS_CODES)[number];
+export const TRACKING_STATUS_CODES = [
+  'PRE_TRANSIT',
+  'TRANSIT',
+  'DELIVERED',
+  'FAILURE',
+  'RETURNED',
+  'CANCELED',
+  'UNKNOWN',
+];
+
+export type ITrackingSubStatusCodes = (typeof ORDER_STATUSES)[number];
+export const TRACKING_SUB_STATUS_CODES = [
+  'information_received',
   'pickup_scheduled',
   'pickup_out_for_collection',
   'pickup_failed',

@@ -282,6 +282,14 @@ export const ADD_COMPANY_SHIPPING_OPTIONS = (locale: ILocale = 'tr') => {
         .optional(),
       geliver: z
         .object({
+          name: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
+          code: z
+            .string()
+            .min(2, { message: m.public_forms_validations_minLength(2) })
+            .max(254, { message: m.public_forms_validations_maxLength(254) }),
           isTest: z.boolean(),
         })
         .optional(),

@@ -249,8 +249,9 @@ export interface PInfoRow {
 
 export interface PMain {
   currency?: string;
+  provider?: string;
   order?: IOrder;
-  paymentResultIyzico?: Iyzipay.PaymentResult;
+  paymentResultIyzico?: Iyzipay.PaymentResult | null;
 }
 
 export interface PCard {
@@ -270,7 +271,7 @@ export interface POrderAddress {
 }
 
 export interface PCardInformation {
-  paymentResultIyzico?: Iyzipay.PaymentResult;
+  paymentResultIyzico?: Iyzipay.PaymentResult | null;
 }
 
 export interface PTableGroup {
@@ -281,6 +282,7 @@ export interface PTableGroup {
 export interface PAddBasketItems {
   products?: IProduct[];
   variants?: IVariant[];
+  templates?: IPackageTemplate[];
 }
 
 export interface PAddBuyer {
