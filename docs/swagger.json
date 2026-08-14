@@ -13934,7 +13934,7 @@
         }
       }
     },
-    "/public/order/{orderId}/{email}": {
+    "/public/order/{orderId}": {
       "get": {
         "tags": [
           "Order"
@@ -13944,24 +13944,10 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "507f1f77bcf86cd799439011"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "orderId",
-            "in": "path"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                "user@example.com"
-              ]
-            },
-            "required": true,
-            "name": "email",
             "in": "path"
           }
         ],
