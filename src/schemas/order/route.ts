@@ -17,6 +17,21 @@ const OrderListQuerySchema = ListQuerySchema.extend({
     .meta({ examples: ['pending'] }),
 });
 
+// GET /public/order/{orderId}
+registry.registerPath({
+  method: 'get',
+  path: '/public/order/{orderId}',
+  tags: ['Order'],
+  summary: 'Get order in the system',
+  operationId: 'getPublicOrder',
+  request: {
+    params: z.object({
+      orderId: z.string(),
+    }),
+  },
+  responses,
+});
+
 // GET /public-key/order
 registry.registerPath({
   method: 'get',

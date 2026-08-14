@@ -13934,6 +13934,61 @@
         }
       }
     },
+    "/public/order/{orderId}/{email}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get order in the system",
+        "operationId": "getPublicOrder",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "507f1f77bcf86cd799439011"
+              ]
+            },
+            "required": true,
+            "name": "orderId",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "user@example.com"
+              ]
+            },
+            "required": true,
+            "name": "email",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public-key/order": {
       "get": {
         "tags": [
