@@ -91,6 +91,11 @@ export const LinkSchema = z.object({
 /*************************
  *       CONSTANTS       *
  *************************/
+export const DEFAULT_PAGINATION = [
+  { name: '10', value: 10 },
+  { name: '25', value: 25 },
+  { name: '50', value: 50 },
+];
 export const PRESET_RANGES: Record<keyof IPreset2, IPreset> = {
   yesterday: 'yesterday',
   week: 'week',

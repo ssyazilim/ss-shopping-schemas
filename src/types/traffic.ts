@@ -76,3 +76,4 @@ export const VisitorStatisticsSchema = z.object({
  *       CONSTANTS       *
  *************************/
 export const DEFAULT_IP_ADDRESS: IIpDetails = getDefaultsForSchema(IpDetailsSchema);
+export const DEFAULT_VISITOR = { totalReferrer: 0, totalDirect: 0, totalBot: 0, total: 0 };

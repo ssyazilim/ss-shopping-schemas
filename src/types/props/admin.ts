@@ -11,10 +11,19 @@ import type {
   IPaymentSettings,
   IProductSettings,
 } from '../company';
-import type { ICity, ICountry, IDistrict, IPhoneCode, IUpdatedData } from '../country';
-import type { IExternal } from '../external';
+import type { ICity, ICountry, IDistrict, IUpdatedData } from '../country';
 import type {
-  IDealer,
+  IModule,
+  ICrispConfig,
+  IIyzicoConfig,
+  IWhatsappConfig,
+  ITawkToConfig,
+  IGoogleAuthConfig,
+  IFacebookAuthConfig,
+  INetgsmConfig,
+  IGeliverConfig,
+} from '../module';
+import type {
   IGeliverAddPackageTemplateResponse,
   IGeliverAddProviderResponse,
   IGeliverAddWebHookResponse,
@@ -173,17 +182,17 @@ export interface PError {
 export interface PBestSeller {
   currency?: string;
   activeType?: string;
-  label1?: string;
-  label2?: string;
+  label?: string;
+  labell?: string;
   basketItems?: IOrderBasketItem[];
-  basketItems2?: IOrderBasketItem[];
+  basketItemss?: IOrderBasketItem[];
 }
 
 export interface PLine {
   currency?: string;
   dateButtons?: IDateButton[];
   basketItems?: IOrderBasketItem[];
-  basketItems2?: IOrderBasketItem[];
+  basketItemss?: IOrderBasketItem[];
 }
 
 export interface PDoughnut {
@@ -202,7 +211,7 @@ export interface PFunnel {
 export interface PStatSection {
   totalCount?: number;
   basketItems?: IOrderBasketItem[];
-  basketItems2?: IOrderBasketItem[];
+  basketItemss?: IOrderBasketItem[];
 }
 
 export interface PTopSection {
@@ -219,26 +228,6 @@ export interface PCategoryAdd {
   isAdd?: boolean;
   categories?: ICategory[];
   rowData?: ITableIndex & ICategory;
-}
-
-export interface PFacebook {
-  facebookData?: IExternal['facebook'];
-  externalId?: string;
-}
-
-export interface PModuleFacebook {
-  facebookData?: IExternal['facebook'];
-  externalId?: string;
-}
-
-export interface PModuleGoogle {
-  googleData?: IExternal['google'];
-  externalId?: string;
-}
-
-export interface PModuleYandex {
-  yandexData?: IExternal['yandex'];
-  externalId?: string;
 }
 
 export interface PInfoRow {
@@ -287,12 +276,11 @@ export interface PAddBasketItems {
 
 export interface PAddBuyer {
   triggerClick?: number;
-  phoneCodes?: IPhoneCode[];
+  phoneCodes?: ICountry[];
   cities?: IGeliverCity[];
 }
 
 export interface PAddShipping {
-  dealers?: IDealer[];
   templates?: IPackageTemplate[];
 }
 
@@ -332,27 +320,24 @@ export interface PPostAdd {
 
 export interface PChat {
   company?: ICompany;
-  external?: IExternal;
-  phoneCodes?: IPhoneCode[];
+  // external?: IExternal;
+  phoneCodes?: ICountry[];
 }
 
 export interface PCommunication {
   company?: ICompany;
-  phoneCodes?: IPhoneCode[];
+  phoneCodes?: ICountry[];
 }
 
 export interface PRegion {
   company?: ICompany;
-  timeZones?: IUpdatedData[];
+  timeZones?: (ICountry['timezones'][number] & { name: string })[];
   currencies?: IUpdatedData[];
 }
 
 export interface PSellerAddress {
   company?: ICompany;
-  phoneCodes?: IPhoneCode[];
-  countries?: ICountry[];
-  cities?: ICity[];
-  districts?: IDistrict[];
+  phoneCodes?: ICountry[];
 }
 
 export interface PSellerGeneral {
@@ -361,14 +346,14 @@ export interface PSellerGeneral {
 
 export interface PSellerPayment {
   company?: ICompany;
-  external?: IExternal;
+  // external?: IExternal;
 }
 
 export interface PSellerShipping {
   company?: ICompany;
-  external?: IExternal;
+  // external?: IExternal;
   currencies?: IUpdatedData[];
-  dealers?: IDealer[];
+  dealers?: IDealerPricesWithDesi[];
 }
 
 export interface PSocialMedia {
@@ -518,6 +503,7 @@ export interface PDefaultForm {
   validateError?: boolean;
   validateMessage?: string;
   activeValidate?: boolean;
+  showPasswordToggle?: boolean;
 }
 
 export interface PDraggableList {
@@ -776,7 +762,7 @@ export interface PShippingAdd {
   isAdd?: boolean;
   isRecipient?: boolean;
   rowData?: ITableIndex & IGeliverAddressAddResponse;
-  phoneCodes?: IPhoneCode[];
+  phoneCodes?: ICountry[];
   cities?: IGeliverCity[];
   districts?: IGeliverDistrict[];
 }
@@ -802,7 +788,7 @@ export interface PShipmentAdd {
   isAdd?: boolean;
   products?: IProduct[];
   variants?: IVariant[];
-  phoneCodes?: IPhoneCode[];
+  phoneCodes?: ICountry[];
   templates?: IPackageTemplate[];
   receivers?: { name?: string; description?: string; current?: boolean }[];
   senders?: { name?: string; description?: string; current?: boolean }[];
@@ -868,6 +854,65 @@ export interface PPbar {
   showHeader?: boolean;
   label?: string;
   backgroundColor?: string;
+}
+
+export interface PPhoneInput {
+  modelValue?: string;
+  data?: ICountry[];
+  uniqueId?: string;
+  formClass?: string;
+  labelTitle?: string;
+  disabled?: boolean;
+  validateError?: boolean;
+  validateMessage?: string;
+  activeValidate?: boolean;
+}
+
+export interface PInlineLinks {
+  data?: (IModule & { description: string })[],
+  buttonLabel?: string,
+  buttonLabel2?: string,
+  buttonLabel3?: string,
+}
+
+export interface PModuleIyzico {
+  moduleKey: 'iyzico',
+  moduleData?: Partial<IIyzicoConfig>,
+}
+
+export interface PModuleWhatsapp {
+  moduleKey: 'whatsapp',
+  moduleData?: Partial<IWhatsappConfig>,
+}
+
+export interface PModuleCrisp {
+  moduleKey: 'crisp',
+  moduleData?: Partial<ICrispConfig>,
+}
+
+export interface PModuleTawkTo {
+  moduleKey: 'tawkTo',
+  moduleData?: Partial<ITawkToConfig>,
+}
+
+export interface PModuleGoogleAuth {
+  moduleKey: 'googleAuth',
+  moduleData?: Partial<IGoogleAuthConfig>,
+}
+
+export interface PModuleFacebookAuth {
+  moduleKey: 'facebookAuth',
+  moduleData?: Partial<IFacebookAuthConfig>,
+}
+
+export interface PModuleNetgsm {
+  moduleKey: 'netgsm',
+  moduleData?: Partial<INetgsmConfig>,
+}
+
+export interface PModuleGeliver {
+  moduleKey: 'geliver',
+  moduleData?: Partial<IGeliverConfig>,
 }
 
 /*************************

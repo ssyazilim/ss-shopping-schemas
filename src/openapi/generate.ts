@@ -40,7 +40,7 @@ const document = generator.generateDocument({
     { name: 'Company', description: 'Company information for the User' },
     { name: 'Countries Cities & Districts', description: 'Country State City for the User' },
     { name: 'Currency', description: 'Currencies for the system' },
-    { name: 'External', description: 'External Services for the system' },
+    { name: 'Module', description: 'Modules for the system' },
     { name: 'Form', description: 'Form process for users' },
     { name: 'Google', description: 'Google operations for the system' },
     { name: 'Gsm', description: 'GSM service operations for the system' },

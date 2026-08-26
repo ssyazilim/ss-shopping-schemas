@@ -56,8 +56,8 @@
       "description": "Currencies for the system"
     },
     {
-      "name": "External",
-      "description": "External Services for the system"
+      "name": "Module",
+      "description": "Modules for the system"
     },
     {
       "name": "Form",
@@ -3248,443 +3248,150 @@
           }
         }
       },
-      "ExternalIyzico": {
+      "addModule": {
         "type": "object",
         "properties": {
-          "lang": {
+          "key": {
             "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
             "examples": [
-              "en"
+              "google-auth"
             ]
           },
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "examples": [
-              "https://sandbox-api.iyzipay.com"
-            ]
-          },
-          "apiKey": {
-            "type": "string"
-          },
-          "secretKey": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "lang",
-          "url",
-          "apiKey",
-          "secretKey"
-        ]
-      },
-      "ExternalGoogle": {
-        "type": "object",
-        "properties": {
-          "analyticsId": {
-            "type": "string",
-            "examples": [
-              "G-123456"
-            ]
-          },
-          "analyticsPropertyId": {
-            "type": "string"
-          },
-          "tagManagerId": {
-            "type": "string",
-            "examples": [
-              "GTM-123456"
-            ]
-          },
-          "apiKey": {
-            "type": "string"
-          },
-          "clientId": {
-            "type": "string"
-          },
-          "clientSecret": {
-            "type": "string"
-          },
-          "callbackUrl": {
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "required": [
-          "analyticsId",
-          "analyticsPropertyId",
-          "tagManagerId",
-          "apiKey",
-          "clientId",
-          "clientSecret",
-          "callbackUrl"
-        ]
-      },
-      "ExternalFacebook": {
-        "type": "object",
-        "properties": {
-          "apiKey": {
-            "type": "string"
-          },
-          "clientId": {
-            "type": "string"
-          },
-          "clientSecret": {
-            "type": "string"
-          },
-          "callbackUrl": {
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "required": [
-          "apiKey",
-          "clientId",
-          "clientSecret",
-          "callbackUrl"
-        ]
-      },
-      "ExternalTawkTo": {
-        "type": "object",
-        "properties": {
-          "propertyId": {
-            "type": "string"
-          },
-          "widgetId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "propertyId",
-          "widgetId"
-        ]
-      },
-      "ExternalCrisp": {
-        "type": "object",
-        "properties": {
-          "siteId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "siteId"
-        ]
-      },
-      "ExternalGeliver": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "token"
-        ]
-      },
-      "AddExternal": {
-        "type": "object",
-        "properties": {
           "name": {
-            "type": "string"
-          },
-          "iyzico": {
-            "type": "object",
-            "properties": {
-              "lang": {
-                "type": "string",
-                "examples": [
-                  "en"
-                ]
-              },
-              "url": {
-                "type": "string",
-                "format": "uri",
-                "examples": [
-                  "https://sandbox-api.iyzipay.com"
-                ]
-              },
-              "apiKey": {
-                "type": "string"
-              },
-              "secretKey": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "lang",
-              "url",
-              "apiKey",
-              "secretKey"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Google Authentication"
             ]
           },
-          "google": {
-            "type": "object",
-            "properties": {
-              "analyticsId": {
-                "type": "string",
-                "examples": [
-                  "G-123456"
-                ]
-              },
-              "analyticsPropertyId": {
-                "type": "string"
-              },
-              "tagManagerId": {
-                "type": "string",
-                "examples": [
-                  "GTM-123456"
-                ]
-              },
-              "apiKey": {
-                "type": "string"
-              },
-              "clientId": {
-                "type": "string"
-              },
-              "clientSecret": {
-                "type": "string"
-              },
-              "callbackUrl": {
-                "type": "string",
-                "format": "uri"
-              }
-            },
-            "required": [
-              "analyticsId",
-              "analyticsPropertyId",
-              "tagManagerId",
-              "apiKey",
-              "clientId",
-              "clientSecret",
-              "callbackUrl"
+          "icon": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "google"
             ]
           },
-          "yandex": {
-            "type": "object",
-            "properties": {
-              "metricaId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "metricaId"
+          "category": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "auth"
             ]
           },
-          "facebook": {
-            "type": "object",
-            "properties": {
-              "apiKey": {
-                "type": "string"
-              },
-              "clientId": {
-                "type": "string"
-              },
-              "clientSecret": {
-                "type": "string"
-              },
-              "callbackUrl": {
-                "type": "string",
-                "format": "uri"
-              }
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
             },
-            "required": [
-              "apiKey",
-              "clientId",
-              "clientSecret",
-              "callbackUrl"
+            "examples": [
+              [
+                "clientId",
+                "clientSecret"
+              ]
             ]
           },
-          "tawkTo": {
-            "type": "object",
-            "properties": {
-              "propertyId": {
-                "type": "string"
-              },
-              "widgetId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "propertyId",
-              "widgetId"
+          "enabled": {
+            "type": "boolean",
+            "examples": [
+              false
             ]
           },
-          "crisp": {
-            "type": "object",
-            "properties": {
-              "siteId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "siteId"
+          "isActive": {
+            "type": "boolean",
+            "examples": [
+              true
             ]
           },
-          "geliver": {
+          "config": {
             "type": "object",
-            "properties": {
-              "token": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "token"
-            ]
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254
+            }
           }
         },
         "required": [
-          "name"
+          "key",
+          "name",
+          "icon",
+          "category",
+          "fields",
+          "enabled",
+          "isActive"
         ]
       },
-      "UpdateExternal": {
+      "updateModule": {
         "type": "object",
         "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "google-auth"
+            ]
+          },
           "name": {
-            "type": "string"
-          },
-          "iyzico": {
-            "type": "object",
-            "properties": {
-              "lang": {
-                "type": "string",
-                "examples": [
-                  "en"
-                ]
-              },
-              "url": {
-                "type": "string",
-                "format": "uri",
-                "examples": [
-                  "https://sandbox-api.iyzipay.com"
-                ]
-              },
-              "apiKey": {
-                "type": "string"
-              },
-              "secretKey": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "lang",
-              "url",
-              "apiKey",
-              "secretKey"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "Google Authentication"
             ]
           },
-          "google": {
-            "type": "object",
-            "properties": {
-              "analyticsId": {
-                "type": "string",
-                "examples": [
-                  "G-123456"
-                ]
-              },
-              "analyticsPropertyId": {
-                "type": "string"
-              },
-              "tagManagerId": {
-                "type": "string",
-                "examples": [
-                  "GTM-123456"
-                ]
-              },
-              "apiKey": {
-                "type": "string"
-              },
-              "clientId": {
-                "type": "string"
-              },
-              "clientSecret": {
-                "type": "string"
-              },
-              "callbackUrl": {
-                "type": "string",
-                "format": "uri"
-              }
-            },
-            "required": [
-              "analyticsId",
-              "analyticsPropertyId",
-              "tagManagerId",
-              "apiKey",
-              "clientId",
-              "clientSecret",
-              "callbackUrl"
+          "icon": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "google"
             ]
           },
-          "yandex": {
-            "type": "object",
-            "properties": {
-              "metricaId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "metricaId"
+          "category": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "auth"
             ]
           },
-          "facebook": {
-            "type": "object",
-            "properties": {
-              "apiKey": {
-                "type": "string"
-              },
-              "clientId": {
-                "type": "string"
-              },
-              "clientSecret": {
-                "type": "string"
-              },
-              "callbackUrl": {
-                "type": "string",
-                "format": "uri"
-              }
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
             },
-            "required": [
-              "apiKey",
-              "clientId",
-              "clientSecret",
-              "callbackUrl"
+            "examples": [
+              [
+                "clientId",
+                "clientSecret"
+              ]
             ]
           },
-          "tawkTo": {
-            "type": "object",
-            "properties": {
-              "propertyId": {
-                "type": "string"
-              },
-              "widgetId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "propertyId",
-              "widgetId"
+          "enabled": {
+            "type": "boolean",
+            "examples": [
+              false
             ]
           },
-          "crisp": {
-            "type": "object",
-            "properties": {
-              "siteId": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "siteId"
+          "isActive": {
+            "type": "boolean",
+            "examples": [
+              true
             ]
           },
-          "geliver": {
+          "config": {
             "type": "object",
-            "properties": {
-              "token": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "token"
-            ]
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 254
+            }
           }
         }
       },
@@ -12068,13 +11775,13 @@
         }
       }
     },
-    "/public/external": {
+    "/public/module": {
       "get": {
         "tags": [
-          "External"
+          "Module"
         ],
-        "summary": "Get external services in the system",
-        "operationId": "getExternal",
+        "summary": "Get modules in the system",
+        "operationId": "getModules",
         "responses": {
           "200": {
             "description": "OK",
@@ -12099,13 +11806,13 @@
         }
       }
     },
-    "/public/external/{key}": {
+    "/public/module/{key}": {
       "get": {
         "tags": [
-          "External"
+          "Module"
         ],
-        "summary": "Get external service key in the system",
-        "operationId": "getExternalKey",
+        "summary": "Get a module by key in the system",
+        "operationId": "getModuleByKey",
         "parameters": [
           {
             "schema": {
@@ -12140,68 +11847,13 @@
         }
       }
     },
-    "/admin/external": {
-      "post": {
-        "tags": [
-          "External"
-        ],
-        "summary": "Add a new external to the system",
-        "operationId": "addExternal",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddExternal"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddExternal"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddExternal"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/external/{externalId}": {
+    "/admin/module/{key}": {
       "patch": {
         "tags": [
-          "External"
+          "Module"
         ],
-        "summary": "Update a external to the system",
-        "operationId": "updateExternal",
+        "summary": "Update a module in the system",
+        "operationId": "updateModule",
         "security": [
           {
             "JWT": []
@@ -12213,7 +11865,7 @@
               "type": "string"
             },
             "required": true,
-            "name": "externalId",
+            "name": "key",
             "in": "path"
           }
         ],
@@ -12221,17 +11873,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateExternal"
+                "$ref": "#/components/schemas/updateModule"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateExternal"
+                "$ref": "#/components/schemas/updateModule"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateExternal"
+                "$ref": "#/components/schemas/updateModule"
               }
             }
           }

@@ -10,7 +10,7 @@ export * from './company';
 export * from './contact';
 export * from './country';
 export * from './currency';
-export * from './external';
+export * from './module';
 export * from './gsm';
 export * from './iyzico';
 export * from './menu';
