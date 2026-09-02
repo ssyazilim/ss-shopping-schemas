@@ -57,12 +57,10 @@ export const PRESIGNED_PUT_OBJECT = z.object({
 
 export const ADD_FOLDER = z.object({
   bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z
-    .string()
-    .meta({
-      examples: ['test/posts/blog'],
-      description: 'Full folder path without a trailing slash',
-    }),
+  objectName: z.string().meta({
+    examples: ['test/posts/blog'],
+    description: 'Full folder path without a trailing slash',
+  }),
 });
 
 export const PRESIGNED_GET_OBJECT = z.object({
