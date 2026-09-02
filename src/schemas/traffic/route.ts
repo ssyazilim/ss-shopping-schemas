@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from 
 registry.registerPath({
   method: 'post',
   path: '/public/traffic/analyze',
-  tags: ['Traffic'],
+  tags: ['API-traffic'],
   summary: 'Analyze the web site traffic',
   operationId: 'analyzeTraffic',
   request: { body: buildRequestBody(AnalyzeSchema) },
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/traffic/analyze-traffic',
-  tags: ['Traffic'],
+  tags: ['API-traffic'],
   summary: 'Get all visitors in the system',
   operationId: 'getTrafficsAdmin',
   security: [{ JWT: [] }],
@@ -41,7 +41,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/traffic/analyze-organic-traffic',
-  tags: ['Traffic'],
+  tags: ['API-traffic'],
   summary: 'Get all organic visitors in the system',
   operationId: 'getOrganicTrafficsAdmin',
   security: [{ JWT: [] }],
@@ -64,7 +64,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/traffic/analyze-organic-traffic',
-  tags: ['Traffic'],
+  tags: ['API-traffic'],
   summary: 'Delete a customer traffic from the system',
   operationId: 'deleteVisitor',
   security: [{ JWT: [] }],

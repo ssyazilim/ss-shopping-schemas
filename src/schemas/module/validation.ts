@@ -32,6 +32,10 @@ export const ADD_MODULE = (locale: ILocale = 'tr') => {
       .max(254, { message: m.public_forms_validations_maxLength(254) })
       .meta({ examples: ['auth'] }),
     isEnabled: z.boolean().meta({ examples: [false] }),
+    isVerified: z
+      .boolean()
+      .optional()
+      .meta({ examples: [false] }),
     config: MODULE_CONFIG().optional(),
   });
 };

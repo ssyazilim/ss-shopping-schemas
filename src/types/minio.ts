@@ -15,6 +15,34 @@ export const ListObjectsSchema = z.object({
   size: z.number(),
 });
 
+export type IListPrefixes = z.infer<typeof ListPrefixesSchema>;
+export const ListPrefixesSchema = z.object({
+  prefix: z.string(),
+  size: z.number(),
+});
+
+export type IListEntry = IListObjects | IListPrefixes;
+
+export interface IMediaEntry {
+  key: string;
+  name: string;
+  url: string;
+  isFolder: boolean;
+  size: number;
+  lastModified?: string;
+  etag?: string;
+}
+
+export interface IMediaUpload {
+  id: string;
+  name: string;
+  size: number;
+  objectUrl: string;
+  isImage: boolean;
+  progress: number;
+  status: 'uploading' | 'done' | 'error';
+}
+
 export type IUploader = z.infer<typeof UploaderSchema>;
 export const UploaderSchema = z.object({
   id: z.string(),
@@ -33,6 +61,7 @@ export const PutObjectSchema = z.object({
   bucketName: z.string(),
   objectName: z.string(),
   expireTime: z.number(),
+  fileName: z.string().optional(),
 });
 
 export type ISignedPutData = z.infer<typeof SignedPutDataSchema>;
@@ -41,6 +70,11 @@ export const SignedPutDataSchema = z.object({
   imagePath: z.string(),
   objectName: z.string(),
   imageName: z.string(),
+});
+
+export type IAddFolderData = z.infer<typeof AddFolderDataSchema>;
+export const AddFolderDataSchema = z.object({
+  folderName: z.string(),
 });
 
 export type IDeleteObject = z.infer<typeof DeleteObjectSchema>;

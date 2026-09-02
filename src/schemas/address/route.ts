@@ -11,7 +11,7 @@ const addressIdParam = z.object({
 registry.registerPath({
   method: 'get',
   path: '/public/address',
-  tags: ['Address'],
+  tags: ['API-address'],
   summary: 'Get an address for session user from the system',
   operationId: 'getAddressForUser',
   security: [{ JWT: [] }],
@@ -22,7 +22,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/address',
-  tags: ['Address'],
+  tags: ['API-address'],
   summary: 'Add a new address to system',
   operationId: 'addAddress',
   security: [{ JWT: [] }],
@@ -34,7 +34,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/address/{addressId}',
-  tags: ['Address'],
+  tags: ['API-address'],
   summary: 'Get an address from the system',
   operationId: 'getAddress',
   security: [{ JWT: [] }],
@@ -46,7 +46,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/public/address/{addressId}',
-  tags: ['Address'],
+  tags: ['API-address'],
   summary: 'Update an address from the system',
   operationId: 'updateAddress',
   security: [{ JWT: [] }],
@@ -61,7 +61,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/public/address/{addressId}',
-  tags: ['Address'],
+  tags: ['API-address'],
   summary: 'Delete an address in the system',
   operationId: 'deleteAddress',
   security: [{ JWT: [] }],
@@ -73,7 +73,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/addresses',
-  tags: ['Address'],
+  tags: ['API-address'],
   summary: 'Get all user addresses in the system',
   operationId: 'getAddresses',
   security: [{ JWT: [] }],

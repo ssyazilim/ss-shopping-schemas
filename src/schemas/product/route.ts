@@ -8,7 +8,7 @@ import { UpdateTaxSchema } from '../company/schema';
 registry.registerPath({
   method: 'get',
   path: '/public/products',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Get all products in the system',
   operationId: 'getProducts',
   request: {
@@ -27,7 +27,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/items/best-seller',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Get all best products and variants in the system',
   operationId: 'getItems',
   request: {
@@ -46,7 +46,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/products/XML/google',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Get all products in the system with Google XML format',
   operationId: 'getProductsGoogleXML',
   responses,
@@ -56,7 +56,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/products/XML/yandex',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Get all products in the system with Yandex XML format',
   operationId: 'getProductsYandexXML',
   responses,
@@ -66,7 +66,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/product/{productId}',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Get a product from the system',
   operationId: 'getProduct',
   request: {
@@ -85,7 +85,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/products/count',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Check product and variant count in the system',
   operationId: 'countProducts',
   security: [{ JWT: [] }],
@@ -96,7 +96,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/products/update-sku',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Update sku for all items in the system',
   operationId: 'updateSkuForItems',
   security: [{ JWT: [] }],
@@ -107,7 +107,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/products/update-tax',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Update tax for all items in the system',
   operationId: 'updateTaxForItems',
   security: [{ JWT: [] }],
@@ -119,7 +119,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/product',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Add a new product to system',
   operationId: 'addProduct',
   security: [{ JWT: [] }],
@@ -131,7 +131,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/product',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Delete a product or products in the system',
   operationId: 'deleteProduct',
   security: [{ JWT: [] }],
@@ -143,7 +143,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/product/{productId}',
-  tags: ['Product'],
+  tags: ['API-product'],
   summary: 'Update a product in the system',
   operationId: 'updateProduct',
   security: [{ JWT: [] }],

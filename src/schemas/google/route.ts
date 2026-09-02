@@ -7,7 +7,7 @@ import { responses, buildRequestBody } from '../common';
 registry.registerPath({
   method: 'post',
   path: '/public/google/translate',
-  tags: ['Google'],
+  tags: ['SERVICE-google'],
   summary: 'Translate a prompt selected language',
   operationId: 'translatePrompt',
   request: { body: buildRequestBody(TranslateSchema) },
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/google/subscribe',
-  tags: ['Google'],
+  tags: ['SERVICE-google'],
   summary: 'Add your email to subscription list',
   operationId: 'addMailToSubscription',
   request: { body: buildRequestBody(PasswordResetUserSchema) },
@@ -29,7 +29,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/google/gemini-prompt',
-  tags: ['Google'],
+  tags: ['SERVICE-google'],
   summary: 'Send a prompt to Gemini AI',
   operationId: 'sendGeminiPrompt',
   security: [{ JWT: [] }],

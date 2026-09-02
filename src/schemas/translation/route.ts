@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from 
 registry.registerPath({
   method: 'get',
   path: '/public/translations',
-  tags: ['Translation'],
+  tags: ['API-translation'],
   summary: 'Get all translations in the system',
   operationId: 'getTranslations',
   request: {
@@ -25,7 +25,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/translation/{code}',
-  tags: ['Translation'],
+  tags: ['API-translation'],
   summary: 'Get a translation from the system',
   operationId: 'getTranslation',
   request: {
@@ -40,7 +40,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/translation',
-  tags: ['Translation'],
+  tags: ['API-translation'],
   summary: 'Get a specific key translation in the system',
   operationId: 'getTranslationByKey',
   security: [{ JWT: [] }],
@@ -58,7 +58,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/translation',
-  tags: ['Translation'],
+  tags: ['API-translation'],
   summary: 'Add a new translation to system',
   operationId: 'addTranslation',
   security: [{ JWT: [] }],
@@ -70,7 +70,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/translation',
-  tags: ['Translation'],
+  tags: ['API-translation'],
   summary: 'Delete a translation or translations in the system',
   operationId: 'deleteTranslations',
   security: [{ JWT: [] }],
@@ -82,7 +82,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/translation/{translationId}',
-  tags: ['Translation'],
+  tags: ['API-translation'],
   summary: 'Update a translation from the system',
   operationId: 'updateTranslation',
   security: [{ JWT: [] }],

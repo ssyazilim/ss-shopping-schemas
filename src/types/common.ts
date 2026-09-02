@@ -68,6 +68,7 @@ export const SelectedItemSchema = z.enum([
   'delete',
   'deleteSelected',
   'deleteAll',
+  'moveSelected',
   '',
 ]);
 
@@ -83,7 +84,7 @@ export type IApiResponse<T> = {
 
 // IDeepPartial recursive mapped type — Zod ile tam karşılığı yok, TypeScript tipi olarak kalır
 export type IDeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? IDeepPartial<T[P]> : T[P];
+  [P in keyof T]?: NonNullable<T[P]> extends object ? IDeepPartial<NonNullable<T[P]>> : T[P];
 };
 
 export type ITableIndex = z.infer<typeof TableIndexSchema>;

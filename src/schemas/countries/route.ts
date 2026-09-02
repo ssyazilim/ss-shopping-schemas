@@ -6,7 +6,7 @@ import { responses } from '../common';
 registry.registerPath({
   method: 'get',
   path: '/public/country',
-  tags: ['Countries Cities & Districts'],
+  tags: ['SERVICE-countries-cities-districts'],
   summary: 'Get a Countries for the user',
   operationId: 'getCountries',
   responses,
@@ -16,7 +16,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/country/{countryCode}',
-  tags: ['Countries Cities & Districts'],
+  tags: ['SERVICE-countries-cities-districts'],
   summary: 'Get a States or Cities for the user',
   operationId: 'getStates',
   request: { params: z.object({ countryCode: z.string().meta({ examples: ['TR'] }) }) },
@@ -27,7 +27,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/country/{countryCode}/city/{cityCode}',
-  tags: ['Countries Cities & Districts'],
+  tags: ['SERVICE-countries-cities-districts'],
   summary: 'Get a Districts for the user',
   operationId: 'getDistricts',
   request: {
@@ -43,7 +43,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/geliver/country/{countryCode}',
-  tags: ['Countries Cities & Districts'],
+  tags: ['SERVICE-countries-cities-districts'],
   summary: 'Get a States or Cities for the user using geliver.io service',
   operationId: 'getGeliverStates',
   request: { params: z.object({ countryCode: z.string().meta({ examples: ['TR'] }) }) },
@@ -54,7 +54,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/geliver/country/{countryCode}/city/{cityCode}',
-  tags: ['Countries Cities & Districts'],
+  tags: ['SERVICE-countries-cities-districts'],
   summary: 'Get a Districts for the user using geliver.io service',
   operationId: 'getGeliverDistricts',
   request: {

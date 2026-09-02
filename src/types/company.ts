@@ -3,7 +3,6 @@ import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import {
   ADD_COMPANY,
   ADD_COMPANY_ADDRESS,
-  ADD_COMPANY_COMMUNICATION_OPTIONS,
   ADD_COMPANY_MAIL_OPTIONS,
   ADD_COMPANY_PAYMENT,
   ADD_COMPANY_PROPERTIES,
@@ -43,11 +42,30 @@ export const PropertiesSchema = ADD_COMPANY_PROPERTIES();
 export type IMailOptions = z.infer<typeof MailOptionsSchema>;
 export const MailOptionsSchema = ADD_COMPANY_MAIL_OPTIONS();
 
-export type ICommunicationOptions = z.infer<typeof CommunicationOptionsSchema>;
-export const CommunicationOptionsSchema = ADD_COMPANY_COMMUNICATION_OPTIONS();
-
 export type IShippingOptions = z.infer<typeof ShippingOptionsSchema>;
 export const ShippingOptionsSchema = ADD_COMPANY_SHIPPING_OPTIONS();
+
+export const SHIPMENT_METHODS = [
+  'all',
+  'geliver',
+  'automatic',
+  'standard',
+] as const satisfies readonly (keyof IShippingOptions['shipment'])[];
+
+export type IShipmentMethod = (typeof SHIPMENT_METHODS)[number];
+
+export const getEnabledShipmentMethod = (
+  shipment?: IShippingOptions['shipment'],
+): IShipmentMethod | undefined => SHIPMENT_METHODS.find((key) => shipment?.[key]?.isEnabled);
+
+export interface IShipmentMethodOption {
+  _id: string;
+  name: IShipmentMethod;
+  label: string;
+  description: string;
+  showContent: boolean;
+  disable: boolean;
+}
 
 export type ICompany = z.infer<typeof CompanySchema>;
 export const CompanySchema = ADD_COMPANY().extend(MongoSchema.shape);
@@ -64,4 +82,54 @@ export const SiteDataSchema = z.object({
 /*************************
  *       CONSTANTS       *
  *************************/
-export const DEFAULT_COMPANY: ICompany = getDefaultsForSchema(CompanySchema);
+export const DEFAULT_COMPANY: ICompany = {
+  _id: '',
+  createdAt: '',
+  updatedAt: '',
+  name: '',
+  baseUrl: '',
+  logo: [],
+  favicon: [],
+  description: '',
+  timeZone: 'Europe/Istanbul',
+  currency: 'TRY',
+  address: getDefaultsForSchema(CompanyAddressSchema),
+  socialMedia: [],
+  payments: [],
+  properties: {
+    homePage: getDefaultsForSchema(HomePageSchema),
+    paymentSettings: getDefaultsForSchema(PaymentSettingsSchema),
+    productSettings: getDefaultsForSchema(ProductSettingsSchema),
+    orderSettings: getDefaultsForSchema(OrderSettingsSchema),
+  },
+  mailOptions: getDefaultsForSchema(MailOptionsSchema),
+  shippingOptions: {
+    shipment: {
+      all: { isEnabled: true },
+      geliver: { isEnabled: false },
+      automatic: { isEnabled: false, name: '', code: '' },
+      standard: {
+        isEnabled: false,
+        name: '',
+        code: '',
+        price: {
+          currency: 'TRY',
+          currencyLocale: 'TRY',
+          sell: 0,
+          sellLocale: 0,
+        },
+      },
+    },
+    properties: {
+      free: {
+        isEnabled: false,
+        price: {
+          currency: 'TRY',
+          currencyLocale: 'TRY',
+          sell: 0,
+          sellLocale: 0,
+        },
+      },
+    },
+  },
+};

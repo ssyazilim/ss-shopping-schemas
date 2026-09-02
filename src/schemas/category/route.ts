@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from 
 registry.registerPath({
   method: 'get',
   path: '/public/categories',
-  tags: ['Category'],
+  tags: ['API-category'],
   summary: 'Get all categories in the system',
   operationId: 'getCategories',
   request: { query: ListQuerySchema },
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/categories/google/{locale}',
-  tags: ['Category'],
+  tags: ['API-category'],
   summary: 'Get Google categories from the system',
   operationId: 'getGoogleCategories',
   request: {
@@ -31,7 +31,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/category',
-  tags: ['Category'],
+  tags: ['API-category'],
   summary: 'Add a new category to system',
   operationId: 'addCategory',
   security: [{ JWT: [] }],
@@ -43,7 +43,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/category',
-  tags: ['Category'],
+  tags: ['API-category'],
   summary: 'Delete a categories in the system',
   operationId: 'deleteCategories',
   security: [{ JWT: [] }],
@@ -55,7 +55,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/category/{categoryId}',
-  tags: ['Category'],
+  tags: ['API-category'],
   summary: 'Update a category from the system',
   operationId: 'updateCategory',
   security: [{ JWT: [] }],

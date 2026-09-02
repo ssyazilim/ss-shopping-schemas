@@ -86,28 +86,28 @@ export const DEFAULT_LOCALES_ADMIN = [
 ];
 
 export const DEFAULT_COUNTRY: ICountry = {
-    id: 225,
-    name: 'Turkey',
-    iso2: 'TR',
-    iso3: 'TUR',
-    phonecode: '90',
-    capital: 'Ankara',
-    currency: 'TRY',
-    native: 'Türkiye',
-    emoji: '🇹🇷',
-    region: "Asia",
-    region_id: "3",
-    subregion: "Western Asia",
-    subregion_id: "11",
-    timezones: [
-      {
-        zoneName: "Europe/Istanbul",
-        gmtOffset: 10800,
-        gmtOffsetName: "UTC+03:00",
-        abbreviation: "EET",
-        tzName: "Eastern European Time",
-      }
-    ],
-    latitude: 39,
-    longitude: 35
-  };
+  id: 225,
+  name: 'Turkey',
+  iso2: 'TR',
+  iso3: 'TUR',
+  phonecode: '90',
+  capital: 'Ankara',
+  currency: 'TRY',
+  native: 'Türkiye',
+  emoji: '🇹🇷',
+  region: 'Asia',
+  region_id: '3',
+  subregion: 'Western Asia',
+  subregion_id: '11',
+  timezones: [
+    {
+      zoneName: 'Europe/Istanbul',
+      gmtOffset: 10800,
+      gmtOffsetName: 'UTC+03:00',
+      abbreviation: 'EET',
+      tzName: 'Eastern European Time',
+    },
+  ],
+  latitude: 39,
+  longitude: 35,
+};

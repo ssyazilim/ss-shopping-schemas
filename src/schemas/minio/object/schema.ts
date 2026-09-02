@@ -6,6 +6,8 @@ import {
   COPY_OBJECT,
   PRESIGNED_URL,
   PRESIGNED_GET_OBJECT,
+  PRESIGNED_PUT_OBJECT,
+  ADD_FOLDER,
 } from './validation';
 
 export const AddObjectSchema = registry.register('AddObject', ADD_OBJECT);
@@ -22,3 +24,10 @@ export const PresignedGetObjectSchema = registry.register(
   'PresignedGetObject',
   PRESIGNED_GET_OBJECT,
 );
+
+export const PresignedPutObjectSchema = registry.register(
+  'PresignedPutObject',
+  PRESIGNED_PUT_OBJECT,
+);
+
+export const AddFolderSchema = registry.register('AddFolder', ADD_FOLDER);

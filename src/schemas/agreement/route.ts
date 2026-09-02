@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from 
 registry.registerPath({
   method: 'get',
   path: '/public/agreements',
-  tags: ['Agreement'],
+  tags: ['API-agreement'],
   summary: 'Get all agreements in the system',
   operationId: 'getAgreements',
   request: { query: ListQuerySchema },
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/agreement/{locale}/{name}',
-  tags: ['Agreement'],
+  tags: ['API-agreement'],
   summary: 'Get an agreement from the system',
   operationId: 'getAgreement',
   request: {
@@ -34,7 +34,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/agreement',
-  tags: ['Agreement'],
+  tags: ['API-agreement'],
   summary: 'Add new agreement to the system',
   operationId: 'addAgreement',
   security: [{ JWT: [] }],
@@ -46,7 +46,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/agreement',
-  tags: ['Agreement'],
+  tags: ['API-agreement'],
   summary: 'Delete agreements from the system',
   operationId: 'deleteAgreements',
   security: [{ JWT: [] }],
@@ -58,7 +58,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/agreement/{agreementId}',
-  tags: ['Agreement'],
+  tags: ['API-agreement'],
   summary: 'Update an agreement from the system',
   operationId: 'updateAgreement',
   security: [{ JWT: [] }],

@@ -13,7 +13,7 @@ import {
 registry.registerPath({
   method: 'post',
   path: '/public/auth/login',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'Login process for the User in the system',
   operationId: 'loginUser',
   request: { body: buildRequestBody(LoginUserSchema) },
@@ -24,7 +24,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/auth/register',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'Add a new user to system',
   operationId: 'addUser',
   request: { body: buildRequestBody(AddUserSchema) },
@@ -35,7 +35,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/auth/register-verification',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'Check User key in the system',
   operationId: 'checkUser',
   request: { body: buildRequestBody(CheckKeySchema) },
@@ -46,7 +46,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/auth/register-activate',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'Activate User in the system',
   operationId: 'activateUser',
   request: { body: buildRequestBody(ActivateUserSchema) },
@@ -57,7 +57,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/auth/refresh-code',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'Refresh code for the activation in the system',
   operationId: 'refreshCode',
   request: { body: buildRequestBody(CheckKeySchema) },
@@ -68,7 +68,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/auth/password-reset',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'User can be reset password using this api',
   operationId: 'passwordResetUser',
   request: { body: buildRequestBody(PasswordResetUserSchema) },
@@ -79,7 +79,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/auth/password-reset-complete',
-  tags: ['Authentication'],
+  tags: ['API-authentication'],
   summary: 'User can be reset password for using this api',
   operationId: 'passwordResetCompleteUser',
   request: { body: buildRequestBody(PasswordResetCompleteUserSchema) },

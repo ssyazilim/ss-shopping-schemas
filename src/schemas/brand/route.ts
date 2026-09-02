@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from 
 registry.registerPath({
   method: 'get',
   path: '/public/brands',
-  tags: ['Brand'],
+  tags: ['API-brand'],
   summary: 'Get all brands in the system',
   operationId: 'getBrands',
   request: { query: ListQuerySchema },
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/brand/{brandId}',
-  tags: ['Brand'],
+  tags: ['API-brand'],
   summary: 'Get a brand from the system',
   operationId: 'getBrand',
   request: { params: z.object({ brandId: z.string() }) },
@@ -29,7 +29,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/brand',
-  tags: ['Brand'],
+  tags: ['API-brand'],
   summary: 'Add new brands to the system',
   operationId: 'addBrand',
   security: [{ JWT: [] }],
@@ -41,7 +41,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/brand',
-  tags: ['Brand'],
+  tags: ['API-brand'],
   summary: 'Delete brands from the system',
   operationId: 'deleteBrands',
   security: [{ JWT: [] }],
@@ -53,7 +53,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/brand/{brandId}',
-  tags: ['Brand'],
+  tags: ['API-brand'],
   summary: 'Update a brand from the system',
   operationId: 'updateBrand',
   security: [{ JWT: [] }],

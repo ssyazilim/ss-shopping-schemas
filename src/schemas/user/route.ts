@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from 
 registry.registerPath({
   method: 'get',
   path: '/public/user/{userId}',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Get a user from the system',
   operationId: 'getUser',
   request: { params: z.object({ userId: z.string() }) },
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/public/user',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Edit user information',
   operationId: 'editUser',
   security: [{ JWT: [] }],
@@ -30,7 +30,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/public/user',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Delete user account',
   operationId: 'deleteUser',
   security: [{ JWT: [] }],
@@ -42,7 +42,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/users',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Get all users in the system',
   operationId: 'getUsers',
   security: [{ JWT: [] }],
@@ -54,7 +54,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/user',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Add a customer to the system',
   operationId: 'addCustomer',
   security: [{ JWT: [] }],
@@ -66,7 +66,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/user',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Delete customers from the system',
   operationId: 'deleteCustomer',
   security: [{ JWT: [] }],
@@ -78,7 +78,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/user/{userId}',
-  tags: ['User'],
+  tags: ['API-user'],
   summary: 'Update a customer in the system',
   operationId: 'updateCustomer',
   security: [{ JWT: [] }],

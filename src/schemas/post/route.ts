@@ -8,7 +8,7 @@ import { responses, buildRequestBody, DeleteModelSchema, ListQuerySchema } from 
 registry.registerPath({
   method: 'get',
   path: '/public/posts/total',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Get all posts total count in the system',
   operationId: 'getPostTotal',
   responses,
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/posts',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Get all posts in the system',
   operationId: 'getPosts',
   request: {
@@ -40,7 +40,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/post/{postId}',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Get a post from the system',
   operationId: 'getPost',
   request: {
@@ -59,7 +59,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/post/{postId}/like',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Add a like or dislike to post in the system',
   operationId: 'likePosts',
   security: [{ JWT: [] }],
@@ -74,7 +74,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/post/{postId}/comment',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Add a comment to post in the system',
   operationId: 'commentBlogs',
   security: [{ JWT: [] }],
@@ -89,7 +89,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/post',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Add a new post to system',
   operationId: 'addPost',
   security: [{ JWT: [] }],
@@ -101,7 +101,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/post',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Delete a post or posts in the system',
   operationId: 'deletePosts',
   security: [{ JWT: [] }],
@@ -113,7 +113,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/post/{postId}',
-  tags: ['Post'],
+  tags: ['API-post'],
   summary: 'Update a post from the system',
   operationId: 'updatePost',
   security: [{ JWT: [] }],

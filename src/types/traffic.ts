@@ -77,3 +77,11 @@ export const VisitorStatisticsSchema = z.object({
  *************************/
 export const DEFAULT_IP_ADDRESS: IIpDetails = getDefaultsForSchema(IpDetailsSchema);
 export const DEFAULT_VISITOR = { totalReferrer: 0, totalDirect: 0, totalBot: 0, total: 0 };
+export const GOOGLE_BOT_IP_RANGES = [
+  '209.85.238.0/24',
+  '66.249.64.0/19',
+  '64.233.160.0/19',
+  '72.14.192.0/18',
+  '74.125.0.0/16',
+  '216.239.32.0/19',
+];

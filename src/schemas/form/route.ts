@@ -12,7 +12,7 @@ import { responses, buildRequestBody } from '../common';
 registry.registerPath({
   method: 'post',
   path: '/public/contact/send-message',
-  tags: ['Form'],
+  tags: ['API-form'],
   summary: 'Send a Customer message to system',
   operationId: 'sendMessageToSystem',
   request: { body: buildRequestBody(ContactMeSchema) },
@@ -23,7 +23,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/contact/upload-file',
-  tags: ['Form'],
+  tags: ['API-form'],
   summary: 'User can be upload a file (xml, pdf)',
   operationId: 'addFile',
   request: {
@@ -40,7 +40,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/contact/send-resume',
-  tags: ['Form'],
+  tags: ['API-form'],
   summary: 'Send a Customer resume to the authorities',
   operationId: 'sendResume',
   request: { body: buildRequestBody(ContactMeResumeSchema) },
@@ -51,7 +51,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/contact/send-error-message',
-  tags: ['Form'],
+  tags: ['API-form'],
   summary: 'Send a Customer error message to system',
   operationId: 'sendErrorMessageToSystem',
   request: { body: buildRequestBody(ContactMeErrorSchema) },
@@ -62,7 +62,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/contact/check-smtp',
-  tags: ['Form'],
+  tags: ['API-form'],
   summary: 'Check your SMTP settings is valid',
   operationId: 'checkSMTP',
   security: [{ JWT: [] }],

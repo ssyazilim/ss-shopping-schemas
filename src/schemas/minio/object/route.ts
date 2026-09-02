@@ -7,6 +7,8 @@ import {
   CopyObjectSchema,
   PresignedUrlSchema,
   PresignedGetObjectSchema,
+  PresignedPutObjectSchema,
+  AddFolderSchema,
 } from './schema';
 import { responses, buildRequestBody } from '../../common';
 
@@ -14,7 +16,7 @@ import { responses, buildRequestBody } from '../../common';
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/object/check-metadata',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Get metadata of a specific object',
   operationId: 'getObjectMetadata',
   security: [{ JWT: [] }],
@@ -31,7 +33,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/object',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Get a specific object',
   operationId: 'getObject',
   security: [{ JWT: [] }],
@@ -48,7 +50,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Upload file to minio',
   operationId: 'addObject',
   security: [{ JWT: [] }],
@@ -66,7 +68,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/object',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Delete a specific object',
   operationId: 'deleteObject',
   security: [{ JWT: [] }],
@@ -78,7 +80,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/object/objects',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Delete multiple objects',
   operationId: 'deleteObjects',
   security: [{ JWT: [] }],
@@ -90,7 +92,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/copy',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Copy an object from one bucket to another',
   operationId: 'copyObject',
   security: [{ JWT: [] }],
@@ -102,7 +104,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/presigned-url',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Generates a presigned URL for the provided HTTP method',
   operationId: 'getPresignedUrl',
   security: [{ JWT: [] }],
@@ -114,7 +116,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/presigned-get-object',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Generates a presigned URL for HTTP GET operations',
   operationId: 'getPresignedGetObject',
   security: [{ JWT: [] }],
@@ -126,10 +128,22 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/object/presigned-put-object',
-  tags: ['Minio Object S3'],
+  tags: ['SERVICE-minio-object-S3'],
   summary: 'Generates a presigned URL for HTTP PUT operations',
   operationId: 'getPresignedPutObject',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(PresignedGetObjectSchema) },
+  request: { body: buildRequestBody(PresignedPutObjectSchema) },
+  responses,
+});
+
+// POST /admin/minio/folder
+registry.registerPath({
+  method: 'post',
+  path: '/admin/minio/folder',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Creates an empty folder with a zero byte object',
+  operationId: 'addFolder',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(AddFolderSchema) },
   responses,
 });

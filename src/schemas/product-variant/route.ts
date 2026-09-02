@@ -12,7 +12,7 @@ import { responses, buildRequestBody, ListQuerySchema } from '../common';
 registry.registerPath({
   method: 'get',
   path: '/public/variants',
-  tags: ['Product Variant'],
+  tags: ['API-product-variant'],
   summary: 'Get all variants in the system',
   operationId: 'getVariants',
   request: { query: ListQuerySchema },
@@ -23,7 +23,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/variant/{productId}',
-  tags: ['Product Variant'],
+  tags: ['API-product-variant'],
   summary: 'Get a product variants from the system',
   operationId: 'getProductVariants',
   request: { params: z.object({ productId: z.string() }) },
@@ -34,7 +34,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/variant/{productId}',
-  tags: ['Product Variant'],
+  tags: ['API-product-variant'],
   summary: 'Add a new variant to system',
   operationId: 'addVariant',
   security: [{ JWT: [] }],
@@ -49,7 +49,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/variant/{productId}',
-  tags: ['Product Variant'],
+  tags: ['API-product-variant'],
   summary: 'Update a variant in the system',
   operationId: 'updateVariant',
   security: [{ JWT: [] }],
@@ -64,7 +64,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/variant',
-  tags: ['Product Variant'],
+  tags: ['API-product-variant'],
   summary: 'Delete a variant or variants in the system',
   operationId: 'deleteVariant',
   security: [{ JWT: [] }],
@@ -76,7 +76,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/variants/{productId}',
-  tags: ['Product Variant'],
+  tags: ['API-product-variant'],
   summary: 'Add a new variants to product in the system',
   operationId: 'addVariantsMulti',
   security: [{ JWT: [] }],

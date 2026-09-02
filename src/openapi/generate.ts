@@ -9,13 +9,6 @@ registry.registerComponent('securitySchemes', 'JWT', {
   description: 'Provide your JWT token in the Authorization header as a Bearer token',
 });
 
-registry.registerComponent('securitySchemes', 'X-API-KEY', {
-  type: 'apiKey',
-  name: 'x-api-key',
-  in: 'header',
-  description: "Provide your api key in the 'x-api-key' header",
-});
-
 const generator = new OpenApiGeneratorV31(registry.definitions);
 
 const document = generator.generateDocument({
@@ -30,44 +23,45 @@ const document = generator.generateDocument({
     version: '1.0.11',
   },
   tags: [
-    { name: 'Authentication', description: 'API authentications process for users' },
-    { name: 'Address', description: 'Addresses for the system' },
-    { name: 'Agreement', description: 'User agreements for the system' },
-    { name: 'Brand', description: 'Brands for the system' },
-    { name: 'Card', description: 'User card information' },
-    { name: 'Cart', description: 'Carts for the system' },
-    { name: 'Category', description: 'Categories for the system' },
-    { name: 'Company', description: 'Company information for the User' },
-    { name: 'Countries Cities & Districts', description: 'Country State City for the User' },
-    { name: 'Currency', description: 'Currencies for the system' },
-    { name: 'Module', description: 'Modules for the system' },
-    { name: 'Form', description: 'Form process for users' },
-    { name: 'Google', description: 'Google operations for the system' },
-    { name: 'Gsm', description: 'GSM service operations for the system' },
-    { name: 'Minio Bucket S3', description: 'Simple Storage Service for the bucket operations' },
-    { name: 'Minio Object S3', description: 'Simple Storage Service for the object operations' },
-    { name: 'Order', description: 'User order information' },
-    { name: 'Payment Iyzico', description: 'Iyzico payment operations' },
-    { name: 'Post', description: 'Posts for the system' },
-    { name: 'Product', description: 'Products for the system' },
-    { name: 'Product Variant', description: 'Variants for the products' },
-    { name: 'Question', description: 'Questions for the product' },
-    { name: 'Review', description: 'Reviews for the product' },
-    { name: 'Shipping', description: 'Shipping calculations for the system' },
-    { name: 'Traffic', description: 'Web site analysis for users' },
-    { name: 'Translation', description: 'Translations for the system' },
-    { name: 'User', description: 'User process for users' },
+    { name: 'API-authentication', description: 'API authentications process for users' },
+    { name: 'API-address', description: 'Addresses for the system' },
+    { name: 'API-agreement', description: 'User agreements for the system' },
+    { name: 'API-brand', description: 'Brands for the system' },
+    { name: 'API-card', description: 'User card information' },
+    { name: 'API-cart', description: 'Carts for the system' },
+    { name: 'API-category', description: 'Categories for the system' },
+    { name: 'API-company', description: 'Company information for the User' },
+    { name: 'API-module', description: 'Modules for the system' },
+    { name: 'API-form', description: 'Form process for users' },
+    { name: 'API-order', description: 'User order information' },
+    { name: 'API-post', description: 'Posts for the system' },
+    { name: 'API-product', description: 'Products for the system' },
+    { name: 'API-product-variant', description: 'Variants for the products' },
+    { name: 'API-question', description: 'Questions for the product' },
+    { name: 'API-review', description: 'Reviews for the product' },
+    { name: 'API-traffic', description: 'Web site analysis for users' },
+    { name: 'API-translation', description: 'Translations for the system' },
+    { name: 'API-user', description: 'User process for users' },
+    { name: 'SERVICE-countries-cities-districts', description: 'Country State City for the User' },
+    { name: 'SERVICE-currency', description: 'Currencies for the system' },
+    { name: 'SERVICE-google', description: 'Google operations for the system' },
+    {
+      name: 'SERVICE-minio-bucket-S3',
+      description: 'Simple Storage Service for the bucket operations',
+    },
+    {
+      name: 'SERVICE-minio-object-S3',
+      description: 'Simple Storage Service for the object operations',
+    },
+    { name: 'SERVICE-message-netgsm', description: 'GSM service operations for the system' },
+    { name: 'SERVICE-payment-iyzico', description: 'Iyzico payment operations' },
+    { name: 'SERVICE-shipping-geliver', description: 'Shipping calculations for the system' },
   ],
   externalDocs: {
     description: 'Find out more about Swagger',
     url: 'https://swagger.io',
   },
-  servers: [
-    { url: 'http://localhost:5001/api' },
-    { url: 'https://api.bastakshop.com/api' },
-    { url: 'https://api.kimyakent.com/api' },
-    { url: 'https://api.ulusanelektrik.com/api' },
-  ],
+  servers: [{ url: 'http://localhost:5001/api' }, { url: 'http://localhost:5002/service' }],
 });
 
 writeFileSync(

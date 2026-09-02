@@ -6,7 +6,7 @@ import { responses } from '../common';
 registry.registerPath({
   method: 'get',
   path: '/public/card',
-  tags: ['Card'],
+  tags: ['API-card'],
   summary: 'Get a user card tokens in the system',
   operationId: 'getCard',
   security: [{ JWT: [] }],
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/cards',
-  tags: ['Card'],
+  tags: ['API-card'],
   summary: 'Get all cards for the user',
   operationId: 'getCards',
   security: [{ JWT: [] }],

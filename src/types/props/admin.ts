@@ -22,6 +22,10 @@ import type {
   IFacebookAuthConfig,
   INetgsmConfig,
   IGeliverConfig,
+  IGoogleAnalyticsConfig,
+  IGoogleTagConfig,
+  IYandexMetricaConfig,
+  IPaytrConfig,
 } from '../module';
 import type {
   IGeliverAddPackageTemplateResponse,
@@ -34,6 +38,7 @@ import type {
   IDealerPricesWithDesi,
   IPackageTemplate,
 } from '../geliver';
+import type { IMediaEntry, IMediaUpload } from '../minio';
 import type { IOrder, IOrderBasketItem } from '../order';
 import type { IPost, IPostCounts } from '../post';
 import type { IPrice, IProduct, IProductAndVariant, IStaticImage, IType } from '../product';
@@ -111,6 +116,47 @@ export interface PMainLogo {
 export interface PAlert {
   message?: string;
   type?: 'danger' | 'success' | 'warning' | 'info';
+}
+
+export interface PMediaOption {
+  key: string;
+  name: string;
+  divided?: boolean;
+}
+
+export interface PMediaFileMenu {
+  options?: PMediaOption[];
+}
+
+export interface PMediaList {
+  files?: IMediaEntry[];
+  options?: PMediaOption[];
+  selectedKey?: string;
+}
+
+export interface PMediaFilter {
+  name: string;
+  value: string;
+}
+
+export interface PMediaFilters {
+  filters?: PMediaFilter[];
+}
+
+export interface PMediaUploads {
+  uploads?: IMediaUpload[];
+  title?: string;
+}
+
+export interface PMediaGrid {
+  files?: IMediaEntry[];
+  options?: PMediaOption[];
+  selectedKey?: string;
+}
+
+export interface PBreadcrumbsFolder {
+  segments?: string[];
+  rootName?: string;
 }
 
 export interface PBadge {
@@ -443,6 +489,7 @@ export interface PResetPassword {
 export interface PButton {
   uniqueId?: string;
   type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'danger' | 'warning' | 'success' | 'info';
   iconAfter?: boolean;
   buttonClass?: string;
   labelTitle?: string;
@@ -727,6 +774,7 @@ export interface PTablePagination {
 
 export interface PTableTopSection {
   navigation?: ITopNavigation[];
+  showSearch?: boolean;
 }
 
 export interface PTableTopSectionMobile {
@@ -869,50 +917,78 @@ export interface PPhoneInput {
 }
 
 export interface PInlineLinks {
-  data?: (IModule & { description: string })[],
-  buttonLabel?: string,
-  buttonLabel2?: string,
-  buttonLabel3?: string,
+  data?: (IModule & { description: string })[];
+  buttonLabel?: string;
+  buttonLabel2?: string;
+  buttonLabel3?: string;
 }
 
 export interface PModuleIyzico {
-  moduleKey: 'iyzico',
-  moduleData?: Partial<IIyzicoConfig>,
+  moduleKey: 'iyzico';
+  moduleData?: Partial<IIyzicoConfig>;
 }
 
 export interface PModuleWhatsapp {
-  moduleKey: 'whatsapp',
-  moduleData?: Partial<IWhatsappConfig>,
+  moduleKey: 'whatsapp';
+  moduleData?: Partial<IWhatsappConfig>;
 }
 
 export interface PModuleCrisp {
-  moduleKey: 'crisp',
-  moduleData?: Partial<ICrispConfig>,
+  moduleKey: 'crisp';
+  moduleData?: Partial<ICrispConfig>;
 }
 
 export interface PModuleTawkTo {
-  moduleKey: 'tawkTo',
-  moduleData?: Partial<ITawkToConfig>,
+  moduleKey: 'tawkTo';
+  moduleData?: Partial<ITawkToConfig>;
 }
 
 export interface PModuleGoogleAuth {
-  moduleKey: 'googleAuth',
-  moduleData?: Partial<IGoogleAuthConfig>,
+  moduleKey: 'googleAuth';
+  moduleData?: Partial<IGoogleAuthConfig>;
 }
 
 export interface PModuleFacebookAuth {
-  moduleKey: 'facebookAuth',
-  moduleData?: Partial<IFacebookAuthConfig>,
+  moduleKey: 'facebookAuth';
+  moduleData?: Partial<IFacebookAuthConfig>;
 }
 
 export interface PModuleNetgsm {
-  moduleKey: 'netgsm',
-  moduleData?: Partial<INetgsmConfig>,
+  moduleKey: 'netgsm';
+  moduleData?: Partial<INetgsmConfig>;
 }
 
 export interface PModuleGeliver {
-  moduleKey: 'geliver',
-  moduleData?: Partial<IGeliverConfig>,
+  moduleKey: 'geliver';
+  moduleData?: Partial<IGeliverConfig>;
+}
+
+export interface PModuleGoogleAnalytics {
+  moduleKey: 'googleAnalytics';
+  moduleData?: Partial<IGoogleAnalyticsConfig>;
+}
+
+export interface PModuleGoogleTag {
+  moduleKey: 'googleTag';
+  moduleData?: Partial<IGoogleTagConfig>;
+}
+
+export interface PModuleYandexMetrica {
+  moduleKey: 'yandexMetrica';
+  moduleData?: Partial<IYandexMetricaConfig>;
+}
+
+export interface PModulePaytr {
+  moduleKey: 'paytr';
+  moduleData?: Partial<IPaytrConfig>;
+}
+
+export interface PModuleGoogleMerchant {
+  feedUrl?: string;
+}
+
+export interface PModuleYandexMerchants {
+  feedUrl?: string;
 }
 
 /*************************

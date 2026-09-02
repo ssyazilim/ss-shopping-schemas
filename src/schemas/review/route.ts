@@ -11,7 +11,7 @@ const ReviewListQuerySchema = ListQuerySchema.extend({
 registry.registerPath({
   method: 'get',
   path: '/public/reviews/{productId}',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Get all reviews for a product',
   operationId: 'getReviewsForProduct',
   request: {
@@ -25,7 +25,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/reviews',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Get user reviews in the system',
   operationId: 'getReviews',
   security: [{ JWT: [] }],
@@ -37,7 +37,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/review/{productId}',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Add a new review for a product',
   operationId: 'addReview',
   security: [{ JWT: [] }],
@@ -52,7 +52,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/public/review/{reviewId}',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Update a review',
   operationId: 'updateReview',
   security: [{ JWT: [] }],
@@ -67,7 +67,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/public/review/{reviewId}',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Delete a review',
   operationId: 'deleteReview',
   security: [{ JWT: [] }],
@@ -79,7 +79,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/reviews',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Get all reviews in the system',
   operationId: 'getReviewsAdmin',
   security: [{ JWT: [] }],
@@ -91,7 +91,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/review/{userId}/{productId}',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Add an admin review for a product',
   operationId: 'addReviewAdmin',
   security: [{ JWT: [] }],
@@ -106,7 +106,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/review/{reviewId}',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Update a review as admin',
   operationId: 'updateReviewAdmin',
   security: [{ JWT: [] }],
@@ -121,7 +121,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/review',
-  tags: ['Review'],
+  tags: ['API-review'],
   summary: 'Delete reviews from the system',
   operationId: 'deleteReviewsAdmin',
   security: [{ JWT: [] }],

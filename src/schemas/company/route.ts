@@ -7,7 +7,7 @@ import { responses, buildRequestBody, DeleteModelSchema } from '../common';
 registry.registerPath({
   method: 'get',
   path: '/public/company',
-  tags: ['Company'],
+  tags: ['API-company'],
   summary: 'Get a company information in the system',
   operationId: 'getCompany',
   responses,
@@ -17,7 +17,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/company',
-  tags: ['Company'],
+  tags: ['API-company'],
   summary: 'Add a company information for the system',
   operationId: 'addCompany',
   security: [{ JWT: [] }],
@@ -29,7 +29,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/company/{companyId}',
-  tags: ['Company'],
+  tags: ['API-company'],
   summary: 'Update a company to the system',
   operationId: 'updateCompany',
   security: [{ JWT: [] }],
@@ -44,7 +44,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/company/payment/{companyId}',
-  tags: ['Company'],
+  tags: ['API-company'],
   summary: 'Add a company payment for the system',
   operationId: 'addCompanyPayments',
   security: [{ JWT: [] }],
@@ -59,7 +59,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/company/payment/{companyId}',
-  tags: ['Company'],
+  tags: ['API-company'],
   summary: 'Update a company payment for the system',
   operationId: 'updateCompanyPayments',
   security: [{ JWT: [] }],
@@ -74,7 +74,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/company/payment/{companyId}',
-  tags: ['Company'],
+  tags: ['API-company'],
   summary: 'Delete a company payment in the system',
   operationId: 'deleteCompanyPayments',
   security: [{ JWT: [] }],

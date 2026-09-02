@@ -7,7 +7,7 @@ import { responses, buildRequestBody } from '../../common';
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/buckets',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Get all buckets in the system',
   operationId: 'getBuckets',
   security: [{ JWT: [] }],
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket/{bucketName}',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Get bucket information in the system',
   operationId: 'getBucket',
   security: [{ JWT: [] }],
@@ -30,7 +30,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/bucket/{bucketName}',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Add bucket for the system',
   operationId: 'addBucket',
   security: [{ JWT: [] }],
@@ -42,7 +42,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/bucket/{bucketName}',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Delete empty bucket for the system',
   operationId: 'deleteBucket',
   security: [{ JWT: [] }],
@@ -54,7 +54,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-operations/incompleted-uploads',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Get partially uploaded objects in a bucket',
   operationId: 'getIncompletedUploads',
   security: [{ JWT: [] }],
@@ -78,7 +78,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-operations',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Lists all objects in a bucket using S3 listing objects V2 API',
   operationId: 'listObjects',
   security: [{ JWT: [] }],
@@ -109,7 +109,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-version/{bucketName}',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Get Versioning state of a Bucket',
   operationId: 'getBucketVersion',
   security: [{ JWT: [] }],
@@ -121,7 +121,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/bucket-version',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Add bucket version for the bucket',
   operationId: 'addBucketVersion',
   security: [{ JWT: [] }],
@@ -133,7 +133,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/minio/bucket-config/{bucketName}',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Get Lifecycle Configuration of a Bucket',
   operationId: 'getBucketConfig',
   security: [{ JWT: [] }],
@@ -145,7 +145,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/minio/bucket-config/{bucketName}',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Delete Lifecycle Configuration of a Bucket',
   operationId: 'deleteBucketConfig',
   security: [{ JWT: [] }],
@@ -157,7 +157,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/minio/bucket-config',
-  tags: ['Minio Bucket S3'],
+  tags: ['SERVICE-minio-bucket-S3'],
   summary: 'Set Lifecycle Configuration on a Bucket',
   operationId: 'addBucketConfig',
   security: [{ JWT: [] }],

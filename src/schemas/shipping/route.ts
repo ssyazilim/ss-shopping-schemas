@@ -12,40 +12,33 @@ import {
 } from './schema';
 import { responses, buildRequestBody } from '../common';
 
+const geliverHeaders = z.object({
+  'x-geliver-token': z.string().default('2b9e3373-4ef2-4907-9329-3bf8d4a7d929'),
+});
+
+const apiKeyGeliverHeaders = z.object({
+  'x-api-key': z.string().default('9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a'),
+  'x-geliver-token': z.string().default('2b9e3373-4ef2-4907-9329-3bf8d4a7d929'),
+});
+
 // GET /public/shipping/prices
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/prices',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Get price list for parcel dimensions',
   operationId: 'getShippingPrices',
+  security: [],
   request: {
+    headers: geliverHeaders,
     query: z.object({
-      paramType: z.string().meta({ examples: ['parcel'] }),
-      length: z
-        .number()
-        .int()
-        .meta({ examples: [10] }),
-      width: z
-        .number()
-        .int()
-        .meta({ examples: [10] }),
-      height: z
-        .number()
-        .int()
-        .meta({ examples: [10] }),
-      weight: z
-        .number()
-        .int()
-        .meta({ examples: [1] }),
-      distanceUnit: z
-        .string()
-        .optional()
-        .meta({ examples: ['cm'] }),
-      massUnit: z
-        .string()
-        .optional()
-        .meta({ examples: ['kg'] }),
+      paramType: z.string().default('all'),
+      length: z.number().int().default(20),
+      width: z.number().int().default(15),
+      height: z.number().int().default(10),
+      weight: z.number().default(0.8),
+      distanceUnit: z.string().optional().default('cm'),
+      massUnit: z.string().optional().default('kg'),
     }),
   },
   responses,
@@ -55,9 +48,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/templates',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'List shipment templates',
   operationId: 'getShippingTemplates',
+  security: [],
+  request: { headers: geliverHeaders },
   responses,
 });
 
@@ -65,12 +60,14 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/shipment/labelPDF/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Download label PDF for a shipment',
   operationId: 'getShippingShipmentLabelPDF',
+  security: [],
   request: {
+    headers: geliverHeaders,
     params: z.object({
-      shipmentId: z.string().meta({ examples: ['1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'] }),
+      shipmentId: z.string().default('1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'),
     }),
   },
   responses: {
@@ -83,12 +80,14 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/shipping/shipment/labelHTML/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Download responsive label HTML for a shipment',
   operationId: 'getShippingShipmentLabelHTML',
+  security: [],
   request: {
+    headers: geliverHeaders,
     params: z.object({
-      shipmentId: z.string().meta({ examples: ['1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'] }),
+      shipmentId: z.string().default('1186e0d8-dd49-4fb9-b5ec-2d6af4146e32'),
     }),
   },
   responses: {
@@ -101,11 +100,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public-key/shipping/address',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a shipping address',
   operationId: 'addShippingAddress',
   security: [{ 'X-API-KEY': [] }],
-  request: { body: buildRequestBody(AddShippingAddressSchema) },
+  request: { headers: apiKeyGeliverHeaders, body: buildRequestBody(AddShippingAddressSchema) },
   responses,
 });
 
@@ -113,22 +112,15 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public-key/shipping/addresses',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'List shipping addresses',
   operationId: 'getShippingAddresses',
   security: [{ 'X-API-KEY': [] }],
   request: {
+    headers: apiKeyGeliverHeaders,
     query: z.object({
-      page: z
-        .number()
-        .int()
-        .optional()
-        .meta({ examples: [1] }),
-      limit: z
-        .number()
-        .int()
-        .optional()
-        .meta({ examples: [25] }),
+      page: z.number().int().optional().default(1),
+      limit: z.number().int().optional().default(25),
       isRecipientAddress: z.coerce.boolean().optional(),
     }),
   },
@@ -139,11 +131,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public-key/shipping/shipment',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a shipment',
   operationId: 'addShippingShipment',
   security: [{ 'X-API-KEY': [] }],
-  request: { body: buildRequestBody(AddShippingShipmentSchema) },
+  request: { headers: apiKeyGeliverHeaders, body: buildRequestBody(AddShippingShipmentSchema) },
   responses,
 });
 
@@ -151,11 +143,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/accept/{offerId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Accept an offer (purchase label)',
   operationId: 'acceptShippingOffer',
   security: [{ 'X-API-KEY': [] }],
-  request: { params: z.object({ offerId: z.string() }) },
+  request: { headers: apiKeyGeliverHeaders, params: z.object({ offerId: z.string() }) },
   responses,
 });
 
@@ -163,11 +155,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/balance/{organizationId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Get organisation balance information',
   operationId: 'getShippingBalance',
   security: [{ JWT: [] }],
-  request: { params: z.object({ organizationId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ organizationId: z.string() }) },
   responses,
 });
 
@@ -175,11 +167,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/address/{addressId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Get a specific shipping address',
   operationId: 'getShippingAddress',
   security: [{ JWT: [] }],
-  request: { params: z.object({ addressId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ addressId: z.string() }) },
   responses,
 });
 
@@ -187,11 +179,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/address/{addressId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Delete a shipping address',
   operationId: 'deleteShippingAddress',
   security: [{ JWT: [] }],
-  request: { params: z.object({ addressId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ addressId: z.string() }) },
   responses,
 });
 
@@ -199,24 +191,16 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/shipments',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'List shipments',
   operationId: 'getShippingShipments',
   security: [{ JWT: [] }],
   request: {
+    headers: geliverHeaders,
     query: z.object({
-      page: z
-        .number()
-        .int()
-        .meta({ examples: [1] }),
-      limit: z
-        .number()
-        .int()
-        .meta({ examples: [25] }),
-      statusFilter: z
-        .string()
-        .optional()
-        .meta({ examples: ['GOT_OFFERS'] }),
+      page: z.number().int().default(1),
+      limit: z.number().int().default(25),
+      statusFilter: z.string().optional().default('GOT_OFFERS'),
     }),
   },
   responses,
@@ -226,11 +210,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/shipment/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Get a specific shipment',
   operationId: 'getShippingShipment',
   security: [{ JWT: [] }],
-  request: { params: z.object({ shipmentId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ shipmentId: z.string() }) },
   responses,
 });
 
@@ -238,11 +222,12 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/shipping/shipment/update-package/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Update package dimensions for a shipment',
   operationId: 'patchShippingPackage',
   security: [{ JWT: [] }],
   request: {
+    headers: geliverHeaders,
     params: z.object({ shipmentId: z.string() }),
     body: buildRequestBody(UpdateShippingPackageSchema),
   },
@@ -253,11 +238,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/shipment/cancel/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Cancel a shipment',
   operationId: 'deleteShippingShipment',
   security: [{ JWT: [] }],
-  request: { params: z.object({ shipmentId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ shipmentId: z.string() }) },
   responses,
 });
 
@@ -265,11 +250,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/clone/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Clone a shipment',
   operationId: 'cloneShippingShipment',
   security: [{ JWT: [] }],
-  request: { params: z.object({ shipmentId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ shipmentId: z.string() }) },
   responses,
 });
 
@@ -277,11 +262,12 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/return/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a return shipment',
   operationId: 'returnShippingShipment',
   security: [{ JWT: [] }],
   request: {
+    headers: geliverHeaders,
     params: z.object({ shipmentId: z.string() }),
     body: buildRequestBody(ReturnShippingShipmentSchema),
   },
@@ -292,11 +278,12 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/accept-return/{shipmentId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Create and purchase a return shipment label',
   operationId: 'acceptShippingReturn',
   security: [{ JWT: [] }],
   request: {
+    headers: geliverHeaders,
     params: z.object({ shipmentId: z.string() }),
     body: buildRequestBody(ReturnShippingShipmentSchema),
   },
@@ -307,11 +294,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/create',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'One-step label purchase',
   operationId: 'createShippingShipment',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(CreateShippingShipmentSchema) },
+  request: { headers: geliverHeaders, body: buildRequestBody(CreateShippingShipmentSchema) },
   responses,
 });
 
@@ -319,11 +306,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/template',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Add a shipment template',
   operationId: 'createShippingTemplate',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ShippingTemplateSchema) },
+  request: { headers: geliverHeaders, body: buildRequestBody(ShippingTemplateSchema) },
   responses,
 });
 
@@ -331,11 +318,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/template/{templateId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Delete a shipment template',
   operationId: 'deleteShippingTemplate',
   security: [{ JWT: [] }],
-  request: { params: z.object({ templateId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ templateId: z.string() }) },
   responses,
 });
 
@@ -343,10 +330,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/providers',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'List shipping provider accounts',
   operationId: 'getShippingProviders',
   security: [{ JWT: [] }],
+  request: { headers: geliverHeaders },
   responses,
 });
 
@@ -354,11 +342,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/provider',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a shipping provider account',
   operationId: 'createShippingProvider',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ShippingProviderSchema) },
+  request: { headers: geliverHeaders, body: buildRequestBody(ShippingProviderSchema) },
   responses,
 });
 
@@ -366,11 +354,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/provider/{providerAccountId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Delete a shipping provider',
   operationId: 'deleteShippingProvider',
   security: [{ JWT: [] }],
-  request: { params: z.object({ providerAccountId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ providerAccountId: z.string() }) },
   responses,
 });
 
@@ -378,10 +366,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/shipping/webhooks',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'List shipping webhooks',
   operationId: 'getShippingWebhooks',
   security: [{ JWT: [] }],
+  request: { headers: geliverHeaders },
   responses,
 });
 
@@ -389,11 +378,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/webhook',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a shipping webhook',
   operationId: 'createShippingWebhook',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ShippingWebhookSchema) },
+  request: { headers: geliverHeaders, body: buildRequestBody(ShippingWebhookSchema) },
   responses,
 });
 
@@ -401,11 +390,11 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/webhook/test',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Test a shipping webhook',
   operationId: 'testShippingWebhook',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ShippingWebhookSchema) },
+  request: { headers: geliverHeaders, body: buildRequestBody(ShippingWebhookSchema) },
   responses,
 });
 
@@ -413,10 +402,10 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/shipping/webhook/{webhookId}',
-  tags: ['Shipping'],
+  tags: ['SERVICE-shipping-geliver'],
   summary: 'Delete a shipping webhook',
   operationId: 'deleteShippingWebhook',
   security: [{ JWT: [] }],
-  request: { params: z.object({ webhookId: z.string() }) },
+  request: { headers: geliverHeaders, params: z.object({ webhookId: z.string() }) },
   responses,
 });

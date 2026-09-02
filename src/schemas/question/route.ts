@@ -11,7 +11,7 @@ const QuestionListQuerySchema = ListQuerySchema.extend({
 registry.registerPath({
   method: 'get',
   path: '/public/questions/{productId}',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Get all questions for a product',
   operationId: 'getQuestionsForProduct',
   request: {
@@ -25,7 +25,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/public/questions',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Get user questions in the system',
   operationId: 'getQuestions',
   security: [{ JWT: [] }],
@@ -37,7 +37,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/question/{productId}',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Add a new question for a product',
   operationId: 'addQuestion',
   security: [{ JWT: [] }],
@@ -52,7 +52,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/public/question/{questionId}',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Update a question',
   operationId: 'updateQuestion',
   security: [{ JWT: [] }],
@@ -67,7 +67,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/public/question/{questionId}',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Delete a question',
   operationId: 'deleteQuestion',
   security: [{ JWT: [] }],
@@ -79,7 +79,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/questions',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Get all questions in the system',
   operationId: 'getQuestionsAdmin',
   security: [{ JWT: [] }],
@@ -91,7 +91,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/admin/question/{userId}/{productId}',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Add an admin question for a product',
   operationId: 'addQuestionAdmin',
   security: [{ JWT: [] }],
@@ -106,7 +106,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'patch',
   path: '/admin/question/{questionId}',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Update a question as admin',
   operationId: 'updateQuestionAdmin',
   security: [{ JWT: [] }],
@@ -121,7 +121,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'delete',
   path: '/admin/question',
-  tags: ['Question'],
+  tags: ['API-question'],
   summary: 'Delete questions from the system',
   operationId: 'deleteQuestionsAdmin',
   security: [{ JWT: [] }],

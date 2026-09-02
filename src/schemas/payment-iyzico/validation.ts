@@ -337,6 +337,21 @@ export const CANCEL_PAYMENT = (locale: ILocale = 'tr') => {
       .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
+export const DELETE_CARD_IYZICO = (locale: ILocale = 'tr') => {
+  const m = messages[locale];
+  return z.object({
+    cardUserKey: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['d3f7e8b2-1a4c-4c9e-8b2a-6f1e2d3c4b5a'] }),
+    cardToken: z
+      .string()
+      .min(2, { message: m.public_forms_validations_minLength(2) })
+      .max(254, { message: m.public_forms_validations_maxLength(254) })
+      .meta({ examples: ['a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d'] }),
+  });
+};
 export const REFUND_PAYMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({

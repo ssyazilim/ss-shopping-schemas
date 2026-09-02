@@ -7,7 +7,7 @@ import { responses, buildRequestBody, ListQuerySchema, DateRangeQuerySchema } fr
 registry.registerPath({
   method: 'get',
   path: '/public/cart',
-  tags: ['Cart'],
+  tags: ['API-cart'],
   summary: 'Get a cart from the system for User',
   operationId: 'getCartWithUserId',
   security: [{ JWT: [] }],
@@ -18,7 +18,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/cart',
-  tags: ['Cart'],
+  tags: ['API-cart'],
   summary: 'Add a new cart to system for User',
   operationId: 'addCart',
   security: [{ JWT: [] }],
@@ -29,7 +29,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/cart/product/update',
-  tags: ['Cart'],
+  tags: ['API-cart'],
   summary: 'Add or remove product for cart',
   operationId: 'addToCart',
   security: [{ JWT: [] }],
@@ -41,7 +41,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'post',
   path: '/public/cart/set-quantity',
-  tags: ['Cart'],
+  tags: ['API-cart'],
   summary: 'Set quantity for product or variant',
   operationId: 'setQuantity',
   security: [{ JWT: [] }],
@@ -53,7 +53,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/carts',
-  tags: ['Cart'],
+  tags: ['API-cart'],
   summary: 'Get all carts in the system',
   operationId: 'getCarts',
   security: [{ JWT: [] }],
@@ -65,7 +65,7 @@ registry.registerPath({
 registry.registerPath({
   method: 'get',
   path: '/admin/cart/{cartId}',
-  tags: ['Cart'],
+  tags: ['API-cart'],
   summary: 'Get a cart from the system',
   operationId: 'getCart',
   security: [{ JWT: [] }],

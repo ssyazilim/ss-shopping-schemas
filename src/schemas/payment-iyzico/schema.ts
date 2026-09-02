@@ -7,6 +7,7 @@ import {
   COMPLETE_PAYMENT_3D,
   CHECK_INSTALLMENT,
   CANCEL_PAYMENT,
+  DELETE_CARD_IYZICO,
 } from './validation';
 
 registry.register('paymentCard', ADD_PAYMENT_CARD());
@@ -28,3 +29,5 @@ export const CompletePayment3DSchema = registry.register(
 export const CheckInstallmentSchema = registry.register('checkInstallment', CHECK_INSTALLMENT());
 
 export const CancelPaymentSchema = registry.register('cancelPayment', CANCEL_PAYMENT());
+
+export const DeleteCardSchema = registry.register('deleteCard', DELETE_CARD_IYZICO());

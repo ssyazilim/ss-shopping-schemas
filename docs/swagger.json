@@ -16,112 +16,112 @@
   },
   "tags": [
     {
-      "name": "Authentication",
+      "name": "API-authentication",
       "description": "API authentications process for users"
     },
     {
-      "name": "Address",
+      "name": "API-address",
       "description": "Addresses for the system"
     },
     {
-      "name": "Agreement",
+      "name": "API-agreement",
       "description": "User agreements for the system"
     },
     {
-      "name": "Brand",
+      "name": "API-brand",
       "description": "Brands for the system"
     },
     {
-      "name": "Card",
+      "name": "API-card",
       "description": "User card information"
     },
     {
-      "name": "Cart",
+      "name": "API-cart",
       "description": "Carts for the system"
     },
     {
-      "name": "Category",
+      "name": "API-category",
       "description": "Categories for the system"
     },
     {
-      "name": "Company",
+      "name": "API-company",
       "description": "Company information for the User"
     },
     {
-      "name": "Countries Cities & Districts",
-      "description": "Country State City for the User"
-    },
-    {
-      "name": "Currency",
-      "description": "Currencies for the system"
-    },
-    {
-      "name": "Module",
+      "name": "API-module",
       "description": "Modules for the system"
     },
     {
-      "name": "Form",
+      "name": "API-form",
       "description": "Form process for users"
     },
     {
-      "name": "Google",
-      "description": "Google operations for the system"
-    },
-    {
-      "name": "Gsm",
-      "description": "GSM service operations for the system"
-    },
-    {
-      "name": "Minio Bucket S3",
-      "description": "Simple Storage Service for the bucket operations"
-    },
-    {
-      "name": "Minio Object S3",
-      "description": "Simple Storage Service for the object operations"
-    },
-    {
-      "name": "Order",
+      "name": "API-order",
       "description": "User order information"
     },
     {
-      "name": "Payment Iyzico",
-      "description": "Iyzico payment operations"
-    },
-    {
-      "name": "Post",
+      "name": "API-post",
       "description": "Posts for the system"
     },
     {
-      "name": "Product",
+      "name": "API-product",
       "description": "Products for the system"
     },
     {
-      "name": "Product Variant",
+      "name": "API-product-variant",
       "description": "Variants for the products"
     },
     {
-      "name": "Question",
+      "name": "API-question",
       "description": "Questions for the product"
     },
     {
-      "name": "Review",
+      "name": "API-review",
       "description": "Reviews for the product"
     },
     {
-      "name": "Shipping",
-      "description": "Shipping calculations for the system"
-    },
-    {
-      "name": "Traffic",
+      "name": "API-traffic",
       "description": "Web site analysis for users"
     },
     {
-      "name": "Translation",
+      "name": "API-translation",
       "description": "Translations for the system"
     },
     {
-      "name": "User",
+      "name": "API-user",
       "description": "User process for users"
+    },
+    {
+      "name": "SERVICE-countries-cities-districts",
+      "description": "Country State City for the User"
+    },
+    {
+      "name": "SERVICE-currency",
+      "description": "Currencies for the system"
+    },
+    {
+      "name": "SERVICE-google",
+      "description": "Google operations for the system"
+    },
+    {
+      "name": "SERVICE-minio-bucket-S3",
+      "description": "Simple Storage Service for the bucket operations"
+    },
+    {
+      "name": "SERVICE-minio-object-S3",
+      "description": "Simple Storage Service for the object operations"
+    },
+    {
+      "name": "SERVICE-message-netgsm",
+      "description": "GSM service operations for the system"
+    },
+    {
+      "name": "SERVICE-payment-iyzico",
+      "description": "Iyzico payment operations"
+    },
+    {
+      "name": "SERVICE-shipping-geliver",
+      "description": "Shipping calculations for the system"
     }
   ],
   "externalDocs": {
@@ -133,13 +133,7 @@
       "url": "http://localhost:5001/api"
     },
     {
-      "url": "https://api.bastakshop.com/api"
-    },
-    {
-      "url": "https://api.kimyakent.com/api"
-    },
-    {
-      "url": "https://api.ulusanelektrik.com/api"
+      "url": "http://localhost:5002/service"
     }
   ],
   "components": {
@@ -149,12 +143,6 @@
         "scheme": "Bearer",
         "bearerFormat": "JWT",
         "description": "Provide your JWT token in the Authorization header as a Bearer token"
-      },
-      "X-API-KEY": {
-        "type": "apiKey",
-        "name": "x-api-key",
-        "in": "header",
-        "description": "Provide your api key in the 'x-api-key' header"
       }
     },
     "schemas": {
@@ -1487,30 +1475,6 @@
       "CompanyProperties": {
         "type": "object",
         "properties": {
-          "paymentMethod": {
-            "type": "string",
-            "enum": [
-              "cash",
-              "iyzico",
-              "paytr",
-              "lemonSqueezy"
-            ],
-            "examples": [
-              "cash"
-            ]
-          },
-          "liveChatMethod": {
-            "type": "string",
-            "enum": [
-              "none",
-              "whatsapp",
-              "tawkTo",
-              "crisp"
-            ],
-            "examples": [
-              "none"
-            ]
-          },
           "homePage": {
             "type": "object",
             "properties": {
@@ -1678,8 +1642,6 @@
           }
         },
         "required": [
-          "paymentMethod",
-          "liveChatMethod",
           "homePage",
           "paymentSettings",
           "productSettings",
@@ -1768,20 +1730,37 @@
       "CompanyShippingOptions": {
         "type": "object",
         "properties": {
-          "method": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 254,
-            "examples": [
-              "standard"
-            ]
-          },
           "shipment": {
             "type": "object",
             "properties": {
+              "all": {
+                "type": "object",
+                "properties": {
+                  "isEnabled": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "isEnabled"
+                ]
+              },
+              "geliver": {
+                "type": "object",
+                "properties": {
+                  "isEnabled": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "isEnabled"
+                ]
+              },
               "automatic": {
                 "type": "object",
                 "properties": {
+                  "isEnabled": {
+                    "type": "boolean"
+                  },
                   "name": {
                     "type": "string",
                     "minLength": 2,
@@ -1794,6 +1773,7 @@
                   }
                 },
                 "required": [
+                  "isEnabled",
                   "name",
                   "code"
                 ]
@@ -1801,6 +1781,9 @@
               "standard": {
                 "type": "object",
                 "properties": {
+                  "isEnabled": {
+                    "type": "boolean"
+                  },
                   "name": {
                     "type": "string",
                     "minLength": 2,
@@ -1812,96 +1795,97 @@
                     "maxLength": 254
                   },
                   "price": {
-                    "type": "integer",
-                    "minimum": 0
-                  },
-                  "priceLocale": {
-                    "type": "integer",
-                    "minimum": 0
-                  },
-                  "currency": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "currencyLocale": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
+                    "type": "object",
+                    "properties": {
+                      "currency": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "currencyLocale": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "sell": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "sellLocale": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "currency",
+                      "currencyLocale",
+                      "sell",
+                      "sellLocale"
+                    ]
                   }
                 },
                 "required": [
+                  "isEnabled",
                   "name",
                   "code",
-                  "price",
-                  "priceLocale",
-                  "currency",
-                  "currencyLocale"
-                ]
-              },
-              "geliver": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "code": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "isTest": {
-                    "type": "boolean"
-                  }
-                },
-                "required": [
-                  "name",
-                  "code",
-                  "isTest"
+                  "price"
                 ]
               }
             }
           },
-          "free": {
+          "properties": {
             "type": "object",
             "properties": {
-              "isEnabled": {
-                "type": "boolean"
-              },
-              "price": {
-                "type": "integer",
-                "minimum": 0
-              },
-              "priceLocale": {
-                "type": "integer",
-                "minimum": 0
-              },
-              "currency": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254
-              },
-              "currencyLocale": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254
+              "free": {
+                "type": "object",
+                "properties": {
+                  "isEnabled": {
+                    "type": "boolean"
+                  },
+                  "price": {
+                    "type": "object",
+                    "properties": {
+                      "currency": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "currencyLocale": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 254
+                      },
+                      "sell": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "sellLocale": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "currency",
+                      "currencyLocale",
+                      "sell",
+                      "sellLocale"
+                    ]
+                  }
+                },
+                "required": [
+                  "isEnabled",
+                  "price"
+                ]
               }
             },
             "required": [
-              "isEnabled",
-              "price",
-              "priceLocale",
-              "currency",
-              "currencyLocale"
+              "free"
             ]
           }
         },
         "required": [
-          "method",
           "shipment",
-          "free"
+          "properties"
         ]
       },
       "UpdateTax": {
@@ -2170,30 +2154,6 @@
           "properties": {
             "type": "object",
             "properties": {
-              "paymentMethod": {
-                "type": "string",
-                "enum": [
-                  "cash",
-                  "iyzico",
-                  "paytr",
-                  "lemonSqueezy"
-                ],
-                "examples": [
-                  "cash"
-                ]
-              },
-              "liveChatMethod": {
-                "type": "string",
-                "enum": [
-                  "none",
-                  "whatsapp",
-                  "tawkTo",
-                  "crisp"
-                ],
-                "examples": [
-                  "none"
-                ]
-              },
               "homePage": {
                 "type": "object",
                 "properties": {
@@ -2361,8 +2321,6 @@
               }
             },
             "required": [
-              "paymentMethod",
-              "liveChatMethod",
               "homePage",
               "paymentSettings",
               "productSettings",
@@ -2448,84 +2406,40 @@
               "from"
             ]
           },
-          "communicationOptions": {
-            "type": "object",
-            "properties": {
-              "method": {
-                "type": "string",
-                "enum": [
-                  "none",
-                  "netgsm",
-                  "twilio"
-                ],
-                "examples": [
-                  "none"
-                ]
-              },
-              "netgsm": {
-                "type": "object",
-                "properties": {
-                  "sender": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "phoneNumber": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "sender",
-                  "phoneNumber"
-                ]
-              },
-              "twilio": {
-                "type": "object",
-                "properties": {
-                  "accountSid": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "authToken": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "phoneNumber": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "accountSid",
-                  "authToken",
-                  "phoneNumber"
-                ]
-              }
-            },
-            "required": [
-              "method",
-              "netgsm",
-              "twilio"
-            ]
-          },
           "shippingOptions": {
             "type": "object",
             "properties": {
-              "method": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "standard"
-                ]
-              },
               "shipment": {
                 "type": "object",
                 "properties": {
+                  "all": {
+                    "type": "object",
+                    "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "isEnabled"
+                    ]
+                  },
+                  "geliver": {
+                    "type": "object",
+                    "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "isEnabled"
+                    ]
+                  },
                   "automatic": {
                     "type": "object",
                     "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      },
                       "name": {
                         "type": "string",
                         "minLength": 2,
@@ -2538,6 +2452,7 @@
                       }
                     },
                     "required": [
+                      "isEnabled",
                       "name",
                       "code"
                     ]
@@ -2545,6 +2460,9 @@
                   "standard": {
                     "type": "object",
                     "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      },
                       "name": {
                         "type": "string",
                         "minLength": 2,
@@ -2556,96 +2474,97 @@
                         "maxLength": 254
                       },
                       "price": {
-                        "type": "integer",
-                        "minimum": 0
-                      },
-                      "priceLocale": {
-                        "type": "integer",
-                        "minimum": 0
-                      },
-                      "currency": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "currencyLocale": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
+                        "type": "object",
+                        "properties": {
+                          "currency": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "currencyLocale": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "sell": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "sellLocale": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "currency",
+                          "currencyLocale",
+                          "sell",
+                          "sellLocale"
+                        ]
                       }
                     },
                     "required": [
+                      "isEnabled",
                       "name",
                       "code",
-                      "price",
-                      "priceLocale",
-                      "currency",
-                      "currencyLocale"
-                    ]
-                  },
-                  "geliver": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "code": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "isTest": {
-                        "type": "boolean"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "code",
-                      "isTest"
+                      "price"
                     ]
                   }
                 }
               },
-              "free": {
+              "properties": {
                 "type": "object",
                 "properties": {
-                  "isEnabled": {
-                    "type": "boolean"
-                  },
-                  "price": {
-                    "type": "integer",
-                    "minimum": 0
-                  },
-                  "priceLocale": {
-                    "type": "integer",
-                    "minimum": 0
-                  },
-                  "currency": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "currencyLocale": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
+                  "free": {
+                    "type": "object",
+                    "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      },
+                      "price": {
+                        "type": "object",
+                        "properties": {
+                          "currency": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "currencyLocale": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "sell": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "sellLocale": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "currency",
+                          "currencyLocale",
+                          "sell",
+                          "sellLocale"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "isEnabled",
+                      "price"
+                    ]
                   }
                 },
                 "required": [
-                  "isEnabled",
-                  "price",
-                  "priceLocale",
-                  "currency",
-                  "currencyLocale"
+                  "free"
                 ]
               }
             },
             "required": [
-              "method",
               "shipment",
-              "free"
+              "properties"
             ]
           }
         },
@@ -2656,7 +2575,6 @@
           "payments",
           "properties",
           "mailOptions",
-          "communicationOptions",
           "shippingOptions"
         ]
       },
@@ -2872,30 +2790,6 @@
           "properties": {
             "type": "object",
             "properties": {
-              "paymentMethod": {
-                "type": "string",
-                "enum": [
-                  "cash",
-                  "iyzico",
-                  "paytr",
-                  "lemonSqueezy"
-                ],
-                "examples": [
-                  "cash"
-                ]
-              },
-              "liveChatMethod": {
-                "type": "string",
-                "enum": [
-                  "none",
-                  "whatsapp",
-                  "tawkTo",
-                  "crisp"
-                ],
-                "examples": [
-                  "none"
-                ]
-              },
               "homePage": {
                 "type": "object",
                 "properties": {
@@ -3089,70 +2983,34 @@
               }
             }
           },
-          "communicationOptions": {
-            "type": "object",
-            "properties": {
-              "method": {
-                "type": "string",
-                "enum": [
-                  "none",
-                  "netgsm",
-                  "twilio"
-                ],
-                "examples": [
-                  "none"
-                ]
-              },
-              "netgsm": {
-                "type": "object",
-                "properties": {
-                  "sender": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "phoneNumber": {
-                    "type": "string"
-                  }
-                }
-              },
-              "twilio": {
-                "type": "object",
-                "properties": {
-                  "accountSid": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "authToken": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "phoneNumber": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
           "shippingOptions": {
             "type": "object",
             "properties": {
-              "method": {
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 254,
-                "examples": [
-                  "standard"
-                ]
-              },
               "shipment": {
                 "type": "object",
                 "properties": {
+                  "all": {
+                    "type": "object",
+                    "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "geliver": {
+                    "type": "object",
+                    "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
                   "automatic": {
                     "type": "object",
                     "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      },
                       "name": {
                         "type": "string",
                         "minLength": 2,
@@ -3168,6 +3026,9 @@
                   "standard": {
                     "type": "object",
                     "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      },
                       "name": {
                         "type": "string",
                         "minLength": 2,
@@ -3179,68 +3040,65 @@
                         "maxLength": 254
                       },
                       "price": {
-                        "type": "integer",
-                        "minimum": 0
-                      },
-                      "priceLocale": {
-                        "type": "integer",
-                        "minimum": 0
-                      },
-                      "currency": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "currencyLocale": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      }
-                    }
-                  },
-                  "geliver": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "code": {
-                        "type": "string",
-                        "minLength": 2,
-                        "maxLength": 254
-                      },
-                      "isTest": {
-                        "type": "boolean"
+                        "type": "object",
+                        "properties": {
+                          "currency": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "currencyLocale": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "sell": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "sellLocale": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        }
                       }
                     }
                   }
                 }
               },
-              "free": {
+              "properties": {
                 "type": "object",
                 "properties": {
-                  "isEnabled": {
-                    "type": "boolean"
-                  },
-                  "price": {
-                    "type": "integer",
-                    "minimum": 0
-                  },
-                  "priceLocale": {
-                    "type": "integer",
-                    "minimum": 0
-                  },
-                  "currency": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
-                  },
-                  "currencyLocale": {
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 254
+                  "free": {
+                    "type": "object",
+                    "properties": {
+                      "isEnabled": {
+                        "type": "boolean"
+                      },
+                      "price": {
+                        "type": "object",
+                        "properties": {
+                          "currency": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "currencyLocale": {
+                            "type": "string",
+                            "minLength": 2,
+                            "maxLength": 254
+                          },
+                          "sell": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "sellLocale": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -3283,37 +3141,21 @@
               "auth"
             ]
           },
-          "fields": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "examples": [
-              [
-                "clientId",
-                "clientSecret"
-              ]
-            ]
-          },
-          "enabled": {
+          "isEnabled": {
             "type": "boolean",
             "examples": [
               false
             ]
           },
-          "isActive": {
+          "isVerified": {
             "type": "boolean",
             "examples": [
-              true
+              false
             ]
           },
           "config": {
             "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254
-            }
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -3321,9 +3163,7 @@
           "name",
           "icon",
           "category",
-          "fields",
-          "enabled",
-          "isActive"
+          "isEnabled"
         ]
       },
       "updateModule": {
@@ -3361,37 +3201,21 @@
               "auth"
             ]
           },
-          "fields": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "examples": [
-              [
-                "clientId",
-                "clientSecret"
-              ]
-            ]
-          },
-          "enabled": {
+          "isEnabled": {
             "type": "boolean",
             "examples": [
               false
             ]
           },
-          "isActive": {
+          "isVerified": {
             "type": "boolean",
             "examples": [
-              true
+              false
             ]
           },
           "config": {
             "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 254
-            }
+            "additionalProperties": {}
           }
         }
       },
@@ -3597,42 +3421,34 @@
         "properties": {
           "msg": {
             "type": "string",
-            "examples": [
-              "Hi there. This is just a test message!"
-            ]
+            "default": "Hi there. This is just a test message!"
           },
           "no": {
             "type": "string",
-            "examples": [
-              "5365056943"
-            ]
+            "default": "5365056943"
           }
-        },
-        "required": [
-          "msg",
-          "no"
-        ]
+        }
       },
       "SendSms": {
         "type": "object",
         "properties": {
           "msgheader": {
             "type": "string",
-            "examples": [
-              "ERBIL.GUR"
-            ]
+            "default": "ERBIL.GUR"
           },
           "encoding": {
             "type": "string",
             "enum": [
               "TR",
               "ASCII"
-            ]
+            ],
+            "default": "TR"
           },
           "startdate": {
             "type": "string",
             "minLength": 12,
-            "maxLength": 12
+            "maxLength": 12,
+            "default": "010620261530"
           },
           "messages": {
             "type": "array",
@@ -3641,27 +3457,17 @@
               "properties": {
                 "msg": {
                   "type": "string",
-                  "examples": [
-                    "Hi there. This is just a test message!"
-                  ]
+                  "default": "Hi there. This is just a test message!"
                 },
                 "no": {
                   "type": "string",
-                  "examples": [
-                    "5365056943"
-                  ]
+                  "default": "5365056943"
                 }
-              },
-              "required": [
-                "msg",
-                "no"
-              ]
+              }
             }
           }
         },
         "required": [
-          "msgheader",
-          "encoding",
           "messages"
         ]
       },
@@ -3850,20 +3656,23 @@
           "bucketName": {
             "type": "string",
             "examples": [
-              "test1"
-            ]
+              "images"
+            ],
+            "description": "Target bucket"
           },
           "objectName": {
             "type": "string",
             "examples": [
-              "1.jpg"
-            ]
+              "test/posts/1.jpg"
+            ],
+            "description": "Target key inside the bucket"
           },
           "sourceName": {
             "type": "string",
             "examples": [
-              "test2/images/1.jpg"
-            ]
+              "images/test/products/1.jpg"
+            ],
+            "description": "Source as bucket name and key together, not only the key"
           }
         },
         "required": [
@@ -3926,6 +3735,69 @@
             "examples": [
               360
             ]
+          },
+          "fileName": {
+            "type": "string",
+            "examples": [
+              "bahce-fotografi.jpg"
+            ],
+            "description": "Forces the browser to download the file with this name instead of opening it"
+          }
+        },
+        "required": [
+          "bucketName",
+          "objectName"
+        ]
+      },
+      "PresignedPutObject": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "objectName": {
+            "type": "string",
+            "examples": [
+              "test/products"
+            ]
+          },
+          "expireTime": {
+            "type": "number",
+            "examples": [
+              360
+            ]
+          },
+          "fileName": {
+            "type": "string",
+            "examples": [
+              "bahce-fotografi.jpg"
+            ],
+            "description": "File name with extension. A unique name is generated when it is not sent"
+          }
+        },
+        "required": [
+          "bucketName",
+          "objectName"
+        ]
+      },
+      "AddFolder": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "objectName": {
+            "type": "string",
+            "examples": [
+              "test/posts/blog"
+            ],
+            "description": "Full folder path without a trailing slash"
           }
         },
         "required": [
@@ -5877,6 +5749,31 @@
         },
         "required": [
           "paymentId"
+        ]
+      },
+      "deleteCard": {
+        "type": "object",
+        "properties": {
+          "cardUserKey": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "d3f7e8b2-1a4c-4c9e-8b2a-6f1e2d3c4b5a"
+            ]
+          },
+          "cardToken": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 254,
+            "examples": [
+              "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+            ]
+          }
+        },
+        "required": [
+          "cardUserKey",
+          "cardToken"
         ]
       },
       "post": {
@@ -9152,7 +9049,7 @@
     "/public/auth/login": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "Login process for the User in the system",
         "operationId": "loginUser",
@@ -9202,7 +9099,7 @@
     "/public/auth/register": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "Add a new user to system",
         "operationId": "addUser",
@@ -9252,7 +9149,7 @@
     "/public/auth/register-verification": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "Check User key in the system",
         "operationId": "checkUser",
@@ -9302,7 +9199,7 @@
     "/public/auth/register-activate": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "Activate User in the system",
         "operationId": "activateUser",
@@ -9352,7 +9249,7 @@
     "/public/auth/refresh-code": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "Refresh code for the activation in the system",
         "operationId": "refreshCode",
@@ -9402,7 +9299,7 @@
     "/public/auth/password-reset": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "User can be reset password using this api",
         "operationId": "passwordResetUser",
@@ -9452,7 +9349,7 @@
     "/public/auth/password-reset-complete": {
       "post": {
         "tags": [
-          "Authentication"
+          "API-authentication"
         ],
         "summary": "User can be reset password for using this api",
         "operationId": "passwordResetCompleteUser",
@@ -9502,7 +9399,7 @@
     "/public/address": {
       "get": {
         "tags": [
-          "Address"
+          "API-address"
         ],
         "summary": "Get an address for session user from the system",
         "operationId": "getAddressForUser",
@@ -9536,7 +9433,7 @@
       },
       "post": {
         "tags": [
-          "Address"
+          "API-address"
         ],
         "summary": "Add a new address to system",
         "operationId": "addAddress",
@@ -9591,7 +9488,7 @@
     "/public/address/{addressId}": {
       "get": {
         "tags": [
-          "Address"
+          "API-address"
         ],
         "summary": "Get an address from the system",
         "operationId": "getAddress",
@@ -9635,7 +9532,7 @@
       },
       "patch": {
         "tags": [
-          "Address"
+          "API-address"
         ],
         "summary": "Update an address from the system",
         "operationId": "updateAddress",
@@ -9698,7 +9595,7 @@
       },
       "delete": {
         "tags": [
-          "Address"
+          "API-address"
         ],
         "summary": "Delete an address in the system",
         "operationId": "deleteAddress",
@@ -9744,7 +9641,7 @@
     "/admin/addresses": {
       "get": {
         "tags": [
-          "Address"
+          "API-address"
         ],
         "summary": "Get all user addresses in the system",
         "operationId": "getAddresses",
@@ -9821,7 +9718,7 @@
     "/public/agreements": {
       "get": {
         "tags": [
-          "Agreement"
+          "API-agreement"
         ],
         "summary": "Get all agreements in the system",
         "operationId": "getAgreements",
@@ -9893,7 +9790,7 @@
     "/public/agreement/{locale}/{name}": {
       "get": {
         "tags": [
-          "Agreement"
+          "API-agreement"
         ],
         "summary": "Get an agreement from the system",
         "operationId": "getAgreement",
@@ -9948,7 +9845,7 @@
     "/admin/agreement": {
       "post": {
         "tags": [
-          "Agreement"
+          "API-agreement"
         ],
         "summary": "Add new agreement to the system",
         "operationId": "addAgreement",
@@ -10001,7 +9898,7 @@
       },
       "delete": {
         "tags": [
-          "Agreement"
+          "API-agreement"
         ],
         "summary": "Delete agreements from the system",
         "operationId": "deleteAgreements",
@@ -10056,7 +9953,7 @@
     "/admin/agreement/{agreementId}": {
       "patch": {
         "tags": [
-          "Agreement"
+          "API-agreement"
         ],
         "summary": "Update an agreement from the system",
         "operationId": "updateAgreement",
@@ -10121,7 +10018,7 @@
     "/public/brands": {
       "get": {
         "tags": [
-          "Brand"
+          "API-brand"
         ],
         "summary": "Get all brands in the system",
         "operationId": "getBrands",
@@ -10193,7 +10090,7 @@
     "/public/brand/{brandId}": {
       "get": {
         "tags": [
-          "Brand"
+          "API-brand"
         ],
         "summary": "Get a brand from the system",
         "operationId": "getBrand",
@@ -10234,7 +10131,7 @@
     "/admin/brand": {
       "post": {
         "tags": [
-          "Brand"
+          "API-brand"
         ],
         "summary": "Add new brands to the system",
         "operationId": "addBrand",
@@ -10287,7 +10184,7 @@
       },
       "delete": {
         "tags": [
-          "Brand"
+          "API-brand"
         ],
         "summary": "Delete brands from the system",
         "operationId": "deleteBrands",
@@ -10342,7 +10239,7 @@
     "/admin/brand/{brandId}": {
       "patch": {
         "tags": [
-          "Brand"
+          "API-brand"
         ],
         "summary": "Update a brand from the system",
         "operationId": "updateBrand",
@@ -10407,7 +10304,7 @@
     "/public/card": {
       "get": {
         "tags": [
-          "Card"
+          "API-card"
         ],
         "summary": "Get a user card tokens in the system",
         "operationId": "getCard",
@@ -10453,7 +10350,7 @@
     "/admin/cards": {
       "get": {
         "tags": [
-          "Card"
+          "API-card"
         ],
         "summary": "Get all cards for the user",
         "operationId": "getCards",
@@ -10489,7 +10386,7 @@
     "/public/cart": {
       "get": {
         "tags": [
-          "Cart"
+          "API-cart"
         ],
         "summary": "Get a cart from the system for User",
         "operationId": "getCartWithUserId",
@@ -10523,7 +10420,7 @@
       },
       "post": {
         "tags": [
-          "Cart"
+          "API-cart"
         ],
         "summary": "Add a new cart to system for User",
         "operationId": "addCart",
@@ -10559,7 +10456,7 @@
     "/public/cart/product/update": {
       "post": {
         "tags": [
-          "Cart"
+          "API-cart"
         ],
         "summary": "Add or remove product for cart",
         "operationId": "addToCart",
@@ -10614,7 +10511,7 @@
     "/public/cart/set-quantity": {
       "post": {
         "tags": [
-          "Cart"
+          "API-cart"
         ],
         "summary": "Set quantity for product or variant",
         "operationId": "setQuantity",
@@ -10669,7 +10566,7 @@
     "/admin/carts": {
       "get": {
         "tags": [
-          "Cart"
+          "API-cart"
         ],
         "summary": "Get all carts in the system",
         "operationId": "getCarts",
@@ -10768,7 +10665,7 @@
     "/admin/cart/{cartId}": {
       "get": {
         "tags": [
-          "Cart"
+          "API-cart"
         ],
         "summary": "Get a cart from the system",
         "operationId": "getCart",
@@ -10814,7 +10711,7 @@
     "/public/categories": {
       "get": {
         "tags": [
-          "Category"
+          "API-category"
         ],
         "summary": "Get all categories in the system",
         "operationId": "getCategories",
@@ -10886,7 +10783,7 @@
     "/public/categories/google/{locale}": {
       "get": {
         "tags": [
-          "Category"
+          "API-category"
         ],
         "summary": "Get Google categories from the system",
         "operationId": "getGoogleCategories",
@@ -10934,7 +10831,7 @@
     "/admin/category": {
       "post": {
         "tags": [
-          "Category"
+          "API-category"
         ],
         "summary": "Add a new category to system",
         "operationId": "addCategory",
@@ -10987,7 +10884,7 @@
       },
       "delete": {
         "tags": [
-          "Category"
+          "API-category"
         ],
         "summary": "Delete a categories in the system",
         "operationId": "deleteCategories",
@@ -11042,7 +10939,7 @@
     "/admin/category/{categoryId}": {
       "patch": {
         "tags": [
-          "Category"
+          "API-category"
         ],
         "summary": "Update a category from the system",
         "operationId": "updateCategory",
@@ -11107,7 +11004,7 @@
     "/public/company": {
       "get": {
         "tags": [
-          "Company"
+          "API-company"
         ],
         "summary": "Get a company information in the system",
         "operationId": "getCompany",
@@ -11138,7 +11035,7 @@
     "/admin/company": {
       "post": {
         "tags": [
-          "Company"
+          "API-company"
         ],
         "summary": "Add a company information for the system",
         "operationId": "addCompany",
@@ -11193,7 +11090,7 @@
     "/admin/company/{companyId}": {
       "patch": {
         "tags": [
-          "Company"
+          "API-company"
         ],
         "summary": "Update a company to the system",
         "operationId": "updateCompany",
@@ -11258,7 +11155,7 @@
     "/admin/company/payment/{companyId}": {
       "post": {
         "tags": [
-          "Company"
+          "API-company"
         ],
         "summary": "Add a company payment for the system",
         "operationId": "addCompanyPayments",
@@ -11321,7 +11218,7 @@
       },
       "patch": {
         "tags": [
-          "Company"
+          "API-company"
         ],
         "summary": "Update a company payment for the system",
         "operationId": "updateCompanyPayments",
@@ -11384,7 +11281,7 @@
       },
       "delete": {
         "tags": [
-          "Company"
+          "API-company"
         ],
         "summary": "Delete a company payment in the system",
         "operationId": "deleteCompanyPayments",
@@ -11449,7 +11346,7 @@
     "/public/country": {
       "get": {
         "tags": [
-          "Countries Cities & Districts"
+          "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a Countries for the user",
         "operationId": "getCountries",
@@ -11480,7 +11377,7 @@
     "/public/country/{countryCode}": {
       "get": {
         "tags": [
-          "Countries Cities & Districts"
+          "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a States or Cities for the user",
         "operationId": "getStates",
@@ -11524,7 +11421,7 @@
     "/public/country/{countryCode}/city/{cityCode}": {
       "get": {
         "tags": [
-          "Countries Cities & Districts"
+          "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a Districts for the user",
         "operationId": "getDistricts",
@@ -11579,7 +11476,7 @@
     "/public/geliver/country/{countryCode}": {
       "get": {
         "tags": [
-          "Countries Cities & Districts"
+          "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a States or Cities for the user using geliver.io service",
         "operationId": "getGeliverStates",
@@ -11623,7 +11520,7 @@
     "/public/geliver/country/{countryCode}/city/{cityCode}": {
       "get": {
         "tags": [
-          "Countries Cities & Districts"
+          "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a Districts for the user using geliver.io service",
         "operationId": "getGeliverDistricts",
@@ -11678,7 +11575,7 @@
     "/public/currencies": {
       "get": {
         "tags": [
-          "Currency"
+          "SERVICE-currency"
         ],
         "summary": "Get all currencies in the system",
         "operationId": "getCurrencies",
@@ -11709,7 +11606,7 @@
     "/public/currencies/exchange": {
       "get": {
         "tags": [
-          "Currency"
+          "SERVICE-currency"
         ],
         "summary": "Converts the sent rate to the desired rate",
         "description": "TRY = Turkish Lira | USD = American Dollar | EUR = Euro | GBP = British Pound Sterling | CHF = Switzerland Frank | JPY = Japanese Yen | SAR = Saudi Riyal | NOK = Norwegian Krone | DKK = Danish Krone | AUD = Australian Dollar | CAD = Canada Dollar | SEK = Swedish Krone | SRU = Russian Ruble",
@@ -11778,7 +11675,7 @@
     "/public/module": {
       "get": {
         "tags": [
-          "Module"
+          "API-module"
         ],
         "summary": "Get modules in the system",
         "operationId": "getModules",
@@ -11809,7 +11706,7 @@
     "/public/module/{key}": {
       "get": {
         "tags": [
-          "Module"
+          "API-module"
         ],
         "summary": "Get a module by key in the system",
         "operationId": "getModuleByKey",
@@ -11850,7 +11747,7 @@
     "/admin/module/{key}": {
       "patch": {
         "tags": [
-          "Module"
+          "API-module"
         ],
         "summary": "Update a module in the system",
         "operationId": "updateModule",
@@ -11915,7 +11812,7 @@
     "/public/contact/send-message": {
       "post": {
         "tags": [
-          "Form"
+          "API-form"
         ],
         "summary": "Send a Customer message to system",
         "operationId": "sendMessageToSystem",
@@ -11965,7 +11862,7 @@
     "/public/contact/upload-file": {
       "post": {
         "tags": [
-          "Form"
+          "API-form"
         ],
         "summary": "User can be upload a file (xml, pdf)",
         "operationId": "addFile",
@@ -12005,7 +11902,7 @@
     "/public/contact/send-resume": {
       "post": {
         "tags": [
-          "Form"
+          "API-form"
         ],
         "summary": "Send a Customer resume to the authorities",
         "operationId": "sendResume",
@@ -12055,7 +11952,7 @@
     "/public/contact/send-error-message": {
       "post": {
         "tags": [
-          "Form"
+          "API-form"
         ],
         "summary": "Send a Customer error message to system",
         "operationId": "sendErrorMessageToSystem",
@@ -12105,7 +12002,7 @@
     "/admin/contact/check-smtp": {
       "post": {
         "tags": [
-          "Form"
+          "API-form"
         ],
         "summary": "Check your SMTP settings is valid",
         "operationId": "checkSMTP",
@@ -12160,7 +12057,7 @@
     "/public/google/translate": {
       "post": {
         "tags": [
-          "Google"
+          "SERVICE-google"
         ],
         "summary": "Translate a prompt selected language",
         "operationId": "translatePrompt",
@@ -12210,7 +12107,7 @@
     "/public/google/subscribe": {
       "post": {
         "tags": [
-          "Google"
+          "SERVICE-google"
         ],
         "summary": "Add your email to subscription list",
         "operationId": "addMailToSubscription",
@@ -12260,7 +12157,7 @@
     "/admin/google/gemini-prompt": {
       "post": {
         "tags": [
-          "Google"
+          "SERVICE-google"
         ],
         "summary": "Send a prompt to Gemini AI",
         "operationId": "sendGeminiPrompt",
@@ -12312,16 +12209,27 @@
         }
       }
     },
-    "/public/gsm/send-sms": {
+    "/public-key/gsm/send-sms": {
       "post": {
         "tags": [
-          "Gsm"
+          "SERVICE-message-netgsm"
         ],
         "summary": "Send a sms for specific turkish number",
         "operationId": "sendSMS",
         "security": [
           {
-            "JWT": []
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -12370,7 +12278,7 @@
     "/admin/gsm/check-report": {
       "get": {
         "tags": [
-          "Gsm"
+          "SERVICE-message-netgsm"
         ],
         "summary": "List message headers for send sms",
         "operationId": "checkReport",
@@ -12416,7 +12324,7 @@
     "/admin/gsm/check-balance": {
       "get": {
         "tags": [
-          "Gsm"
+          "SERVICE-message-netgsm"
         ],
         "summary": "Check balance situation for the sms",
         "operationId": "checkBalance",
@@ -12467,7 +12375,7 @@
     "/admin/gsm/list-headers": {
       "get": {
         "tags": [
-          "Gsm"
+          "SERVICE-message-netgsm"
         ],
         "summary": "List message headers for send sms",
         "operationId": "listHeaders",
@@ -12503,7 +12411,7 @@
     "/admin/minio/buckets": {
       "get": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get all buckets in the system",
         "operationId": "getBuckets",
@@ -12539,7 +12447,7 @@
     "/admin/minio/bucket/{bucketName}": {
       "get": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get bucket information in the system",
         "operationId": "getBucket",
@@ -12586,7 +12494,7 @@
       },
       "post": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Add bucket for the system",
         "operationId": "addBucket",
@@ -12633,7 +12541,7 @@
       },
       "delete": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Delete empty bucket for the system",
         "operationId": "deleteBucket",
@@ -12682,7 +12590,7 @@
     "/admin/minio/bucket-operations/incompleted-uploads": {
       "get": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get partially uploaded objects in a bucket",
         "operationId": "getIncompletedUploads",
@@ -12755,7 +12663,7 @@
     "/admin/minio/bucket-operations": {
       "get": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Lists all objects in a bucket using S3 listing objects V2 API",
         "operationId": "listObjects",
@@ -12843,7 +12751,7 @@
     "/admin/minio/bucket-version/{bucketName}": {
       "get": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get Versioning state of a Bucket",
         "operationId": "getBucketVersion",
@@ -12892,7 +12800,7 @@
     "/admin/minio/bucket-version": {
       "post": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Add bucket version for the bucket",
         "operationId": "addBucketVersion",
@@ -12947,7 +12855,7 @@
     "/admin/minio/bucket-config/{bucketName}": {
       "get": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get Lifecycle Configuration of a Bucket",
         "operationId": "getBucketConfig",
@@ -12994,7 +12902,7 @@
       },
       "delete": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Delete Lifecycle Configuration of a Bucket",
         "operationId": "deleteBucketConfig",
@@ -13043,7 +12951,7 @@
     "/admin/minio/bucket-config": {
       "post": {
         "tags": [
-          "Minio Bucket S3"
+          "SERVICE-minio-bucket-S3"
         ],
         "summary": "Set Lifecycle Configuration on a Bucket",
         "operationId": "addBucketConfig",
@@ -13098,7 +13006,7 @@
     "/admin/minio/object/check-metadata": {
       "get": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Get metadata of a specific object",
         "operationId": "getObjectMetadata",
@@ -13158,7 +13066,7 @@
     "/admin/minio/object": {
       "get": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Get a specific object",
         "operationId": "getObject",
@@ -13216,7 +13124,7 @@
       },
       "post": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Upload file to minio",
         "operationId": "addObject",
@@ -13259,7 +13167,7 @@
       },
       "delete": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Delete a specific object",
         "operationId": "deleteObject",
@@ -13314,7 +13222,7 @@
     "/admin/minio/object/objects": {
       "delete": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Delete multiple objects",
         "operationId": "deleteObjects",
@@ -13369,7 +13277,7 @@
     "/admin/minio/object/copy": {
       "post": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Copy an object from one bucket to another",
         "operationId": "copyObject",
@@ -13424,7 +13332,7 @@
     "/admin/minio/object/presigned-url": {
       "post": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Generates a presigned URL for the provided HTTP method",
         "operationId": "getPresignedUrl",
@@ -13479,7 +13387,7 @@
     "/admin/minio/object/presigned-get-object": {
       "post": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Generates a presigned URL for HTTP GET operations",
         "operationId": "getPresignedGetObject",
@@ -13534,7 +13442,7 @@
     "/admin/minio/object/presigned-put-object": {
       "post": {
         "tags": [
-          "Minio Object S3"
+          "SERVICE-minio-object-S3"
         ],
         "summary": "Generates a presigned URL for HTTP PUT operations",
         "operationId": "getPresignedPutObject",
@@ -13547,17 +13455,72 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PresignedGetObject"
+                "$ref": "#/components/schemas/PresignedPutObject"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/PresignedGetObject"
+                "$ref": "#/components/schemas/PresignedPutObject"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/PresignedGetObject"
+                "$ref": "#/components/schemas/PresignedPutObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/folder": {
+      "post": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Creates an empty folder with a zero byte object",
+        "operationId": "addFolder",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFolder"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFolder"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFolder"
               }
             }
           }
@@ -13589,7 +13552,7 @@
     "/public/order/{orderId}": {
       "get": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Get order in the system",
         "operationId": "getPublicOrder",
@@ -13630,7 +13593,7 @@
     "/public-key/order": {
       "get": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Get User order in system",
         "operationId": "getOrder",
@@ -13655,6 +13618,15 @@
             "required": false,
             "name": "paymentId",
             "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
           }
         ],
         "responses": {
@@ -13682,13 +13654,24 @@
       },
       "post": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Save order to the system",
         "operationId": "saveOrder",
         "security": [
           {
             "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -13737,7 +13720,7 @@
     "/public/orders": {
       "get": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Get User Orders in the system",
         "operationId": "getOrdersForTheUser",
@@ -13773,7 +13756,7 @@
     "/admin/orders": {
       "get": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Get all orders in the system",
         "operationId": "getOrdersAdmin",
@@ -13881,7 +13864,7 @@
       },
       "delete": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Delete a order or orders in the system",
         "operationId": "deleteOrders",
@@ -13936,7 +13919,7 @@
     "/admin/order/{id}": {
       "patch": {
         "tags": [
-          "Order"
+          "API-order"
         ],
         "summary": "Update order in the system",
         "operationId": "updateOrder",
@@ -14001,7 +13984,7 @@
     "/public-key/payment-iyzico/check/{paymentId}": {
       "get": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "Check payment for the IYZICO Service",
         "operationId": "checkIyzicoPayment",
@@ -14018,6 +14001,42 @@
             "required": true,
             "name": "paymentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "responses": {
@@ -14047,7 +14066,7 @@
     "/public-key/payment-iyzico/IYZICO/{locale}": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "The payment form initiates a session and returns checkoutFormContent, paymentPageUrl, and the transaction token to display the payment page",
         "operationId": "checkIyzicoHtml",
@@ -14064,13 +14083,56 @@
                 "en",
                 "tr"
               ],
-              "examples": [
-                "tr"
-              ]
+              "default": "tr"
             },
-            "required": true,
+            "required": false,
             "name": "locale",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://your-domain.com/checkToken"
+            },
+            "required": false,
+            "name": "x-iyzico-callback-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14119,7 +14181,7 @@
     "/public-key/payment-iyzico/IYZICO/{token}/{locale}": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "After the CF payment form is completed, it queries the results using the token",
         "operationId": "retrieveIyzicoForm",
@@ -14144,13 +14206,47 @@
                 "en",
                 "tr"
               ],
-              "examples": [
-                "tr"
-              ]
+              "default": "tr"
             },
-            "required": true,
+            "required": false,
             "name": "locale",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "responses": {
@@ -14180,7 +14276,7 @@
     "/public/payment-iyzico/NON-3D/{locale}": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "The Payment Creation API is responsible for processing the customer’s card payments. When this service is used, iyzico provides an immediate response regarding the success of the transaction",
         "operationId": "createIyzicoPayment",
@@ -14197,13 +14293,38 @@
                 "en",
                 "tr"
               ],
-              "examples": [
-                "tr"
-              ]
+              "default": "tr"
             },
-            "required": true,
+            "required": false,
             "name": "locale",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14252,7 +14373,7 @@
     "/public/payment-iyzico/3D/{locale}": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "It initiates a 3D Secure session and returns the `htmlContent` value for 3DS authentication",
         "operationId": "createIyzico3DPayment",
@@ -14269,13 +14390,47 @@
                 "en",
                 "tr"
               ],
-              "examples": [
-                "tr"
-              ]
+              "default": "tr"
             },
-            "required": true,
+            "required": false,
             "name": "locale",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://your-domain.com/checkToken"
+            },
+            "required": false,
+            "name": "x-iyzico-callback-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14324,7 +14479,7 @@
     "/public/payment-iyzico/3D/{paymentId}/{token}": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "After 3DS verification, a request must be sent to this endpoint to complete the payment transaction. This service is triggered using the information received after the verification step and concludes the transaction as either successful or unsuccessful",
         "operationId": "completeIyzico3DPayment",
@@ -14349,6 +14504,33 @@
             "required": true,
             "name": "token",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14397,13 +14579,42 @@
     "/public/payment-iyzico/check/installment": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "Check installments with the IYZICO Service",
         "operationId": "checkIyzicoInstallment",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14452,7 +14663,7 @@
     "/public/payment-iyzico/cancel/{locale}": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "Used to cancel a payment transaction",
         "operationId": "cancelIyzicoPayment",
@@ -14469,13 +14680,38 @@
                 "en",
                 "tr"
               ],
-              "examples": [
-                "tr"
-              ]
+              "default": "tr"
             },
-            "required": true,
+            "required": false,
             "name": "locale",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14524,7 +14760,7 @@
     "/public/payment-iyzico/check-card/{userKey}": {
       "get": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "Get a special card for the user",
         "operationId": "getCardWithDetail",
@@ -14541,6 +14777,33 @@
             "required": true,
             "name": "userKey",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "responses": {
@@ -14570,13 +14833,42 @@
     "/public/payment-iyzico/add-card": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "Add a new card to the system",
         "operationId": "addCard",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14622,12 +14914,12 @@
         }
       }
     },
-    "/public/payment-iyzico/delete-card/{cardId}": {
+    "/public/payment-iyzico/delete-card": {
       "delete": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
-        "summary": "Delete a card from the system",
+        "summary": "Delete a card from the IYZICO Service",
         "operationId": "deleteCard",
         "security": [
           {
@@ -14637,13 +14929,51 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
             },
-            "required": true,
-            "name": "cardId",
-            "in": "path"
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteCard"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteCard"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteCard"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -14671,13 +15001,42 @@
     "/public/payment-iyzico/validate-card": {
       "post": {
         "tags": [
-          "Payment Iyzico"
+          "SERVICE-payment-iyzico"
         ],
         "summary": "Check a card with the IYZICO Service",
         "operationId": "checkIyzicoCard",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-rCQcWjtVjkrRprfoPuG82xgl5kfTDrtx"
+            },
+            "required": false,
+            "name": "x-iyzico-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "sandbox-bJwEMD8sZsz9ZI7N5ueggImNe2xTMxhc"
+            },
+            "required": false,
+            "name": "x-iyzico-secret-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "https://sandbox-api.iyzipay.com"
+            },
+            "required": false,
+            "name": "x-iyzico-url",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -14726,7 +15085,7 @@
     "/public/posts/total": {
       "get": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Get all posts total count in the system",
         "operationId": "getPostTotal",
@@ -14757,7 +15116,7 @@
     "/public/posts": {
       "get": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Get all posts in the system",
         "operationId": "getPosts",
@@ -14851,7 +15210,7 @@
     "/public/post/{postId}": {
       "get": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Get a post from the system",
         "operationId": "getPost",
@@ -14903,7 +15262,7 @@
     "/public/post/{postId}/like": {
       "post": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Add a like or dislike to post in the system",
         "operationId": "likePosts",
@@ -14968,7 +15327,7 @@
     "/public/post/{postId}/comment": {
       "post": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Add a comment to post in the system",
         "operationId": "commentBlogs",
@@ -15033,7 +15392,7 @@
     "/admin/post": {
       "post": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Add a new post to system",
         "operationId": "addPost",
@@ -15086,7 +15445,7 @@
       },
       "delete": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Delete a post or posts in the system",
         "operationId": "deletePosts",
@@ -15141,7 +15500,7 @@
     "/admin/post/{postId}": {
       "patch": {
         "tags": [
-          "Post"
+          "API-post"
         ],
         "summary": "Update a post from the system",
         "operationId": "updatePost",
@@ -15206,7 +15565,7 @@
     "/public/products": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Get all products in the system",
         "operationId": "getProducts",
@@ -15297,7 +15656,7 @@
     "/public/items/best-seller": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Get all best products and variants in the system",
         "operationId": "getItems",
@@ -15341,7 +15700,7 @@
     "/public/products/XML/google": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Get all products in the system with Google XML format",
         "operationId": "getProductsGoogleXML",
@@ -15372,7 +15731,7 @@
     "/public/products/XML/yandex": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Get all products in the system with Yandex XML format",
         "operationId": "getProductsYandexXML",
@@ -15403,7 +15762,7 @@
     "/public/product/{productId}": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Get a product from the system",
         "operationId": "getProduct",
@@ -15455,7 +15814,7 @@
     "/admin/products/count": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Check product and variant count in the system",
         "operationId": "countProducts",
@@ -15491,7 +15850,7 @@
     "/admin/products/update-sku": {
       "get": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Update sku for all items in the system",
         "operationId": "updateSkuForItems",
@@ -15527,7 +15886,7 @@
     "/admin/products/update-tax": {
       "patch": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Update tax for all items in the system",
         "operationId": "updateTaxForItems",
@@ -15582,7 +15941,7 @@
     "/admin/product": {
       "post": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Add a new product to system",
         "operationId": "addProduct",
@@ -15635,7 +15994,7 @@
       },
       "delete": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Delete a product or products in the system",
         "operationId": "deleteProduct",
@@ -15690,7 +16049,7 @@
     "/admin/product/{productId}": {
       "patch": {
         "tags": [
-          "Product"
+          "API-product"
         ],
         "summary": "Update a product in the system",
         "operationId": "updateProduct",
@@ -15755,7 +16114,7 @@
     "/public/variants": {
       "get": {
         "tags": [
-          "Product Variant"
+          "API-product-variant"
         ],
         "summary": "Get all variants in the system",
         "operationId": "getVariants",
@@ -15827,7 +16186,7 @@
     "/public/variant/{productId}": {
       "get": {
         "tags": [
-          "Product Variant"
+          "API-product-variant"
         ],
         "summary": "Get a product variants from the system",
         "operationId": "getProductVariants",
@@ -15868,7 +16227,7 @@
     "/admin/variant/{productId}": {
       "post": {
         "tags": [
-          "Product Variant"
+          "API-product-variant"
         ],
         "summary": "Add a new variant to system",
         "operationId": "addVariant",
@@ -15931,7 +16290,7 @@
       },
       "patch": {
         "tags": [
-          "Product Variant"
+          "API-product-variant"
         ],
         "summary": "Update a variant in the system",
         "operationId": "updateVariant",
@@ -15996,7 +16355,7 @@
     "/admin/variant": {
       "delete": {
         "tags": [
-          "Product Variant"
+          "API-product-variant"
         ],
         "summary": "Delete a variant or variants in the system",
         "operationId": "deleteVariant",
@@ -16051,7 +16410,7 @@
     "/admin/variants/{productId}": {
       "post": {
         "tags": [
-          "Product Variant"
+          "API-product-variant"
         ],
         "summary": "Add a new variants to product in the system",
         "operationId": "addVariantsMulti",
@@ -16106,7 +16465,7 @@
     "/public/questions/{productId}": {
       "get": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Get all questions for a product",
         "operationId": "getQuestionsForProduct",
@@ -16200,7 +16559,7 @@
     "/public/questions": {
       "get": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Get user questions in the system",
         "operationId": "getQuestions",
@@ -16291,7 +16650,7 @@
     "/public/question/{productId}": {
       "post": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Add a new question for a product",
         "operationId": "addQuestion",
@@ -16356,7 +16715,7 @@
     "/public/question/{questionId}": {
       "patch": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Update a question",
         "operationId": "updateQuestion",
@@ -16419,7 +16778,7 @@
       },
       "delete": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Delete a question",
         "operationId": "deleteQuestion",
@@ -16465,7 +16824,7 @@
     "/admin/questions": {
       "get": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Get all questions in the system",
         "operationId": "getQuestionsAdmin",
@@ -16556,7 +16915,7 @@
     "/admin/question/{userId}/{productId}": {
       "post": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Add an admin question for a product",
         "operationId": "addQuestionAdmin",
@@ -16629,7 +16988,7 @@
     "/admin/question/{questionId}": {
       "patch": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Update a question as admin",
         "operationId": "updateQuestionAdmin",
@@ -16694,7 +17053,7 @@
     "/admin/question": {
       "delete": {
         "tags": [
-          "Question"
+          "API-question"
         ],
         "summary": "Delete questions from the system",
         "operationId": "deleteQuestionsAdmin",
@@ -16749,7 +17108,7 @@
     "/public/reviews/{productId}": {
       "get": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Get all reviews for a product",
         "operationId": "getReviewsForProduct",
@@ -16829,7 +17188,7 @@
     "/public/reviews": {
       "get": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Get user reviews in the system",
         "operationId": "getReviews",
@@ -16920,7 +17279,7 @@
     "/public/review/{productId}": {
       "post": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Add a new review for a product",
         "operationId": "addReview",
@@ -16985,7 +17344,7 @@
     "/public/review/{reviewId}": {
       "patch": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Update a review",
         "operationId": "updateReview",
@@ -17048,7 +17407,7 @@
       },
       "delete": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Delete a review",
         "operationId": "deleteReview",
@@ -17094,7 +17453,7 @@
     "/admin/reviews": {
       "get": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Get all reviews in the system",
         "operationId": "getReviewsAdmin",
@@ -17185,7 +17544,7 @@
     "/admin/review/{userId}/{productId}": {
       "post": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Add an admin review for a product",
         "operationId": "addReviewAdmin",
@@ -17258,7 +17617,7 @@
     "/admin/review/{reviewId}": {
       "patch": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Update a review as admin",
         "operationId": "updateReviewAdmin",
@@ -17323,7 +17682,7 @@
     "/admin/review": {
       "delete": {
         "tags": [
-          "Review"
+          "API-review"
         ],
         "summary": "Delete reviews from the system",
         "operationId": "deleteReviewsAdmin",
@@ -17378,72 +17737,61 @@
     "/public/shipping/prices": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Get price list for parcel dimensions",
         "operationId": "getShippingPrices",
+        "security": [],
         "parameters": [
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "parcel"
-              ]
+              "default": "all"
             },
-            "required": true,
+            "required": false,
             "name": "paramType",
             "in": "query"
           },
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                10
-              ]
+              "default": 20
             },
-            "required": true,
+            "required": false,
             "name": "length",
             "in": "query"
           },
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                10
-              ]
+              "default": 15
             },
-            "required": true,
+            "required": false,
             "name": "width",
             "in": "query"
           },
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                10
-              ]
+              "default": 10
             },
-            "required": true,
+            "required": false,
             "name": "height",
             "in": "query"
           },
           {
             "schema": {
-              "type": "integer",
-              "examples": [
-                1
-              ]
+              "type": "number",
+              "default": 0.8
             },
-            "required": true,
+            "required": false,
             "name": "weight",
             "in": "query"
           },
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "cm"
-              ]
+              "default": "cm"
             },
             "required": false,
             "name": "distanceUnit",
@@ -17452,13 +17800,20 @@
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "kg"
-              ]
+              "default": "kg"
             },
             "required": false,
             "name": "massUnit",
             "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17488,10 +17843,22 @@
     "/public/shipping/templates": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "List shipment templates",
         "operationId": "getShippingTemplates",
+        "security": [],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -17519,21 +17886,29 @@
     "/public/shipping/shipment/labelPDF/{shipmentId}": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Download label PDF for a shipment",
         "operationId": "getShippingShipmentLabelPDF",
+        "security": [],
         "parameters": [
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-              ]
+              "default": "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
             },
-            "required": true,
+            "required": false,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17563,21 +17938,29 @@
     "/public/shipping/shipment/labelHTML/{shipmentId}": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Download responsive label HTML for a shipment",
         "operationId": "getShippingShipmentLabelHTML",
+        "security": [],
         "parameters": [
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
-              ]
+              "default": "1186e0d8-dd49-4fb9-b5ec-2d6af4146e32"
             },
-            "required": true,
+            "required": false,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17607,13 +17990,33 @@
     "/public-key/shipping/address": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipping address",
         "operationId": "addShippingAddress",
         "security": [
           {
             "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -17662,7 +18065,7 @@
     "/public-key/shipping/addresses": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "List shipping addresses",
         "operationId": "getShippingAddresses",
@@ -17675,9 +18078,7 @@
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                1
-              ]
+              "default": 1
             },
             "required": false,
             "name": "page",
@@ -17686,9 +18087,7 @@
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                25
-              ]
+              "default": 25
             },
             "required": false,
             "name": "limit",
@@ -17704,6 +18103,24 @@
             "required": false,
             "name": "isRecipientAddress",
             "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17733,13 +18150,33 @@
     "/public-key/shipping/shipment": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipment",
         "operationId": "addShippingShipment",
         "security": [
           {
             "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -17788,7 +18225,7 @@
     "/admin/shipping/shipment/accept/{offerId}": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Accept an offer (purchase label)",
         "operationId": "acceptShippingOffer",
@@ -17805,6 +18242,24 @@
             "required": true,
             "name": "offerId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a"
+            },
+            "required": false,
+            "name": "x-api-key",
+            "in": "header"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17834,7 +18289,7 @@
     "/admin/shipping/balance/{organizationId}": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Get organisation balance information",
         "operationId": "getShippingBalance",
@@ -17851,6 +18306,15 @@
             "required": true,
             "name": "organizationId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17880,7 +18344,7 @@
     "/admin/shipping/address/{addressId}": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Get a specific shipping address",
         "operationId": "getShippingAddress",
@@ -17897,6 +18361,15 @@
             "required": true,
             "name": "addressId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17924,7 +18397,7 @@
       },
       "delete": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipping address",
         "operationId": "deleteShippingAddress",
@@ -17941,6 +18414,15 @@
             "required": true,
             "name": "addressId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -17970,7 +18452,7 @@
     "/admin/shipping/shipments": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "List shipments",
         "operationId": "getShippingShipments",
@@ -17983,35 +18465,38 @@
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                1
-              ]
+              "default": 1
             },
-            "required": true,
+            "required": false,
             "name": "page",
             "in": "query"
           },
           {
             "schema": {
               "type": "integer",
-              "examples": [
-                25
-              ]
+              "default": 25
             },
-            "required": true,
+            "required": false,
             "name": "limit",
             "in": "query"
           },
           {
             "schema": {
               "type": "string",
-              "examples": [
-                "GOT_OFFERS"
-              ]
+              "default": "GOT_OFFERS"
             },
             "required": false,
             "name": "statusFilter",
             "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18041,7 +18526,7 @@
     "/admin/shipping/shipment/{shipmentId}": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Get a specific shipment",
         "operationId": "getShippingShipment",
@@ -18058,6 +18543,15 @@
             "required": true,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18087,7 +18581,7 @@
     "/admin/shipping/shipment/update-package/{shipmentId}": {
       "patch": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Update package dimensions for a shipment",
         "operationId": "patchShippingPackage",
@@ -18104,6 +18598,15 @@
             "required": true,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18152,7 +18655,7 @@
     "/admin/shipping/shipment/cancel/{shipmentId}": {
       "delete": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Cancel a shipment",
         "operationId": "deleteShippingShipment",
@@ -18169,6 +18672,15 @@
             "required": true,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18198,7 +18710,7 @@
     "/admin/shipping/shipment/clone/{shipmentId}": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Clone a shipment",
         "operationId": "cloneShippingShipment",
@@ -18215,6 +18727,15 @@
             "required": true,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18244,7 +18765,7 @@
     "/admin/shipping/shipment/return/{shipmentId}": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Create a return shipment",
         "operationId": "returnShippingShipment",
@@ -18261,6 +18782,15 @@
             "required": true,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18309,7 +18839,7 @@
     "/admin/shipping/shipment/accept-return/{shipmentId}": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Create and purchase a return shipment label",
         "operationId": "acceptShippingReturn",
@@ -18326,6 +18856,15 @@
             "required": true,
             "name": "shipmentId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18374,13 +18913,24 @@
     "/admin/shipping/shipment/create": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "One-step label purchase",
         "operationId": "createShippingShipment",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18429,13 +18979,24 @@
     "/admin/shipping/template": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Add a shipment template",
         "operationId": "createShippingTemplate",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18484,7 +19045,7 @@
     "/admin/shipping/template/{templateId}": {
       "delete": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipment template",
         "operationId": "deleteShippingTemplate",
@@ -18501,6 +19062,15 @@
             "required": true,
             "name": "templateId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18530,13 +19100,24 @@
     "/admin/shipping/providers": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "List shipping provider accounts",
         "operationId": "getShippingProviders",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18566,13 +19147,24 @@
     "/admin/shipping/provider": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipping provider account",
         "operationId": "createShippingProvider",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18621,7 +19213,7 @@
     "/admin/shipping/provider/{providerAccountId}": {
       "delete": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipping provider",
         "operationId": "deleteShippingProvider",
@@ -18638,6 +19230,15 @@
             "required": true,
             "name": "providerAccountId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18667,13 +19268,24 @@
     "/admin/shipping/webhooks": {
       "get": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "List shipping webhooks",
         "operationId": "getShippingWebhooks",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18703,13 +19315,24 @@
     "/admin/shipping/webhook": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipping webhook",
         "operationId": "createShippingWebhook",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18758,13 +19381,24 @@
     "/admin/shipping/webhook/test": {
       "post": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Test a shipping webhook",
         "operationId": "testShippingWebhook",
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "requestBody": {
@@ -18813,7 +19447,7 @@
     "/admin/shipping/webhook/{webhookId}": {
       "delete": {
         "tags": [
-          "Shipping"
+          "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipping webhook",
         "operationId": "deleteShippingWebhook",
@@ -18830,6 +19464,15 @@
             "required": true,
             "name": "webhookId",
             "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "2b9e3373-4ef2-4907-9329-3bf8d4a7d929"
+            },
+            "required": false,
+            "name": "x-geliver-token",
+            "in": "header"
           }
         ],
         "responses": {
@@ -18859,7 +19502,7 @@
     "/public/traffic/analyze": {
       "post": {
         "tags": [
-          "Traffic"
+          "API-traffic"
         ],
         "summary": "Analyze the web site traffic",
         "operationId": "analyzeTraffic",
@@ -18909,7 +19552,7 @@
     "/admin/traffic/analyze-traffic": {
       "get": {
         "tags": [
-          "Traffic"
+          "API-traffic"
         ],
         "summary": "Get all visitors in the system",
         "operationId": "getTrafficsAdmin",
@@ -18969,7 +19612,7 @@
     "/admin/traffic/analyze-organic-traffic": {
       "get": {
         "tags": [
-          "Traffic"
+          "API-traffic"
         ],
         "summary": "Get all organic visitors in the system",
         "operationId": "getOrganicTrafficsAdmin",
@@ -19066,7 +19709,7 @@
       },
       "delete": {
         "tags": [
-          "Traffic"
+          "API-traffic"
         ],
         "summary": "Delete a customer traffic from the system",
         "operationId": "deleteVisitor",
@@ -19121,7 +19764,7 @@
     "/public/translations": {
       "get": {
         "tags": [
-          "Translation"
+          "API-translation"
         ],
         "summary": "Get all translations in the system",
         "operationId": "getTranslations",
@@ -19204,7 +19847,7 @@
     "/public/translation/{code}": {
       "get": {
         "tags": [
-          "Translation"
+          "API-translation"
         ],
         "summary": "Get a translation from the system",
         "operationId": "getTranslation",
@@ -19250,7 +19893,7 @@
     "/admin/translation": {
       "get": {
         "tags": [
-          "Translation"
+          "API-translation"
         ],
         "summary": "Get a specific key translation in the system",
         "operationId": "getTranslationByKey",
@@ -19319,7 +19962,7 @@
       },
       "post": {
         "tags": [
-          "Translation"
+          "API-translation"
         ],
         "summary": "Add a new translation to system",
         "operationId": "addTranslation",
@@ -19372,7 +20015,7 @@
       },
       "delete": {
         "tags": [
-          "Translation"
+          "API-translation"
         ],
         "summary": "Delete a translation or translations in the system",
         "operationId": "deleteTranslations",
@@ -19427,7 +20070,7 @@
     "/admin/translation/{translationId}": {
       "patch": {
         "tags": [
-          "Translation"
+          "API-translation"
         ],
         "summary": "Update a translation from the system",
         "operationId": "updateTranslation",
@@ -19492,7 +20135,7 @@
     "/public/user/{userId}": {
       "get": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Get a user from the system",
         "operationId": "getUser",
@@ -19533,7 +20176,7 @@
     "/public/user": {
       "patch": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Edit user information",
         "operationId": "editUser",
@@ -19586,7 +20229,7 @@
       },
       "delete": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Delete user account",
         "operationId": "deleteUser",
@@ -19641,7 +20284,7 @@
     "/admin/users": {
       "get": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Get all users in the system",
         "operationId": "getUsers",
@@ -19718,7 +20361,7 @@
     "/admin/user": {
       "post": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Add a customer to the system",
         "operationId": "addCustomer",
@@ -19771,7 +20414,7 @@
       },
       "delete": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Delete customers from the system",
         "operationId": "deleteCustomer",
@@ -19826,7 +20469,7 @@
     "/admin/user/{userId}": {
       "patch": {
         "tags": [
-          "User"
+          "API-user"
         ],
         "summary": "Update a customer in the system",
         "operationId": "updateCustomer",
