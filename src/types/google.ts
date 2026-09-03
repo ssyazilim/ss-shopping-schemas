@@ -1,5 +1,11 @@
 import { z } from 'zod';
 
+export type IGoogleCategory = z.infer<typeof GoogleCategorySchema>;
+export const GoogleCategorySchema = z.object({
+  id: z.string(),
+  name: z.array(z.string()),
+});
+
 export type IDestination = z.infer<typeof DestinationSchema>;
 export const DestinationSchema = z.enum([
   'Shopping ads',

@@ -96,10 +96,10 @@ registry.registerPath({
   },
 });
 
-// POST /public-key/shipping/address
+// POST /public/shipping/address
 registry.registerPath({
   method: 'post',
-  path: '/public-key/shipping/address',
+  path: '/public/shipping/address',
   tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a shipping address',
   operationId: 'addShippingAddress',
@@ -108,10 +108,10 @@ registry.registerPath({
   responses,
 });
 
-// GET /public-key/shipping/addresses
+// GET /public/shipping/addresses
 registry.registerPath({
   method: 'get',
-  path: '/public-key/shipping/addresses',
+  path: '/public/shipping/addresses',
   tags: ['SERVICE-shipping-geliver'],
   summary: 'List shipping addresses',
   operationId: 'getShippingAddresses',
@@ -127,10 +127,10 @@ registry.registerPath({
   responses,
 });
 
-// POST /public-key/shipping/shipment
+// POST /public/shipping/shipment
 registry.registerPath({
   method: 'post',
-  path: '/public-key/shipping/shipment',
+  path: '/public/shipping/shipment',
   tags: ['SERVICE-shipping-geliver'],
   summary: 'Create a shipment',
   operationId: 'addShippingShipment',
@@ -139,7 +139,7 @@ registry.registerPath({
   responses,
 });
 
-// POST /public-key/shipping/shipment/accept/{offerId}
+// POST /public/shipping/shipment/accept/{offerId}
 registry.registerPath({
   method: 'post',
   path: '/admin/shipping/shipment/accept/{offerId}',

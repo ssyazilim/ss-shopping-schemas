@@ -1,7 +1,21 @@
+import { z } from 'zod';
 import { registry } from '../registry';
 import { GeminiPromptSchema, TranslateSchema } from './schema';
 import { PasswordResetUserSchema } from '../auth/schema';
 import { responses, buildRequestBody } from '../common';
+
+// GET /public/google/categories/{locale}
+registry.registerPath({
+  method: 'get',
+  path: '/public/google/categories/{locale}',
+  tags: ['SERVICE-google'],
+  summary: 'Get Google categories from the system',
+  operationId: 'getGoogleCategories',
+  request: {
+    params: z.object({ locale: z.enum(['en-US', 'tr-TR']).meta({ examples: ['tr-TR'] }) }),
+  },
+  responses,
+});
 
 // POST /public/google/translate
 registry.registerPath({

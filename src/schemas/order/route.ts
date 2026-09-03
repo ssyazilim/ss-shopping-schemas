@@ -36,10 +36,10 @@ registry.registerPath({
   responses,
 });
 
-// GET /public-key/order
+// GET /public/order
 registry.registerPath({
   method: 'get',
-  path: '/public-key/order',
+  path: '/public/order',
   tags: ['API-order'],
   summary: 'Get User order in system',
   operationId: 'getOrder',
@@ -54,10 +54,10 @@ registry.registerPath({
   responses,
 });
 
-// POST /public-key/order
+// POST /public/order
 registry.registerPath({
   method: 'post',
-  path: '/public-key/order',
+  path: '/public/order',
   tags: ['API-order'],
   summary: 'Save order to the system',
   operationId: 'saveOrder',

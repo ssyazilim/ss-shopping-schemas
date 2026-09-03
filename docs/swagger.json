@@ -10780,54 +10780,6 @@
         }
       }
     },
-    "/public/categories/google/{locale}": {
-      "get": {
-        "tags": [
-          "API-category"
-        ],
-        "summary": "Get Google categories from the system",
-        "operationId": "getGoogleCategories",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en-US",
-                "tr-TR"
-              ],
-              "examples": [
-                "tr-TR"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/category": {
       "post": {
         "tags": [
@@ -12054,6 +12006,54 @@
         }
       }
     },
+    "/public/google/categories/{locale}": {
+      "get": {
+        "tags": [
+          "SERVICE-google"
+        ],
+        "summary": "Get Google categories from the system",
+        "operationId": "getGoogleCategories",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en-US",
+                "tr-TR"
+              ],
+              "examples": [
+                "tr-TR"
+              ]
+            },
+            "required": true,
+            "name": "locale",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/google/translate": {
       "post": {
         "tags": [
@@ -12209,7 +12209,7 @@
         }
       }
     },
-    "/public-key/gsm/send-sms": {
+    "/public/gsm/send-sms": {
       "post": {
         "tags": [
           "SERVICE-message-netgsm"
@@ -13590,7 +13590,7 @@
         }
       }
     },
-    "/public-key/order": {
+    "/public/order": {
       "get": {
         "tags": [
           "API-order"
@@ -13981,7 +13981,7 @@
         }
       }
     },
-    "/public-key/payment-iyzico/check/{paymentId}": {
+    "/public/payment-iyzico/check/{paymentId}": {
       "get": {
         "tags": [
           "SERVICE-payment-iyzico"
@@ -14063,7 +14063,7 @@
         }
       }
     },
-    "/public-key/payment-iyzico/IYZICO/{locale}": {
+    "/public/payment-iyzico/IYZICO/{locale}": {
       "post": {
         "tags": [
           "SERVICE-payment-iyzico"
@@ -14178,7 +14178,7 @@
         }
       }
     },
-    "/public-key/payment-iyzico/IYZICO/{token}/{locale}": {
+    "/public/payment-iyzico/IYZICO/{token}/{locale}": {
       "post": {
         "tags": [
           "SERVICE-payment-iyzico"
@@ -17987,7 +17987,7 @@
         }
       }
     },
-    "/public-key/shipping/address": {
+    "/public/shipping/address": {
       "post": {
         "tags": [
           "SERVICE-shipping-geliver"
@@ -18062,7 +18062,7 @@
         }
       }
     },
-    "/public-key/shipping/addresses": {
+    "/public/shipping/addresses": {
       "get": {
         "tags": [
           "SERVICE-shipping-geliver"
@@ -18147,7 +18147,7 @@
         }
       }
     },
-    "/public-key/shipping/shipment": {
+    "/public/shipping/shipment": {
       "post": {
         "tags": [
           "SERVICE-shipping-geliver"

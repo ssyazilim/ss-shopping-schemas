@@ -32,12 +32,6 @@ export const CategoryYMLSchema = z.object({
   parentId: z.string().optional(),
 });
 
-export type IGoogleCategory = z.infer<typeof GoogleCategorySchema>;
-export const GoogleCategorySchema = z.object({
-  id: z.string(),
-  name: z.array(z.string()),
-});
-
 export type ITags = z.infer<typeof TagsSchema>;
 export const TagsSchema = z.object({
   text: z.string(),

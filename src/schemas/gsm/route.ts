@@ -7,10 +7,10 @@ const apiKeyHeaders = z.object({
   'x-api-key': z.string().default('9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a'),
 });
 
-// POST /public-key/gsm/send-sms
+// POST /public/gsm/send-sms
 registry.registerPath({
   method: 'post',
-  path: '/public-key/gsm/send-sms',
+  path: '/public/gsm/send-sms',
   tags: ['SERVICE-message-netgsm'],
   summary: 'Send a sms for specific turkish number',
   operationId: 'sendSMS',

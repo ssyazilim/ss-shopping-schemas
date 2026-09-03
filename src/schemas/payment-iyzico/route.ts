@@ -34,7 +34,7 @@ const apiKeyIyzicoCallbackHeaders = apiKeyIyzicoHeaders.extend(callbackHeader);
 // GET /public/payment-iyzico/check/{paymentId}
 registry.registerPath({
   method: 'get',
-  path: '/public-key/payment-iyzico/check/{paymentId}',
+  path: '/public/payment-iyzico/check/{paymentId}',
   tags: ['SERVICE-payment-iyzico'],
   summary: 'Check payment for the IYZICO Service',
   operationId: 'checkIyzicoPayment',
@@ -49,7 +49,7 @@ registry.registerPath({
 // POST /public/payment-iyzico/IYZICO/{locale}
 registry.registerPath({
   method: 'post',
-  path: '/public-key/payment-iyzico/IYZICO/{locale}',
+  path: '/public/payment-iyzico/IYZICO/{locale}',
   tags: ['SERVICE-payment-iyzico'],
   summary:
     'The payment form initiates a session and returns checkoutFormContent, paymentPageUrl, and the transaction token to display the payment page',
@@ -66,7 +66,7 @@ registry.registerPath({
 // POST /public/payment-iyzico/IYZICO/{token}/{locale}
 registry.registerPath({
   method: 'post',
-  path: '/public-key/payment-iyzico/IYZICO/{token}/{locale}',
+  path: '/public/payment-iyzico/IYZICO/{token}/{locale}',
   tags: ['SERVICE-payment-iyzico'],
   summary: 'After the CF payment form is completed, it queries the results using the token',
   operationId: 'retrieveIyzicoForm',

@@ -14,19 +14,6 @@ registry.registerPath({
   responses,
 });
 
-// GET /public/categories/google/{locale}
-registry.registerPath({
-  method: 'get',
-  path: '/public/categories/google/{locale}',
-  tags: ['API-category'],
-  summary: 'Get Google categories from the system',
-  operationId: 'getGoogleCategories',
-  request: {
-    params: z.object({ locale: z.enum(['en-US', 'tr-TR']).meta({ examples: ['tr-TR'] }) }),
-  },
-  responses,
-});
-
 // POST /admin/category
 registry.registerPath({
   method: 'post',
