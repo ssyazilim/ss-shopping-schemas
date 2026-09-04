@@ -8,6 +8,9 @@ import {
   PRESIGNED_GET_OBJECT,
   PRESIGNED_PUT_OBJECT,
   ADD_FOLDER,
+  SET_OBJECT_TAGGING,
+  DELETE_OBJECT_TAGGING,
+  REMOVE_INCOMPLETE_UPLOAD,
 } from './validation';
 
 export const AddObjectSchema = registry.register('AddObject', ADD_OBJECT);
@@ -31,3 +34,15 @@ export const PresignedPutObjectSchema = registry.register(
 );
 
 export const AddFolderSchema = registry.register('AddFolder', ADD_FOLDER);
+
+export const SetObjectTaggingSchema = registry.register('SetObjectTagging', SET_OBJECT_TAGGING);
+
+export const DeleteObjectTaggingSchema = registry.register(
+  'DeleteObjectTagging',
+  DELETE_OBJECT_TAGGING,
+);
+
+export const RemoveIncompleteUploadSchema = registry.register(
+  'RemoveIncompleteUpload',
+  REMOVE_INCOMPLETE_UPLOAD,
+);

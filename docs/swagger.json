@@ -3514,56 +3514,50 @@
             "type": "object",
             "properties": {
               "Rule": {
-                "type": "object",
-                "properties": {
-                  "ID": {
-                    "type": "string",
-                    "examples": [
-                      "Transition and Expiration Rule"
-                    ]
-                  },
-                  "Status": {
-                    "type": "string",
-                    "enum": [
-                      "Enabled",
-                      "Suspended"
-                    ]
-                  },
-                  "Filter": {
-                    "type": "object",
-                    "properties": {
-                      "Prefix": {
-                        "type": "string",
-                        "examples": [
-                          ""
-                        ]
-                      }
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ID": {
+                      "type": "string"
                     },
-                    "required": [
-                      "Prefix"
-                    ]
-                  },
-                  "Expiration": {
-                    "type": "object",
-                    "properties": {
-                      "Days": {
-                        "type": "string",
-                        "examples": [
-                          "3650"
-                        ]
-                      }
+                    "Status": {
+                      "type": "string",
+                      "enum": [
+                        "Enabled",
+                        "Suspended"
+                      ]
                     },
-                    "required": [
-                      "Days"
-                    ]
-                  }
-                },
-                "required": [
-                  "ID",
-                  "Status",
-                  "Filter",
-                  "Expiration"
-                ]
+                    "Filter": {
+                      "type": "object",
+                      "properties": {
+                        "Prefix": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "Prefix"
+                      ]
+                    },
+                    "Expiration": {
+                      "type": "object",
+                      "properties": {
+                        "Days": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "Days"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ID",
+                    "Status",
+                    "Filter",
+                    "Expiration"
+                  ]
+                }
               }
             },
             "required": [
@@ -3574,6 +3568,105 @@
         "required": [
           "bucketName",
           "properties"
+        ]
+      },
+      "SetBucketPolicy": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "policy": {
+            "type": "string",
+            "examples": [
+              "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::test/*\"]}]}"
+            ],
+            "description": "Bucket policy as a JSON document string. Send an empty string to remove the policy"
+          }
+        },
+        "required": [
+          "bucketName",
+          "policy"
+        ]
+      },
+      "SetBucketEncryption": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "Rule": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ApplyServerSideEncryptionByDefault": {
+                      "type": "object",
+                      "properties": {
+                        "SSEAlgorithm": {
+                          "type": "string",
+                          "examples": [
+                            "AES256"
+                          ]
+                        },
+                        "KmsMasterKeyID": {
+                          "type": "string",
+                          "examples": [
+                            ""
+                          ]
+                        }
+                      },
+                      "required": [
+                        "SSEAlgorithm"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "Rule"
+            ]
+          }
+        },
+        "required": [
+          "bucketName",
+          "properties"
+        ]
+      },
+      "SetBucketTagging": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "examples": [
+              {
+                "env": "production"
+              }
+            ]
+          }
+        },
+        "required": [
+          "bucketName",
+          "tags"
         ]
       },
       "AddObject": {
@@ -3798,6 +3891,81 @@
               "test/posts/blog"
             ],
             "description": "Full folder path without a trailing slash"
+          }
+        },
+        "required": [
+          "bucketName",
+          "objectName"
+        ]
+      },
+      "SetObjectTagging": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "objectName": {
+            "type": "string",
+            "examples": [
+              "1.jpg"
+            ]
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "examples": [
+              {
+                "env": "production"
+              }
+            ]
+          }
+        },
+        "required": [
+          "bucketName",
+          "objectName",
+          "tags"
+        ]
+      },
+      "DeleteObjectTagging": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "objectName": {
+            "type": "string",
+            "examples": [
+              "1.jpg"
+            ]
+          }
+        },
+        "required": [
+          "bucketName",
+          "objectName"
+        ]
+      },
+      "RemoveIncompleteUpload": {
+        "type": "object",
+        "properties": {
+          "bucketName": {
+            "type": "string",
+            "examples": [
+              "test"
+            ]
+          },
+          "objectName": {
+            "type": "string",
+            "examples": [
+              "1.jpg"
+            ]
           }
         },
         "required": [
@@ -12587,167 +12755,6 @@
         }
       }
     },
-    "/admin/minio/bucket-operations/incompleted-uploads": {
-      "get": {
-        "tags": [
-          "SERVICE-minio-bucket-S3"
-        ],
-        "summary": "Get partially uploaded objects in a bucket",
-        "operationId": "getIncompletedUploads",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
-            },
-            "required": true,
-            "name": "bucketName",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                ""
-              ],
-              "description": "Where to start => .../../"
-            },
-            "required": false,
-            "description": "Where to start => .../../",
-            "name": "prefix",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "boolean",
-              "examples": false,
-              "description": "Include to the subfolders"
-            },
-            "required": false,
-            "description": "Include to the subfolders",
-            "name": "recursive",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/minio/bucket-operations": {
-      "get": {
-        "tags": [
-          "SERVICE-minio-bucket-S3"
-        ],
-        "summary": "Lists all objects in a bucket using S3 listing objects V2 API",
-        "operationId": "listObjects",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
-            },
-            "required": true,
-            "name": "bucketName",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                ""
-              ],
-              "description": "Where to start => .../../"
-            },
-            "required": false,
-            "description": "Where to start => .../../",
-            "name": "prefix",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "boolean",
-              "examples": [
-                false
-              ],
-              "description": "Include to the subfolders"
-            },
-            "required": false,
-            "description": "Include to the subfolders",
-            "name": "recursive",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                ""
-              ],
-              "description": "You can start from a point in an alphabetical directory => e.txt | k.txt"
-            },
-            "required": false,
-            "description": "You can start from a point in an alphabetical directory => e.txt | k.txt",
-            "name": "startAfter",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiSuccess"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/minio/bucket-version/{bucketName}": {
       "get": {
         "tags": [
@@ -13003,6 +13010,412 @@
         }
       }
     },
+    "/admin/minio/bucket-policy/{bucketName}": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Get access policy of a Bucket",
+        "operationId": "getBucketPolicy",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/bucket-policy": {
+      "post": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Set access policy on a Bucket",
+        "operationId": "addBucketPolicy",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketPolicy"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketPolicy"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketPolicy"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/bucket-encryption/{bucketName}": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Get default encryption configuration of a Bucket",
+        "operationId": "getBucketEncryption",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Remove default encryption configuration of a Bucket",
+        "operationId": "deleteBucketEncryption",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/bucket-encryption": {
+      "post": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Set default encryption configuration on a Bucket",
+        "operationId": "addBucketEncryption",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketEncryption"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketEncryption"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketEncryption"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/bucket-tagging/{bucketName}": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Get tags of a Bucket",
+        "operationId": "getBucketTagging",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Remove tags of a Bucket",
+        "operationId": "deleteBucketTagging",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/bucket-tagging": {
+      "post": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Set tags on a Bucket",
+        "operationId": "addBucketTagging",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketTagging"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketTagging"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBucketTagging"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/minio/object/check-metadata": {
       "get": {
         "tags": [
@@ -13219,7 +13632,93 @@
         }
       }
     },
-    "/admin/minio/object/objects": {
+    "/admin/minio/objects": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Lists all objects in a bucket using S3 listing objects V2 API",
+        "operationId": "listObjects",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                ""
+              ],
+              "description": "Where to start => .../../"
+            },
+            "required": false,
+            "description": "Where to start => .../../",
+            "name": "prefix",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "examples": [
+                false
+              ],
+              "description": "Include to the subfolders"
+            },
+            "required": false,
+            "description": "Include to the subfolders",
+            "name": "recursive",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                ""
+              ],
+              "description": "You can start from a point in an alphabetical directory => e.txt | k.txt"
+            },
+            "required": false,
+            "description": "You can start from a point in an alphabetical directory => e.txt | k.txt",
+            "name": "startAfter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "SERVICE-minio-object-S3"
@@ -13525,6 +14024,386 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/object/tagging": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Get tags of a specific object",
+        "operationId": "getObjectTagging",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "1.jpg"
+              ]
+            },
+            "required": true,
+            "name": "objectName",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Set tags on a specific object",
+        "operationId": "addObjectTagging",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetObjectTagging"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SetObjectTagging"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetObjectTagging"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Remove tags of a specific object",
+        "operationId": "deleteObjectTagging",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteObjectTagging"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteObjectTagging"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteObjectTagging"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/object/incompleted-uploads": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Get partially uploaded objects in a bucket",
+        "operationId": "getIncompletedUploads",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                ""
+              ],
+              "description": "Where to start => .../../"
+            },
+            "required": false,
+            "description": "Where to start => .../../",
+            "name": "prefix",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "examples": false,
+              "description": "Include to the subfolders"
+            },
+            "required": false,
+            "description": "Include to the subfolders",
+            "name": "recursive",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Remove a partially uploaded (incomplete) object",
+        "operationId": "deleteIncompleteUpload",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveIncompleteUpload"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveIncompleteUpload"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveIncompleteUpload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/minio/object/partial": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-object-S3"
+        ],
+        "summary": "Get a byte range of an object as a binary stream",
+        "operationId": "getPartialObject",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "1.jpg"
+              ]
+            },
+            "required": true,
+            "name": "objectName",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "examples": [
+                0
+              ]
+            },
+            "required": false,
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "examples": [
+                1024
+              ]
+            },
+            "required": false,
+            "name": "length",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",

@@ -78,3 +78,19 @@ export const PRESIGNED_GET_OBJECT = z.object({
       description: 'Forces the browser to download the file with this name instead of opening it',
     }),
 });
+
+export const SET_OBJECT_TAGGING = z.object({
+  bucketName: z.string().meta({ examples: ['test'] }),
+  objectName: z.string().meta({ examples: ['1.jpg'] }),
+  tags: z.record(z.string(), z.string()).meta({ examples: [{ env: 'production' }] }),
+});
+
+export const DELETE_OBJECT_TAGGING = z.object({
+  bucketName: z.string().meta({ examples: ['test'] }),
+  objectName: z.string().meta({ examples: ['1.jpg'] }),
+});
+
+export const REMOVE_INCOMPLETE_UPLOAD = z.object({
+  bucketName: z.string().meta({ examples: ['test'] }),
+  objectName: z.string().meta({ examples: ['1.jpg'] }),
+});

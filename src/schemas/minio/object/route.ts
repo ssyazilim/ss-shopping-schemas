@@ -9,6 +9,9 @@ import {
   PresignedGetObjectSchema,
   PresignedPutObjectSchema,
   AddFolderSchema,
+  SetObjectTaggingSchema,
+  DeleteObjectTaggingSchema,
+  RemoveIncompleteUploadSchema,
 } from './schema';
 import { responses, buildRequestBody } from '../../common';
 
@@ -76,10 +79,41 @@ registry.registerPath({
   responses,
 });
 
-// DELETE /admin/minio/object/objects
+// GET /admin/minio/objects
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/objects',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Lists all objects in a bucket using S3 listing objects V2 API',
+  operationId: 'listObjects',
+  security: [{ JWT: [] }],
+  request: {
+    query: z.object({
+      bucketName: z.string().meta({ examples: ['test'] }),
+      prefix: z
+        .string()
+        .optional()
+        .meta({ examples: [''], description: 'Where to start => .../../' }),
+      recursive: z
+        .boolean()
+        .optional()
+        .meta({ examples: [false], description: 'Include to the subfolders' }),
+      startAfter: z
+        .string()
+        .optional()
+        .meta({
+          examples: [''],
+          description: 'You can start from a point in an alphabetical directory => e.txt | k.txt',
+        }),
+    }),
+  },
+  responses,
+});
+
+// DELETE /admin/minio/objects
 registry.registerPath({
   method: 'delete',
-  path: '/admin/minio/object/objects',
+  path: '/admin/minio/objects',
   tags: ['SERVICE-minio-object-S3'],
   summary: 'Delete multiple objects',
   operationId: 'deleteObjects',
@@ -145,5 +179,101 @@ registry.registerPath({
   operationId: 'addFolder',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddFolderSchema) },
+  responses,
+});
+
+// GET /admin/minio/object/tagging
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/object/tagging',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Get tags of a specific object',
+  operationId: 'getObjectTagging',
+  security: [{ JWT: [] }],
+  request: {
+    query: z.object({
+      bucketName: z.string().meta({ examples: ['test'] }),
+      objectName: z.string().meta({ examples: ['1.jpg'] }),
+    }),
+  },
+  responses,
+});
+
+// POST /admin/minio/object/tagging
+registry.registerPath({
+  method: 'post',
+  path: '/admin/minio/object/tagging',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Set tags on a specific object',
+  operationId: 'addObjectTagging',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(SetObjectTaggingSchema) },
+  responses,
+});
+
+// DELETE /admin/minio/object/tagging
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/minio/object/tagging',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Remove tags of a specific object',
+  operationId: 'deleteObjectTagging',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(DeleteObjectTaggingSchema) },
+  responses,
+});
+
+// GET /admin/minio/object/incompleted-uploads
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/object/incompleted-uploads',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Get partially uploaded objects in a bucket',
+  operationId: 'getIncompletedUploads',
+  security: [{ JWT: [] }],
+  request: {
+    query: z.object({
+      bucketName: z.string().meta({ examples: ['test'] }),
+      prefix: z
+        .string()
+        .optional()
+        .meta({ examples: [''], description: 'Where to start => .../../' }),
+      recursive: z
+        .boolean()
+        .optional()
+        .meta({ examples: false, description: 'Include to the subfolders' }),
+    }),
+  },
+  responses,
+});
+
+// DELETE /admin/minio/object/incompleted-uploads
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/minio/object/incompleted-uploads',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Remove a partially uploaded (incomplete) object',
+  operationId: 'deleteIncompleteUpload',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(RemoveIncompleteUploadSchema) },
+  responses,
+});
+
+// GET /admin/minio/object/partial
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/object/partial',
+  tags: ['SERVICE-minio-object-S3'],
+  summary: 'Get a byte range of an object as a binary stream',
+  operationId: 'getPartialObject',
+  security: [{ JWT: [] }],
+  request: {
+    query: z.object({
+      bucketName: z.string().meta({ examples: ['test'] }),
+      objectName: z.string().meta({ examples: ['1.jpg'] }),
+      offset: z.coerce.number().meta({ examples: [0] }),
+      length: z.coerce.number().meta({ examples: [1024] }),
+    }),
+  },
   responses,
 });

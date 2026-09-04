@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import { registry } from '../../registry';
-import { AddBucketVersionSchema, AddBucketConfigSchema } from './schema';
+import {
+  AddBucketVersionSchema,
+  AddBucketConfigSchema,
+  SetBucketPolicySchema,
+  SetBucketEncryptionSchema,
+  SetBucketTaggingSchema,
+} from './schema';
 import { responses, buildRequestBody } from '../../common';
 
 // GET /admin/minio/buckets
@@ -47,61 +53,6 @@ registry.registerPath({
   operationId: 'deleteBucket',
   security: [{ JWT: [] }],
   request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
-  responses,
-});
-
-// GET /admin/minio/bucket-operations/incompleted-uploads
-registry.registerPath({
-  method: 'get',
-  path: '/admin/minio/bucket-operations/incompleted-uploads',
-  tags: ['SERVICE-minio-bucket-S3'],
-  summary: 'Get partially uploaded objects in a bucket',
-  operationId: 'getIncompletedUploads',
-  security: [{ JWT: [] }],
-  request: {
-    query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      prefix: z
-        .string()
-        .optional()
-        .meta({ examples: [''], description: 'Where to start => .../../' }),
-      recursive: z
-        .boolean()
-        .optional()
-        .meta({ examples: false, description: 'Include to the subfolders' }),
-    }),
-  },
-  responses,
-});
-
-// GET /admin/minio/bucket-operations
-registry.registerPath({
-  method: 'get',
-  path: '/admin/minio/bucket-operations',
-  tags: ['SERVICE-minio-bucket-S3'],
-  summary: 'Lists all objects in a bucket using S3 listing objects V2 API',
-  operationId: 'listObjects',
-  security: [{ JWT: [] }],
-  request: {
-    query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      prefix: z
-        .string()
-        .optional()
-        .meta({ examples: [''], description: 'Where to start => .../../' }),
-      recursive: z
-        .boolean()
-        .optional()
-        .meta({ examples: [false], description: 'Include to the subfolders' }),
-      startAfter: z
-        .string()
-        .optional()
-        .meta({
-          examples: [''],
-          description: 'You can start from a point in an alphabetical directory => e.txt | k.txt',
-        }),
-    }),
-  },
   responses,
 });
 
@@ -162,5 +113,101 @@ registry.registerPath({
   operationId: 'addBucketConfig',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddBucketConfigSchema) },
+  responses,
+});
+
+// GET /admin/minio/bucket-policy/{bucketName}
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/bucket-policy/{bucketName}',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Get access policy of a Bucket',
+  operationId: 'getBucketPolicy',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  responses,
+});
+
+// POST /admin/minio/bucket-policy
+registry.registerPath({
+  method: 'post',
+  path: '/admin/minio/bucket-policy',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Set access policy on a Bucket',
+  operationId: 'addBucketPolicy',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(SetBucketPolicySchema) },
+  responses,
+});
+
+// GET /admin/minio/bucket-encryption/{bucketName}
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/bucket-encryption/{bucketName}',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Get default encryption configuration of a Bucket',
+  operationId: 'getBucketEncryption',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  responses,
+});
+
+// POST /admin/minio/bucket-encryption
+registry.registerPath({
+  method: 'post',
+  path: '/admin/minio/bucket-encryption',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Set default encryption configuration on a Bucket',
+  operationId: 'addBucketEncryption',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(SetBucketEncryptionSchema) },
+  responses,
+});
+
+// DELETE /admin/minio/bucket-encryption/{bucketName}
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/minio/bucket-encryption/{bucketName}',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Remove default encryption configuration of a Bucket',
+  operationId: 'deleteBucketEncryption',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  responses,
+});
+
+// GET /admin/minio/bucket-tagging/{bucketName}
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/bucket-tagging/{bucketName}',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Get tags of a Bucket',
+  operationId: 'getBucketTagging',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  responses,
+});
+
+// POST /admin/minio/bucket-tagging
+registry.registerPath({
+  method: 'post',
+  path: '/admin/minio/bucket-tagging',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Set tags on a Bucket',
+  operationId: 'addBucketTagging',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(SetBucketTaggingSchema) },
+  responses,
+});
+
+// DELETE /admin/minio/bucket-tagging/{bucketName}
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/minio/bucket-tagging/{bucketName}',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Remove tags of a Bucket',
+  operationId: 'deleteBucketTagging',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
   responses,
 });
