@@ -68,6 +68,18 @@ registry.registerPath({
   responses,
 });
 
+// GET /admin/minio/bucket-region/{bucketName}
+registry.registerPath({
+  method: 'get',
+  path: '/admin/minio/bucket-region/{bucketName}',
+  tags: ['SERVICE-minio-bucket-S3'],
+  summary: 'Get the region of a Bucket',
+  operationId: 'getBucketRegion',
+  security: [{ JWT: [] }],
+  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  responses,
+});
+
 // POST /admin/minio/bucket-version
 registry.registerPath({
   method: 'post',

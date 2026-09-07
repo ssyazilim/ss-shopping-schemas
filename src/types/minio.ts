@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { DELETE_OBJECT } from '../schemas/minio/object/validation';
+import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 
 export type ILoader = z.infer<typeof LoaderSchema>;
 export const LoaderSchema = z.object({
@@ -7,12 +8,17 @@ export const LoaderSchema = z.object({
   requestsPending: z.number(),
 });
 
+// versionId/isLatest/isDeleteMarker are only filled in when the listing asks for versions;
+// a plain listing omits them, which is why they are optional here.
 export type IListObjects = z.infer<typeof ListObjectsSchema>;
 export const ListObjectsSchema = z.object({
   name: z.string(),
   lastModified: z.string(),
   etag: z.string(),
   size: z.number(),
+  versionId: z.string().optional(),
+  isLatest: z.boolean().optional(),
+  isDeleteMarker: z.boolean().optional(),
 });
 
 export type IListPrefixes = z.infer<typeof ListPrefixesSchema>;
@@ -22,6 +28,18 @@ export const ListPrefixesSchema = z.object({
 });
 
 export type IListEntry = IListObjects | IListPrefixes;
+
+// A multipart upload that was started but never completed; its parts still occupy
+// storage even though the object is not listable via listObjects.
+// Only valid for recursive listings: a non-recursive call groups by delimiter and
+// emits { prefix } entries into the same stream, which do not match this shape.
+export type IIncompleteUpload = z.infer<typeof IncompleteUploadSchema>;
+export const IncompleteUploadSchema = z.object({
+  key: z.string(),
+  uploadId: z.string(),
+  size: z.number(),
+  initiated: z.string(),
+});
 
 export interface IMediaEntry {
   key: string;
@@ -90,7 +108,7 @@ export const StatusSchema = z.object({
 export type ILifeCycleConfig = z.infer<typeof LifeCycleConfigSchema>;
 export const LifeCycleConfigSchema = z.object({
   ID: z.string(),
-  Status: z.enum(['Enabled', 'Suspended']),
+  Status: z.enum(['Enabled', 'Disabled']),
   Filter: z.object({ Prefix: z.string() }),
   Expiration: z.object({ Days: z.number() }),
 });
@@ -98,8 +116,121 @@ export const LifeCycleConfigSchema = z.object({
 export type IStatOpts = z.infer<typeof StatOptsSchema>;
 export const StatOptsSchema = z.union([z.record(z.string(), z.unknown()), z.object({})]);
 
+// versionId targets one specific version instead of the current one. forceDelete is a MinIO
+// extension (x-minio-force-delete) that drops every version of the key in a single call.
 export type IDeleteOpts = z.infer<typeof DeleteOptsSchema>;
 export const DeleteOptsSchema = z.union([
-  z.object({ versionId: z.string(), governanceBypass: z.boolean() }),
+  z.object({
+    versionId: z.string().optional(),
+    governanceBypass: z.boolean().optional(),
+    forceDelete: z.boolean().optional(),
+  }),
   z.object({}),
 ]);
+
+export type IEditableRule = z.infer<typeof EditableRuleSchema>;
+export const EditableRuleSchema = z.object({
+  ID: z.string(),
+  Prefix: z.string(),
+  Days: z.string(),
+  Enabled: z.boolean(),
+})
+
+export type IEditableTag = z.infer<typeof EditableTagSchema>;
+export const EditableTagSchema = z.object({
+  Key: z.string(),
+  Value: z.string(),
+})
+
+export type IBucketPolicyStatement = z.infer<typeof BucketPolicyStatementSchema>;
+export const BucketPolicyStatementSchema = z.object({
+  Effect: z.enum(['Allow', 'Deny']),
+  Principal: z.object({ AWS: z.array(z.string()) }),
+  Action: z.array(z.string()),
+  Resource: z.array(z.string()),
+});
+
+export type IBucketPolicy = z.infer<typeof BucketPolicySchema>;
+export const BucketPolicySchema = z.object({
+  Version: z.string(),
+  Statement: z.array(BucketPolicyStatementSchema),
+});
+
+export type IBucketAccess = z.infer<typeof BucketAccessSchema>;
+export const BucketAccessSchema = z.enum(['private', 'public', 'custom']);
+
+export type IEncryptionMode = z.infer<typeof EncryptionModeSchema>;
+export const EncryptionModeSchema = z.enum(['disabled', 'sse-s3']);
+
+export type IEncryptionConfig = z.infer<typeof EncryptionConfigSchema>;
+export const EncryptionConfigSchema = z.object({
+  Rule: z.array(
+    z.object({
+      ApplyServerSideEncryptionByDefault: z
+        .object({
+          SSEAlgorithm: z.string(),
+          KmsMasterKeyID: z.string().optional(),
+        })
+        .optional(),
+    }),
+  ),
+});
+
+export type IObjectMetadata = z.infer<typeof ObjectMetadataSchema>;
+export const ObjectMetadataSchema = z.object({
+  size: z.number(),
+  metaData: z.record(z.string(), z.string()),
+  lastModified: z.string(),
+  versionId: z.string().nullable(),
+  etag: z.string(),
+});
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const MEDIA_TYPE_EXTENSIONS: Record<string, string[]> = {
+  images: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'avif'],
+  pdf: ['pdf'],
+  documents: ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'csv'],
+  video: ['mp4', 'webm', 'mov', 'avi', 'mkv'],
+  audio: ['mp3', 'wav', 'ogg', 'm4a', 'aac'],
+};
+export const DEFAULT_RULE: ILifeCycleConfig = {
+  ID: "",
+  Status: "Enabled",
+  Filter: {
+    Prefix: "/"
+  },
+  Expiration: {
+    Days: 365
+  }
+}
+export const DEFAULT_BUCKET_POLICY: IBucketPolicy = getDefaultsForSchema(BucketPolicySchema);
+export const DEFAULT_TAG: IEditableTag = {
+  Key: "",
+  Value: "",
+}
+
+// Public access policy: anonymous read + write (download, upload, delete, list) for everyone
+export const getPublicBucketPolicy = (bucketName: string): IBucketPolicy => ({
+  Version: '2012-10-17',
+  Statement: [
+    {
+      Effect: 'Allow',
+      Principal: { AWS: ['*'] },
+      Action: ['s3:GetBucketLocation', 's3:ListBucket', 's3:ListBucketMultipartUploads'],
+      Resource: [`arn:aws:s3:::${bucketName}`],
+    },
+    {
+      Effect: 'Allow',
+      Principal: { AWS: ['*'] },
+      Action: ['s3:*'],
+      Resource: [`arn:aws:s3:::${bucketName}/*`],
+    },
+  ],
+})
+
+// SSE-S3 (AES256) server-side encryption applied to every object by default
+export const getSseS3Encryption = (): IEncryptionConfig => ({
+  Rule: [{ ApplyServerSideEncryptionByDefault: { SSEAlgorithm: 'AES256' } }],
+})

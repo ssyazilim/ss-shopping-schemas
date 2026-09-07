@@ -3525,7 +3525,7 @@
                       "type": "string",
                       "enum": [
                         "Enabled",
-                        "Suspended"
+                        "Disabled"
                       ]
                     },
                     "Filter": {
@@ -3579,17 +3579,28 @@
               "test"
             ]
           },
+          "access": {
+            "type": "string",
+            "enum": [
+              "private",
+              "public",
+              "custom"
+            ],
+            "examples": [
+              "custom"
+            ],
+            "description": "Access mode. 'private' removes the policy, 'public' applies the anonymous read+write policy, 'custom' uses the provided policy document. Defaults to 'custom' when omitted"
+          },
           "policy": {
             "type": "string",
             "examples": [
               "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::test/*\"]}]}"
             ],
-            "description": "Bucket policy as a JSON document string. Send an empty string to remove the policy"
+            "description": "Bucket policy as a JSON document string. Only used when access is 'custom'. Send an empty string to remove the policy"
           }
         },
         "required": [
-          "bucketName",
-          "policy"
+          "bucketName"
         ]
       },
       "SetBucketEncryption": {
@@ -3600,6 +3611,17 @@
             "examples": [
               "test"
             ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "disabled",
+              "sse-s3"
+            ],
+            "examples": [
+              "sse-s3"
+            ],
+            "description": "Encryption mode. 'sse-s3' applies AES256 server-side encryption, 'disabled' removes it. The backend builds the configuration"
           },
           "properties": {
             "type": "object",
@@ -3613,16 +3635,10 @@
                       "type": "object",
                       "properties": {
                         "SSEAlgorithm": {
-                          "type": "string",
-                          "examples": [
-                            "AES256"
-                          ]
+                          "type": "string"
                         },
                         "KmsMasterKeyID": {
-                          "type": "string",
-                          "examples": [
-                            ""
-                          ]
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -3639,8 +3655,7 @@
           }
         },
         "required": [
-          "bucketName",
-          "properties"
+          "bucketName"
         ]
       },
       "SetBucketTagging": {
@@ -12804,6 +12819,55 @@
         }
       }
     },
+    "/admin/minio/bucket-region/{bucketName}": {
+      "get": {
+        "tags": [
+          "SERVICE-minio-bucket-S3"
+        ],
+        "summary": "Get the region of a Bucket",
+        "operationId": "getBucketRegion",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "test"
+              ]
+            },
+            "required": true,
+            "name": "bucketName",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/minio/bucket-version": {
       "post": {
         "tags": [
@@ -14214,13 +14278,13 @@
         }
       }
     },
-    "/admin/minio/object/incompleted-uploads": {
+    "/admin/minio/objects/incomplete-uploads": {
       "get": {
         "tags": [
           "SERVICE-minio-object-S3"
         ],
         "summary": "Get partially uploaded objects in a bucket",
-        "operationId": "getIncompletedUploads",
+        "operationId": "listIncompleteUploads",
         "security": [
           {
             "JWT": []
@@ -14254,7 +14318,9 @@
           {
             "schema": {
               "type": "boolean",
-              "examples": false,
+              "examples": [
+                false
+              ],
               "description": "Include to the subfolders"
             },
             "required": false,
@@ -14285,7 +14351,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/admin/minio/object/incomplete-upload": {
       "delete": {
         "tags": [
           "SERVICE-minio-object-S3"

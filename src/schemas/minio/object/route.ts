@@ -223,13 +223,13 @@ registry.registerPath({
   responses,
 });
 
-// GET /admin/minio/object/incompleted-uploads
+// GET /admin/minio/objects/incomplete-uploads
 registry.registerPath({
   method: 'get',
-  path: '/admin/minio/object/incompleted-uploads',
+  path: '/admin/minio/objects/incomplete-uploads',
   tags: ['SERVICE-minio-object-S3'],
   summary: 'Get partially uploaded objects in a bucket',
-  operationId: 'getIncompletedUploads',
+  operationId: 'listIncompleteUploads',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -241,16 +241,16 @@ registry.registerPath({
       recursive: z
         .boolean()
         .optional()
-        .meta({ examples: false, description: 'Include to the subfolders' }),
+        .meta({ examples: [false], description: 'Include to the subfolders' }),
     }),
   },
   responses,
 });
 
-// DELETE /admin/minio/object/incompleted-uploads
+// DELETE /admin/minio/object/incomplete-upload
 registry.registerPath({
   method: 'delete',
-  path: '/admin/minio/object/incompleted-uploads',
+  path: '/admin/minio/object/incomplete-upload',
   tags: ['SERVICE-minio-object-S3'],
   summary: 'Remove a partially uploaded (incomplete) object',
   operationId: 'deleteIncompleteUpload',

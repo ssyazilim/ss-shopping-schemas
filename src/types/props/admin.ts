@@ -38,7 +38,16 @@ import type {
   IDealerPricesWithDesi,
   IPackageTemplate,
 } from '../geliver';
-import type { IMediaEntry, IMediaUpload } from '../minio';
+import type {
+  IMediaEntry,
+  IMediaUpload,
+  IEditableRule,
+  IEditableTag,
+  IStatus,
+  IBucketPolicy,
+  IBucketAccess,
+  IEncryptionMode,
+} from '../minio';
 import type { IOrder, IOrderBasketItem } from '../order';
 import type { IPost, IPostCounts } from '../post';
 import type { IPrice, IProduct, IProductAndVariant, IStaticImage, IType } from '../product';
@@ -152,6 +161,10 @@ export interface PMediaGrid {
   files?: IMediaEntry[];
   options?: PMediaOption[];
   selectedKey?: string;
+}
+
+export interface PMediaDetail {
+  file?: IMediaEntry | null;
 }
 
 export interface PBreadcrumbsFolder {
@@ -989,6 +1002,14 @@ export interface PModuleGoogleMerchant {
 
 export interface PModuleYandexMerchants {
   feedUrl?: string;
+}
+export interface PBucketSettings {
+  version?: IStatus;
+  rules?: IEditableRule[];
+  policy?: IBucketPolicy;
+  policyAccess?: IBucketAccess;
+  tags?: IEditableTag[];
+  encryption?: IEncryptionMode;
 }
 
 /*************************

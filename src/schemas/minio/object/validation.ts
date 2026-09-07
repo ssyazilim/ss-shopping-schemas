@@ -8,14 +8,27 @@ export const ADD_OBJECT = z.object({
   file: z.any().meta({ type: 'string', format: 'binary' }),
 });
 
+// On a versioned (or once-versioned, now suspended) bucket a plain delete only hides the
+// current version: the noncurrent ones keep the key alive and it reappears in listings.
+// allVersions sweeps every version and delete marker so the key is really gone.
+const ALL_VERSIONS = z
+  .boolean()
+  .optional()
+  .meta({
+    examples: [true],
+    description: 'Removes every version and delete marker of the key, not just the current one',
+  });
+
 export const DELETE_OBJECT = z.object({
   bucketName: z.string().meta({ examples: ['test'] }),
   objectName: z.string().meta({ examples: ['1.jpg'] }),
+  allVersions: ALL_VERSIONS,
 });
 
 export const DELETE_OBJECTS = z.object({
   bucketName: z.string().meta({ examples: ['test'] }),
   objectNames: z.array(z.string()).meta({ examples: [['1.jpg', '2.jpg']] }),
+  allVersions: ALL_VERSIONS,
 });
 
 export const COPY_OBJECT = z.object({
