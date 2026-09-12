@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { UpdateModuleSchema } from './schema';
-import { responses, buildRequestBody } from '../common';
+import { UpdateModuleSchema, ModuleModel } from './schema';
+import { buildRequestBody, jsonResponse, listResponse } from '../common';
 
 // GET /public/module
 registry.registerPath({
@@ -10,7 +10,7 @@ registry.registerPath({
   tags: ['API-module'],
   summary: 'Get modules in the system',
   operationId: 'getModules',
-  responses,
+  responses: listResponse(ModuleModel),
 });
 
 // GET /public/module/{key}
@@ -21,7 +21,7 @@ registry.registerPath({
   summary: 'Get a module by key in the system',
   operationId: 'getModuleByKey',
   request: { params: z.object({ key: z.string() }) },
-  responses,
+  responses: jsonResponse(ModuleModel),
 });
 
 // PATCH /admin/module/{key}
@@ -36,5 +36,5 @@ registry.registerPath({
     params: z.object({ key: z.string() }),
     body: buildRequestBody(UpdateModuleSchema),
   },
-  responses,
+  responses: jsonResponse(ModuleModel),
 });

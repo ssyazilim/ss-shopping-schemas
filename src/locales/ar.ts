@@ -12,6 +12,8 @@ export const notifications: INotifications = {
   public_forms_validations_url: 'يرجى إدخال رابط URL صحيح!',
   public_forms_validations_minLength: (min: number) => `الحد الأدنى !${min} أحرف`,
   public_forms_validations_maxLength: (max: number) => `الحد الأقصى !${max} أحرف`,
+  public_forms_validations_minItems: (min: number) => `الحد الأدنى !${min} عناصر`,
+  public_forms_validations_maxItems: (max: number) => `الحد الأقصى !${max} عناصر`,
   public_forms_validations_minPriceGreaterThanMax:
     'يجب أن تكون القيمة الدنيا أقل من القيمة القصوى!',
 };

@@ -12,5 +12,7 @@ export type INotifications = {
   public_forms_validations_url: string;
   public_forms_validations_minLength: (min: number) => string;
   public_forms_validations_maxLength: (max: number) => string;
+  public_forms_validations_minItems: (min: number) => string;
+  public_forms_validations_maxItems: (max: number) => string;
   public_forms_validations_minPriceGreaterThanMax: string;
 };

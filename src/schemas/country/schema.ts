@@ -10,39 +10,45 @@ export const timeZoneSchema = z.object({
 });
 
 export type ICountry = z.infer<typeof CountrySchema>;
-export const CountrySchema = z.object({
-  id: z.number(),
-  capital: z.string(),
-  currency: z.string(),
-  emoji: z.string(),
-  iso2: z.string(),
-  iso3: z.string(),
-  latitude: z.number(),
-  longitude: z.number(),
-  name: z.string(),
-  native: z.string(),
-  phonecode: z.string(),
-  region: z.string(),
-  region_id: z.string(),
-  subregion: z.string(),
-  subregion_id: z.string(),
-  timezones: z.array(timeZoneSchema),
-});
+export const CountrySchema = z
+  .object({
+    id: z.number(),
+    capital: z.string(),
+    currency: z.string(),
+    emoji: z.string(),
+    iso2: z.string(),
+    iso3: z.string(),
+    latitude: z.number(),
+    longitude: z.number(),
+    name: z.string(),
+    native: z.string(),
+    phonecode: z.string(),
+    region: z.string(),
+    region_id: z.string(),
+    subregion: z.string(),
+    subregion_id: z.string(),
+    timezones: z.array(timeZoneSchema),
+  })
+  .meta({ id: 'Country' });
 
 export type ICity = z.infer<typeof CitySchema>;
-export const CitySchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  iso2: z.string(),
-});
+export const CitySchema = z
+  .object({
+    id: z.number(),
+    name: z.string(),
+    iso2: z.string(),
+  })
+  .meta({ id: 'City' });
 
 export type IDistrict = z.infer<typeof DistrictSchema>;
-export const DistrictSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  latitude: z.string(),
-  longitude: z.string(),
-});
+export const DistrictSchema = z
+  .object({
+    id: z.number(),
+    name: z.string(),
+    latitude: z.string(),
+    longitude: z.string(),
+  })
+  .meta({ id: 'District' });
 
 export type IPhoneCode = z.infer<typeof PhoneCodeSchema>;
 export const PhoneCodeSchema = z.object({

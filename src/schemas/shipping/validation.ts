@@ -10,13 +10,11 @@ export const SHIPPING_ITEM = (locale: ILocale) => {
     title: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Lorem ipsum dolor sit amet'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     quantity: z
       .number({ message: m.public_forms_validations_mustNumber })
       .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: 2 }),
+      .int({ message: m.public_forms_validations_mustNumberInteger }),
   });
 };
 
@@ -26,27 +24,20 @@ export const SHIPPING_ORDER_INFO = (locale: ILocale = 'tr') => {
     sourceCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['API'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     sourceIdentifier: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['http://localhost:5000'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     orderNumber: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['1234567890'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     totalAmount: z
       .number({ message: m.public_forms_validations_mustNumber })
       .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .optional()
-      .meta({ examples: [250] }),
-    totalAmountCurrency: z
-      .string()
-      .optional()
-      .meta({ examples: ['TL'] }),
+      .optional(),
+    totalAmountCurrency: z.string().optional(),
   });
 };
 export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
@@ -55,38 +46,26 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Ufuk Sarı'] }),
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['no-reply@ssyazilim.com'] }),
-    phone: z
-      .e164({ message: m.public_forms_validations_phoneNumber })
-      .meta({ examples: ['+905309464864'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    email: z.email({ message: m.public_forms_validations_email }),
+    phone: z.e164({ message: m.public_forms_validations_phoneNumber }),
     address1: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Belek mahallesi Atatürk caddesi No: 11/1'] }),
-    address2: z
-      .string()
-      .optional()
-      .meta({ examples: [''] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    address2: z.string().optional(),
     countryCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['TR'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     cityName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Antalya'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     cityCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['07'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     districtID: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
@@ -95,38 +74,35 @@ export const ADD_SHIPPING_SHIPMENT_ADDRESS = (locale: ILocale = 'tr') => {
     districtName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Belek'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     zip: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['07500'] }),
-    isRecipientAddress: z.boolean().meta({ examples: [true] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    isRecipientAddress: z.boolean(),
     shortName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['UFUKSARI'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const SHIPPING_PACKAGE_DIMENSIONS = (locale: ILocale = 'tr', optional = false) => {
   const m = messages[locale];
-  const size = (examples: string[]) => {
+  const size = () => {
     const base = z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) });
-    return (optional ? base.optional() : base).meta({ examples });
+    return optional ? base.optional() : base;
   };
-  const unit = (examples: string[]) => z.string().optional().meta({ examples });
+  const unit = () => z.string().optional();
   return z.object({
-    length: size(['100']),
-    width: size(['50']),
-    height: size(['2']),
-    weight: size(['5']),
-    distanceUnit: unit(['cm']),
-    massUnit: unit(['kg']),
+    length: size(),
+    width: size(),
+    height: size(),
+    weight: size(),
+    distanceUnit: unit(),
+    massUnit: unit(),
   });
 };
 export const SHIPPING_RECIPIENT_ADDRESS = (locale: ILocale = 'tr') => {
@@ -135,52 +111,41 @@ export const SHIPPING_RECIPIENT_ADDRESS = (locale: ILocale = 'tr') => {
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Oğuzhan Altay'] }),
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['oguzhanaltay@gmail.com'] }),
-    phone: z
-      .e164({ message: m.public_forms_validations_phoneNumber })
-      .meta({ examples: ['+905447929292'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    email: z.email({ message: m.public_forms_validations_email }),
+    phone: z.e164({ message: m.public_forms_validations_phoneNumber }),
     address1: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Yukarı Dudullu, Kıbrıs Cd., 34775 Ümraniye/İstanbul'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     countryCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['TR'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     cityCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['34'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     districtName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Ümraniye'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z
     .object({
-      test: z.boolean().meta({ examples: [true] }),
+      test: z.boolean(),
       items: z.array(SHIPPING_ITEM(locale)),
       senderAddressID: z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
       returnAddressID: z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .meta({ examples: ['7f76e149-9d63-4993-b62a-ac0eee05f830'] }),
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
       recipientAddress: SHIPPING_RECIPIENT_ADDRESS(locale).optional(),
       recipientAddressID: z
         .string()
@@ -192,25 +157,15 @@ export const ADD_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
         .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .optional()
-        .meta({ examples: ['3cb149af-8c2b-4712-863a-25b39c1dbe0a'] }),
-      productPaymentOnDelivery: z
-        .boolean()
-        .optional()
-        .meta({ examples: [false] }),
-      hidePackageContentOnTag: z
-        .boolean()
-        .optional()
-        .meta({ examples: [false] }),
+        .optional(),
+      productPaymentOnDelivery: z.boolean().optional(),
+      hidePackageContentOnTag: z.boolean().optional(),
     })
     .extend(SHIPPING_PACKAGE_DIMENSIONS(locale, true).shape);
 };
 export const CREATE_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   return z.object({
-    providerServiceCode: z
-      .string()
-      .optional()
-      .meta({ examples: ['GELIVER_STANDART'] }),
+    providerServiceCode: z.string().optional(),
     providerAccountID: z.string().optional(),
     shipment: ADD_SHIPPING_SHIPMENT(locale),
   });
@@ -221,15 +176,13 @@ export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['İzzet Sarı'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     email: z.email({ message: m.public_forms_validations_email }).optional(),
     phone: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['+905332810759'] }),
+      .optional(),
     address1: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
@@ -239,40 +192,32 @@ export const SHIPPING_RETURN_ADDRESS = (locale: ILocale = 'tr') => {
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['TR'] }),
+      .optional(),
     cityCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['07'] }),
+      .optional(),
     districtName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['Serik'] }),
+      .optional(),
   });
 };
 export const RETURN_SHIPPING_SHIPMENT = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    isReturn: z
-      .boolean()
-      .optional()
-      .meta({ examples: [true] }),
+    isReturn: z.boolean().optional(),
     providerServiceCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['GELIVER_STANDART'] }),
+      .optional(),
     count: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .optional()
-      .meta({ examples: [1] }),
+      .optional(),
     senderAddress: SHIPPING_RETURN_ADDRESS(locale).optional(),
   });
 };
@@ -283,26 +228,22 @@ export const UPDATE_SHIPPING_PACKAGE = (locale: ILocale = 'tr') => {
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['20'] }),
+      .optional(),
     width: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['15'] }),
+      .optional(),
     height: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['10'] }),
+      .optional(),
     weight: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['0.8'] }),
+      .optional(),
   });
 };
 export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
@@ -312,8 +253,7 @@ export const SHIPPING_TEMPLATE = (locale: ILocale = 'tr') => {
       name: z
         .string()
         .min(1, { message: m.public_forms_validations_minLength(1) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .meta({ examples: ['kilim-olcusu'] }),
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
     })
     .extend(SHIPPING_PACKAGE_DIMENSIONS(locale).shape);
 };
@@ -323,47 +263,34 @@ export const SHIPPING_PROVIDER = (locale: ILocale = 'tr') => {
     username: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['test'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     password: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
       .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .optional()
-      .meta({ examples: ['pass'] }),
+      .optional(),
     providerCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['SURAT'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     version: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: [1] }),
-    isActive: z.boolean().meta({ examples: [false] }),
-    isC2C: z
-      .boolean()
-      .optional()
-      .meta({ examples: [false] }),
-    sharable: z.boolean().meta({ examples: [true] }),
-    isTest: z
-      .boolean()
-      .optional()
-      .meta({ examples: [false] }),
+      .int({ message: m.public_forms_validations_mustNumberInteger }),
+    isActive: z.boolean(),
+    isC2C: z.boolean().optional(),
+    sharable: z.boolean(),
+    isTest: z.boolean().optional(),
     parameters: z.record(z.string(), z.unknown()).optional(),
   });
 };
 export const SHIPPING_WEBHOOK = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    url: z
-      .url({ message: m.public_forms_validations_url })
-      .meta({ examples: ['https://webhook.site/test'] }),
+    url: z.url({ message: m.public_forms_validations_url }),
     type: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['TRACK_UPDATED'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     headerName: z.string().optional(),
     headerValue: z.string().optional(),
   });

@@ -1,21 +1,29 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddAddressSchema, UpdateAddressSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema } from '../common';
+import { ADD_ADDRESS, UPDATE_ADDRESS } from './validation';
+import { AddressSchema } from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+  UpdateResultSchema,
+} from '../common';
 
 const addressIdParam = z.object({
   addressId: z.string(),
 });
 
-// GET /public/address
+// GET /public/addresses
 registry.registerPath({
   method: 'get',
-  path: '/public/address',
+  path: '/public/addresses',
   tags: ['API-address'],
   summary: 'Get an address for session user from the system',
   operationId: 'getAddressForUser',
   security: [{ JWT: [] }],
-  responses,
+  responses: listResponse(AddressSchema),
 });
 
 // POST /public/address
@@ -26,8 +34,8 @@ registry.registerPath({
   summary: 'Add a new address to system',
   operationId: 'addAddress',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddAddressSchema) },
-  responses,
+  request: { body: buildRequestBody(ADD_ADDRESS()) },
+  responses: jsonResponse(AddressSchema),
 });
 
 // GET /public/address/{addressId}
@@ -39,7 +47,7 @@ registry.registerPath({
   operationId: 'getAddress',
   security: [{ JWT: [] }],
   request: { params: addressIdParam },
-  responses,
+  responses: jsonResponse(AddressSchema),
 });
 
 // PATCH /public/address/{addressId}
@@ -52,9 +60,9 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     params: addressIdParam,
-    body: buildRequestBody(UpdateAddressSchema),
+    body: buildRequestBody(UPDATE_ADDRESS()),
   },
-  responses,
+  responses: jsonResponse(UpdateResultSchema),
 });
 
 // DELETE /public/address/{addressId}
@@ -66,7 +74,7 @@ registry.registerPath({
   operationId: 'deleteAddress',
   security: [{ JWT: [] }],
   request: { params: addressIdParam },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // GET /admin/addresses
@@ -78,5 +86,5 @@ registry.registerPath({
   operationId: 'getAddresses',
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema },
-  responses,
+  responses: listResponse(AddressSchema),
 });

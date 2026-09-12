@@ -1,7 +1,14 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddQuestionSchema, UpdateQuestionSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import { AddQuestionSchema, UpdateQuestionSchema, QuestionModel } from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 const QuestionListQuerySchema = ListQuerySchema.extend({
   status: z.enum(['pending', 'approved', 'rejected']).optional().default('pending'),
@@ -18,7 +25,7 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     query: QuestionListQuerySchema,
   },
-  responses,
+  responses: listResponse(QuestionModel),
 });
 
 // GET /public/questions
@@ -30,7 +37,7 @@ registry.registerPath({
   operationId: 'getQuestions',
   security: [{ JWT: [] }],
   request: { query: QuestionListQuerySchema },
-  responses,
+  responses: listResponse(QuestionModel),
 });
 
 // POST /public/question/{productId}
@@ -45,7 +52,7 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     body: buildRequestBody(AddQuestionSchema),
   },
-  responses,
+  responses: jsonResponse(QuestionModel),
 });
 
 // PATCH /public/question/{questionId}
@@ -60,7 +67,7 @@ registry.registerPath({
     params: z.object({ questionId: z.string() }),
     body: buildRequestBody(AddQuestionSchema),
   },
-  responses,
+  responses: jsonResponse(QuestionModel),
 });
 
 // DELETE /public/question/{questionId}
@@ -72,7 +79,7 @@ registry.registerPath({
   operationId: 'deleteQuestion',
   security: [{ JWT: [] }],
   request: { params: z.object({ questionId: z.string() }) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // GET /admin/questions
@@ -84,7 +91,7 @@ registry.registerPath({
   operationId: 'getQuestionsAdmin',
   security: [{ JWT: [] }],
   request: { query: QuestionListQuerySchema },
-  responses,
+  responses: listResponse(QuestionModel),
 });
 
 // POST /admin/question/{userId}/{productId}
@@ -99,7 +106,7 @@ registry.registerPath({
     params: z.object({ userId: z.string(), productId: z.string() }),
     body: buildRequestBody(UpdateQuestionSchema),
   },
-  responses,
+  responses: jsonResponse(QuestionModel),
 });
 
 // PATCH /admin/question/{questionId}
@@ -114,7 +121,7 @@ registry.registerPath({
     params: z.object({ questionId: z.string() }),
     body: buildRequestBody(UpdateQuestionSchema),
   },
-  responses,
+  responses: jsonResponse(QuestionModel),
 });
 
 // DELETE /admin/question
@@ -126,5 +133,5 @@ registry.registerPath({
   operationId: 'deleteQuestionsAdmin',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });

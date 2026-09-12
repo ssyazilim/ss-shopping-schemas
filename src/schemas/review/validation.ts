@@ -10,17 +10,14 @@ export const ADD_REVIEW = (locale: ILocale = 'tr') => {
     status: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['pending'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
     rating: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [5] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     content: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Harika bir ürün. Kesinlikle tavsiye ederim.'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };

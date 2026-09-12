@@ -1,8 +1,12 @@
-import { registry } from '../registry';
-import { ADD_BRAND, ADD_BRANDS } from './validation';
+import { z } from 'zod';
+import { ADD_BRAND } from './validation';
+import { MongoSchema } from '../../types/common';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
-export const AddBrandSchema = registry.register('Brand', ADD_BRAND());
+export type IBrand = z.infer<typeof BrandSchema>;
+export const BrandSchema = ADD_BRAND().extend(MongoSchema.shape).meta({ id: 'Brand' });
 
-export const AddBrandsSchema = registry.register('AddBrands', ADD_BRANDS());
-
-export const UpdateBrandSchema = registry.register('UpdateBrand', ADD_BRAND().partial());
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const DEFAULT_BRAND: IBrand = getDefaultsForSchema(BrandSchema);

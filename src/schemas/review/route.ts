@@ -1,7 +1,14 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddReviewSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import { AddReviewSchema, ReviewModel } from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 const ReviewListQuerySchema = ListQuerySchema.extend({
   status: z.enum(['pending', 'approved', 'rejected']).optional().default('pending'),
@@ -18,7 +25,7 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     query: ListQuerySchema,
   },
-  responses,
+  responses: listResponse(ReviewModel),
 });
 
 // GET /public/reviews
@@ -30,7 +37,7 @@ registry.registerPath({
   operationId: 'getReviews',
   security: [{ JWT: [] }],
   request: { query: ReviewListQuerySchema },
-  responses,
+  responses: listResponse(ReviewModel),
 });
 
 // POST /public/review/{productId}
@@ -45,7 +52,7 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     body: buildRequestBody(AddReviewSchema),
   },
-  responses,
+  responses: jsonResponse(ReviewModel),
 });
 
 // PATCH /public/review/{reviewId}
@@ -60,7 +67,7 @@ registry.registerPath({
     params: z.object({ reviewId: z.string() }),
     body: buildRequestBody(AddReviewSchema),
   },
-  responses,
+  responses: jsonResponse(ReviewModel),
 });
 
 // DELETE /public/review/{reviewId}
@@ -72,7 +79,7 @@ registry.registerPath({
   operationId: 'deleteReview',
   security: [{ JWT: [] }],
   request: { params: z.object({ reviewId: z.string() }) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // GET /admin/reviews
@@ -84,7 +91,7 @@ registry.registerPath({
   operationId: 'getReviewsAdmin',
   security: [{ JWT: [] }],
   request: { query: ReviewListQuerySchema },
-  responses,
+  responses: listResponse(ReviewModel),
 });
 
 // POST /admin/review/{userId}/{productId}
@@ -99,7 +106,7 @@ registry.registerPath({
     params: z.object({ userId: z.string(), productId: z.string() }),
     body: buildRequestBody(AddReviewSchema),
   },
-  responses,
+  responses: jsonResponse(ReviewModel),
 });
 
 // PATCH /admin/review/{reviewId}
@@ -114,7 +121,7 @@ registry.registerPath({
     params: z.object({ reviewId: z.string() }),
     body: buildRequestBody(AddReviewSchema),
   },
-  responses,
+  responses: jsonResponse(ReviewModel),
 });
 
 // DELETE /admin/review
@@ -126,5 +133,5 @@ registry.registerPath({
   operationId: 'deleteReviewsAdmin',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });

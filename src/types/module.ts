@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
-import { ADD_MODULE, MODULE_CONFIG } from '../schemas';
+import { ADD_MODULE, MODULE_CONFIG } from '../schemas/module/validation';
 import { MongoSchema } from './common';
 
 export type IModuleConfig = z.infer<ReturnType<typeof MODULE_CONFIG>>;

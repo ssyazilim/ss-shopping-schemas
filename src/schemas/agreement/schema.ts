@@ -1,11 +1,12 @@
-import { registry } from '../registry';
-import { ADD_AGREEMENT, ADD_AGREEMENTS } from './validation';
+import { z } from 'zod';
+import { ADD_AGREEMENT } from './validation';
+import { MongoSchema } from '../../types/common';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
-export const AddAgreementSchema = registry.register('Agreement', ADD_AGREEMENT());
+export type IAgreement = z.infer<typeof AgreementSchema>;
+export const AgreementSchema = ADD_AGREEMENT().extend(MongoSchema.shape).meta({ id: 'Agreement' });
 
-export const UpdateAgreementSchema = registry.register(
-  'UpdateAgreement',
-  ADD_AGREEMENT().partial(),
-);
-
-export const AddAgreementsSchema = registry.register('AddAgreements', ADD_AGREEMENTS());
+/*************************
+ *       CONSTANTS       *
+ *************************/
+export const DEFAULT_AGREEMENT: IAgreement = getDefaultsForSchema(AgreementSchema);

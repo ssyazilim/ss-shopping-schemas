@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { DELETE_OBJECT } from '../schemas/minio/object/validation';
-import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
+import { DELETE_OBJECT } from './object/validation';
+import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
 export type ILoader = z.infer<typeof LoaderSchema>;
 export const LoaderSchema = z.object({
@@ -134,13 +134,13 @@ export const EditableRuleSchema = z.object({
   Prefix: z.string(),
   Days: z.string(),
   Enabled: z.boolean(),
-})
+});
 
 export type IEditableTag = z.infer<typeof EditableTagSchema>;
 export const EditableTagSchema = z.object({
   Key: z.string(),
   Value: z.string(),
-})
+});
 
 export type IBucketPolicyStatement = z.infer<typeof BucketPolicyStatementSchema>;
 export const BucketPolicyStatementSchema = z.object({
@@ -195,21 +195,17 @@ export const MEDIA_TYPE_EXTENSIONS: Record<string, string[]> = {
   video: ['mp4', 'webm', 'mov', 'avi', 'mkv'],
   audio: ['mp3', 'wav', 'ogg', 'm4a', 'aac'],
 };
-export const DEFAULT_RULE: ILifeCycleConfig = {
-  ID: "",
-  Status: "Enabled",
-  Filter: {
-    Prefix: "/"
-  },
-  Expiration: {
-    Days: 365
-  }
-}
+export const DEFAULT_RULE: IEditableRule = {
+  ID: '',
+  Prefix: '/',
+  Days: '365',
+  Enabled: true,
+};
 export const DEFAULT_BUCKET_POLICY: IBucketPolicy = getDefaultsForSchema(BucketPolicySchema);
 export const DEFAULT_TAG: IEditableTag = {
-  Key: "",
-  Value: "",
-}
+  Key: '',
+  Value: '',
+};
 
 // Public access policy: anonymous read + write (download, upload, delete, list) for everyone
 export const getPublicBucketPolicy = (bucketName: string): IBucketPolicy => ({
@@ -228,9 +224,9 @@ export const getPublicBucketPolicy = (bucketName: string): IBucketPolicy => ({
       Resource: [`arn:aws:s3:::${bucketName}/*`],
     },
   ],
-})
+});
 
 // SSE-S3 (AES256) server-side encryption applied to every object by default
 export const getSseS3Encryption = (): IEncryptionConfig => ({
   Rule: [{ ApplyServerSideEncryptionByDefault: { SSEAlgorithm: 'AES256' } }],
-})
+});

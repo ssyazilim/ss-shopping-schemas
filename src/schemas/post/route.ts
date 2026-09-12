@@ -1,8 +1,21 @@
 import { z } from 'zod';
 
 import { registry } from '../registry';
-import { PostSchema, LikePostSchema, CommentPostSchema } from './schema';
-import { responses, buildRequestBody, DeleteModelSchema, ListQuerySchema } from '../common';
+import {
+  AddPostSchema,
+  LikePostSchema,
+  CommentPostSchema,
+  PostModel,
+  PostCountsModel,
+} from './schema';
+import {
+  buildRequestBody,
+  DeleteModelSchema,
+  ListQuerySchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 // GET /public/posts/total
 registry.registerPath({
@@ -11,7 +24,7 @@ registry.registerPath({
   tags: ['API-post'],
   summary: 'Get all posts total count in the system',
   operationId: 'getPostTotal',
-  responses,
+  responses: jsonResponse(PostCountsModel),
 });
 
 // GET /public/posts
@@ -33,7 +46,7 @@ registry.registerPath({
         .meta({ examples: ['comments'] }),
     }),
   },
-  responses,
+  responses: listResponse(PostModel),
 });
 
 // GET /public/post/{postId}
@@ -52,7 +65,7 @@ registry.registerPath({
         .meta({ examples: ['tr'] }),
     }),
   },
-  responses,
+  responses: jsonResponse(PostModel),
 });
 
 // POST /public/post/{postId}/like
@@ -67,7 +80,7 @@ registry.registerPath({
     params: z.object({ postId: z.string() }),
     body: buildRequestBody(LikePostSchema),
   },
-  responses,
+  responses: jsonResponse(PostModel),
 });
 
 // POST /public/post/{postId}/comment
@@ -82,7 +95,7 @@ registry.registerPath({
     params: z.object({ postId: z.string() }),
     body: buildRequestBody(CommentPostSchema),
   },
-  responses,
+  responses: jsonResponse(PostModel),
 });
 
 // POST /admin/post
@@ -93,8 +106,8 @@ registry.registerPath({
   summary: 'Add a new post to system',
   operationId: 'addPost',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(PostSchema) },
-  responses,
+  request: { body: buildRequestBody(AddPostSchema) },
+  responses: jsonResponse(PostModel),
 });
 
 // DELETE /admin/post
@@ -106,7 +119,7 @@ registry.registerPath({
   operationId: 'deletePosts',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/post/{postId}
@@ -119,7 +132,7 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),
-    body: buildRequestBody(PostSchema),
+    body: buildRequestBody(AddPostSchema),
   },
-  responses,
+  responses: jsonResponse(PostModel),
 });

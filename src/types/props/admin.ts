@@ -1,7 +1,7 @@
 import type Iyzipay from 'iyzipay';
-import type { IAgreement } from '../agreement';
-import type { IBrand } from '../brand';
-import type { ICategory } from '../category';
+import type { IAgreement } from '../../schemas/agreement/schema';
+import type { IBrand } from '../../schemas/brand/schema';
+import type { ICategory } from '../../schemas/category/schema';
 import type {
   ICompany,
   IHomePage,
@@ -10,8 +10,8 @@ import type {
   IPaymentMethods,
   IPaymentSettings,
   IProductSettings,
-} from '../company';
-import type { ICity, ICountry, IDistrict, IUpdatedData } from '../country';
+} from '../../schemas/company/schema';
+import type { ICity, ICountry, IDistrict, IUpdatedData } from '../../schemas/country/schema';
 import type {
   IModule,
   ICrispConfig,
@@ -47,7 +47,7 @@ import type {
   IBucketPolicy,
   IBucketAccess,
   IEncryptionMode,
-} from '../minio';
+} from '../../schemas/minio/schema';
 import type { IOrder, IOrderBasketItem } from '../order';
 import type { IPost, IPostCounts } from '../post';
 import type { IPrice, IProduct, IProductAndVariant, IStaticImage, IType } from '../product';

@@ -1,18 +1,18 @@
 import { z } from 'zod';
 import { registry } from '../../registry';
 import {
-  AddObjectSchema,
-  DeleteObjectSchema,
-  DeleteObjectsSchema,
-  CopyObjectSchema,
-  PresignedUrlSchema,
-  PresignedGetObjectSchema,
-  PresignedPutObjectSchema,
-  AddFolderSchema,
-  SetObjectTaggingSchema,
-  DeleteObjectTaggingSchema,
-  RemoveIncompleteUploadSchema,
-} from './schema';
+  ADD_OBJECT,
+  DELETE_OBJECT,
+  DELETE_OBJECTS,
+  COPY_OBJECT,
+  PRESIGNED_URL,
+  PRESIGNED_GET_OBJECT,
+  PRESIGNED_PUT_OBJECT,
+  ADD_FOLDER,
+  SET_OBJECT_TAGGING,
+  DELETE_OBJECT_TAGGING,
+  REMOVE_INCOMPLETE_UPLOAD,
+} from './validation';
 import { responses, buildRequestBody } from '../../common';
 
 // GET /admin/minio/object/check-metadata
@@ -60,7 +60,7 @@ registry.registerPath({
   request: {
     body: {
       content: {
-        'multipart/form-data': { schema: AddObjectSchema },
+        'multipart/form-data': { schema: ADD_OBJECT },
       },
     },
   },
@@ -75,7 +75,7 @@ registry.registerPath({
   summary: 'Delete a specific object',
   operationId: 'deleteObject',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteObjectSchema) },
+  request: { body: buildRequestBody(DELETE_OBJECT) },
   responses,
 });
 
@@ -118,7 +118,7 @@ registry.registerPath({
   summary: 'Delete multiple objects',
   operationId: 'deleteObjects',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteObjectsSchema) },
+  request: { body: buildRequestBody(DELETE_OBJECTS) },
   responses,
 });
 
@@ -130,7 +130,7 @@ registry.registerPath({
   summary: 'Copy an object from one bucket to another',
   operationId: 'copyObject',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(CopyObjectSchema) },
+  request: { body: buildRequestBody(COPY_OBJECT) },
   responses,
 });
 
@@ -142,7 +142,7 @@ registry.registerPath({
   summary: 'Generates a presigned URL for the provided HTTP method',
   operationId: 'getPresignedUrl',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(PresignedUrlSchema) },
+  request: { body: buildRequestBody(PRESIGNED_URL) },
   responses,
 });
 
@@ -154,7 +154,7 @@ registry.registerPath({
   summary: 'Generates a presigned URL for HTTP GET operations',
   operationId: 'getPresignedGetObject',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(PresignedGetObjectSchema) },
+  request: { body: buildRequestBody(PRESIGNED_GET_OBJECT) },
   responses,
 });
 
@@ -166,7 +166,7 @@ registry.registerPath({
   summary: 'Generates a presigned URL for HTTP PUT operations',
   operationId: 'getPresignedPutObject',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(PresignedPutObjectSchema) },
+  request: { body: buildRequestBody(PRESIGNED_PUT_OBJECT) },
   responses,
 });
 
@@ -178,7 +178,7 @@ registry.registerPath({
   summary: 'Creates an empty folder with a zero byte object',
   operationId: 'addFolder',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddFolderSchema) },
+  request: { body: buildRequestBody(ADD_FOLDER) },
   responses,
 });
 
@@ -207,7 +207,7 @@ registry.registerPath({
   summary: 'Set tags on a specific object',
   operationId: 'addObjectTagging',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(SetObjectTaggingSchema) },
+  request: { body: buildRequestBody(SET_OBJECT_TAGGING) },
   responses,
 });
 
@@ -219,7 +219,7 @@ registry.registerPath({
   summary: 'Remove tags of a specific object',
   operationId: 'deleteObjectTagging',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteObjectTaggingSchema) },
+  request: { body: buildRequestBody(DELETE_OBJECT_TAGGING) },
   responses,
 });
 
@@ -255,7 +255,7 @@ registry.registerPath({
   summary: 'Remove a partially uploaded (incomplete) object',
   operationId: 'deleteIncompleteUpload',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(RemoveIncompleteUploadSchema) },
+  request: { body: buildRequestBody(REMOVE_INCOMPLETE_UPLOAD) },
   responses,
 });
 

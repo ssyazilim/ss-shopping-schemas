@@ -7,30 +7,23 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const IMAGES = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    staticImages: z
-      .array(
-        z.object({
-          name: z
-            .string()
-            .min(2, { message: m.public_forms_validations_minLength(2) })
-            .max(254, { message: m.public_forms_validations_maxLength(254) }),
-          image: z
-            .string()
-            .min(2, { message: m.public_forms_validations_minLength(2) })
-            .max(254, { message: m.public_forms_validations_maxLength(254) }),
-        }),
-      )
-      .meta({ examples: [[]] }),
+    staticImages: z.array(
+      z.object({
+        name: z
+          .string()
+          .min(2, { message: m.public_forms_validations_minLength(2) })
+          .max(254, { message: m.public_forms_validations_maxLength(254) }),
+        image: z
+          .string()
+          .min(2, { message: m.public_forms_validations_minLength(2) })
+          .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      }),
+    ),
     dynamicImages: z.array(
       z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(4) })
-        .meta({
-          examples: [
-            'https://placehold.co/600x400/000000/FFF?text=1,https://placehold.co/600x400/000000/FFF?text=2',
-          ],
-        }),
+        .max(254, { message: m.public_forms_validations_maxLength(4) }),
     ),
   });
 };
@@ -40,43 +33,36 @@ export const PRICE = (locale: ILocale = 'tr') => {
     currency: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(4, { message: m.public_forms_validations_maxLength(4) })
-      .meta({ examples: ['USD'] }),
+      .max(4, { message: m.public_forms_validations_maxLength(4) }),
     purchase: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1000] }),
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
     sell: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1500] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     dealerCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['SURAT'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     shipping: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [15] }),
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
     discountAmount: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: [10] }),
+      .int({ message: m.public_forms_validations_mustNumberInteger }),
     taxAmount: z
       .number({ message: m.public_forms_validations_mustNumber })
       .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .int({ message: m.public_forms_validations_mustNumberInteger })
-      .meta({ examples: [20] }),
+      .int({ message: m.public_forms_validations_mustNumberInteger }),
   });
 };
 
 export const PRODUCT_PROPERTIES = () => {
   return z.object({
-    hidePrice: z.boolean().meta({ examples: [false] }),
-    isFeatured: z.boolean().meta({ examples: [false] }),
-    isShippingFree: z.boolean().meta({ examples: [false] }),
+    hidePrice: z.boolean(),
+    isFeatured: z.boolean(),
+    isShippingFree: z.boolean(),
   });
 };
 export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
@@ -86,49 +72,33 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
     title: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Lorem ipsum dolor sit amet'] }),
-    description: z
-      .string()
-      .optional()
-      .meta({
-        examples: [
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        ],
-      }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    description: z.string().optional(),
     images: IMAGES(locale),
     price: PRICE(locale),
     stockQuantity: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [100] }),
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
     desi: z
       .number({ message: m.public_forms_validations_mustNumber })
       .min(0, { message: m.public_forms_validations_minLength(0) })
       .max(1000, { message: m.public_forms_validations_maxLength(1000) })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1] }),
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
     brand: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['67d15594f49546e19c4f2342'] }),
-    gtin: z
-      .string()
-      .optional()
-      .meta({ examples: ['0123456789012'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    gtin: z.string().optional(),
     sku: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['4SN106B'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     category: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['67f38474e1d5b52fee02dcba'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     properties: PRODUCT_PROPERTIES(),
   });
 };

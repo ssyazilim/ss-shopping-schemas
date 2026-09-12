@@ -10,13 +10,11 @@ export const ADD_QUESTION = (locale: ILocale = 'tr') => {
     status: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['pending'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
     question: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['Çoraplarınızda kullanılan kumaş türleri nelerdir?'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
   });
 };
 
@@ -26,17 +24,14 @@ export const UPDATE_QUESTION = (locale: ILocale = 'tr') => {
     status: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['approved'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
     question: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['Çoraplarınızda kullanılan kumaş türleri nelerdir?'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
     answer: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['Pamuk, yün ve akrilik kullandık.'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
   });
 };

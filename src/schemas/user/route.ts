@@ -1,7 +1,20 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { EditUserSchema, DeleteUserSchema, CustomerSchema, UpdateCustomerSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import {
+  EditUserSchema,
+  DeleteUserSchema,
+  CustomerSchema,
+  UpdateCustomerSchema,
+  UserModel,
+} from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 // GET /public/user/{userId}
 registry.registerPath({
@@ -11,7 +24,7 @@ registry.registerPath({
   summary: 'Get a user from the system',
   operationId: 'getUser',
   request: { params: z.object({ userId: z.string() }) },
-  responses,
+  responses: jsonResponse(UserModel),
 });
 
 // PATCH /public/user
@@ -23,7 +36,7 @@ registry.registerPath({
   operationId: 'editUser',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(EditUserSchema) },
-  responses,
+  responses: jsonResponse(UserModel),
 });
 
 // DELETE /public/user
@@ -35,7 +48,7 @@ registry.registerPath({
   operationId: 'deleteUser',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteUserSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // GET /admin/users
@@ -47,7 +60,7 @@ registry.registerPath({
   operationId: 'getUsers',
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema },
-  responses,
+  responses: listResponse(UserModel),
 });
 
 // POST /admin/user
@@ -59,7 +72,7 @@ registry.registerPath({
   operationId: 'addCustomer',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(CustomerSchema) },
-  responses,
+  responses: jsonResponse(UserModel),
 });
 
 // DELETE /admin/user
@@ -71,7 +84,7 @@ registry.registerPath({
   operationId: 'deleteCustomer',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/user/{userId}
@@ -86,5 +99,5 @@ registry.registerPath({
     params: z.object({ userId: z.string() }),
     body: buildRequestBody(UpdateCustomerSchema),
   },
-  responses,
+  responses: jsonResponse(UserModel),
 });

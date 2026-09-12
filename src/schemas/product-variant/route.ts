@@ -5,8 +5,15 @@ import {
   AddVariantsMultiSchema,
   UpdateVariantSchema,
   DeleteForVariantSchema,
+  VariantModel,
 } from './schema';
-import { responses, buildRequestBody, ListQuerySchema } from '../common';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 // GET /public/variants
 registry.registerPath({
@@ -16,7 +23,7 @@ registry.registerPath({
   summary: 'Get all variants in the system',
   operationId: 'getVariants',
   request: { query: ListQuerySchema },
-  responses,
+  responses: listResponse(VariantModel),
 });
 
 // GET /public/variant/{productId}
@@ -27,7 +34,7 @@ registry.registerPath({
   summary: 'Get a product variants from the system',
   operationId: 'getProductVariants',
   request: { params: z.object({ productId: z.string() }) },
-  responses,
+  responses: listResponse(VariantModel),
 });
 
 // POST /admin/variant/{productId}
@@ -42,7 +49,7 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     body: buildRequestBody(AddVariantSchema),
   },
-  responses,
+  responses: jsonResponse(VariantModel),
 });
 
 // PATCH /admin/variant/{productId}
@@ -57,7 +64,7 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     body: buildRequestBody(UpdateVariantSchema),
   },
-  responses,
+  responses: jsonResponse(VariantModel),
 });
 
 // DELETE /admin/variant
@@ -69,7 +76,7 @@ registry.registerPath({
   operationId: 'deleteVariant',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteForVariantSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // POST /admin/variants/{productId}
@@ -81,5 +88,5 @@ registry.registerPath({
   operationId: 'addVariantsMulti',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(AddVariantsMultiSchema) },
-  responses,
+  responses: listResponse(VariantModel),
 });

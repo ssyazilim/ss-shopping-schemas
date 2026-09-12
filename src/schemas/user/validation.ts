@@ -10,28 +10,21 @@ export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
     name: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['Adem'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
     surname: z
       .string()
       .min(2, m.public_forms_validations_minLength(2))
-      .max(254, m.public_forms_validations_maxLength(254))
-      .meta({ examples: ['Şenocak'] }),
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['senocak-a@hotmail.com'] }),
-    phoneNumber: z
-      .e164({ message: m.public_forms_validations_phoneNumber })
-      .meta({ examples: ['+905425496142'] }),
+      .max(254, m.public_forms_validations_maxLength(254)),
+    email: z.email({ message: m.public_forms_validations_email }),
+    phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
     password: z
       .string()
       .min(8, m.public_forms_validations_minLength(8))
       .max(64, m.public_forms_validations_maxLength(64))
       .or(z.literal(''))
-      .optional()
-      .meta({ examples: ['Passw0rd'] }),
-    role: z.array(z.enum(['ROLE_ADMIN', 'ROLE_USER'])).meta({ examples: [['ROLE_USER']] }),
-    isActivated: z.boolean().meta({ examples: [true] }),
+      .optional(),
+    role: z.array(z.enum(['ROLE_ADMIN', 'ROLE_USER'])),
+    isActivated: z.boolean(),
   });
 };
 export const ADD_CUSTOMERS = () => z.array(ADD_CUSTOMER());

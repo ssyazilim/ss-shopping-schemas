@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { responses } from '../common';
+import { jsonResponse, listResponse } from '../common';
+import { CurrencySchema } from './schema';
 
 // GET /public/currencies
 registry.registerPath({
@@ -9,7 +10,7 @@ registry.registerPath({
   tags: ['SERVICE-currency'],
   summary: 'Get all currencies in the system',
   operationId: 'getCurrencies',
-  responses,
+  responses: listResponse(CurrencySchema),
 });
 
 // GET /public/currencies/exchange
@@ -33,5 +34,5 @@ registry.registerPath({
         .meta({ description: 'TRY, USD, EUR, GBP, CHF, JPY, SAR, NOK, DKK, AUD, CAD, SEK, SRU' }),
     }),
   },
-  responses,
+  responses: jsonResponse(z.number().meta({ examples: [42.75] })),
 });

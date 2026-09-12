@@ -10,27 +10,22 @@ export const ADD_POST = (locale: ILocale = 'tr') => {
     type: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['blog'] }),
-    date: z
-      .array(
-        z
-          .string()
-          .min(2, { message: m.public_forms_validations_minLength(2) })
-          .max(254, { message: m.public_forms_validations_maxLength(254) }),
-      )
-      .meta({ examples: [['2025-12-04T06:00:00.000Z', '2025-12-11T09:00:00.000Z']] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    date: z.array(
+      z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    ),
     timeZone: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Cankaya/Ankara/Turkey'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Ticaret ve E-ticaret Kavramları'] }),
-    content: z.any().meta({ examples: ['<p><b>Merhaba</b> bu bir test yazisidir.</p>'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    content: z.any(),
   });
 };
 export const ADD_POSTS = () => z.array(ADD_POST());

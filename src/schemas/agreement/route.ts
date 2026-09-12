@@ -1,7 +1,16 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddAgreementSchema, UpdateAgreementSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import { ADD_AGREEMENT, UPDATE_AGREEMENT } from './validation';
+import { AgreementSchema } from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+  UpdateResultSchema,
+} from '../common';
 
 // GET /public/agreements
 registry.registerPath({
@@ -10,8 +19,19 @@ registry.registerPath({
   tags: ['API-agreement'],
   summary: 'Get all agreements in the system',
   operationId: 'getAgreements',
-  request: { query: ListQuerySchema },
-  responses,
+  request: {
+    query: ListQuerySchema.extend({
+      include: z
+        .string()
+        .optional()
+        .meta({ examples: ['name,locale'] }),
+      exclude: z
+        .string()
+        .optional()
+        .meta({ examples: ['content'] }),
+    }),
+  },
+  responses: listResponse(AgreementSchema),
 });
 
 // GET /public/agreement/{locale}/{name}
@@ -27,7 +47,7 @@ registry.registerPath({
       name: z.string().meta({ examples: ['Gizlilik politikası'] }),
     }),
   },
-  responses,
+  responses: jsonResponse(AgreementSchema),
 });
 
 // POST /admin/agreement
@@ -38,8 +58,8 @@ registry.registerPath({
   summary: 'Add new agreement to the system',
   operationId: 'addAgreement',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddAgreementSchema) },
-  responses,
+  request: { body: buildRequestBody(ADD_AGREEMENT()) },
+  responses: jsonResponse(AgreementSchema),
 });
 
 // DELETE /admin/agreement
@@ -51,7 +71,7 @@ registry.registerPath({
   operationId: 'deleteAgreements',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/agreement/{agreementId}
@@ -64,7 +84,7 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     params: z.object({ agreementId: z.string() }),
-    body: buildRequestBody(UpdateAgreementSchema),
+    body: buildRequestBody(UPDATE_AGREEMENT()),
   },
-  responses,
+  responses: jsonResponse(UpdateResultSchema),
 });

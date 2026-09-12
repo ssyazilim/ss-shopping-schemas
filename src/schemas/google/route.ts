@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { GeminiPromptSchema, TranslateSchema } from './schema';
-import { PasswordResetUserSchema } from '../auth/schema';
-import { responses, buildRequestBody } from '../common';
+import { GEMINI_PROMPT, TRANSLATE, SUBSCRIBE_MAIL } from './validation';
+import { GoogleCategorySchema, SubscribeResultSchema } from './schema';
+import { buildRequestBody, jsonResponse, listResponse } from '../common';
 
 // GET /public/google/categories/{locale}
 registry.registerPath({
@@ -14,7 +14,7 @@ registry.registerPath({
   request: {
     params: z.object({ locale: z.enum(['en-US', 'tr-TR']).meta({ examples: ['tr-TR'] }) }),
   },
-  responses,
+  responses: listResponse(GoogleCategorySchema),
 });
 
 // POST /public/google/translate
@@ -24,8 +24,8 @@ registry.registerPath({
   tags: ['SERVICE-google'],
   summary: 'Translate a prompt selected language',
   operationId: 'translatePrompt',
-  request: { body: buildRequestBody(TranslateSchema) },
-  responses,
+  request: { body: buildRequestBody(TRANSLATE) },
+  responses: jsonResponse(z.string()),
 });
 
 // POST /public/google/subscribe
@@ -35,8 +35,8 @@ registry.registerPath({
   tags: ['SERVICE-google'],
   summary: 'Add your email to subscription list',
   operationId: 'addMailToSubscription',
-  request: { body: buildRequestBody(PasswordResetUserSchema) },
-  responses,
+  request: { body: buildRequestBody(SUBSCRIBE_MAIL) },
+  responses: jsonResponse(SubscribeResultSchema),
 });
 
 // POST /admin/google/gemini-prompt
@@ -47,6 +47,6 @@ registry.registerPath({
   summary: 'Send a prompt to Gemini AI',
   operationId: 'sendGeminiPrompt',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(GeminiPromptSchema) },
-  responses,
+  request: { body: buildRequestBody(GEMINI_PROMPT) },
+  responses: jsonResponse(z.string()),
 });

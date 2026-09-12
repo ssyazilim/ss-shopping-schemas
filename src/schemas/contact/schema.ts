@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { FileTypeSchema } from '../../types/common';
 
 export type IDefault = z.infer<typeof DefaultSchema>;
 export const DefaultSchema = z.object({
@@ -54,3 +55,20 @@ export type ISendError = z.infer<typeof SendErrorSchema>;
 export const SendErrorSchema = DefaultSchema.extend({
   form: ErrorBodySchema,
 });
+
+export type IUploadedFile = z.infer<typeof UploadedFileSchema>;
+export const UploadedFileSchema = FileTypeSchema.meta({ id: 'UploadedFile' });
+
+export type ISmtpTestResult = z.infer<typeof SmtpTestResultSchema>;
+export const SmtpTestResultSchema = z
+  .object({
+    accepted: z.array(z.string()),
+    rejected: z.array(z.string()),
+    response: z.string(),
+    messageId: z.string(),
+    envelope: z.object({ from: z.string(), to: z.array(z.string()) }),
+  })
+  .meta({ id: 'SmtpTestResult' });
+
+export type IEmptyResult = z.infer<typeof EmptyResultSchema>;
+export const EmptyResultSchema = z.object({}).meta({ id: 'EmptyResult' });

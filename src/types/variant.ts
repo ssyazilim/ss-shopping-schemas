@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { VARIANT } from '../schemas';
+import { VARIANT } from '../schemas/product-variant/validation';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import { MongoSchema } from './common';
 import { PriceSchema, ProductSchema } from './product';

@@ -8,18 +8,19 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const ADD_BRAND = (locale: ILocale = 'tr') => {
   const m = messages[locale];
 
-  return z.object({
-    name: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Beko'] }),
-    images: IMAGES(locale),
-    productCount: z
-      .number()
-      .optional()
-      .meta({ examples: [0] }),
-  });
+  return z
+    .object({
+      name: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      images: IMAGES(locale),
+      productCount: z.number().optional(),
+    })
+    .meta({ id: 'AddBrand' });
 };
+
+export const UPDATE_BRAND = (locale: ILocale = 'tr') =>
+  ADD_BRAND(locale).partial().meta({ id: 'UpdateBrand' });
 
 export const ADD_BRANDS = (locale: ILocale = 'tr') => z.array(ADD_BRAND(locale));

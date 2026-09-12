@@ -1,7 +1,15 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { TranslationSchema, UpdateTranslationSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import { AddTranslationSchema, UpdateTranslationSchema, TranslationModel } from './schema';
+import {
+  responses,
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 // GET /public/translations
 registry.registerPath({
@@ -18,7 +26,7 @@ registry.registerPath({
         .meta({ examples: ['translations,logs'] }),
     }),
   },
-  responses,
+  responses: listResponse(TranslationModel),
 });
 
 // GET /public/translation/{code}
@@ -33,7 +41,7 @@ registry.registerPath({
       code: z.enum(['en', 'tr']).meta({ default: 'en' }),
     }),
   },
-  responses,
+  responses: jsonResponse(TranslationModel),
 });
 
 // GET /admin/translation
@@ -62,8 +70,8 @@ registry.registerPath({
   summary: 'Add a new translation to system',
   operationId: 'addTranslation',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(TranslationSchema) },
-  responses,
+  request: { body: buildRequestBody(AddTranslationSchema) },
+  responses: jsonResponse(TranslationModel),
 });
 
 // DELETE /admin/translation
@@ -75,7 +83,7 @@ registry.registerPath({
   operationId: 'deleteTranslations',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/translation/{translationId}
@@ -90,5 +98,5 @@ registry.registerPath({
     params: z.object({ translationId: z.string() }),
     body: buildRequestBody(UpdateTranslationSchema),
   },
-  responses,
+  responses: jsonResponse(TranslationModel),
 });

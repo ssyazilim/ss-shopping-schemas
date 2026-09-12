@@ -1,8 +1,16 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { ProductSchema, EditProductSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
-import { UpdateTaxSchema } from '../company/schema';
+import { AddProductSchema, EditProductSchema, ProductModel, BestProductsModel } from './schema';
+import {
+  responses,
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
+import { UPDATE_TAX } from '../company/validation';
 
 // GET /public/products
 registry.registerPath({
@@ -20,7 +28,7 @@ registry.registerPath({
         .meta({ examples: ['color:red,size:XL'] }),
     }),
   },
-  responses,
+  responses: listResponse(ProductModel),
 });
 
 // GET /public/items/best-seller
@@ -39,7 +47,7 @@ registry.registerPath({
         .meta({ examples: [10] }),
     }),
   },
-  responses,
+  responses: listResponse(BestProductsModel),
 });
 
 // GET /public/products/XML/google
@@ -78,7 +86,7 @@ registry.registerPath({
         .meta({ examples: ['tr'] }),
     }),
   },
-  responses,
+  responses: jsonResponse(ProductModel),
 });
 
 // GET /admin/products/count
@@ -111,7 +119,7 @@ registry.registerPath({
   summary: 'Update tax for all items in the system',
   operationId: 'updateTaxForItems',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(UpdateTaxSchema) },
+  request: { body: buildRequestBody(UPDATE_TAX()) },
   responses,
 });
 
@@ -123,8 +131,8 @@ registry.registerPath({
   summary: 'Add a new product to system',
   operationId: 'addProduct',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ProductSchema) },
-  responses,
+  request: { body: buildRequestBody(AddProductSchema) },
+  responses: jsonResponse(ProductModel),
 });
 
 // DELETE /admin/product
@@ -136,7 +144,7 @@ registry.registerPath({
   operationId: 'deleteProduct',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/product/{productId}
@@ -151,5 +159,5 @@ registry.registerPath({
     params: z.object({ productId: z.string() }),
     body: buildRequestBody(EditProductSchema),
   },
-  responses,
+  responses: jsonResponse(ProductModel),
 });

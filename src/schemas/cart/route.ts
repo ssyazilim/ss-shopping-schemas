@@ -1,7 +1,16 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddToCartSchema, SetQuantitySchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DateRangeQuerySchema } from '../common';
+import { ADD_CART } from './validation';
+import { CartSchema } from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DateRangeQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+} from '../common';
 
 // GET /public/cart
 registry.registerPath({
@@ -11,7 +20,7 @@ registry.registerPath({
   summary: 'Get a cart from the system for User',
   operationId: 'getCartWithUserId',
   security: [{ JWT: [] }],
-  responses,
+  responses: jsonResponse(CartSchema),
 });
 
 // POST /public/cart
@@ -22,7 +31,18 @@ registry.registerPath({
   summary: 'Add a new cart to system for User',
   operationId: 'addCart',
   security: [{ JWT: [] }],
-  responses,
+  responses: jsonResponse(CartSchema),
+});
+
+// DELETE /public/cart
+registry.registerPath({
+  method: 'delete',
+  path: '/public/cart',
+  tags: ['API-cart'],
+  summary: 'Clear all entries of the cart for User',
+  operationId: 'clearCart',
+  security: [{ JWT: [] }],
+  responses: jsonResponse(CartSchema),
 });
 
 // POST /public/cart/product/update
@@ -33,20 +53,8 @@ registry.registerPath({
   summary: 'Add or remove product for cart',
   operationId: 'addToCart',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddToCartSchema) },
-  responses,
-});
-
-// POST /public/cart/set-quantity
-registry.registerPath({
-  method: 'post',
-  path: '/public/cart/set-quantity',
-  tags: ['API-cart'],
-  summary: 'Set quantity for product or variant',
-  operationId: 'setQuantity',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(SetQuantitySchema) },
-  responses,
+  request: { body: buildRequestBody(ADD_CART()) },
+  responses: jsonResponse(CartSchema),
 });
 
 // GET /admin/carts
@@ -58,7 +66,7 @@ registry.registerPath({
   operationId: 'getCarts',
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema.extend(DateRangeQuerySchema.shape) },
-  responses,
+  responses: listResponse(CartSchema),
 });
 
 // GET /admin/cart/{cartId}
@@ -70,5 +78,17 @@ registry.registerPath({
   operationId: 'getCart',
   security: [{ JWT: [] }],
   request: { params: z.object({ cartId: z.string() }) },
-  responses,
+  responses: jsonResponse(CartSchema),
+});
+
+// DELETE /admin/cart
+registry.registerPath({
+  method: 'delete',
+  path: '/admin/cart',
+  tags: ['API-cart'],
+  summary: 'Delete a cart or carts in the system',
+  operationId: 'deleteCarts',
+  security: [{ JWT: [] }],
+  request: { body: buildRequestBody(DeleteModelSchema) },
+  responses: jsonResponse(DeleteResultSchema),
 });

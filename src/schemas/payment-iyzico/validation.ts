@@ -8,34 +8,26 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 export const ADD_BASKET_ITEM_IYZICO = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    id: z
-      .string()
-      .length(24, { message: m.public_forms_validations_minLength(24) })
-      .meta({ examples: ['674094c121add706a8980816'] }),
+    id: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Samsung Galaxy A16 4 Gb Ram 128 Gb Gri'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     price: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1500.65] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     category1: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Cep telefonu & Aksesuar'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     category2: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['product'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     itemType: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['PHYSICAL'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const ADD_SHIPPING_ADDRESS_IYZICO = (locale: ILocale = 'tr') => {
@@ -44,23 +36,19 @@ export const ADD_SHIPPING_ADDRESS_IYZICO = (locale: ILocale = 'tr') => {
     contactName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Ayşe'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     country: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Türkiye'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     city: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Antalya'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     address: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const ADD_BILLING_ADDRESS_IYZICO = (locale: ILocale = 'tr') => {
@@ -69,70 +57,52 @@ export const ADD_BILLING_ADDRESS_IYZICO = (locale: ILocale = 'tr') => {
     contactName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Varyant Restaurant'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     country: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Türkiye'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     city: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Antalya'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     address: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Bahçelievler Mahallesi, Atatürk Parkı 25/21'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     zipCode: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['07500'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const ADD_BUYER_IYZICO = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    id: z
-      .string()
-      .length(24, { message: m.public_forms_validations_minLength(24) })
-      .meta({ examples: ['674094c121add706a8980819'] }),
+    id: z.string().length(24, { message: m.public_forms_validations_minLength(24) }),
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Ayşe'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     surname: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Sarı'] }),
-    identityNumber: z
-      .string()
-      .length(11, { message: m.public_forms_validations_minLength(11) })
-      .meta({ examples: ['19342410262'] }),
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['no-reply@ssyazilim.com'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    identityNumber: z.string().length(11, { message: m.public_forms_validations_minLength(11) }),
+    email: z.email({ message: m.public_forms_validations_email }),
     country: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Türkiye'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     city: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Antalya'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     registrationAddress: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Sarıabalı Mahallesi, Müftüler Mevki, Sokak:20 No:3 Serik'] }),
-    ip: z.union([z.ipv4(), z.ipv6()]).meta({ examples: ['95.70.235.104'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    ip: z.union([z.ipv4(), z.ipv6()]),
   });
 };
 
@@ -142,43 +112,35 @@ export const ADD_PAYMENT_CARD = (locale: ILocale = 'tr') => {
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ALI'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     surname: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['SARI'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     cardNumber: z
       .string()
       .min(16, { message: m.public_forms_validations_minLength(16) })
-      .max(16, { message: m.public_forms_validations_maxLength(16) })
-      .meta({ examples: ['5890040000000016'] }),
+      .max(16, { message: m.public_forms_validations_maxLength(16) }),
     expireMonth: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(2, { message: m.public_forms_validations_maxLength(2) })
-      .meta({ examples: ['11'] }),
+      .max(2, { message: m.public_forms_validations_maxLength(2) }),
     expireYear: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(4, { message: m.public_forms_validations_maxLength(4) })
-      .meta({ examples: ['2026'] }),
+      .max(4, { message: m.public_forms_validations_maxLength(4) }),
     cvc: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(4, { message: m.public_forms_validations_maxLength(4) })
-      .meta({ examples: ['704'] }),
+      .max(4, { message: m.public_forms_validations_maxLength(4) }),
     installment: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1] }),
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
     registerCard: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .nonnegative({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [0] }),
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
   });
 };
 export const ADD_PAYMENT_CARD_IYZICO = (locale: ILocale = 'tr') => {
@@ -187,35 +149,26 @@ export const ADD_PAYMENT_CARD_IYZICO = (locale: ILocale = 'tr') => {
     cardAlias: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ALISARI'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     cardHolderName: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['ALI SARI'] }),
-    cardNumber: z
-      .string()
-      .refine(isValidCard, { message: m.public_forms_validations_cardNumber })
-      .meta({ examples: ['5170410000000004'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    cardNumber: z.string().refine(isValidCard, { message: m.public_forms_validations_cardNumber }),
     expireMonth: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(2) })
-      .max(2, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['10'] }),
+      .max(2, { message: m.public_forms_validations_maxLength(254) }),
     expireYear: z
       .string()
       .min(4, { message: m.public_forms_validations_minLength(2) })
-      .max(4, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['2030'] }),
+      .max(4, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const ADD_CARD_IYZICO = (locale: ILocale = 'tr') => {
   const m = messages[locale];
   return z.object({
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['no-reply@ssyazilim.com'] }),
+    email: z.email({ message: m.public_forms_validations_email }),
     card: ADD_PAYMENT_CARD_IYZICO(locale),
   });
 };
@@ -225,8 +178,7 @@ export const ADD_PAYMENT_CARD_IYZICO_NON_3D = (locale: ILocale = 'tr') => {
     cvc: z
       .string()
       .min(3, { message: m.public_forms_validations_minLength(3) })
-      .max(4, { message: m.public_forms_validations_maxLength(4) })
-      .meta({ examples: ['123'] }),
+      .max(4, { message: m.public_forms_validations_maxLength(4) }),
   });
 };
 
@@ -235,17 +187,14 @@ export const ADD_PAYMENT_IYZICO = (locale: ILocale = 'tr') => {
   return z.object({
     price: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1500.65] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     paidPrice: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1800.65] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     installments: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     paymentCard: ADD_PAYMENT_CARD_IYZICO(locale),
     buyer: ADD_BUYER_IYZICO(locale),
     shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
@@ -258,17 +207,14 @@ export const ADD_PAYMENT_IYZICO_NON_3D = (locale: ILocale = 'tr') => {
   return z.object({
     price: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1500.65] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     paidPrice: z
       .number({ message: m.public_forms_validations_mustNumber })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1800.65] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     installments: z
       .number({ message: m.public_forms_validations_mustNumber })
       .int({ message: m.public_forms_validations_mustNumberInteger })
-      .positive({ message: m.public_forms_validations_mustNumberPositive })
-      .meta({ examples: [1] }),
+      .positive({ message: m.public_forms_validations_mustNumberPositive }),
     paymentCard: ADD_PAYMENT_CARD_IYZICO_NON_3D(locale),
     buyer: ADD_BUYER_IYZICO(locale),
     shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
@@ -284,13 +230,11 @@ export const CHECK_HTML_FOR_IYZICO = (locale: ILocale = 'tr') => {
       name: z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .meta({ examples: ['Ali'] }),
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
       surname: z
         .string()
         .min(2, { message: m.public_forms_validations_minLength(2) })
-        .max(254, { message: m.public_forms_validations_maxLength(254) })
-        .meta({ examples: ['SARI'] }),
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
     }),
     buyer: ADD_BUYER_IYZICO(locale),
     shippingAddress: ADD_SHIPPING_ADDRESS_IYZICO(locale),
@@ -304,13 +248,11 @@ export const COMPLETE_PAYMENT_3D = (locale: ILocale = 'tr') => {
     conversationId: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['e1e4b5c04f3a4b6a9d8ca0a6f3e3f4a1'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     conversationData: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: [''] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const CHECK_INSTALLMENT = (locale: ILocale = 'tr') => {
@@ -319,13 +261,11 @@ export const CHECK_INSTALLMENT = (locale: ILocale = 'tr') => {
     binNumber: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['531157'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     price: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['2500'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const CANCEL_PAYMENT = (locale: ILocale = 'tr') => {
@@ -343,13 +283,11 @@ export const DELETE_CARD_IYZICO = (locale: ILocale = 'tr') => {
     cardUserKey: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['d3f7e8b2-1a4c-4c9e-8b2a-6f1e2d3c4b5a'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     cardToken: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
   });
 };
 export const REFUND_PAYMENT = (locale: ILocale = 'tr') => {
@@ -366,8 +304,7 @@ export const REFUND_PAYMENT = (locale: ILocale = 'tr') => {
     price: z
       .string()
       .min(1, { message: m.public_forms_validations_minLength(1) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['2500'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     currency: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })

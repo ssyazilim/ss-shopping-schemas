@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
-import { SHIPPING_RECIPIENT_ADDRESS } from '../schemas';
+import { SHIPPING_RECIPIENT_ADDRESS } from '../schemas/shipping/validation';
 
 export type IGeliverShipmentRecipientAddress = z.infer<
   ReturnType<typeof SHIPPING_RECIPIENT_ADDRESS>
@@ -77,21 +77,25 @@ export const GeliverDealerPriceResponseSchema = z.object({
 });
 
 export type IGeliverCity = z.infer<typeof GeliverCitySchema>;
-export const GeliverCitySchema = z.object({
-  name: z.string(),
-  areaCode: z.string(),
-  cityCode: z.string(),
-  countryCode: z.string(),
-});
+export const GeliverCitySchema = z
+  .object({
+    name: z.string(),
+    areaCode: z.string(),
+    cityCode: z.string(),
+    countryCode: z.string(),
+  })
+  .meta({ id: 'GeliverCity' });
 
 export type IGeliverDistrict = z.infer<typeof GeliverDistrictSchema>;
-export const GeliverDistrictSchema = z.object({
-  name: z.string(),
-  districtID: z.string(),
-  cityCode: z.string(),
-  regionCode: z.string(),
-  countryCode: z.string(),
-});
+export const GeliverDistrictSchema = z
+  .object({
+    name: z.string(),
+    districtID: z.string(),
+    cityCode: z.string(),
+    regionCode: z.string(),
+    countryCode: z.string(),
+  })
+  .meta({ id: 'GeliverDistrict' });
 
 export type IGeliverAddressAdd = z.infer<typeof GeliverAddressAddSchema>;
 export const GeliverAddressAddSchema = z.object({

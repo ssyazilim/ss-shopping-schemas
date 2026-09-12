@@ -10,22 +10,17 @@ export const ADD_TRANSLATION = (locale: ILocale = 'tr') => {
     code: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['tr'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     language: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['tr-TR'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Türkçe'] }),
-    file: z.literal('index.ts').meta({ examples: ['index.ts'] }),
-    translations: z
-      .record(z.string(), z.string())
-      .meta({ examples: [{ public_settings_currency: 'TRY' }] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    file: z.literal('index.ts'),
+    translations: z.record(z.string(), z.string()),
   });
 };
 

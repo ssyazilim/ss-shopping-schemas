@@ -6,48 +6,39 @@ const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.a
 
 export const LOGIN_USER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['test@ssyazilim.com'] }),
-    password: z
-      .string()
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64))
-      .meta({ examples: ['Passw0rd'] }),
-  });
+  return z
+    .object({
+      email: z.email({ message: m.public_forms_validations_email }),
+      password: z
+        .string()
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+    })
+    .meta({ id: 'loginUser' });
 };
 
 export const ADD_USER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    name: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Barış'] }),
-    surname: z
-      .string()
-      .optional()
-      .meta({ examples: ['Gür'] }),
-    email: z
-      .email({ message: m.public_forms_validations_email })
-      .meta({ examples: ['test@ssyazilim.com'] }),
-    phoneNumber: z
-      .e164({ message: m.public_forms_validations_phoneNumber })
-      .meta({ examples: ['+905365056943'] }),
-    password: z
-      .string()
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64))
-      .meta({ examples: ['Passw0rd'] }),
-    rePassword: z
-      .string()
-      .min(8, m.public_forms_validations_minLength(8))
-      .max(64, m.public_forms_validations_maxLength(64))
-      .meta({ examples: ['Passw0rd'] }),
-    activationType: z.enum(['phone', 'email']).meta({ examples: ['email'] }),
-  });
+  return z
+    .object({
+      name: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      surname: z.string().optional(),
+      email: z.email({ message: m.public_forms_validations_email }),
+      phoneNumber: z.e164({ message: m.public_forms_validations_phoneNumber }),
+      password: z
+        .string()
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+      rePassword: z
+        .string()
+        .min(8, m.public_forms_validations_minLength(8))
+        .max(64, m.public_forms_validations_maxLength(64)),
+      activationType: z.enum(['phone', 'email']),
+    })
+    .meta({ id: 'addUser' });
 };
 export const ADD_USER_CHECK = (locale: ILocale = 'tr') => {
   const m = messages[locale];
@@ -64,34 +55,40 @@ export const ADD_USER_CHECK = (locale: ILocale = 'tr') => {
 
 export const CHECK_KEY = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    key: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) }),
-  });
+  return z
+    .object({
+      key: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    })
+    .meta({ id: 'checkKey' });
 };
 
 export const ACTIVATE_USER = (locale: ILocale = 'tr') => {
   const m = messages[locale];
 
-  return z.object({
-    key: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) }),
-    code: z
-      .string()
-      .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) }),
-  });
+  return z
+    .object({
+      key: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+      code: z
+        .string()
+        .min(2, { message: m.public_forms_validations_minLength(2) })
+        .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    })
+    .meta({ id: 'activateUser' });
 };
 
 export const PASSWORD_RESET = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  return z.object({
-    email: z.email({ message: m.public_forms_validations_email }),
-  });
+  return z
+    .object({
+      email: z.email({ message: m.public_forms_validations_email }),
+    })
+    .meta({ id: 'passwordResetUser' });
 };
 
 export const PASSWORD_RESET_COMPLETE = (locale: ILocale = 'tr') => {
@@ -120,5 +117,6 @@ export const PASSWORD_RESET_COMPLETE = (locale: ILocale = 'tr') => {
           message: m.public_forms_validations_sameAs,
         });
       }
-    });
+    })
+    .meta({ id: 'passwordResetCompleteUser' });
 };

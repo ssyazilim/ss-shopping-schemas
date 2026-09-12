@@ -1,13 +1,15 @@
 import { registry } from '../registry';
-import { responses, buildRequestBody } from '../common';
+import { z } from 'zod';
+import { buildRequestBody, jsonResponse } from '../common';
+import { AuthTokensSchema, AuthUserSchema } from './schema';
 import {
-  LoginUserSchema,
-  AddUserSchema,
-  CheckKeySchema,
-  ActivateUserSchema,
-  PasswordResetUserSchema,
-  PasswordResetCompleteUserSchema,
-} from './schema';
+  LOGIN_USER,
+  ADD_USER,
+  CHECK_KEY,
+  ACTIVATE_USER,
+  PASSWORD_RESET,
+  PASSWORD_RESET_COMPLETE,
+} from './validation';
 
 // POST /public/auth/login
 registry.registerPath({
@@ -16,8 +18,8 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'Login process for the User in the system',
   operationId: 'loginUser',
-  request: { body: buildRequestBody(LoginUserSchema) },
-  responses,
+  request: { body: buildRequestBody(LOGIN_USER()) },
+  responses: jsonResponse(AuthTokensSchema),
 });
 
 // POST /public/auth/register
@@ -27,8 +29,8 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'Add a new user to system',
   operationId: 'addUser',
-  request: { body: buildRequestBody(AddUserSchema) },
-  responses,
+  request: { body: buildRequestBody(ADD_USER()) },
+  responses: jsonResponse(AuthUserSchema),
 });
 
 // POST /public/auth/register-verification
@@ -38,8 +40,8 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'Check User key in the system',
   operationId: 'checkUser',
-  request: { body: buildRequestBody(CheckKeySchema) },
-  responses,
+  request: { body: buildRequestBody(CHECK_KEY()) },
+  responses: jsonResponse(AuthUserSchema),
 });
 
 // POST /public/auth/register-activate
@@ -49,8 +51,8 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'Activate User in the system',
   operationId: 'activateUser',
-  request: { body: buildRequestBody(ActivateUserSchema) },
-  responses,
+  request: { body: buildRequestBody(ACTIVATE_USER()) },
+  responses: jsonResponse(AuthUserSchema),
 });
 
 // POST /public/auth/refresh-code
@@ -60,8 +62,8 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'Refresh code for the activation in the system',
   operationId: 'refreshCode',
-  request: { body: buildRequestBody(CheckKeySchema) },
-  responses,
+  request: { body: buildRequestBody(CHECK_KEY()) },
+  responses: jsonResponse(AuthUserSchema),
 });
 
 // POST /public/auth/password-reset
@@ -71,8 +73,8 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'User can be reset password using this api',
   operationId: 'passwordResetUser',
-  request: { body: buildRequestBody(PasswordResetUserSchema) },
-  responses,
+  request: { body: buildRequestBody(PASSWORD_RESET()) },
+  responses: jsonResponse(z.email().meta({ examples: ['test@ssyazilim.com'] })),
 });
 
 // POST /public/auth/password-reset-complete
@@ -82,6 +84,6 @@ registry.registerPath({
   tags: ['API-authentication'],
   summary: 'User can be reset password for using this api',
   operationId: 'passwordResetCompleteUser',
-  request: { body: buildRequestBody(PasswordResetCompleteUserSchema) },
-  responses,
+  request: { body: buildRequestBody(PASSWORD_RESET_COMPLETE()) },
+  responses: jsonResponse(AuthUserSchema),
 });

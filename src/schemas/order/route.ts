@@ -1,12 +1,14 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { OrderSchema, EditOrderSchema } from './schema';
+import { SaveOrderSchema, EditOrderSchema, OrderModel } from './schema';
 import {
-  responses,
   buildRequestBody,
   DeleteModelSchema,
   ListQuerySchema,
   DateRangeQuerySchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
 } from '../common';
 
 const apiKeyHeaders = z.object({
@@ -33,7 +35,7 @@ registry.registerPath({
       orderId: z.string(),
     }),
   },
-  responses,
+  responses: jsonResponse(OrderModel),
 });
 
 // GET /public/order
@@ -51,7 +53,7 @@ registry.registerPath({
       paymentId: z.string().optional(),
     }),
   },
-  responses,
+  responses: jsonResponse(OrderModel),
 });
 
 // POST /public/order
@@ -62,8 +64,8 @@ registry.registerPath({
   summary: 'Save order to the system',
   operationId: 'saveOrder',
   security: [{ 'X-API-KEY': [] }],
-  request: { headers: apiKeyHeaders, body: buildRequestBody(OrderSchema) },
-  responses,
+  request: { headers: apiKeyHeaders, body: buildRequestBody(SaveOrderSchema) },
+  responses: jsonResponse(OrderModel),
 });
 
 // GET /public/orders
@@ -74,7 +76,7 @@ registry.registerPath({
   summary: 'Get User Orders in the system',
   operationId: 'getOrdersForTheUser',
   security: [{ JWT: [] }],
-  responses,
+  responses: listResponse(OrderModel),
 });
 
 // GET /admin/orders
@@ -86,7 +88,7 @@ registry.registerPath({
   operationId: 'getOrdersAdmin',
   security: [{ JWT: [] }],
   request: { query: OrderListQuerySchema },
-  responses,
+  responses: listResponse(OrderModel),
 });
 
 // UPDATE /admin/order/{id}
@@ -101,7 +103,7 @@ registry.registerPath({
     params: z.object({ id: z.string() }),
     body: buildRequestBody(EditOrderSchema),
   },
-  responses,
+  responses: jsonResponse(OrderModel),
 });
 
 // DELETE /admin/orders
@@ -113,5 +115,5 @@ registry.registerPath({
   operationId: 'deleteOrders',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });

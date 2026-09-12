@@ -1,7 +1,16 @@
 import { z } from 'zod';
 import { registry } from '../registry';
-import { AddBrandSchema, UpdateBrandSchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import { ADD_BRAND, UPDATE_BRAND } from './validation';
+import { BrandSchema } from './schema';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+  UpdateResultSchema,
+} from '../common';
 
 // GET /public/brands
 registry.registerPath({
@@ -11,7 +20,7 @@ registry.registerPath({
   summary: 'Get all brands in the system',
   operationId: 'getBrands',
   request: { query: ListQuerySchema },
-  responses,
+  responses: listResponse(BrandSchema),
 });
 
 // GET /public/brand/{brandId}
@@ -22,7 +31,7 @@ registry.registerPath({
   summary: 'Get a brand from the system',
   operationId: 'getBrand',
   request: { params: z.object({ brandId: z.string() }) },
-  responses,
+  responses: jsonResponse(BrandSchema),
 });
 
 // POST /admin/brand
@@ -33,8 +42,8 @@ registry.registerPath({
   summary: 'Add new brands to the system',
   operationId: 'addBrand',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddBrandSchema) },
-  responses,
+  request: { body: buildRequestBody(ADD_BRAND()) },
+  responses: jsonResponse(BrandSchema),
 });
 
 // DELETE /admin/brand
@@ -46,7 +55,7 @@ registry.registerPath({
   operationId: 'deleteBrands',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/brand/{brandId}
@@ -59,7 +68,7 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     params: z.object({ brandId: z.string() }),
-    body: buildRequestBody(UpdateBrandSchema),
+    body: buildRequestBody(UPDATE_BRAND()),
   },
-  responses,
+  responses: jsonResponse(UpdateResultSchema),
 });

@@ -3,8 +3,8 @@ import { getDefaultsForSchema } from '../utils/getDefaultsForSchema';
 import { IMAGES, PRICE, ADD_PRODUCT } from '../schemas/product/validation';
 import { VARIANTS_TYPE } from '../schemas/product-variant/validation';
 import { MongoSchema } from './common';
-import type { IBrand } from './brand';
-import type { ICategory } from './category';
+import type { IBrand } from '../schemas/brand/schema';
+import type { ICategory } from '../schemas/category/schema';
 import type { IVariant } from './variant';
 
 export type IImage = z.infer<typeof ImageSchema>;

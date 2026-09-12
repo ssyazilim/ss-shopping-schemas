@@ -1,109 +1,102 @@
 import { z } from 'zod';
 
-export const ADD_OBJECT = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z
-    .string()
-    .meta({ examples: ['profile-photo.jpg'], description: 'Object name to store in minio' }),
-  file: z.any().meta({ type: 'string', format: 'binary' }),
-});
+export const ADD_OBJECT = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string().meta({ description: 'Object name to store in minio' }),
+    file: z.any().meta({ type: 'string', format: 'binary' }),
+  })
+  .meta({ id: 'AddObject' });
 
 // On a versioned (or once-versioned, now suspended) bucket a plain delete only hides the
 // current version: the noncurrent ones keep the key alive and it reappears in listings.
 // allVersions sweeps every version and delete marker so the key is really gone.
-const ALL_VERSIONS = z
-  .boolean()
-  .optional()
-  .meta({
-    examples: [true],
-    description: 'Removes every version and delete marker of the key, not just the current one',
-  });
-
-export const DELETE_OBJECT = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['1.jpg'] }),
-  allVersions: ALL_VERSIONS,
+const ALL_VERSIONS = z.boolean().optional().meta({
+  description: 'Removes every version and delete marker of the key, not just the current one',
 });
 
-export const DELETE_OBJECTS = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectNames: z.array(z.string()).meta({ examples: [['1.jpg', '2.jpg']] }),
-  allVersions: ALL_VERSIONS,
-});
+export const DELETE_OBJECT = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string(),
+    allVersions: ALL_VERSIONS,
+  })
+  .meta({ id: 'DeleteObject' });
 
-export const COPY_OBJECT = z.object({
-  bucketName: z.string().meta({ examples: ['images'], description: 'Target bucket' }),
-  objectName: z
-    .string()
-    .meta({ examples: ['test/posts/1.jpg'], description: 'Target key inside the bucket' }),
-  sourceName: z.string().meta({
-    examples: ['images/test/products/1.jpg'],
-    description: 'Source as bucket name and key together, not only the key',
-  }),
-});
+export const DELETE_OBJECTS = z
+  .object({
+    bucketName: z.string(),
+    objectNames: z.array(z.string()),
+    allVersions: ALL_VERSIONS,
+  })
+  .meta({ id: 'DeleteObjects' });
 
-export const PRESIGNED_URL = z.object({
-  httpMethod: z.string().meta({ examples: ['GET'] }),
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['1.jpg'] }),
-  expireTime: z
-    .number()
-    .optional()
-    .meta({ examples: [360] }),
-});
+export const COPY_OBJECT = z
+  .object({
+    bucketName: z.string().meta({ description: 'Target bucket' }),
+    objectName: z.string().meta({ description: 'Target key inside the bucket' }),
+    sourceName: z
+      .string()
+      .meta({ description: 'Source as bucket name and key together, not only the key' }),
+  })
+  .meta({ id: 'CopyObject' });
 
-export const PRESIGNED_PUT_OBJECT = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['test/products'] }),
-  expireTime: z
-    .number()
-    .optional()
-    .meta({ examples: [360] }),
-  fileName: z
-    .string()
-    .optional()
-    .meta({
-      examples: ['bahce-fotografi.jpg'],
+export const PRESIGNED_URL = z
+  .object({
+    httpMethod: z.string(),
+    bucketName: z.string(),
+    objectName: z.string(),
+    expireTime: z.number().optional(),
+  })
+  .meta({ id: 'PresignedUrl' });
+
+export const PRESIGNED_PUT_OBJECT = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string(),
+    expireTime: z.number().optional(),
+    fileName: z.string().optional().meta({
       description: 'File name with extension. A unique name is generated when it is not sent',
     }),
-});
+  })
+  .meta({ id: 'PresignedPutObject' });
 
-export const ADD_FOLDER = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({
-    examples: ['test/posts/blog'],
-    description: 'Full folder path without a trailing slash',
-  }),
-});
+export const ADD_FOLDER = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string().meta({ description: 'Full folder path without a trailing slash' }),
+  })
+  .meta({ id: 'AddFolder' });
 
-export const PRESIGNED_GET_OBJECT = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['1.jpg'] }),
-  expireTime: z
-    .number()
-    .optional()
-    .meta({ examples: [360] }),
-  fileName: z
-    .string()
-    .optional()
-    .meta({
-      examples: ['bahce-fotografi.jpg'],
+export const PRESIGNED_GET_OBJECT = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string(),
+    expireTime: z.number().optional(),
+    fileName: z.string().optional().meta({
       description: 'Forces the browser to download the file with this name instead of opening it',
     }),
-});
+  })
+  .meta({ id: 'PresignedGetObject' });
 
-export const SET_OBJECT_TAGGING = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['1.jpg'] }),
-  tags: z.record(z.string(), z.string()).meta({ examples: [{ env: 'production' }] }),
-});
+export const SET_OBJECT_TAGGING = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string(),
+    tags: z.record(z.string(), z.string()),
+  })
+  .meta({ id: 'SetObjectTagging' });
 
-export const DELETE_OBJECT_TAGGING = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['1.jpg'] }),
-});
+export const DELETE_OBJECT_TAGGING = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string(),
+  })
+  .meta({ id: 'DeleteObjectTagging' });
 
-export const REMOVE_INCOMPLETE_UPLOAD = z.object({
-  bucketName: z.string().meta({ examples: ['test'] }),
-  objectName: z.string().meta({ examples: ['1.jpg'] }),
-});
+export const REMOVE_INCOMPLETE_UPLOAD = z
+  .object({
+    bucketName: z.string(),
+    objectName: z.string(),
+  })
+  .meta({ id: 'RemoveIncompleteUpload' });

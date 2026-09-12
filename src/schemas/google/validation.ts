@@ -1,10 +1,20 @@
 import { z } from 'zod';
 
-export const GEMINI_PROMPT = z.object({
-  prompt: z.string().meta({ examples: ['Write a 25-word poem.'] }),
-});
+export const GEMINI_PROMPT = z
+  .object({
+    prompt: z.string(),
+  })
+  .meta({ id: 'GeminiPrompt' });
 
-export const TRANSLATE = z.object({
-  to: z.string().meta({ examples: ['tr'] }),
-  prompt: z.string().meta({ examples: ['Hello. How are you today?'] }),
-});
+export const TRANSLATE = z
+  .object({
+    to: z.string(),
+    prompt: z.string(),
+  })
+  .meta({ id: 'Translate' });
+
+export const SUBSCRIBE_MAIL = z
+  .object({
+    email: z.email(),
+  })
+  .meta({ id: 'SubscribeMail' });

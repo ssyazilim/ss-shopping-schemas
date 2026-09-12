@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { registry } from '../../registry';
 import {
-  AddBucketVersionSchema,
-  AddBucketConfigSchema,
-  SetBucketPolicySchema,
-  SetBucketEncryptionSchema,
-  SetBucketTaggingSchema,
-} from './schema';
+  ADD_BUCKET_VERSION,
+  ADD_BUCKET_CONFIG,
+  SET_BUCKET_POLICY,
+  SET_BUCKET_ENCRYPTION,
+  SET_BUCKET_TAGGING,
+} from './validation';
 import { responses, buildRequestBody } from '../../common';
 
 // GET /admin/minio/buckets
@@ -88,7 +88,7 @@ registry.registerPath({
   summary: 'Add bucket version for the bucket',
   operationId: 'addBucketVersion',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddBucketVersionSchema) },
+  request: { body: buildRequestBody(ADD_BUCKET_VERSION) },
   responses,
 });
 
@@ -124,7 +124,7 @@ registry.registerPath({
   summary: 'Set Lifecycle Configuration on a Bucket',
   operationId: 'addBucketConfig',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(AddBucketConfigSchema) },
+  request: { body: buildRequestBody(ADD_BUCKET_CONFIG) },
   responses,
 });
 
@@ -148,7 +148,7 @@ registry.registerPath({
   summary: 'Set access policy on a Bucket',
   operationId: 'addBucketPolicy',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(SetBucketPolicySchema) },
+  request: { body: buildRequestBody(SET_BUCKET_POLICY) },
   responses,
 });
 
@@ -172,7 +172,7 @@ registry.registerPath({
   summary: 'Set default encryption configuration on a Bucket',
   operationId: 'addBucketEncryption',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(SetBucketEncryptionSchema) },
+  request: { body: buildRequestBody(SET_BUCKET_ENCRYPTION) },
   responses,
 });
 
@@ -208,7 +208,7 @@ registry.registerPath({
   summary: 'Set tags on a Bucket',
   operationId: 'addBucketTagging',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(SetBucketTaggingSchema) },
+  request: { body: buildRequestBody(SET_BUCKET_TAGGING) },
   responses,
 });
 

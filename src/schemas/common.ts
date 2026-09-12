@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { registry } from './registry';
+import { DeleteMongoSchema, UpdateMongoSchema } from '../types/common';
 
 export const PaginationQuerySchema = registry.register(
   'PaginationQuery',
@@ -13,7 +14,7 @@ export const ListQuerySchema = registry.register(
   'ListQuery',
   z.object({
     page: z.number().int().min(1).default(1).optional(),
-    limit: z.number().int().min(1).max(100).default(25).optional(),
+    limit: z.number().int().min(1).max(5000).default(25).optional(),
     sort: z.string().default('updatedAt,desc'),
     text: z.string().default('').optional(),
   }),
@@ -63,6 +64,38 @@ export const responses = {
   200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
   400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
 };
+
+const errorResponse = {
+  description: 'BAD_REQUEST',
+  content: { 'application/json': { schema: ApiErrorSchema } },
+};
+
+export function jsonResponse(schema: z.ZodType, description = 'OK') {
+  return {
+    200: {
+      description,
+      content: {
+        'application/json': {
+          schema: z.object({
+            success: z.object({
+              message: z.string().meta({ description: 'Success message' }),
+              data: schema,
+            }),
+          }),
+        },
+      },
+    },
+    400: errorResponse,
+  };
+}
+
+export function listResponse(schema: z.ZodType, description = 'OK') {
+  return jsonResponse(z.array(schema), description);
+}
+
+export const DeleteResultSchema = registry.register('DeleteResult', DeleteMongoSchema);
+
+export const UpdateResultSchema = registry.register('UpdateResult', UpdateMongoSchema);
 
 export function buildRequestBody(schema: z.ZodType) {
   return {

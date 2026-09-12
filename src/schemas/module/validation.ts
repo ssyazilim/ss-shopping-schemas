@@ -14,28 +14,21 @@ export const ADD_MODULE = (locale: ILocale = 'tr') => {
     key: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['google-auth'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     name: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['Google Authentication'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     icon: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['google'] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
     category: z
       .string()
       .min(2, { message: m.public_forms_validations_minLength(2) })
-      .max(254, { message: m.public_forms_validations_maxLength(254) })
-      .meta({ examples: ['auth'] }),
-    isEnabled: z.boolean().meta({ examples: [false] }),
-    isVerified: z
-      .boolean()
-      .optional()
-      .meta({ examples: [false] }),
+      .max(254, { message: m.public_forms_validations_maxLength(254) }),
+    isEnabled: z.boolean(),
+    isVerified: z.boolean().optional(),
     config: MODULE_CONFIG().optional(),
   });
 };

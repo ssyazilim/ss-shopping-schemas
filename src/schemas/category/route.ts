@@ -1,7 +1,16 @@
 import { z } from 'zod';
 import { registry } from '../registry';
+import { ADD_CATEGORY, UPDATE_CATEGORY } from './validation';
 import { CategorySchema } from './schema';
-import { responses, buildRequestBody, ListQuerySchema, DeleteModelSchema } from '../common';
+import {
+  buildRequestBody,
+  ListQuerySchema,
+  DeleteModelSchema,
+  jsonResponse,
+  listResponse,
+  DeleteResultSchema,
+  UpdateResultSchema,
+} from '../common';
 
 // GET /public/categories
 registry.registerPath({
@@ -11,7 +20,7 @@ registry.registerPath({
   summary: 'Get all categories in the system',
   operationId: 'getCategories',
   request: { query: ListQuerySchema },
-  responses,
+  responses: listResponse(CategorySchema),
 });
 
 // POST /admin/category
@@ -22,8 +31,8 @@ registry.registerPath({
   summary: 'Add a new category to system',
   operationId: 'addCategory',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(CategorySchema) },
-  responses,
+  request: { body: buildRequestBody(ADD_CATEGORY()) },
+  responses: jsonResponse(CategorySchema),
 });
 
 // DELETE /admin/category
@@ -35,7 +44,7 @@ registry.registerPath({
   operationId: 'deleteCategories',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
-  responses,
+  responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/category/{categoryId}
@@ -48,7 +57,7 @@ registry.registerPath({
   security: [{ JWT: [] }],
   request: {
     params: z.object({ categoryId: z.string() }),
-    body: buildRequestBody(CategorySchema),
+    body: buildRequestBody(UPDATE_CATEGORY()),
   },
-  responses,
+  responses: jsonResponse(UpdateResultSchema),
 });
