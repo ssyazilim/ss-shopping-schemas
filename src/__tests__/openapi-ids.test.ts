@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import { getRefId, OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 import type { RouteConfig } from '@asteasolutions/zod-to-openapi';
-import { registry } from '../schemas';
+import { registry } from '../modules';
 
 const isZod = (value: unknown): value is z.ZodType => value instanceof z.ZodType;
 
@@ -57,15 +57,27 @@ function collectFromRoute(route: RouteConfig, out: unknown[]): void {
 function rootSchemas(): unknown[] {
   const out: unknown[] = [];
   for (const definition of registry.definitions) {
-    if (definition.type === 'schema' || definition.type === 'parameter') out.push(definition.schema);
+    if (definition.type === 'schema' || definition.type === 'parameter')
+      out.push(definition.schema);
     else if (definition.type === 'route') collectFromRoute(definition.route, out);
     else if (definition.type === 'webhook') collectFromRoute(definition.webhook, out);
   }
   return out;
 }
 
+/**
+ * `.optional()` id'yi korur ama üretilen dokümanda component'i etkilemez —
+ * sadece parent'ın `required` listesinden düşer, yani gerçek bir çakışma değil.
+ * `.nullable()` ise component'in kendisini `type: [..., 'null']` yapar, o yüzden sarılı kalır.
+ */
+function unwrapOptional(schema: z.ZodType): z.ZodType {
+  return schema instanceof z.ZodOptional ? unwrapOptional(schema.unwrap() as z.ZodType) : schema;
+}
+
 function structureOf(schema: z.ZodType): string {
-  return JSON.stringify(z.toJSONSchema(schema, { io: 'input', unrepresentable: 'any' }));
+  return JSON.stringify(
+    z.toJSONSchema(unwrapOptional(schema), { io: 'input', unrepresentable: 'any' }),
+  );
 }
 
 /** Çakışma mesajında iki şemanın nerede ayrıldığını göstermek için kısa özet. */

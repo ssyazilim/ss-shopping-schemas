@@ -115,9 +115,6 @@ export interface IJSConfettiApi {
   JSConfetti: { new (): { addConfetti: (options?: { emojis: string[] }) => void } };
 }
 
-/*************************
- *       CONSTANTS       *
- *************************/
 export const DEFAULT_TABLE_INDEX: ITableIndex = {
   key: 0,
   checkbox: false,

@@ -88,9 +88,6 @@ export const LinkSchema = z.object({
   icon: z.unknown(),
 });
 
-/*************************
- *       CONSTANTS       *
- *************************/
 export const DEFAULT_PAGINATION = [
   { name: '10', value: 10 },
   { name: '25', value: 25 },

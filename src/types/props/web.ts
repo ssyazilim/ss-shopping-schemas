@@ -1,18 +1,18 @@
 import type Iyzipay from 'iyzipay';
-import type { IAddress } from '../../schemas/address/schema';
-import type { IBrand } from '../../schemas/brand/schema';
-import type { ICategory, ICategoryMenu } from '../../schemas/category/schema';
-import type { ICompany, IProductSettings, IShippingOptions } from '../../schemas/company/schema';
-import type { IOrder, IOrderBasketItem } from '../order';
-import type { IPost } from '../post';
-import type { IProduct } from '../product';
-import type { IQuestion } from '../question';
-import type { IReview } from '../review';
-import type { ICard } from '../iyzico';
+import type { IAddress } from '../../modules/address/schema';
+import type { IBrand } from '../../modules/brand/schema';
+import type { ICategory, ICategoryMenu } from '../../modules/category/schema';
+import type { ICompany, IProductSettings, IShippingOptions } from '../../modules/company/schema';
+import type { IOrder, IOrderBasketItem } from '../../modules/order/schema';
+import type { IPost } from '../../modules/post/schema';
+import type { IProduct } from '../../modules/product/schema';
+import type { IQuestion } from '../../modules/question/schema';
+import type { IReview } from '../../modules/review/schema';
+import type { ICard } from '../../modules/payment-iyzico/schema';
 import type { IImageData } from '../common';
 import type { ILink, INavigation, ISecondaryNavigation } from '../menu';
 import type { IInputType, IInputMode } from './admin';
-import type { IDealerPricesWithDesi } from '../geliver';
+import type { IDealerPricesWithDesi } from '../../modules/geliver/schema';
 
 /*************************
  *       TYPES           *

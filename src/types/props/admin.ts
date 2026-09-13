@@ -1,7 +1,7 @@
 import type Iyzipay from 'iyzipay';
-import type { IAgreement } from '../../schemas/agreement/schema';
-import type { IBrand } from '../../schemas/brand/schema';
-import type { ICategory } from '../../schemas/category/schema';
+import type { IAgreement } from '../../modules/agreement/schema';
+import type { IBrand } from '../../modules/brand/schema';
+import type { ICategory } from '../../modules/category/schema';
 import type {
   ICompany,
   IHomePage,
@@ -10,8 +10,8 @@ import type {
   IPaymentMethods,
   IPaymentSettings,
   IProductSettings,
-} from '../../schemas/company/schema';
-import type { ICity, ICountry, IDistrict, IUpdatedData } from '../../schemas/country/schema';
+} from '../../modules/company/schema';
+import type { ICity, ICountry, IDistrict, IUpdatedData } from '../../modules/country/schema';
 import type {
   IModule,
   ICrispConfig,
@@ -26,7 +26,7 @@ import type {
   IGoogleTagConfig,
   IYandexMetricaConfig,
   IPaytrConfig,
-} from '../module';
+} from '../../modules/module/schema';
 import type {
   IGeliverAddPackageTemplateResponse,
   IGeliverAddProviderResponse,
@@ -37,7 +37,7 @@ import type {
   IGeliverShipmentAddResponse,
   IDealerPricesWithDesi,
   IPackageTemplate,
-} from '../geliver';
+} from '../../modules/geliver/schema';
 import type {
   IMediaEntry,
   IMediaUpload,
@@ -47,16 +47,22 @@ import type {
   IBucketPolicy,
   IBucketAccess,
   IEncryptionMode,
-} from '../../schemas/minio/schema';
-import type { IOrder, IOrderBasketItem } from '../order';
-import type { IPost, IPostCounts } from '../post';
-import type { IPrice, IProduct, IProductAndVariant, IStaticImage, IType } from '../product';
-import type { IQuestion } from '../question';
-import type { IReview } from '../review';
-import type { ISocketVisitor } from '../traffic';
-import type { ITranslation } from '../translation';
-import type { IUser } from '../user';
-import type { IVariant, IVariantValue } from '../variant';
+} from '../../modules/minio/schema';
+import type { IOrder, IOrderBasketItem } from '../../modules/order/schema';
+import type { IPost, IPostCounts } from '../../modules/post/schema';
+import type {
+  IPrice,
+  IProduct,
+  IProductAndVariant,
+  IStaticImage,
+  IType,
+} from '../../modules/product/schema';
+import type { IQuestion } from '../../modules/question/schema';
+import type { IReview } from '../../modules/review/schema';
+import type { ISocketVisitor } from '../../modules/traffic/schema';
+import type { ITranslation } from '../../modules/translation/schema';
+import type { IUser } from '../../modules/user/schema';
+import type { IVariant, IVariantValue } from '../../modules/product-variant/schema';
 import type { IDateButton, ITableIndex } from '../common';
 import type { IClient, INavigation, ISecondaryNavigation, ITopNavigation } from '../menu';
 
@@ -1012,9 +1018,6 @@ export interface PBucketSettings {
   encryption?: IEncryptionMode;
 }
 
-/*************************
- *       CONSTANTS       *
- *************************/
 export const DEFAULT_SELLER_DATA: PGoogle['sellerData'] = {
   name: '',
   baseUrl: '',

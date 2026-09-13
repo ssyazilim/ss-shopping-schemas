@@ -9,13 +9,11 @@ export const PrimitiveSchema = z.union([
   z.undefined(),
 ]);
 
-// Generic conditional type — Zod'da karşılığı yok, TypeScript tipi olarak kalır
 export type IField<T = unknown> = {
   value: T;
   error: string;
 };
 
-// Recursive conditional mapped type — Zod'da karşılığı yok, TypeScript tipi olarak kalır
 export type INestedForm<T> = T extends IPrimitive
   ? IField<T>
   : T extends Array<unknown>
@@ -24,7 +22,6 @@ export type INestedForm<T> = T extends IPrimitive
       ? IField<T> & { [K in keyof T]: INestedForm<T[K]> }
       : never;
 
-// Generic mapped type — Zod'da karşılığı yok, TypeScript tipi olarak kalır
 export type IFormShape<T extends Record<string, unknown>> = {
   [K in keyof T]: INestedForm<T[K]>;
 };

@@ -1,12 +1,19 @@
 import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 import { writeFileSync } from 'node:fs';
-import { registry } from '../schemas';
+import { registry } from '../modules';
 
 registry.registerComponent('securitySchemes', 'JWT', {
   type: 'http',
   scheme: 'Bearer',
   bearerFormat: 'JWT',
   description: 'Provide your JWT token in the Authorization header as a Bearer token',
+});
+
+registry.registerComponent('securitySchemes', 'X-API-KEY', {
+  type: 'apiKey',
+  in: 'header',
+  name: 'x-api-key',
+  description: 'Service API key required by the checkKey middleware',
 });
 
 const generator = new OpenApiGeneratorV31(registry.definitions);
