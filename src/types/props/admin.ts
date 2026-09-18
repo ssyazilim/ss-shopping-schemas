@@ -12,6 +12,7 @@ import type {
   IProductSettings,
 } from '../../modules/company/schema';
 import type { ICity, ICountry, IDistrict, IUpdatedData } from '../../modules/country/schema';
+import type { IHeaderMenuItem } from '../../modules/header-menu/schema';
 import type {
   IModule,
   ICrispConfig,
@@ -574,6 +575,18 @@ export interface PDefaultForm {
 
 export interface PDraggableList {
   modelValue?: any[];
+}
+
+export interface PHeaderMenuTree {
+  items?: IHeaderMenuItem[];
+}
+
+export interface PHeaderMenuItemRow {
+  label?: string;
+  // kind?: IHeaderMenuItem['kind'];
+  variant?: IHeaderMenuItem['type'] | '';
+  hasDescription?: boolean;
+  isSubItem?: boolean;
 }
 
 export interface PFileUpload {

@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
-import * as locales from '../../locales';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
+import { messages } from '../../locales';
 
 export const ADD_ORDER_USER = (locale: ILocale = 'tr') => {
   const f = fields(locale);
@@ -124,7 +123,7 @@ export const SAVE_ORDER = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_ORDER = (locale: ILocale = 'tr') =>
-  SAVE_ORDER(locale).partial().meta({ id: 'editOrder' });
+  deepPartial(SAVE_ORDER(locale)).meta({ id: 'editOrder' });
 
 export const ADD_ORDER_INFORMATIONS = (locale: ILocale = 'tr') => {
   const f = fields(locale);

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import {
   ADD_COMPANY,
   UPDATE_COMPANY,
@@ -12,40 +13,38 @@ import {
   DeleteModelSchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 const companyIdParam = z.object({ companyId: z.string() });
 
 // GET /public/company
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/company',
-  tags: ['API-company'],
+  tags: [API_TAGS.company.name],
   summary: 'Get a company information in the system',
-  operationId: 'getCompany',
   responses: jsonResponse(CompanySchema),
 });
 
 // POST /admin/company
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/company',
-  tags: ['API-company'],
+  tags: [API_TAGS.company.name],
   summary: 'Add a company information for the system',
-  operationId: 'addCompany',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_COMPANY()) },
-  responses: jsonResponse(CompanySchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // PATCH /admin/company/{companyId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/company/{companyId}',
-  tags: ['API-company'],
+  tags: [API_TAGS.company.name],
   summary: 'Update a company to the system',
-  operationId: 'updateCompany',
   security: [{ JWT: [] }],
   request: {
     params: companyIdParam,
@@ -55,12 +54,11 @@ registry.registerPath({
 });
 
 // POST /admin/company/payment/{companyId}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/company/payment/{companyId}',
-  tags: ['API-company'],
+  tags: [API_TAGS.company.name],
   summary: 'Add a company payment for the system',
-  operationId: 'addCompanyPayments',
   security: [{ JWT: [] }],
   request: {
     params: companyIdParam,
@@ -70,12 +68,11 @@ registry.registerPath({
 });
 
 // PATCH /admin/company/payment/{companyId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/company/payment/{companyId}',
-  tags: ['API-company'],
+  tags: [API_TAGS.company.name],
   summary: 'Update a company payment for the system',
-  operationId: 'updateCompanyPayments',
   security: [{ JWT: [] }],
   request: {
     params: companyIdParam,
@@ -85,12 +82,11 @@ registry.registerPath({
 });
 
 // DELETE /admin/company/payment/{companyId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/company/payment/{companyId}',
-  tags: ['API-company'],
+  tags: [API_TAGS.company.name],
   summary: 'Delete a company payment in the system',
-  operationId: 'deleteCompanyPayments',
   security: [{ JWT: [] }],
   request: {
     params: companyIdParam,

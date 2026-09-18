@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { fields } from '../../utils/fields';
 import type { ILocale } from '../../locales';
 
 export const ADD_QUESTION = (locale: ILocale = 'tr') => {

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ADD_AGREEMENT, UPDATE_AGREEMENT } from './validation';
 import { AgreementSchema } from './schema';
 import {
@@ -8,17 +9,17 @@ import {
   DeleteModelSchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   DeleteResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 // GET /public/agreements
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/agreements',
-  tags: ['API-agreement'],
+  tags: [API_TAGS.agreement.name],
   summary: 'Get all agreements in the system',
-  operationId: 'getAgreements',
   request: {
     query: ListQuerySchema.extend({
       include: z
@@ -35,12 +36,11 @@ registry.registerPath({
 });
 
 // GET /public/agreement/{locale}/{name}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/agreement/{locale}/{name}',
-  tags: ['API-agreement'],
+  tags: [API_TAGS.agreement.name],
   summary: 'Get an agreement from the system',
-  operationId: 'getAgreement',
   request: {
     params: z.object({
       locale: z.string().meta({ examples: ['tr'] }),
@@ -51,36 +51,33 @@ registry.registerPath({
 });
 
 // POST /admin/agreement
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/agreement',
-  tags: ['API-agreement'],
+  tags: [API_TAGS.agreement.name],
   summary: 'Add new agreement to the system',
-  operationId: 'addAgreement',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_AGREEMENT()) },
-  responses: jsonResponse(AgreementSchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // DELETE /admin/agreement
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/agreement',
-  tags: ['API-agreement'],
+  tags: [API_TAGS.agreement.name],
   summary: 'Delete agreements from the system',
-  operationId: 'deleteAgreements',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/agreement/{agreementId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/agreement/{agreementId}',
-  tags: ['API-agreement'],
+  tags: [API_TAGS.agreement.name],
   summary: 'Update an agreement from the system',
-  operationId: 'updateAgreement',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ agreementId: z.string() }),

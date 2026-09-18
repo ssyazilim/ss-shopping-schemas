@@ -1,7 +1,6 @@
 import type { z } from 'zod';
-import type { PaginationQuerySchema, ApiErrorSchema } from '../modules/common';
+import type { ApiErrorSchema } from '../utils/common';
 
-export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
 export type ApiError = z.infer<typeof ApiErrorSchema>;
 
 export * from '../modules/address/schema';
@@ -13,6 +12,7 @@ export * from '../modules/currency/schema';
 export * from '../modules/module/schema';
 export * from '../modules/gsm/schema';
 export * from '../modules/header-menu/schema';
+export * from '../modules/locale/schema';
 export * from '../modules/payment-iyzico/schema';
 export * from './menu';
 export * from '../modules/minio/schema';

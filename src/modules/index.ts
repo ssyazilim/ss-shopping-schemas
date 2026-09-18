@@ -1,7 +1,7 @@
-export { registry } from './registry';
+export { registry } from '../utils/registry';
 
 // schema definitions for OPENAPI producing (side-effect only — registers with registry)
-export * from './common';
+export * from '../utils/common';
 import './agreement/schema';
 import './brand/schema';
 import './cart/schema';

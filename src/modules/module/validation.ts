@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
 
 export const MODULE_CONFIG = () => {
@@ -22,4 +23,4 @@ export const ADD_MODULE = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_MODULE = (locale: ILocale = 'tr') =>
-  ADD_MODULE(locale).partial().meta({ id: 'updateModule' });
+  deepPartial(ADD_MODULE(locale)).meta({ id: 'updateModule' });

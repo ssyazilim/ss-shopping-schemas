@@ -1,10 +1,8 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
-import * as locales from '../../locales';
+import { messages } from '../../locales';
 import { isValidCard } from '../../utils/validations';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const ADD_BASKET_ITEM_IYZICO = (locale: ILocale = 'tr') => {
   const f = fields(locale);

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ADD_CART } from './validation';
 import { CartSchema } from './schema';
 import {
@@ -10,84 +11,77 @@ import {
   jsonResponse,
   listResponse,
   DeleteResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 // GET /public/cart
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/cart',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Get a cart from the system for User',
-  operationId: 'getCartWithUserId',
   security: [{ JWT: [] }],
   responses: jsonResponse(CartSchema),
 });
 
 // POST /public/cart
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/cart',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Add a new cart to system for User',
-  operationId: 'addCart',
   security: [{ JWT: [] }],
   responses: jsonResponse(CartSchema),
 });
 
 // DELETE /public/cart
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/public/cart',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Clear all entries of the cart for User',
-  operationId: 'clearCart',
   security: [{ JWT: [] }],
   responses: jsonResponse(CartSchema),
 });
 
 // POST /public/cart/product/update
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/cart/product/update',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Add or remove product for cart',
-  operationId: 'addToCart',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_CART()) },
   responses: jsonResponse(CartSchema),
 });
 
 // GET /admin/carts
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/carts',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Get all carts in the system',
-  operationId: 'getCarts',
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema.extend(DateRangeQuerySchema.shape) },
   responses: listResponse(CartSchema),
 });
 
 // GET /admin/cart/{cartId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/cart/{cartId}',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Get a cart from the system',
-  operationId: 'getCart',
   security: [{ JWT: [] }],
   request: { params: z.object({ cartId: z.string() }) },
   responses: jsonResponse(CartSchema),
 });
 
 // DELETE /admin/cart
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/cart',
-  tags: ['API-cart'],
+  tags: [API_TAGS.cart.name],
   summary: 'Delete a cart or carts in the system',
-  operationId: 'deleteCarts',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),

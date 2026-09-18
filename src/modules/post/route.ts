@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ADD_POST, UPDATE_POST, LIKE_POST, COMMENT_POST } from './validation';
 import { PostSchema, PostCountsSchema } from './schema';
 import {
@@ -9,27 +10,26 @@ import {
   ListQuerySchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   DeleteResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 // GET /public/posts/total
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/posts/total',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Get all posts total count in the system',
-  operationId: 'getPostTotal',
   responses: jsonResponse(PostCountsSchema),
 });
 
 // GET /public/posts
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/posts',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Get all posts in the system',
-  operationId: 'getPosts',
   request: {
     query: ListQuerySchema.extend({
       type: z
@@ -50,12 +50,11 @@ registry.registerPath({
 });
 
 // GET /public/post/{postId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/post/{postId}',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Get a post from the system',
-  operationId: 'getPost',
   request: {
     params: z.object({ postId: z.string() }),
     query: z.object({
@@ -69,12 +68,11 @@ registry.registerPath({
 });
 
 // POST /public/post/{postId}/like
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/post/{postId}/like',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Add a like or dislike to post in the system',
-  operationId: 'likePosts',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),
@@ -84,12 +82,11 @@ registry.registerPath({
 });
 
 // POST /public/post/{postId}/comment
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/post/{postId}/comment',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Add a comment to post in the system',
-  operationId: 'commentBlogs',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),
@@ -99,36 +96,33 @@ registry.registerPath({
 });
 
 // POST /admin/post
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/post',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Add a new post to system',
-  operationId: 'addPost',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_POST()) },
-  responses: jsonResponse(PostSchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // DELETE /admin/post
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/post',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Delete a post or posts in the system',
-  operationId: 'deletePosts',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/post/{postId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/post/{postId}',
-  tags: ['API-post'],
+  tags: [API_TAGS.post.name],
   summary: 'Update a post from the system',
-  operationId: 'updatePost',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ postId: z.string() }),

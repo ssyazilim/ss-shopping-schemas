@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { SERVICE_TAGS } from '../../utils/tags';
 import {
   ADD_SHIPPING_SHIPMENT_ADDRESS,
   ADD_SHIPPING_SHIPMENT,
@@ -10,7 +11,7 @@ import {
   SHIPPING_PROVIDER,
   SHIPPING_WEBHOOK,
 } from './validation';
-import { responses, buildRequestBody, jsonResponse } from '../common';
+import { errorResponse, buildRequestBody, jsonResponse } from '../../utils/common';
 import {
   GeliverAddPackageTemplateResponseSchema,
   GeliverAddProviderResponseSchema,
@@ -37,12 +38,11 @@ const apiKeyGeliverHeaders = z.object({
 });
 
 // GET /public/shipping/prices
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/shipping/prices',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Get price list for parcel dimensions',
-  operationId: 'getShippingPrices',
   security: [],
   request: {
     headers: geliverHeaders,
@@ -60,24 +60,22 @@ registry.registerPath({
 });
 
 // GET /public/shipping/templates
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/shipping/templates',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'List shipment templates',
-  operationId: 'getShippingTemplates',
   security: [],
   request: { headers: geliverHeaders },
   responses: jsonResponse(GeliverPackageTemplateListSchema),
 });
 
 // GET /public/shipping/shipment/labelPDF/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/shipping/shipment/labelPDF/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Download label PDF for a shipment',
-  operationId: 'getShippingShipmentLabelPDF',
   security: [],
   request: {
     headers: geliverHeaders,
@@ -87,17 +85,16 @@ registry.registerPath({
   },
   responses: {
     200: { description: 'OK', content: { 'application/pdf': { schema: z.string() } } },
-    400: responses[400],
+    400: errorResponse,
   },
 });
 
 // GET /public/shipping/shipment/labelHTML/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/shipping/shipment/labelHTML/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Download responsive label HTML for a shipment',
-  operationId: 'getShippingShipmentLabelHTML',
   security: [],
   request: {
     headers: geliverHeaders,
@@ -107,17 +104,16 @@ registry.registerPath({
   },
   responses: {
     200: { description: 'OK', content: { 'text/html': { schema: z.string() } } },
-    400: responses[400],
+    400: errorResponse,
   },
 });
 
 // POST /public/shipping/address
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/shipping/address',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Create a shipping address',
-  operationId: 'addShippingAddress',
   security: [{ 'X-API-KEY': [] }],
   request: {
     headers: apiKeyGeliverHeaders,
@@ -127,12 +123,11 @@ registry.registerPath({
 });
 
 // GET /public/shipping/addresses
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/shipping/addresses',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'List shipping addresses',
-  operationId: 'getShippingAddresses',
   security: [{ 'X-API-KEY': [] }],
   request: {
     headers: apiKeyGeliverHeaders,
@@ -146,72 +141,66 @@ registry.registerPath({
 });
 
 // POST /public/shipping/shipment
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/shipping/shipment',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Create a shipment',
-  operationId: 'addShippingShipment',
   security: [{ 'X-API-KEY': [] }],
   request: { headers: apiKeyGeliverHeaders, body: buildRequestBody(ADD_SHIPPING_SHIPMENT()) },
   responses: jsonResponse(GeliverShipmentAddResponseSchema),
 });
 
 // POST /public/shipping/shipment/accept/{offerId}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/shipping/shipment/accept/{offerId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Accept an offer (purchase label)',
-  operationId: 'acceptShippingOffer',
   security: [{ 'X-API-KEY': [] }],
   request: { headers: apiKeyGeliverHeaders, params: z.object({ offerId: z.string() }) },
   responses: jsonResponse(GeliverTransactionSchema),
 });
 
 // GET /admin/shipping/balance/{organizationId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/shipping/balance/{organizationId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Get organisation balance information',
-  operationId: 'getShippingBalance',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ organizationId: z.string() }) },
   responses: jsonResponse(GeliverBalanceResponseSchema),
 });
 
 // GET /admin/shipping/address/{addressId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/shipping/address/{addressId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Get a specific shipping address',
-  operationId: 'getShippingAddress',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ addressId: z.string() }) },
   responses: jsonResponse(GeliverAddressAddResponseSchema),
 });
 
 // DELETE /admin/shipping/address/{addressId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/shipping/address/{addressId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Delete a shipping address',
-  operationId: 'deleteShippingAddress',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ addressId: z.string() }) },
   responses: jsonResponse(GeliverResultSchema),
 });
 
 // GET /admin/shipping/shipments
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/shipping/shipments',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'List shipments',
-  operationId: 'getShippingShipments',
   security: [{ JWT: [] }],
   request: {
     headers: geliverHeaders,
@@ -225,24 +214,22 @@ registry.registerPath({
 });
 
 // GET /admin/shipping/shipment/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/shipping/shipment/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Get a specific shipment',
-  operationId: 'getShippingShipment',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ shipmentId: z.string() }) },
   responses: jsonResponse(GeliverShipmentAddResponseSchema),
 });
 
 // PATCH /admin/shipping/shipment/update-package/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/shipping/shipment/update-package/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Update package dimensions for a shipment',
-  operationId: 'patchShippingPackage',
   security: [{ JWT: [] }],
   request: {
     headers: geliverHeaders,
@@ -253,36 +240,33 @@ registry.registerPath({
 });
 
 // DELETE /admin/shipping/shipment/cancel/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/shipping/shipment/cancel/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Cancel a shipment',
-  operationId: 'deleteShippingShipment',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ shipmentId: z.string() }) },
   responses: jsonResponse(GeliverShipmentAddResponseSchema),
 });
 
 // POST /admin/shipping/shipment/clone/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/shipment/clone/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Clone a shipment',
-  operationId: 'cloneShippingShipment',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ shipmentId: z.string() }) },
   responses: jsonResponse(GeliverShipmentAddResponseSchema),
 });
 
 // POST /admin/shipping/shipment/return/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/shipment/return/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Create a return shipment',
-  operationId: 'returnShippingShipment',
   security: [{ JWT: [] }],
   request: {
     headers: geliverHeaders,
@@ -293,12 +277,11 @@ registry.registerPath({
 });
 
 // POST /admin/shipping/shipment/accept-return/{shipmentId}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/shipment/accept-return/{shipmentId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Create and purchase a return shipment label',
-  operationId: 'acceptShippingReturn',
   security: [{ JWT: [] }],
   request: {
     headers: geliverHeaders,
@@ -309,120 +292,110 @@ registry.registerPath({
 });
 
 // POST /admin/shipping/shipment/create
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/shipment/create',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'One-step label purchase',
-  operationId: 'createShippingShipment',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, body: buildRequestBody(CREATE_SHIPPING_SHIPMENT()) },
   responses: jsonResponse(GeliverShipmentAddResponseSchema),
 });
 
 // POST /admin/shipping/template
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/template',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Add a shipment template',
-  operationId: 'createShippingTemplate',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, body: buildRequestBody(SHIPPING_TEMPLATE()) },
   responses: jsonResponse(GeliverAddPackageTemplateResponseSchema),
 });
 
 // DELETE /admin/shipping/template/{templateId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/shipping/template/{templateId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Delete a shipment template',
-  operationId: 'deleteShippingTemplate',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ templateId: z.string() }) },
   responses: jsonResponse(GeliverResultSchema),
 });
 
 // GET /admin/shipping/providers
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/shipping/providers',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'List shipping provider accounts',
-  operationId: 'getShippingProviders',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders },
   responses: jsonResponse(GeliverProviderListSchema),
 });
 
 // POST /admin/shipping/provider
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/provider',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Create a shipping provider account',
-  operationId: 'createShippingProvider',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, body: buildRequestBody(SHIPPING_PROVIDER()) },
   responses: jsonResponse(GeliverAddProviderResponseSchema),
 });
 
 // DELETE /admin/shipping/provider/{providerAccountId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/shipping/provider/{providerAccountId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Delete a shipping provider',
-  operationId: 'deleteShippingProvider',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ providerAccountId: z.string() }) },
   responses: jsonResponse(GeliverResultSchema),
 });
 
 // GET /admin/shipping/webhooks
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/shipping/webhooks',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'List shipping webhooks',
-  operationId: 'getShippingWebhooks',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders },
   responses: jsonResponse(z.array(GeliverAddWebHookResponseSchema)),
 });
 
 // POST /admin/shipping/webhook
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/webhook',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Create a shipping webhook',
-  operationId: 'createShippingWebhook',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, body: buildRequestBody(SHIPPING_WEBHOOK()) },
   responses: jsonResponse(GeliverAddWebHookResponseSchema),
 });
 
 // POST /admin/shipping/webhook/test
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/shipping/webhook/test',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Test a shipping webhook',
-  operationId: 'testShippingWebhook',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, body: buildRequestBody(SHIPPING_WEBHOOK()) },
   responses: jsonResponse(GeliverResultSchema),
 });
 
 // DELETE /admin/shipping/webhook/{webhookId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/shipping/webhook/{webhookId}',
-  tags: ['SERVICE-shipping-geliver'],
+  tags: [SERVICE_TAGS.shippingGeliver.name],
   summary: 'Delete a shipping webhook',
-  operationId: 'deleteShippingWebhook',
   security: [{ JWT: [] }],
   request: { headers: geliverHeaders, params: z.object({ webhookId: z.string() }) },
   responses: jsonResponse(GeliverResultSchema),

@@ -1,28 +1,17 @@
 import { z } from 'zod';
-import { registry } from './registry';
-import { DeleteMongoSchema, UpdateMongoSchema } from '../types/common';
+import { DeleteMongoSchema, InsertMongoSchema, UpdateMongoSchema } from '../types/common';
 
-export const PaginationQuerySchema = registry.register(
-  'PaginationQuery',
-  z.object({
-    page: z.number().int().min(1).default(1),
-    limit: z.number().int().min(1).max(100).default(20).optional(),
-  }),
-);
-
-export const ListQuerySchema = registry.register(
-  'ListQuery',
-  z.object({
+export const ListQuerySchema = z
+  .object({
     page: z.number().int().min(1).default(1).optional(),
     limit: z.number().int().min(1).max(5000).default(25).optional(),
     sort: z.string().default('updatedAt,desc'),
     text: z.string().default('').optional(),
-  }),
-);
+  })
+  .meta({ id: 'ListQuery' });
 
-export const DateRangeQuerySchema = registry.register(
-  'DateRangeQuery',
-  z.object({
+export const DateRangeQuerySchema = z
+  .object({
     startDate: z
       .string()
       .optional()
@@ -31,41 +20,24 @@ export const DateRangeQuerySchema = registry.register(
       .string()
       .optional()
       .meta({ examples: ['2024-12-15T23:59:59.999Z'] }),
-  }),
-);
+  })
+  .meta({ id: 'DateRangeQuery' });
 
-export const ApiSuccessSchema = registry.register(
-  'ApiSuccess',
-  z.object({
-    success: z.object({
-      message: z.string().meta({ description: 'Success message' }),
-      data: z.any(),
-    }),
-  }),
-);
-
-export const ApiErrorSchema = registry.register(
-  'ApiError',
-  z.object({
+export const ApiErrorSchema = z
+  .object({
     error: z.object({
       message: z.string().meta({ description: 'Error message' }),
     }),
-  }),
-);
+  })
+  .meta({ id: 'ApiError' });
 
-export const DeleteModelSchema = registry.register(
-  'DeleteModel',
-  z.object({
+export const DeleteModelSchema = z
+  .object({
     selectedIds: z.array(z.string()).meta({ description: 'IDs to delete' }),
-  }),
-);
+  })
+  .meta({ id: 'DeleteModel' });
 
-export const responses = {
-  200: { description: 'OK', content: { 'application/json': { schema: ApiSuccessSchema } } },
-  400: { description: 'BAD_REQUEST', content: { 'application/json': { schema: ApiErrorSchema } } },
-};
-
-const errorResponse = {
+export const errorResponse = {
   description: 'BAD_REQUEST',
   content: { 'application/json': { schema: ApiErrorSchema } },
 };
@@ -137,9 +109,11 @@ export function listResponse(schema: z.ZodType, description = 'OK') {
   return jsonResponse(z.array(schema), description);
 }
 
-export const DeleteResultSchema = registry.register('DeleteResult', DeleteMongoSchema);
+export const DeleteResultSchema = DeleteMongoSchema.meta({ id: 'DeleteResult' });
 
-export const UpdateResultSchema = registry.register('UpdateResult', UpdateMongoSchema);
+export const UpdateResultSchema = UpdateMongoSchema.meta({ id: 'UpdateResult' });
+
+export const InsertResultSchema = InsertMongoSchema.meta({ id: 'InsertResult' });
 
 export function buildRequestBody(schema: z.ZodType) {
   return {
@@ -153,6 +127,9 @@ export function buildRequestBody(schema: z.ZodType) {
 
 function toDeepPartial(field: z.ZodType): z.ZodType {
   if (field instanceof z.ZodOptional) return toDeepPartial(field.unwrap() as z.ZodType);
+  if (field instanceof z.ZodNullable) return toDeepPartial(field.unwrap() as z.ZodType).nullable();
+  if (field instanceof z.ZodDefault) return toDeepPartial(field.def.innerType as z.ZodType);
+  if (field instanceof z.ZodArray) return z.array(toDeepPartial(field.element as z.ZodType));
   if (field instanceof z.ZodObject) return deepPartial(field);
   return field;
 }

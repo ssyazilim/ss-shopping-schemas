@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ADD_TRANSLATION, UPDATE_TRANSLATION } from './validation';
 import { TranslationSchema, TranslationKeySchema } from './schema';
 import {
@@ -8,17 +9,17 @@ import {
   DeleteModelSchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   DeleteResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 // GET /public/translations
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/translations',
-  tags: ['API-translation'],
+  tags: [API_TAGS.translation.name],
   summary: 'Get all translations in the system',
-  operationId: 'getTranslations',
   request: {
     query: ListQuerySchema.extend({
       include: z
@@ -35,12 +36,11 @@ registry.registerPath({
 });
 
 // GET /public/translation/{code}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/translation/{code}',
-  tags: ['API-translation'],
+  tags: [API_TAGS.translation.name],
   summary: 'Get a translation from the system',
-  operationId: 'getTranslation',
   request: {
     params: z.object({
       code: z.enum(['en', 'tr']).meta({ default: 'en' }),
@@ -50,12 +50,11 @@ registry.registerPath({
 });
 
 // GET /admin/translation
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/translation',
-  tags: ['API-translation'],
+  tags: [API_TAGS.translation.name],
   summary: 'Get a specific key translation in the system',
-  operationId: 'getTranslationByKey',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -67,36 +66,33 @@ registry.registerPath({
 });
 
 // POST /admin/translation
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/translation',
-  tags: ['API-translation'],
+  tags: [API_TAGS.translation.name],
   summary: 'Add a new translation to system',
-  operationId: 'addTranslation',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_TRANSLATION()) },
-  responses: jsonResponse(TranslationSchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // DELETE /admin/translation
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/translation',
-  tags: ['API-translation'],
+  tags: [API_TAGS.translation.name],
   summary: 'Delete a translation or translations in the system',
-  operationId: 'deleteTranslations',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/translation/{translationId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/translation/{translationId}',
-  tags: ['API-translation'],
+  tags: [API_TAGS.translation.name],
   summary: 'Update a translation from the system',
-  operationId: 'updateTranslation',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ translationId: z.string() }),

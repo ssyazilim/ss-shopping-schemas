@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { SAVE_ORDER, UPDATE_ORDER } from './validation';
 import { OrderSchema } from './schema';
 import {
@@ -11,7 +12,7 @@ import {
   listResponse,
   DeleteResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 const apiKeyHeaders = z.object({
   'x-api-key': z.string().default('9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a'),
@@ -26,12 +27,11 @@ const OrderListQuerySchema = ListQuerySchema.extend({
 });
 
 // GET /public/order/{orderId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/order/{orderId}',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Get order in the system',
-  operationId: 'getPublicOrder',
   request: {
     params: z.object({
       orderId: z.string(),
@@ -41,12 +41,11 @@ registry.registerPath({
 });
 
 // GET /public/order
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/order',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Get User order in system',
-  operationId: 'getOrder',
   security: [{ 'X-API-KEY': [] }],
   request: {
     headers: apiKeyHeaders,
@@ -59,24 +58,22 @@ registry.registerPath({
 });
 
 // POST /public/order
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/order',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Save order to the system',
-  operationId: 'saveOrder',
   security: [{ 'X-API-KEY': [] }],
   request: { headers: apiKeyHeaders, body: buildRequestBody(SAVE_ORDER()) },
   responses: jsonResponse(OrderSchema),
 });
 
 // GET /public/orders
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/orders',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Get User Orders in the system',
-  operationId: 'getOrdersForTheUser',
   security: [{ JWT: [] }],
   request: {
     query: ListQuerySchema.extend({
@@ -90,24 +87,22 @@ registry.registerPath({
 });
 
 // GET /admin/orders
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/orders',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Get all orders in the system',
-  operationId: 'getOrdersAdmin',
   security: [{ JWT: [] }],
   request: { query: OrderListQuerySchema },
   responses: listResponse(OrderSchema),
 });
 
 // UPDATE /admin/order/{id}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/order/{id}',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Update order in the system',
-  operationId: 'updateOrder',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ id: z.string() }),
@@ -117,12 +112,11 @@ registry.registerPath({
 });
 
 // DELETE /admin/orders
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/orders',
-  tags: ['API-order'],
+  tags: [API_TAGS.order.name],
   summary: 'Delete a order or orders in the system',
-  operationId: 'deleteOrders',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),

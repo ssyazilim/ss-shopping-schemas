@@ -16,11 +16,4 @@ export const TranslationKeySchema = z
   })
   .meta({ id: 'TranslationKey' });
 
-export const DEFAULT_SYSTEM_LOCALES = [
-  { code: 'tr', language: 'tr-TR', name: 'Türkçe' },
-  { code: 'en', language: 'en-US', name: 'English' },
-  { code: 'ru', language: 'ru-RU', name: 'Русский' },
-  { code: 'sa', language: 'ar-SA', name: 'العربية' },
-  { code: 'fa', language: 'fa-FA', name: 'فارسی' },
-];
 export const DEFAULT_TRANSLATION: ITranslation = getDefaultsForSchema(TranslationSchema);

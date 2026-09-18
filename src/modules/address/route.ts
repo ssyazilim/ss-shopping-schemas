@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ADD_ADDRESS, UPDATE_ADDRESS } from './validation';
 import { AddressSchema } from './schema';
 import {
@@ -7,56 +8,53 @@ import {
   ListQuerySchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   DeleteResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 const addressIdParam = z.object({
   addressId: z.string(),
 });
 
 // GET /public/addresses
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/addresses',
-  tags: ['API-address'],
+  tags: [API_TAGS.address.name],
   summary: 'Get an address for session user from the system',
-  operationId: 'getAddressForUser',
   security: [{ JWT: [] }],
   responses: listResponse(AddressSchema),
 });
 
 // POST /public/address
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/address',
-  tags: ['API-address'],
+  tags: [API_TAGS.address.name],
   summary: 'Add a new address to system',
-  operationId: 'addAddress',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_ADDRESS()) },
-  responses: jsonResponse(AddressSchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // GET /public/address/{addressId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/address/{addressId}',
-  tags: ['API-address'],
+  tags: [API_TAGS.address.name],
   summary: 'Get an address from the system',
-  operationId: 'getAddress',
   security: [{ JWT: [] }],
   request: { params: addressIdParam },
   responses: jsonResponse(AddressSchema),
 });
 
 // PATCH /public/address/{addressId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/public/address/{addressId}',
-  tags: ['API-address'],
+  tags: [API_TAGS.address.name],
   summary: 'Update an address from the system',
-  operationId: 'updateAddress',
   security: [{ JWT: [] }],
   request: {
     params: addressIdParam,
@@ -66,24 +64,22 @@ registry.registerPath({
 });
 
 // DELETE /public/address/{addressId}
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/public/address/{addressId}',
-  tags: ['API-address'],
+  tags: [API_TAGS.address.name],
   summary: 'Delete an address in the system',
-  operationId: 'deleteAddress',
   security: [{ JWT: [] }],
   request: { params: addressIdParam },
   responses: jsonResponse(DeleteResultSchema),
 });
 
 // GET /admin/addresses
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/addresses',
-  tags: ['API-address'],
+  tags: [API_TAGS.address.name],
   summary: 'Get all user addresses in the system',
-  operationId: 'getAddresses',
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema },
   responses: listResponse(AddressSchema),

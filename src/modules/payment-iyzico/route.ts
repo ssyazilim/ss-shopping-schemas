@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { SERVICE_TAGS } from '../../utils/tags';
 import {
   ADD_CARD_IYZICO,
   ADD_PAYMENT_IYZICO,
@@ -22,7 +23,7 @@ import {
   IyzicoSavePaymentCardResultSchema,
   IyzicoThreeDSInitializeResultSchema,
 } from './schema';
-import { buildRequestBody, jsonResponse } from '../common';
+import { buildRequestBody, jsonResponse } from '../../utils/common';
 
 const apiKeyHeaders = z.object({
   'x-api-key': z.string().default('9f3a1c2e-7b4d-4d8f-9a6e-2c1b7e8d5f3a'),
@@ -45,12 +46,11 @@ const iyzicoCallbackHeaders = iyzicoHeaders.extend(callbackHeader);
 const apiKeyIyzicoCallbackHeaders = apiKeyIyzicoHeaders.extend(callbackHeader);
 
 // GET /public/payment-iyzico/check/{paymentId}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/payment-iyzico/check/{paymentId}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Check payment for the IYZICO Service',
-  operationId: 'checkIyzicoPayment',
   security: [{ 'X-API-KEY': [] }],
   request: {
     headers: apiKeyIyzicoHeaders,
@@ -60,13 +60,12 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/IYZICO/{locale}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/IYZICO/{locale}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary:
     'The payment form initiates a session and returns checkoutFormContent, paymentPageUrl, and the transaction token to display the payment page',
-  operationId: 'checkIyzicoHtml',
   security: [{ 'X-API-KEY': [] }],
   request: {
     headers: apiKeyIyzicoCallbackHeaders,
@@ -77,12 +76,11 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/IYZICO/{token}/{locale}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/IYZICO/{token}/{locale}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'After the CF payment form is completed, it queries the results using the token',
-  operationId: 'retrieveIyzicoForm',
   security: [{ 'X-API-KEY': [] }],
   request: {
     headers: apiKeyIyzicoHeaders,
@@ -95,13 +93,12 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/NON-3D/{locale}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/NON-3D/{locale}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary:
     'The Payment Creation API is responsible for processing the customer’s card payments. When this service is used, iyzico provides an immediate response regarding the success of the transaction',
-  operationId: 'createIyzicoPayment',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -112,13 +109,12 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/3D/{locale}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/3D/{locale}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary:
     'It initiates a 3D Secure session and returns the `htmlContent` value for 3DS authentication',
-  operationId: 'createIyzico3DPayment',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoCallbackHeaders,
@@ -129,13 +125,12 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/3D/{paymentId}/{token}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/3D/{paymentId}/{token}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary:
     'After 3DS verification, a request must be sent to this endpoint to complete the payment transaction. This service is triggered using the information received after the verification step and concludes the transaction as either successful or unsuccessful',
-  operationId: 'completeIyzico3DPayment',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -149,12 +144,11 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/check/installment
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/check/installment',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Check installments with the IYZICO Service',
-  operationId: 'checkIyzicoInstallment',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -164,12 +158,11 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/refund/{locale}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/refund/{locale}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Refund a payment transaction with the IYZICO Service',
-  operationId: 'refundIyzicoPayment',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -180,12 +173,11 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/cancel/{locale}
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/cancel/{locale}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Used to cancel a payment transaction',
-  operationId: 'cancelIyzicoPayment',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -196,12 +188,11 @@ registry.registerPath({
 });
 
 // GET /public/payment-iyzico/check-card/{userKey}
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/payment-iyzico/check-card/{userKey}',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Get a special card for the user',
-  operationId: 'getCardWithDetail',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -211,12 +202,11 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/add-card
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/add-card',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Add a new card to the system',
-  operationId: 'addCard',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -226,12 +216,11 @@ registry.registerPath({
 });
 
 // DELETE /public/payment-iyzico/delete-card
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/public/payment-iyzico/delete-card',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Delete a card from the IYZICO Service',
-  operationId: 'deleteCard',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,
@@ -241,12 +230,11 @@ registry.registerPath({
 });
 
 // POST /public/payment-iyzico/validate-card
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/payment-iyzico/validate-card',
-  tags: ['SERVICE-payment-iyzico'],
+  tags: [SERVICE_TAGS.paymentIyzico.name],
   summary: 'Check a card with the IYZICO Service',
-  operationId: 'checkIyzicoCard',
   security: [{ JWT: [] }],
   request: {
     headers: iyzicoHeaders,

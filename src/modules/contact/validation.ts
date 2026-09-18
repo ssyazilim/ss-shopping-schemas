@@ -1,9 +1,7 @@
 import { z } from 'zod';
-import * as locales from '../../locales';
+import { messages } from '../../locales';
 import type { ILocale } from '../../locales';
-import { fields } from '../fields';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
+import { fields } from '../../utils/fields';
 
 export const CONTACT_ME = (locale: ILocale = 'tr') => {
   const m = messages[locale];

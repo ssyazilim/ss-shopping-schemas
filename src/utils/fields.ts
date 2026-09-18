@@ -1,8 +1,6 @@
 import { z } from 'zod';
-import * as locales from '../locales';
+import { messages } from '../locales';
 import type { ILocale } from '../locales';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 const TEXT_MIN = 1;
 const TEXT_MAX = 255;

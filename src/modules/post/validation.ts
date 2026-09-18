@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import type { ILocale } from '../../locales';
 
 export const ADD_POST = (locale: ILocale = 'tr') => {
@@ -16,7 +17,7 @@ export const ADD_POST = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_POST = (locale: ILocale = 'tr') =>
-  ADD_POST(locale).partial().meta({ id: 'UpdatePost' });
+  deepPartial(ADD_POST(locale)).meta({ id: 'UpdatePost' });
 
 export const ADD_POSTS = () => z.array(ADD_POST());
 

@@ -1,18 +1,15 @@
 import { z } from 'zod';
-import { fields } from '../fields';
-import * as locales from '../../locales';
+import { fields } from '../../utils/fields';
+import { messages } from '../../locales';
 import type { ILocale } from '../../locales';
 import { IMAGES } from '../product/validation';
-import { deepPartial } from '../common';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
+import { deepPartial } from '../../utils/common';
 
 export const UPDATE_COMPANY = (locale: ILocale = 'tr') =>
   deepPartial(ADD_COMPANY(locale)).meta({ id: 'UpdateCompany' });
 
 export const UPDATE_COMPANY_PAYMENT = (locale: ILocale = 'tr') =>
-  ADD_COMPANY_PAYMENT(locale)
-    .partial()
+  deepPartial(ADD_COMPANY_PAYMENT(locale))
     .extend({ paymentId: z.string().length(24) })
     .meta({ id: 'UpdateCompanyPayment' });
 

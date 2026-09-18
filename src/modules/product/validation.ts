@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
-import * as locales from '../../locales';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
+import { messages } from '../../locales';
 
 export const IMAGES = (locale: ILocale = 'tr') => {
   const f = fields(locale);
@@ -78,6 +77,6 @@ export const ADD_PRODUCT = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_PRODUCT = (locale: ILocale = 'tr') =>
-  ADD_PRODUCT(locale).partial().meta({ id: 'editProduct' });
+  deepPartial(ADD_PRODUCT(locale)).meta({ id: 'editProduct' });
 
 export const ADD_PRODUCTS = (locale: ILocale = 'tr') => z.array(ADD_PRODUCT(locale));

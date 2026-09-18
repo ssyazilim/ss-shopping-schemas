@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../../registry';
+import { registerRoute } from '../../../utils/registry';
+import { SERVICE_TAGS } from '../../../utils/tags';
 import {
   ADD_OBJECT,
   DELETE_OBJECT,
@@ -19,7 +20,7 @@ import {
   listResponse,
   messageResponse,
   binaryResponse,
-} from '../../common';
+} from '../../../utils/common';
 import {
   ObjectMetadataSchema,
   AddObjectResultSchema,
@@ -33,12 +34,11 @@ import {
 } from '../schema';
 
 // GET /admin/minio/object/check-metadata
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/minio/object/check-metadata',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Get metadata of a specific object',
-  operationId: 'getObjectMetadata',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -50,12 +50,11 @@ registry.registerPath({
 });
 
 // GET /admin/minio/object
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/minio/object',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Get a specific object',
-  operationId: 'getObject',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -67,12 +66,11 @@ registry.registerPath({
 });
 
 // POST /admin/minio/object
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/object',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Upload file to minio',
-  operationId: 'addObject',
   security: [{ JWT: [] }],
   request: {
     body: {
@@ -85,24 +83,22 @@ registry.registerPath({
 });
 
 // DELETE /admin/minio/object
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/minio/object',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Delete a specific object',
-  operationId: 'deleteObject',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DELETE_OBJECT) },
   responses: messageResponse(),
 });
 
 // GET /admin/minio/objects
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/minio/objects',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Lists all objects in a bucket using S3 listing objects V2 API',
-  operationId: 'listObjects',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -128,84 +124,77 @@ registry.registerPath({
 });
 
 // DELETE /admin/minio/objects
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/minio/objects',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Delete multiple objects',
-  operationId: 'deleteObjects',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DELETE_OBJECTS) },
   responses: listResponse(RemoveObjectsResultSchema),
 });
 
 // POST /admin/minio/object/copy
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/object/copy',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Copy an object from one bucket to another',
-  operationId: 'copyObject',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(COPY_OBJECT) },
   responses: jsonResponse(CopyObjectResultSchema),
 });
 
 // POST /admin/minio/object/presigned-url
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/object/presigned-url',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Generates a presigned URL for the provided HTTP method',
-  operationId: 'getPresignedUrl',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(PRESIGNED_URL) },
   responses: jsonResponse(z.string()),
 });
 
 // POST /admin/minio/object/presigned-get-object
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/object/presigned-get-object',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Generates a presigned URL for HTTP GET operations',
-  operationId: 'getPresignedGetObject',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(PRESIGNED_GET_OBJECT) },
   responses: jsonResponse(z.string()),
 });
 
 // POST /admin/minio/object/presigned-put-object
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/object/presigned-put-object',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Generates a presigned URL for HTTP PUT operations',
-  operationId: 'getPresignedPutObject',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(PRESIGNED_PUT_OBJECT) },
   responses: jsonResponse(z.string()),
 });
 
 // POST /admin/minio/folder
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/folder',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Creates an empty folder with a zero byte object',
-  operationId: 'addFolder',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_FOLDER) },
   responses: jsonResponse(AddFolderResultSchema),
 });
 
 // GET /admin/minio/object/tagging
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/minio/object/tagging',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Get tags of a specific object',
-  operationId: 'getObjectTagging',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -217,36 +206,33 @@ registry.registerPath({
 });
 
 // POST /admin/minio/object/tagging
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/minio/object/tagging',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Set tags on a specific object',
-  operationId: 'addObjectTagging',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(SET_OBJECT_TAGGING) },
   responses: messageResponse(),
 });
 
 // DELETE /admin/minio/object/tagging
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/minio/object/tagging',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Remove tags of a specific object',
-  operationId: 'deleteObjectTagging',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DELETE_OBJECT_TAGGING) },
   responses: messageResponse(),
 });
 
 // GET /admin/minio/objects/incomplete-uploads
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/minio/objects/incomplete-uploads',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Get partially uploaded objects in a bucket',
-  operationId: 'listIncompleteUploads',
   security: [{ JWT: [] }],
   request: {
     query: z.object({
@@ -265,24 +251,22 @@ registry.registerPath({
 });
 
 // DELETE /admin/minio/object/incomplete-upload
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/minio/object/incomplete-upload',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Remove a partially uploaded (incomplete) object',
-  operationId: 'deleteIncompleteUpload',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(REMOVE_INCOMPLETE_UPLOAD) },
   responses: messageResponse(),
 });
 
 // GET /admin/minio/object/partial
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/minio/object/partial',
-  tags: ['SERVICE-minio-object-S3'],
+  tags: [SERVICE_TAGS.minioObject.name],
   summary: 'Get a byte range of an object as a binary stream',
-  operationId: 'getPartialObject',
   security: [{ JWT: [] }],
   request: {
     query: z.object({

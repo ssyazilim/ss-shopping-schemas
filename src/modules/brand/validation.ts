@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import type { ILocale } from '../../locales';
 import { IMAGES } from '../product/validation';
 
@@ -16,6 +17,6 @@ export const ADD_BRAND = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_BRAND = (locale: ILocale = 'tr') =>
-  ADD_BRAND(locale).partial().meta({ id: 'UpdateBrand' });
+  deepPartial(ADD_BRAND(locale)).meta({ id: 'UpdateBrand' });
 
 export const ADD_BRANDS = (locale: ILocale = 'tr') => z.array(ADD_BRAND(locale));

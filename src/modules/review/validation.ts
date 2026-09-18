@@ -1,9 +1,7 @@
 import { z } from 'zod';
-import { fields } from '../fields';
-import * as locales from '../../locales';
+import { fields } from '../../utils/fields';
+import { messages } from '../../locales';
 import type { ILocale } from '../../locales';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const ADD_REVIEW = (locale: ILocale = 'tr') => {
   const f = fields(locale);

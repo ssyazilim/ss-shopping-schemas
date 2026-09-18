@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
 
 export const ADD_TRANSLATION = (locale: ILocale = 'tr') => {
@@ -18,4 +19,4 @@ export const ADD_TRANSLATION = (locale: ILocale = 'tr') => {
 export const ADD_TRANSLATIONS = () => z.array(ADD_TRANSLATION());
 
 export const UPDATE_TRANSLATION = () =>
-  ADD_TRANSLATION().partial().meta({ id: 'updateTranslation' });
+  deepPartial(ADD_TRANSLATION()).meta({ id: 'updateTranslation' });

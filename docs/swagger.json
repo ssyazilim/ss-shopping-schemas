@@ -21,27 +21,27 @@
     },
     {
       "name": "API-address",
-      "description": "Addresses for the system"
+      "description": "Addresses"
     },
     {
       "name": "API-agreement",
-      "description": "User agreements for the system"
+      "description": "User agreements"
     },
     {
       "name": "API-brand",
-      "description": "Brands for the system"
+      "description": "Brands"
     },
     {
       "name": "API-cart",
-      "description": "Carts for the system"
+      "description": "Carts"
     },
     {
       "name": "API-category",
-      "description": "Categories for the system"
+      "description": "Categories"
     },
     {
       "name": "API-company",
-      "description": "Company information for the User"
+      "description": "Company information"
     },
     {
       "name": "API-contact",
@@ -49,7 +49,7 @@
     },
     {
       "name": "API-module",
-      "description": "Modules for the system"
+      "description": "Modules"
     },
     {
       "name": "API-header-menu",
@@ -65,47 +65,47 @@
     },
     {
       "name": "API-post",
-      "description": "Posts for the system"
+      "description": "Posts"
     },
     {
       "name": "API-product",
-      "description": "Products for the system"
+      "description": "Products"
     },
     {
       "name": "API-product-variant",
-      "description": "Variants for the products"
+      "description": "Variants"
     },
     {
       "name": "API-question",
-      "description": "Questions for the product"
+      "description": "Questions"
     },
     {
       "name": "API-review",
-      "description": "Reviews for the product"
+      "description": "Reviews"
     },
     {
       "name": "API-traffic",
-      "description": "Web site analysis for users"
+      "description": "Web site analysis"
     },
     {
       "name": "API-translation",
-      "description": "Translations for the system"
+      "description": "Translations"
     },
     {
       "name": "API-user",
-      "description": "User process for users"
+      "description": "User process"
     },
     {
       "name": "SERVICE-countries-cities-districts",
-      "description": "Country State City for the User"
+      "description": "Country State City API"
     },
     {
       "name": "SERVICE-currency",
-      "description": "Currencies for the system"
+      "description": "Currencies"
     },
     {
       "name": "SERVICE-google",
-      "description": "Google operations for the system"
+      "description": "Google operations"
     },
     {
       "name": "SERVICE-minio-bucket-S3",
@@ -125,7 +125,7 @@
     },
     {
       "name": "SERVICE-shipping-geliver",
-      "description": "Shipping calculations for the system"
+      "description": "Shipping operations for the system"
     }
   ],
   "externalDocs": {
@@ -156,82 +156,19 @@
       }
     },
     "schemas": {
-      "PaginationQuery": {
+      "AuthTokens": {
         "type": "object",
         "properties": {
-          "page": {
-            "type": "integer",
-            "minimum": 1,
-            "default": 1
+          "accessToken": {
+            "type": "string"
           },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100,
-            "default": 20
-          }
-        }
-      },
-      "ListQuery": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "minimum": 1,
-            "default": 1
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 5000,
-            "default": 25
-          },
-          "sort": {
-            "type": "string",
-            "default": "updatedAt,desc"
-          },
-          "text": {
-            "type": "string",
-            "default": ""
-          }
-        }
-      },
-      "DateRangeQuery": {
-        "type": "object",
-        "properties": {
-          "startDate": {
-            "type": "string",
-            "examples": [
-              "2024-12-15T00:00:00.000Z"
-            ]
-          },
-          "endDate": {
-            "type": "string",
-            "examples": [
-              "2024-12-15T23:59:59.999Z"
-            ]
-          }
-        }
-      },
-      "ApiSuccess": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "string",
-                "description": "Success message"
-              },
-              "data": {}
-            },
-            "required": [
-              "message"
-            ]
+          "refreshToken": {
+            "type": "string"
           }
         },
         "required": [
-          "success"
+          "accessToken",
+          "refreshToken"
         ]
       },
       "ApiError": {
@@ -252,81 +189,6 @@
         },
         "required": [
           "error"
-        ]
-      },
-      "DeleteModel": {
-        "type": "object",
-        "properties": {
-          "selectedIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "IDs to delete"
-          }
-        },
-        "required": [
-          "selectedIds"
-        ]
-      },
-      "DeleteResult": {
-        "type": "object",
-        "properties": {
-          "acknowledged": {
-            "type": "boolean"
-          },
-          "deletedCount": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "acknowledged",
-          "deletedCount"
-        ]
-      },
-      "UpdateResult": {
-        "type": "object",
-        "properties": {
-          "acknowledged": {
-            "type": "boolean"
-          },
-          "modifiedCount": {
-            "type": "number"
-          },
-          "upsertedId": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "upsertedCount": {
-            "type": "number"
-          },
-          "matchedCount": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "acknowledged",
-          "modifiedCount",
-          "upsertedId",
-          "upsertedCount",
-          "matchedCount"
-        ]
-      },
-      "AuthTokens": {
-        "type": "object",
-        "properties": {
-          "accessToken": {
-            "type": "string"
-          },
-          "refreshToken": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "accessToken",
-          "refreshToken"
         ]
       },
       "loginUser": {
@@ -825,6 +687,28 @@
           "updatedAt"
         ]
       },
+      "InsertResult": {
+        "type": "object",
+        "properties": {
+          "acknowledged": {
+            "type": "boolean"
+          },
+          "insertedCount": {
+            "type": "number"
+          },
+          "insertedIds": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "acknowledged",
+          "insertedCount",
+          "insertedIds"
+        ]
+      },
       "addAddress": {
         "type": "object",
         "properties": {
@@ -880,6 +764,36 @@
           "address"
         ]
       },
+      "UpdateResult": {
+        "type": "object",
+        "properties": {
+          "acknowledged": {
+            "type": "boolean"
+          },
+          "modifiedCount": {
+            "type": "number"
+          },
+          "upsertedId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "upsertedCount": {
+            "type": "number"
+          },
+          "matchedCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "acknowledged",
+          "modifiedCount",
+          "upsertedId",
+          "upsertedCount",
+          "matchedCount"
+        ]
+      },
       "updateAddress": {
         "type": "object",
         "properties": {
@@ -924,6 +838,21 @@
             "maxLength": 255
           }
         }
+      },
+      "DeleteResult": {
+        "type": "object",
+        "properties": {
+          "acknowledged": {
+            "type": "boolean"
+          },
+          "deletedCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "acknowledged",
+          "deletedCount"
+        ]
       },
       "Agreement": {
         "type": "object",
@@ -985,6 +914,21 @@
           "locale",
           "name",
           "content"
+        ]
+      },
+      "DeleteModel": {
+        "type": "object",
+        "properties": {
+          "selectedIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs to delete"
+          }
+        },
+        "required": [
+          "selectedIds"
         ]
       },
       "UpdateAgreement": {
@@ -1157,11 +1101,7 @@
                       "minLength": 1,
                       "maxLength": 255
                     }
-                  },
-                  "required": [
-                    "name",
-                    "image"
-                  ]
+                  }
                 }
               },
               "dynamicImages": {
@@ -1172,11 +1112,7 @@
                   "maxLength": 255
                 }
               }
-            },
-            "required": [
-              "staticImages",
-              "dynamicImages"
-            ]
+            }
           },
           "productCount": {
             "type": "number"
@@ -1982,11 +1918,7 @@
                       "minLength": 1,
                       "maxLength": 255
                     }
-                  },
-                  "required": [
-                    "name",
-                    "image"
-                  ]
+                  }
                 }
               },
               "dynamicImages": {
@@ -1997,11 +1929,7 @@
                   "maxLength": 255
                 }
               }
-            },
-            "required": [
-              "staticImages",
-              "dynamicImages"
-            ]
+            }
           }
         }
       },
@@ -2773,11 +2701,7 @@
                   "minLength": 1,
                   "maxLength": 255
                 }
-              },
-              "required": [
-                "name",
-                "image"
-              ]
+              }
             }
           },
           "favicon": {
@@ -2795,11 +2719,7 @@
                   "minLength": 1,
                   "maxLength": 255
                 }
-              },
-              "required": [
-                "name",
-                "image"
-              ]
+              }
             }
           },
           "description": {
@@ -2890,13 +2810,35 @@
           "socialMedia": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanySocialMedia"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "link": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "icon": {
+                  "type": "string"
+                }
+              }
             }
           },
           "payments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyPayment"
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "content": {}
+              }
             }
           },
           "properties": {
@@ -3823,8 +3765,6 @@
           },
           "startdate": {
             "type": "string",
-            "minLength": 12,
-            "maxLength": 12,
             "default": "010620261530"
           },
           "messages": {
@@ -3963,12 +3903,18 @@
         "type": "object",
         "properties": {
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HeaderMenuItem"
+            "type": "object",
+            "properties": {
+              "types": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/HeaderMenuItem"
+                }
+              }
             },
-            "minItems": 1,
-            "maxItems": 6
+            "required": [
+              "types"
+            ]
           },
           "_id": {
             "type": "string"
@@ -3990,43 +3936,6 @@
       "HeaderMenuItem": {
         "type": "object",
         "properties": {
-          "label": {
-            "type": "object",
-            "properties": {
-              "tr": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "en": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "ru": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "ar": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "fa": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              }
-            },
-            "required": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
           "type": {
             "type": "string",
             "enum": [
@@ -4034,165 +3943,88 @@
               "popover"
             ]
           },
-          "href": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "index",
-                  "products",
-                  "posts",
-                  "public",
-                  "public-corporate",
-                  "public-corporate-about-us",
-                  "public-faq",
-                  "public-agreements",
-                  "public-contact",
-                  "public-contact-simple",
-                  "public-contact-career",
-                  "public-payment"
-                ]
-              },
-              {
-                "type": "string",
-                "enum": [
-                  ""
-                ]
-              }
-            ]
+          "route": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 255
+          },
+          "labelKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "pageKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
           },
           "order": {
-            "type": "number"
+            "type": "integer",
+            "minimum": 0
           },
           "disabled": {
-            "type": "boolean"
-          },
-          "showNewsFeed": {
             "type": "boolean"
           },
           "subItems": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HeaderMenuSubItem"
-            },
-            "maxItems": 6
+            }
           }
         },
         "required": [
-          "label",
           "type",
-          "href",
+          "route",
+          "labelKey",
+          "pageKey",
           "order",
           "disabled",
-          "showNewsFeed",
           "subItems"
         ]
       },
       "HeaderMenuSubItem": {
         "type": "object",
         "properties": {
-          "label": {
-            "type": "object",
-            "properties": {
-              "tr": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "en": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "ru": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "ar": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              },
-              "fa": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 254
-              }
-            },
-            "required": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
-          "description": {
-            "type": "object",
-            "properties": {
-              "tr": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 500
-              },
-              "en": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 500
-              },
-              "ru": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 500
-              },
-              "ar": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 500
-              },
-              "fa": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 500
-              }
-            },
-            "required": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
-          "href": {
+          "kind": {
             "type": "string",
             "enum": [
-              "index",
-              "products",
-              "posts",
-              "public",
-              "public-corporate",
-              "public-corporate-about-us",
-              "public-faq",
-              "public-agreements",
-              "public-contact",
-              "public-contact-simple",
-              "public-contact-career",
-              "public-payment"
+              "static",
+              "page"
             ]
           },
+          "route": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "labelKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "descriptionKey": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 65534
+          },
+          "pageKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
           "order": {
-            "type": "number"
+            "type": "integer",
+            "minimum": 0
           },
           "disabled": {
             "type": "boolean"
           }
         },
         "required": [
-          "label",
-          "description",
-          "href",
+          "kind",
+          "route",
+          "labelKey",
+          "pageKey",
           "order",
           "disabled"
         ]
@@ -4204,9 +4036,7 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HeaderMenuItem"
-            },
-            "minItems": 1,
-            "maxItems": 6
+            }
           }
         },
         "required": [
@@ -4992,7 +4822,7 @@
             "minLength": 1,
             "maxLength": 255
           },
-          "language": {
+          "languageId": {
             "type": "string",
             "minLength": 2,
             "maxLength": 2
@@ -5038,7 +4868,7 @@
           "status",
           "orderId",
           "orderNumber",
-          "language",
+          "languageId",
           "user",
           "payment",
           "buyer",
@@ -5506,7 +5336,7 @@
             "minLength": 1,
             "maxLength": 255
           },
-          "language": {
+          "languageId": {
             "type": "string",
             "minLength": 2,
             "maxLength": 2
@@ -5878,7 +5708,7 @@
           "status",
           "orderId",
           "orderNumber",
-          "language",
+          "languageId",
           "user",
           "payment",
           "buyer",
@@ -5906,7 +5736,7 @@
             "minLength": 1,
             "maxLength": 255
           },
-          "language": {
+          "languageId": {
             "type": "string",
             "minLength": 2,
             "maxLength": 2
@@ -5934,13 +5764,7 @@
                 "type": "string",
                 "format": "email"
               }
-            },
-            "required": [
-              "id",
-              "contactName",
-              "phoneNumber",
-              "email"
-            ]
+            }
           },
           "payment": {
             "type": "object",
@@ -5968,13 +5792,7 @@
                 "minLength": 1,
                 "maxLength": 255
               }
-            },
-            "required": [
-              "id",
-              "method",
-              "status",
-              "provider"
-            ]
+            }
           },
           "buyer": {
             "type": "object",
@@ -6023,17 +5841,7 @@
                 "minLength": 0,
                 "maxLength": 255
               }
-            },
-            "required": [
-              "contactName",
-              "email",
-              "identityNumber",
-              "registrationAddress",
-              "country",
-              "city",
-              "district",
-              "zipCode"
-            ]
+            }
           },
           "shippingAddress": {
             "type": "object",
@@ -6073,16 +5881,7 @@
                 "minLength": 1,
                 "maxLength": 255
               }
-            },
-            "required": [
-              "name",
-              "surname",
-              "country",
-              "city",
-              "district",
-              "address",
-              "zipCode"
-            ]
+            }
           },
           "billingAddress": {
             "type": "object",
@@ -6122,16 +5921,7 @@
                 "minLength": 1,
                 "maxLength": 255
               }
-            },
-            "required": [
-              "name",
-              "surname",
-              "country",
-              "city",
-              "district",
-              "address",
-              "zipCode"
-            ]
+            }
           },
           "basketItems": {
             "type": "array",
@@ -6155,12 +5945,7 @@
                   "type": "integer",
                   "minimum": 1
                 }
-              },
-              "required": [
-                "productId",
-                "variantId",
-                "quantity"
-              ]
+              }
             }
           },
           "shipment": {
@@ -6264,52 +6049,32 @@
                 "minLength": 0,
                 "maxLength": 255
               }
-            },
-            "required": [
-              "method",
-              "statusCode",
-              "offerProviderCode",
-              "offerTotalAmount",
-              "desi"
-            ]
+            }
           }
         }
       },
       "PageListItem": {
         "type": "object",
         "properties": {
-          "translationKey": {
+          "key": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "locale": {
-            "type": "string",
-            "enum": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
-          "title": {
+          "slugKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "slug": {
+          "titleKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "description": {
+          "descriptionKey": {
             "type": "string",
             "minLength": 0,
             "maxLength": 255
-          },
-          "companyId": {
-            "type": "string"
           },
           "_id": {
             "type": "string"
@@ -6322,11 +6087,9 @@
           }
         },
         "required": [
-          "translationKey",
-          "locale",
-          "title",
-          "slug",
-          "companyId",
+          "key",
+          "slugKey",
+          "titleKey",
           "_id",
           "createdAt",
           "updatedAt"
@@ -6335,32 +6098,22 @@
       "Page": {
         "type": "object",
         "properties": {
-          "translationKey": {
+          "key": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "locale": {
-            "type": "string",
-            "enum": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
-          "title": {
+          "slugKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "slug": {
+          "titleKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "description": {
+          "descriptionKey": {
             "type": "string",
             "minLength": 0,
             "maxLength": 255
@@ -6369,9 +6122,6 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 65535
-          },
-          "companyId": {
-            "type": "string"
           },
           "_id": {
             "type": "string"
@@ -6384,12 +6134,10 @@
           }
         },
         "required": [
-          "translationKey",
-          "locale",
-          "title",
-          "slug",
+          "key",
+          "slugKey",
+          "titleKey",
           "markdown",
-          "companyId",
           "_id",
           "createdAt",
           "updatedAt"
@@ -6398,32 +6146,22 @@
       "AddPage": {
         "type": "object",
         "properties": {
-          "translationKey": {
+          "key": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "locale": {
-            "type": "string",
-            "enum": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
-          "title": {
+          "slugKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "slug": {
+          "titleKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "description": {
+          "descriptionKey": {
             "type": "string",
             "minLength": 0,
             "maxLength": 255
@@ -6435,42 +6173,31 @@
           }
         },
         "required": [
-          "translationKey",
-          "locale",
-          "title",
-          "slug",
+          "key",
+          "slugKey",
+          "titleKey",
           "markdown"
         ]
       },
       "UpdatePage": {
         "type": "object",
         "properties": {
-          "translationKey": {
+          "key": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "locale": {
-            "type": "string",
-            "enum": [
-              "tr",
-              "en",
-              "ru",
-              "ar",
-              "fa"
-            ]
-          },
-          "title": {
+          "slugKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "slug": {
+          "titleKey": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
-          "description": {
+          "descriptionKey": {
             "type": "string",
             "minLength": 0,
             "maxLength": 255
@@ -8574,11 +8301,7 @@
                       "minLength": 1,
                       "maxLength": 255
                     }
-                  },
-                  "required": [
-                    "name",
-                    "image"
-                  ]
+                  }
                 }
               },
               "dynamicImages": {
@@ -8589,11 +8312,7 @@
                   "maxLength": 255
                 }
               }
-            },
-            "required": [
-              "staticImages",
-              "dynamicImages"
-            ]
+            }
           },
           "price": {
             "type": "object",
@@ -8628,16 +8347,7 @@
                 "type": "integer",
                 "minimum": 0
               }
-            },
-            "required": [
-              "currency",
-              "purchase",
-              "sell",
-              "dealerCode",
-              "shipping",
-              "discountAmount",
-              "taxAmount"
-            ]
+            }
           },
           "stockQuantity": {
             "type": "integer",
@@ -8677,12 +8387,7 @@
               "isShippingFree": {
                 "type": "boolean"
               }
-            },
-            "required": [
-              "hidePrice",
-              "isFeatured",
-              "isShippingFree"
-            ]
+            }
           }
         }
       },
@@ -12556,6 +12261,92 @@
           "type"
         ]
       },
+      "analyze": {
+        "type": "object",
+        "properties": {
+          "visitorId": {
+            "type": "string"
+          },
+          "userAgent": {
+            "type": "string"
+          },
+          "referrer": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "visitorId",
+          "userAgent",
+          "referrer"
+        ]
+      },
+      "VisitorStatistics": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "totalRequests": {
+            "type": "number"
+          },
+          "referrerRequests": {
+            "type": "number"
+          },
+          "directRequests": {
+            "type": "number"
+          },
+          "botRequests": {
+            "type": "number"
+          },
+          "topBrowsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopItem"
+            }
+          },
+          "topCities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopItem"
+            }
+          },
+          "topDevices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopItem"
+            }
+          }
+        },
+        "required": [
+          "_id",
+          "date",
+          "totalRequests",
+          "referrerRequests",
+          "directRequests",
+          "botRequests",
+          "topBrowsers",
+          "topCities",
+          "topDevices"
+        ]
+      },
+      "TopItem": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "value",
+          "count"
+        ]
+      },
       "Visitor": {
         "type": "object",
         "properties": {
@@ -12693,92 +12484,6 @@
           "os",
           "device",
           "cpu"
-        ]
-      },
-      "analyze": {
-        "type": "object",
-        "properties": {
-          "visitorId": {
-            "type": "string"
-          },
-          "userAgent": {
-            "type": "string"
-          },
-          "referrer": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "visitorId",
-          "userAgent",
-          "referrer"
-        ]
-      },
-      "VisitorStatistics": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "date": {
-            "type": "string"
-          },
-          "totalRequests": {
-            "type": "number"
-          },
-          "referrerRequests": {
-            "type": "number"
-          },
-          "directRequests": {
-            "type": "number"
-          },
-          "botRequests": {
-            "type": "number"
-          },
-          "topBrowsers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TopItem"
-            }
-          },
-          "topCities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TopItem"
-            }
-          },
-          "topDevices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TopItem"
-            }
-          }
-        },
-        "required": [
-          "_id",
-          "date",
-          "totalRequests",
-          "referrerRequests",
-          "directRequests",
-          "botRequests",
-          "topBrowsers",
-          "topCities",
-          "topDevices"
-        ]
-      },
-      "TopItem": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          },
-          "count": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "value",
-          "count"
         ]
       },
       "Translation": {
@@ -13120,7 +12825,6 @@
           "API-authentication"
         ],
         "summary": "Login process for the User in the system",
-        "operationId": "loginUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13191,7 +12895,6 @@
           "API-authentication"
         ],
         "summary": "Add a new user to system",
-        "operationId": "addUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13262,7 +12965,6 @@
           "API-authentication"
         ],
         "summary": "Check User key in the system",
-        "operationId": "checkUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13333,7 +13035,6 @@
           "API-authentication"
         ],
         "summary": "Activate User in the system",
-        "operationId": "activateUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13404,7 +13105,6 @@
           "API-authentication"
         ],
         "summary": "Refresh code for the activation in the system",
-        "operationId": "refreshCode",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13475,7 +13175,6 @@
           "API-authentication"
         ],
         "summary": "User can be reset password using this api",
-        "operationId": "passwordResetUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13550,7 +13249,6 @@
           "API-authentication"
         ],
         "summary": "User can be reset password for using this api",
-        "operationId": "passwordResetCompleteUser",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13621,7 +13319,6 @@
           "API-address"
         ],
         "summary": "Get an address for session user from the system",
-        "operationId": "getAddressForUser",
         "security": [
           {
             "JWT": []
@@ -13681,7 +13378,6 @@
           "API-address"
         ],
         "summary": "Add a new address to system",
-        "operationId": "addAddress",
         "security": [
           {
             "JWT": []
@@ -13722,7 +13418,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Address"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -13757,7 +13453,6 @@
           "API-address"
         ],
         "summary": "Get an address from the system",
-        "operationId": "getAddress",
         "security": [
           {
             "JWT": []
@@ -13822,7 +13517,6 @@
           "API-address"
         ],
         "summary": "Update an address from the system",
-        "operationId": "updateAddress",
         "security": [
           {
             "JWT": []
@@ -13906,7 +13600,6 @@
           "API-address"
         ],
         "summary": "Delete an address in the system",
-        "operationId": "deleteAddress",
         "security": [
           {
             "JWT": []
@@ -13973,7 +13666,6 @@
           "API-address"
         ],
         "summary": "Get all user addresses in the system",
-        "operationId": "getAddresses",
         "security": [
           {
             "JWT": []
@@ -14074,7 +13766,6 @@
           "API-agreement"
         ],
         "summary": "Get all agreements in the system",
-        "operationId": "getAgreements",
         "parameters": [
           {
             "schema": {
@@ -14192,7 +13883,6 @@
           "API-agreement"
         ],
         "summary": "Get an agreement from the system",
-        "operationId": "getAgreement",
         "parameters": [
           {
             "schema": {
@@ -14268,7 +13958,6 @@
           "API-agreement"
         ],
         "summary": "Add new agreement to the system",
-        "operationId": "addAgreement",
         "security": [
           {
             "JWT": []
@@ -14309,7 +13998,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Agreement"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -14342,7 +14031,6 @@
           "API-agreement"
         ],
         "summary": "Delete agreements from the system",
-        "operationId": "deleteAgreements",
         "security": [
           {
             "JWT": []
@@ -14418,7 +14106,6 @@
           "API-agreement"
         ],
         "summary": "Update an agreement from the system",
-        "operationId": "updateAgreement",
         "security": [
           {
             "JWT": []
@@ -14504,7 +14191,6 @@
           "API-brand"
         ],
         "summary": "Get all brands in the system",
-        "operationId": "getBrands",
         "parameters": [
           {
             "schema": {
@@ -14600,7 +14286,6 @@
           "API-brand"
         ],
         "summary": "Get a brand from the system",
-        "operationId": "getBrand",
         "parameters": [
           {
             "schema": {
@@ -14662,7 +14347,6 @@
           "API-brand"
         ],
         "summary": "Add new brands to the system",
-        "operationId": "addBrand",
         "security": [
           {
             "JWT": []
@@ -14703,7 +14387,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Brand"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -14736,7 +14420,6 @@
           "API-brand"
         ],
         "summary": "Delete brands from the system",
-        "operationId": "deleteBrands",
         "security": [
           {
             "JWT": []
@@ -14812,7 +14495,6 @@
           "API-brand"
         ],
         "summary": "Update a brand from the system",
-        "operationId": "updateBrand",
         "security": [
           {
             "JWT": []
@@ -14898,7 +14580,6 @@
           "API-cart"
         ],
         "summary": "Get a cart from the system for User",
-        "operationId": "getCartWithUserId",
         "security": [
           {
             "JWT": []
@@ -14953,7 +14634,6 @@
           "API-cart"
         ],
         "summary": "Add a new cart to system for User",
-        "operationId": "addCart",
         "security": [
           {
             "JWT": []
@@ -15008,7 +14688,6 @@
           "API-cart"
         ],
         "summary": "Clear all entries of the cart for User",
-        "operationId": "clearCart",
         "security": [
           {
             "JWT": []
@@ -15065,7 +14744,6 @@
           "API-cart"
         ],
         "summary": "Add or remove product for cart",
-        "operationId": "addToCart",
         "security": [
           {
             "JWT": []
@@ -15141,7 +14819,6 @@
           "API-cart"
         ],
         "summary": "Get all carts in the system",
-        "operationId": "getCarts",
         "security": [
           {
             "JWT": []
@@ -15264,7 +14941,6 @@
           "API-cart"
         ],
         "summary": "Get a cart from the system",
-        "operationId": "getCart",
         "security": [
           {
             "JWT": []
@@ -15331,7 +15007,6 @@
           "API-cart"
         ],
         "summary": "Delete a cart or carts in the system",
-        "operationId": "deleteCarts",
         "security": [
           {
             "JWT": []
@@ -15407,7 +15082,6 @@
           "API-category"
         ],
         "summary": "Get all categories in the system",
-        "operationId": "getCategories",
         "parameters": [
           {
             "schema": {
@@ -15503,7 +15177,6 @@
           "API-category"
         ],
         "summary": "Add a new category to system",
-        "operationId": "addCategory",
         "security": [
           {
             "JWT": []
@@ -15544,7 +15217,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Category"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -15577,7 +15250,6 @@
           "API-category"
         ],
         "summary": "Delete a categories in the system",
-        "operationId": "deleteCategories",
         "security": [
           {
             "JWT": []
@@ -15653,7 +15325,6 @@
           "API-category"
         ],
         "summary": "Update a category from the system",
-        "operationId": "updateCategory",
         "security": [
           {
             "JWT": []
@@ -15739,7 +15410,6 @@
           "API-company"
         ],
         "summary": "Get a company information in the system",
-        "operationId": "getCompany",
         "responses": {
           "200": {
             "description": "OK",
@@ -15791,7 +15461,6 @@
           "API-company"
         ],
         "summary": "Add a company information for the system",
-        "operationId": "addCompany",
         "security": [
           {
             "JWT": []
@@ -15832,7 +15501,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Company"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -15867,7 +15536,6 @@
           "API-company"
         ],
         "summary": "Update a company to the system",
-        "operationId": "updateCompany",
         "security": [
           {
             "JWT": []
@@ -15953,7 +15621,6 @@
           "API-company"
         ],
         "summary": "Add a company payment for the system",
-        "operationId": "addCompanyPayments",
         "security": [
           {
             "JWT": []
@@ -16040,7 +15707,6 @@
           "API-company"
         ],
         "summary": "Update a company payment for the system",
-        "operationId": "updateCompanyPayments",
         "security": [
           {
             "JWT": []
@@ -16127,7 +15793,6 @@
           "API-company"
         ],
         "summary": "Delete a company payment in the system",
-        "operationId": "deleteCompanyPayments",
         "security": [
           {
             "JWT": []
@@ -16216,7 +15881,6 @@
           "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a Countries for the user",
-        "operationId": "getCountries",
         "responses": {
           "200": {
             "description": "OK",
@@ -16265,13 +15929,12 @@
         }
       }
     },
-    "/public/countries/{countryCode}/cities": {
+    "/public/country/{countryCode}/cities": {
       "get": {
         "tags": [
           "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a States or Cities for the user",
-        "operationId": "getStates",
         "parameters": [
           {
             "schema": {
@@ -16333,13 +15996,12 @@
         }
       }
     },
-    "/public/countries/{countryCode}/cities/{cityCode}/districts": {
+    "/public/country/{countryCode}/city/{cityCode}/districts": {
       "get": {
         "tags": [
           "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a Districts for the user",
-        "operationId": "getDistricts",
         "parameters": [
           {
             "schema": {
@@ -16412,13 +16074,12 @@
         }
       }
     },
-    "/public/geliver/countries/{countryCode}/cities": {
+    "/public/geliver/country/{countryCode}/cities": {
       "get": {
         "tags": [
           "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a States or Cities for the user using geliver.io service",
-        "operationId": "getGeliverStates",
         "parameters": [
           {
             "schema": {
@@ -16480,13 +16141,12 @@
         }
       }
     },
-    "/public/geliver/countries/{countryCode}/cities/{cityCode}/districts": {
+    "/public/geliver/country/{countryCode}/city/{cityCode}/districts": {
       "get": {
         "tags": [
           "SERVICE-countries-cities-districts"
         ],
         "summary": "Get a Districts for the user using geliver.io service",
-        "operationId": "getGeliverDistricts",
         "parameters": [
           {
             "schema": {
@@ -16565,7 +16225,6 @@
           "SERVICE-currency"
         ],
         "summary": "Get all currencies in the system",
-        "operationId": "getCurrencies",
         "responses": {
           "200": {
             "description": "OK",
@@ -16621,7 +16280,6 @@
         ],
         "summary": "Converts the sent rate to the desired rate",
         "description": "TRY = Turkish Lira | USD = American Dollar | EUR = Euro | GBP = British Pound Sterling | CHF = Switzerland Frank | JPY = Japanese Yen | SAR = Saudi Riyal | NOK = Norwegian Krone | DKK = Danish Krone | AUD = Australian Dollar | CAD = Canada Dollar | SEK = Swedish Krone | SRU = Russian Ruble",
-        "operationId": "listCurrency",
         "security": [
           {
             "JWT": []
@@ -16713,7 +16371,6 @@
           "API-module"
         ],
         "summary": "Get modules in the system",
-        "operationId": "getModules",
         "security": [
           {
             "X-API-KEY": []
@@ -16823,7 +16480,6 @@
           "API-module"
         ],
         "summary": "Get a module by key in the system",
-        "operationId": "getModuleByKey",
         "security": [
           {
             "X-API-KEY": []
@@ -16894,7 +16550,6 @@
           "API-module"
         ],
         "summary": "Update a module in the system",
-        "operationId": "updateModule",
         "security": [
           {
             "JWT": []
@@ -16983,7 +16638,6 @@
           "API-contact"
         ],
         "summary": "Send a Customer message to system",
-        "operationId": "sendMessageToSystem",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17054,7 +16708,6 @@
           "API-contact"
         ],
         "summary": "User can be upload a file (xml, pdf)",
-        "operationId": "addFile",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -17115,7 +16768,6 @@
           "API-contact"
         ],
         "summary": "Send a Customer resume to the authorities",
-        "operationId": "sendResume",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17186,7 +16838,6 @@
           "API-contact"
         ],
         "summary": "Send a Customer error message to system",
-        "operationId": "sendErrorMessageToSystem",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17257,7 +16908,6 @@
           "API-contact"
         ],
         "summary": "Check your SMTP settings is valid",
-        "operationId": "checkSMTP",
         "security": [
           {
             "JWT": []
@@ -17333,7 +16983,6 @@
           "SERVICE-google"
         ],
         "summary": "Get Google categories from the system",
-        "operationId": "getGoogleCategories",
         "parameters": [
           {
             "schema": {
@@ -17405,7 +17054,6 @@
           "SERVICE-google"
         ],
         "summary": "Translate a prompt selected language",
-        "operationId": "translatePrompt",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17476,7 +17124,6 @@
           "SERVICE-google"
         ],
         "summary": "Add your email to subscription list",
-        "operationId": "addMailToSubscription",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17547,7 +17194,6 @@
           "SERVICE-google"
         ],
         "summary": "Send a prompt to Gemini AI",
-        "operationId": "sendGeminiPrompt",
         "security": [
           {
             "JWT": []
@@ -17623,7 +17269,6 @@
           "SERVICE-message-netgsm"
         ],
         "summary": "Send a sms for specific turkish number",
-        "operationId": "sendSMS",
         "security": [
           {
             "X-API-KEY": []
@@ -17713,7 +17358,6 @@
           "SERVICE-message-netgsm"
         ],
         "summary": "List message headers for send sms",
-        "operationId": "checkReport",
         "security": [
           {
             "JWT": []
@@ -17780,7 +17424,6 @@
           "SERVICE-message-netgsm"
         ],
         "summary": "Check balance situation for the sms",
-        "operationId": "checkBalance",
         "security": [
           {
             "JWT": []
@@ -17852,7 +17495,6 @@
           "SERVICE-message-netgsm"
         ],
         "summary": "List message headers for send sms",
-        "operationId": "listHeaders",
         "security": [
           {
             "JWT": []
@@ -17909,7 +17551,6 @@
           "API-header-menu"
         ],
         "summary": "Get the header menu of the storefront",
-        "operationId": "getHeaderMenu",
         "responses": {
           "200": {
             "description": "OK",
@@ -17961,7 +17602,6 @@
           "API-header-menu"
         ],
         "summary": "Update the header menu of the storefront",
-        "operationId": "updateHeaderMenu",
         "security": [
           {
             "JWT": []
@@ -18002,7 +17642,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/HeaderMenu"
+                          "$ref": "#/components/schemas/UpdateResult"
                         }
                       },
                       "required": [
@@ -18037,7 +17677,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get all buckets in the system",
-        "operationId": "getBuckets",
         "security": [
           {
             "JWT": []
@@ -18097,7 +17736,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get bucket information in the system",
-        "operationId": "getBucket",
         "security": [
           {
             "JWT": []
@@ -18165,7 +17803,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Add bucket for the system",
-        "operationId": "addBucket",
         "security": [
           {
             "JWT": []
@@ -18229,7 +17866,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Delete empty bucket for the system",
-        "operationId": "deleteBucket",
         "security": [
           {
             "JWT": []
@@ -18295,7 +17931,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get Versioning state of a Bucket",
-        "operationId": "getBucketVersion",
         "security": [
           {
             "JWT": []
@@ -18365,7 +18000,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get the region of a Bucket",
-        "operationId": "getBucketRegion",
         "security": [
           {
             "JWT": []
@@ -18435,7 +18069,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Add bucket version for the bucket",
-        "operationId": "addBucketVersion",
         "security": [
           {
             "JWT": []
@@ -18507,7 +18140,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get Lifecycle Configuration of a Bucket",
-        "operationId": "getBucketConfig",
         "security": [
           {
             "JWT": []
@@ -18582,7 +18214,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Delete Lifecycle Configuration of a Bucket",
-        "operationId": "deleteBucketConfig",
         "security": [
           {
             "JWT": []
@@ -18648,7 +18279,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Set Lifecycle Configuration on a Bucket",
-        "operationId": "addBucketConfig",
         "security": [
           {
             "JWT": []
@@ -18720,7 +18350,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get access policy of a Bucket",
-        "operationId": "getBucketPolicy",
         "security": [
           {
             "JWT": []
@@ -18790,7 +18419,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Set access policy on a Bucket",
-        "operationId": "addBucketPolicy",
         "security": [
           {
             "JWT": []
@@ -18862,7 +18490,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get default encryption configuration of a Bucket",
-        "operationId": "getBucketEncryption",
         "security": [
           {
             "JWT": []
@@ -18930,7 +18557,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Remove default encryption configuration of a Bucket",
-        "operationId": "deleteBucketEncryption",
         "security": [
           {
             "JWT": []
@@ -18996,7 +18622,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Set default encryption configuration on a Bucket",
-        "operationId": "addBucketEncryption",
         "security": [
           {
             "JWT": []
@@ -19068,7 +18693,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Get tags of a Bucket",
-        "operationId": "getBucketTagging",
         "security": [
           {
             "JWT": []
@@ -19139,7 +18763,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Remove tags of a Bucket",
-        "operationId": "deleteBucketTagging",
         "security": [
           {
             "JWT": []
@@ -19205,7 +18828,6 @@
           "SERVICE-minio-bucket-S3"
         ],
         "summary": "Set tags on a Bucket",
-        "operationId": "addBucketTagging",
         "security": [
           {
             "JWT": []
@@ -19277,7 +18899,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Get metadata of a specific object",
-        "operationId": "getObjectMetadata",
         "security": [
           {
             "JWT": []
@@ -19358,7 +18979,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Get a specific object",
-        "operationId": "getObject",
         "security": [
           {
             "JWT": []
@@ -19417,7 +19037,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Upload file to minio",
-        "operationId": "addObject",
         "security": [
           {
             "JWT": []
@@ -19481,7 +19100,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Delete a specific object",
-        "operationId": "deleteObject",
         "security": [
           {
             "JWT": []
@@ -19553,7 +19171,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Lists all objects in a bucket using S3 listing objects V2 API",
-        "operationId": "listObjects",
         "security": [
           {
             "JWT": []
@@ -19670,7 +19287,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Delete multiple objects",
-        "operationId": "deleteObjects",
         "security": [
           {
             "JWT": []
@@ -19749,7 +19365,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Copy an object from one bucket to another",
-        "operationId": "copyObject",
         "security": [
           {
             "JWT": []
@@ -19825,7 +19440,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Generates a presigned URL for the provided HTTP method",
-        "operationId": "getPresignedUrl",
         "security": [
           {
             "JWT": []
@@ -19901,7 +19515,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Generates a presigned URL for HTTP GET operations",
-        "operationId": "getPresignedGetObject",
         "security": [
           {
             "JWT": []
@@ -19977,7 +19590,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Generates a presigned URL for HTTP PUT operations",
-        "operationId": "getPresignedPutObject",
         "security": [
           {
             "JWT": []
@@ -20053,7 +19665,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Creates an empty folder with a zero byte object",
-        "operationId": "addFolder",
         "security": [
           {
             "JWT": []
@@ -20129,7 +19740,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Get tags of a specific object",
-        "operationId": "getObjectTagging",
         "security": [
           {
             "JWT": []
@@ -20211,7 +19821,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Set tags on a specific object",
-        "operationId": "addObjectTagging",
         "security": [
           {
             "JWT": []
@@ -20281,7 +19890,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Remove tags of a specific object",
-        "operationId": "deleteObjectTagging",
         "security": [
           {
             "JWT": []
@@ -20353,7 +19961,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Get partially uploaded objects in a bucket",
-        "operationId": "listIncompleteUploads",
         "security": [
           {
             "JWT": []
@@ -20452,7 +20059,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Remove a partially uploaded (incomplete) object",
-        "operationId": "deleteIncompleteUpload",
         "security": [
           {
             "JWT": []
@@ -20524,7 +20130,6 @@
           "SERVICE-minio-object-S3"
         ],
         "summary": "Get a byte range of an object as a binary stream",
-        "operationId": "getPartialObject",
         "security": [
           {
             "JWT": []
@@ -20613,7 +20218,6 @@
           "API-order"
         ],
         "summary": "Get order in the system",
-        "operationId": "getPublicOrder",
         "parameters": [
           {
             "schema": {
@@ -20675,7 +20279,6 @@
           "API-order"
         ],
         "summary": "Get User order in system",
-        "operationId": "getOrder",
         "security": [
           {
             "X-API-KEY": []
@@ -20757,7 +20360,6 @@
           "API-order"
         ],
         "summary": "Save order to the system",
-        "operationId": "saveOrder",
         "security": [
           {
             "X-API-KEY": []
@@ -20844,7 +20446,6 @@
           "API-order"
         ],
         "summary": "Get User Orders in the system",
-        "operationId": "getOrdersForTheUser",
         "security": [
           {
             "JWT": []
@@ -20956,7 +20557,6 @@
           "API-order"
         ],
         "summary": "Get all orders in the system",
-        "operationId": "getOrdersAdmin",
         "security": [
           {
             "JWT": []
@@ -21088,7 +20688,6 @@
           "API-order"
         ],
         "summary": "Delete a order or orders in the system",
-        "operationId": "deleteOrders",
         "security": [
           {
             "JWT": []
@@ -21164,7 +20763,6 @@
           "API-order"
         ],
         "summary": "Update order in the system",
-        "operationId": "updateOrder",
         "security": [
           {
             "JWT": []
@@ -21250,38 +20848,6 @@
           "API-page"
         ],
         "summary": "Get all pages of the storefront without markdown content",
-        "operationId": "getPages",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                "68b1f0c2a4d3e51f2c9b7a10"
-              ]
-            },
-            "required": true,
-            "name": "companyId",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "tr",
-                "en",
-                "ru",
-                "ar",
-                "fa"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": false,
-            "name": "locale",
-            "in": "query"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -21330,53 +20896,25 @@
         }
       }
     },
-    "/public/page/{slug}": {
+    "/public/page/{key}": {
       "get": {
         "tags": [
           "API-page"
         ],
-        "summary": "Get a page with its markdown content by slug",
-        "operationId": "getPage",
+        "summary": "Get a page with its markdown content by key",
         "parameters": [
           {
             "schema": {
               "type": "string",
+              "minLength": 1,
+              "maxLength": 255,
               "examples": [
-                "hakkimizda"
+                "about-us"
               ]
             },
             "required": true,
-            "name": "slug",
+            "name": "key",
             "in": "path"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "examples": [
-                "68b1f0c2a4d3e51f2c9b7a10"
-              ]
-            },
-            "required": true,
-            "name": "companyId",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "tr",
-                "en",
-                "ru",
-                "ar",
-                "fa"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": true,
-            "name": "locale",
-            "in": "query"
           }
         ],
         "responses": {
@@ -21429,8 +20967,7 @@
         "tags": [
           "API-page"
         ],
-        "summary": "Get all pages in the system with pagination, search and locale filter",
-        "operationId": "getAdminPages",
+        "summary": "Get all pages in the system with pagination and search",
         "security": [
           {
             "JWT": []
@@ -21474,24 +21011,6 @@
             },
             "required": false,
             "name": "text",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "tr",
-                "en",
-                "ru",
-                "ar",
-                "fa"
-              ],
-              "examples": [
-                "tr"
-              ]
-            },
-            "required": false,
-            "name": "locale",
             "in": "query"
           }
         ],
@@ -21549,7 +21068,6 @@
           "API-page"
         ],
         "summary": "Get a page from the system",
-        "operationId": "getAdminPage",
         "security": [
           {
             "JWT": []
@@ -21614,7 +21132,6 @@
           "API-page"
         ],
         "summary": "Update a page from the system",
-        "operationId": "updatePage",
         "security": [
           {
             "JWT": []
@@ -21700,7 +21217,6 @@
           "API-page"
         ],
         "summary": "Add a new page to the system",
-        "operationId": "addPage",
         "security": [
           {
             "JWT": []
@@ -21741,7 +21257,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Page"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -21774,7 +21290,6 @@
           "API-page"
         ],
         "summary": "Delete a page or pages in the system",
-        "operationId": "deletePages",
         "security": [
           {
             "JWT": []
@@ -21850,7 +21365,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Check payment for the IYZICO Service",
-        "operationId": "checkIyzicoPayment",
         "security": [
           {
             "X-API-KEY": []
@@ -21953,7 +21467,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "The payment form initiates a session and returns checkoutFormContent, paymentPageUrl, and the transaction token to display the payment page",
-        "operationId": "checkIyzicoHtml",
         "security": [
           {
             "X-API-KEY": []
@@ -22089,7 +21602,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "After the CF payment form is completed, it queries the results using the token",
-        "operationId": "retrieveIyzicoForm",
         "security": [
           {
             "X-API-KEY": []
@@ -22205,7 +21717,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "The Payment Creation API is responsible for processing the customer’s card payments. When this service is used, iyzico provides an immediate response regarding the success of the transaction",
-        "operationId": "createIyzicoPayment",
         "security": [
           {
             "JWT": []
@@ -22323,7 +21834,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "It initiates a 3D Secure session and returns the `htmlContent` value for 3DS authentication",
-        "operationId": "createIyzico3DPayment",
         "security": [
           {
             "JWT": []
@@ -22450,7 +21960,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "After 3DS verification, a request must be sent to this endpoint to complete the payment transaction. This service is triggered using the information received after the verification step and concludes the transaction as either successful or unsuccessful",
-        "operationId": "completeIyzico3DPayment",
         "security": [
           {
             "JWT": []
@@ -22571,7 +22080,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Check installments with the IYZICO Service",
-        "operationId": "checkIyzicoInstallment",
         "security": [
           {
             "JWT": []
@@ -22676,7 +22184,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Refund a payment transaction with the IYZICO Service",
-        "operationId": "refundIyzicoPayment",
         "security": [
           {
             "JWT": []
@@ -22794,7 +22301,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Used to cancel a payment transaction",
-        "operationId": "cancelIyzicoPayment",
         "security": [
           {
             "JWT": []
@@ -22912,7 +22418,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Get a special card for the user",
-        "operationId": "getCardWithDetail",
         "security": [
           {
             "JWT": []
@@ -23006,7 +22511,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Add a new card to the system",
-        "operationId": "addCard",
         "security": [
           {
             "JWT": []
@@ -23111,7 +22615,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Delete a card from the IYZICO Service",
-        "operationId": "deleteCard",
         "security": [
           {
             "JWT": []
@@ -23216,7 +22719,6 @@
           "SERVICE-payment-iyzico"
         ],
         "summary": "Check a card with the IYZICO Service",
-        "operationId": "checkIyzicoCard",
         "security": [
           {
             "JWT": []
@@ -23321,7 +22823,6 @@
           "API-post"
         ],
         "summary": "Get all posts total count in the system",
-        "operationId": "getPostTotal",
         "responses": {
           "200": {
             "description": "OK",
@@ -23373,7 +22874,6 @@
           "API-post"
         ],
         "summary": "Get all posts in the system",
-        "operationId": "getPosts",
         "parameters": [
           {
             "schema": {
@@ -23502,7 +23002,6 @@
           "API-post"
         ],
         "summary": "Get a post from the system",
-        "operationId": "getPost",
         "parameters": [
           {
             "schema": {
@@ -23575,7 +23074,6 @@
           "API-post"
         ],
         "summary": "Add a like or dislike to post in the system",
-        "operationId": "likePosts",
         "security": [
           {
             "JWT": []
@@ -23662,7 +23160,6 @@
           "API-post"
         ],
         "summary": "Add a comment to post in the system",
-        "operationId": "commentBlogs",
         "security": [
           {
             "JWT": []
@@ -23748,7 +23245,6 @@
           "API-post"
         ],
         "summary": "Add a new post to system",
-        "operationId": "addPost",
         "security": [
           {
             "JWT": []
@@ -23789,7 +23285,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Post"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -23822,7 +23318,6 @@
           "API-post"
         ],
         "summary": "Delete a post or posts in the system",
-        "operationId": "deletePosts",
         "security": [
           {
             "JWT": []
@@ -23898,7 +23393,6 @@
           "API-post"
         ],
         "summary": "Update a post from the system",
-        "operationId": "updatePost",
         "security": [
           {
             "JWT": []
@@ -23984,7 +23478,6 @@
           "API-product"
         ],
         "summary": "Get all products in the system",
-        "operationId": "getProducts",
         "parameters": [
           {
             "schema": {
@@ -24099,7 +23592,6 @@
           "API-product"
         ],
         "summary": "Get all best products and variants in the system",
-        "operationId": "getItems",
         "parameters": [
           {
             "schema": {
@@ -24167,7 +23659,6 @@
           "API-product"
         ],
         "summary": "Get all products in the system with Google XML format",
-        "operationId": "getProductsGoogleXML",
         "responses": {
           "200": {
             "description": "Google Merchant product feed",
@@ -24198,7 +23689,6 @@
           "API-product"
         ],
         "summary": "Get all products in the system with Yandex XML format",
-        "operationId": "getProductsYandexXML",
         "responses": {
           "200": {
             "description": "Yandex product feed",
@@ -24229,7 +23719,6 @@
           "API-product"
         ],
         "summary": "Get a product from the system",
-        "operationId": "getProduct",
         "parameters": [
           {
             "schema": {
@@ -24302,7 +23791,6 @@
           "API-product"
         ],
         "summary": "Check product and variant count in the system",
-        "operationId": "countProducts",
         "security": [
           {
             "JWT": []
@@ -24371,7 +23859,6 @@
           "API-product"
         ],
         "summary": "Update sku for all items in the system",
-        "operationId": "updateSkuForItems",
         "security": [
           {
             "JWT": []
@@ -24424,7 +23911,6 @@
           "API-product"
         ],
         "summary": "Update tax for all items in the system",
-        "operationId": "updateTaxForItems",
         "security": [
           {
             "JWT": []
@@ -24512,7 +23998,6 @@
           "API-product"
         ],
         "summary": "Add a new product to system",
-        "operationId": "addProduct",
         "security": [
           {
             "JWT": []
@@ -24553,7 +24038,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Product"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -24586,7 +24071,6 @@
           "API-product"
         ],
         "summary": "Delete a product or products in the system",
-        "operationId": "deleteProduct",
         "security": [
           {
             "JWT": []
@@ -24662,7 +24146,6 @@
           "API-product"
         ],
         "summary": "Update a product in the system",
-        "operationId": "updateProduct",
         "security": [
           {
             "JWT": []
@@ -24748,7 +24231,6 @@
           "API-product"
         ],
         "summary": "Get all products in the system for the admin panel",
-        "operationId": "getAdminProducts",
         "security": [
           {
             "JWT": []
@@ -24849,7 +24331,6 @@
           "API-product-variant"
         ],
         "summary": "Get all variants in the system",
-        "operationId": "getVariants",
         "parameters": [
           {
             "schema": {
@@ -24945,7 +24426,6 @@
           "API-product-variant"
         ],
         "summary": "Get a product variants from the system",
-        "operationId": "getProductVariants",
         "parameters": [
           {
             "schema": {
@@ -25010,7 +24490,6 @@
           "API-product-variant"
         ],
         "summary": "Add a new variant to system",
-        "operationId": "addVariant",
         "security": [
           {
             "JWT": []
@@ -25061,7 +24540,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Variant"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -25094,7 +24573,6 @@
           "API-product-variant"
         ],
         "summary": "Update a variant in the system",
-        "operationId": "updateVariant",
         "security": [
           {
             "JWT": []
@@ -25180,7 +24658,6 @@
           "API-product-variant"
         ],
         "summary": "Delete a variant or variants in the system",
-        "operationId": "deleteVariant",
         "security": [
           {
             "JWT": []
@@ -25256,7 +24733,6 @@
           "API-product-variant"
         ],
         "summary": "Add a new variants to product in the system",
-        "operationId": "addVariantsMulti",
         "security": [
           {
             "JWT": []
@@ -25297,10 +24773,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/components/schemas/Variant"
-                          }
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -25335,7 +24808,6 @@
           "API-question"
         ],
         "summary": "Get all questions for a product",
-        "operationId": "getQuestionsForProduct",
         "parameters": [
           {
             "schema": {
@@ -25439,7 +24911,6 @@
           "API-question"
         ],
         "summary": "Get user questions in the system",
-        "operationId": "getQuestions",
         "security": [
           {
             "JWT": []
@@ -25554,7 +25025,6 @@
           "API-question"
         ],
         "summary": "Add a new question for a product",
-        "operationId": "addQuestion",
         "security": [
           {
             "JWT": []
@@ -25605,7 +25075,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Question"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -25640,7 +25110,6 @@
           "API-question"
         ],
         "summary": "Update a question",
-        "operationId": "updateQuestion",
         "security": [
           {
             "JWT": []
@@ -25724,7 +25193,6 @@
           "API-question"
         ],
         "summary": "Delete a question",
-        "operationId": "deleteQuestion",
         "security": [
           {
             "JWT": []
@@ -25791,7 +25259,6 @@
           "API-question"
         ],
         "summary": "Get all questions in the system",
-        "operationId": "getQuestionsAdmin",
         "security": [
           {
             "JWT": []
@@ -25906,7 +25373,6 @@
           "API-question"
         ],
         "summary": "Add an admin question for a product",
-        "operationId": "addQuestionAdmin",
         "security": [
           {
             "JWT": []
@@ -25965,7 +25431,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Question"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -26000,7 +25466,6 @@
           "API-question"
         ],
         "summary": "Update a question as admin",
-        "operationId": "updateQuestionAdmin",
         "security": [
           {
             "JWT": []
@@ -26086,7 +25551,6 @@
           "API-question"
         ],
         "summary": "Delete questions from the system",
-        "operationId": "deleteQuestionsAdmin",
         "security": [
           {
             "JWT": []
@@ -26162,7 +25626,6 @@
           "API-review"
         ],
         "summary": "Get all reviews for a product",
-        "operationId": "getReviewsForProduct",
         "parameters": [
           {
             "schema": {
@@ -26266,7 +25729,6 @@
           "API-review"
         ],
         "summary": "Get user reviews in the system",
-        "operationId": "getReviews",
         "security": [
           {
             "JWT": []
@@ -26381,7 +25843,6 @@
           "API-review"
         ],
         "summary": "Add a new review for a product",
-        "operationId": "addReview",
         "security": [
           {
             "JWT": []
@@ -26432,7 +25893,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Review"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -26467,7 +25928,6 @@
           "API-review"
         ],
         "summary": "Update a review",
-        "operationId": "updateReview",
         "security": [
           {
             "JWT": []
@@ -26551,7 +26011,6 @@
           "API-review"
         ],
         "summary": "Delete a review",
-        "operationId": "deleteReview",
         "security": [
           {
             "JWT": []
@@ -26618,7 +26077,6 @@
           "API-review"
         ],
         "summary": "Get all reviews in the system",
-        "operationId": "getReviewsAdmin",
         "security": [
           {
             "JWT": []
@@ -26733,7 +26191,6 @@
           "API-review"
         ],
         "summary": "Add an admin review for a product",
-        "operationId": "addReviewAdmin",
         "security": [
           {
             "JWT": []
@@ -26792,7 +26249,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Review"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -26827,7 +26284,6 @@
           "API-review"
         ],
         "summary": "Update a review as admin",
-        "operationId": "updateReviewAdmin",
         "security": [
           {
             "JWT": []
@@ -26913,7 +26369,6 @@
           "API-review"
         ],
         "summary": "Delete reviews from the system",
-        "operationId": "deleteReviewsAdmin",
         "security": [
           {
             "JWT": []
@@ -26989,7 +26444,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Get price list for parcel dimensions",
-        "operationId": "getShippingPrices",
         "security": [],
         "parameters": [
           {
@@ -27116,7 +26570,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "List shipment templates",
-        "operationId": "getShippingTemplates",
         "security": [],
         "parameters": [
           {
@@ -27180,7 +26633,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Download label PDF for a shipment",
-        "operationId": "getShippingShipmentLabelPDF",
         "security": [],
         "parameters": [
           {
@@ -27232,7 +26684,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Download responsive label HTML for a shipment",
-        "operationId": "getShippingShipmentLabelHTML",
         "security": [],
         "parameters": [
           {
@@ -27284,7 +26735,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipping address",
-        "operationId": "addShippingAddress",
         "security": [
           {
             "X-API-KEY": []
@@ -27380,7 +26830,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "List shipping addresses",
-        "operationId": "getShippingAddresses",
         "security": [
           {
             "X-API-KEY": []
@@ -27486,7 +26935,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipment",
-        "operationId": "addShippingShipment",
         "security": [
           {
             "X-API-KEY": []
@@ -27582,7 +27030,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Accept an offer (purchase label)",
-        "operationId": "acceptShippingOffer",
         "security": [
           {
             "X-API-KEY": []
@@ -27667,7 +27114,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Get organisation balance information",
-        "operationId": "getShippingBalance",
         "security": [
           {
             "JWT": []
@@ -27743,7 +27189,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Get a specific shipping address",
-        "operationId": "getShippingAddress",
         "security": [
           {
             "JWT": []
@@ -27817,7 +27262,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipping address",
-        "operationId": "deleteShippingAddress",
         "security": [
           {
             "JWT": []
@@ -27893,7 +27337,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "List shipments",
-        "operationId": "getShippingShipments",
         "security": [
           {
             "JWT": []
@@ -27988,7 +27431,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Get a specific shipment",
-        "operationId": "getShippingShipment",
         "security": [
           {
             "JWT": []
@@ -28064,7 +27506,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Update package dimensions for a shipment",
-        "operationId": "patchShippingPackage",
         "security": [
           {
             "JWT": []
@@ -28159,7 +27600,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Cancel a shipment",
-        "operationId": "deleteShippingShipment",
         "security": [
           {
             "JWT": []
@@ -28235,7 +27675,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Clone a shipment",
-        "operationId": "cloneShippingShipment",
         "security": [
           {
             "JWT": []
@@ -28311,7 +27750,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Create a return shipment",
-        "operationId": "returnShippingShipment",
         "security": [
           {
             "JWT": []
@@ -28406,7 +27844,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Create and purchase a return shipment label",
-        "operationId": "acceptShippingReturn",
         "security": [
           {
             "JWT": []
@@ -28501,7 +27938,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "One-step label purchase",
-        "operationId": "createShippingShipment",
         "security": [
           {
             "JWT": []
@@ -28588,7 +28024,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Add a shipment template",
-        "operationId": "createShippingTemplate",
         "security": [
           {
             "JWT": []
@@ -28675,7 +28110,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipment template",
-        "operationId": "deleteShippingTemplate",
         "security": [
           {
             "JWT": []
@@ -28751,7 +28185,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "List shipping provider accounts",
-        "operationId": "getShippingProviders",
         "security": [
           {
             "JWT": []
@@ -28819,7 +28252,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipping provider account",
-        "operationId": "createShippingProvider",
         "security": [
           {
             "JWT": []
@@ -28906,7 +28338,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipping provider",
-        "operationId": "deleteShippingProvider",
         "security": [
           {
             "JWT": []
@@ -28982,7 +28413,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "List shipping webhooks",
-        "operationId": "getShippingWebhooks",
         "security": [
           {
             "JWT": []
@@ -29053,7 +28483,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Create a shipping webhook",
-        "operationId": "createShippingWebhook",
         "security": [
           {
             "JWT": []
@@ -29140,7 +28569,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Test a shipping webhook",
-        "operationId": "testShippingWebhook",
         "security": [
           {
             "JWT": []
@@ -29227,7 +28655,6 @@
           "SERVICE-shipping-geliver"
         ],
         "summary": "Delete a shipping webhook",
-        "operationId": "deleteShippingWebhook",
         "security": [
           {
             "JWT": []
@@ -29303,7 +28730,6 @@
           "API-traffic"
         ],
         "summary": "Analyze the web site traffic",
-        "operationId": "analyzeTraffic",
         "requestBody": {
           "content": {
             "application/json": {
@@ -29339,7 +28765,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Visitor"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -29374,7 +28800,6 @@
           "API-traffic"
         ],
         "summary": "Get all visitors in the system",
-        "operationId": "getTrafficsAdmin",
         "security": [
           {
             "JWT": []
@@ -29458,7 +28883,6 @@
           "API-traffic"
         ],
         "summary": "Get all organic visitors in the system",
-        "operationId": "getOrganicTrafficsAdmin",
         "security": [
           {
             "JWT": []
@@ -29603,7 +29027,6 @@
           "API-traffic"
         ],
         "summary": "Delete a customer traffic from the system",
-        "operationId": "deleteVisitor",
         "security": [
           {
             "JWT": []
@@ -29679,7 +29102,6 @@
           "API-translation"
         ],
         "summary": "Get all translations in the system",
-        "operationId": "getTranslations",
         "parameters": [
           {
             "schema": {
@@ -29797,7 +29219,6 @@
           "API-translation"
         ],
         "summary": "Get a translation from the system",
-        "operationId": "getTranslation",
         "parameters": [
           {
             "schema": {
@@ -29871,7 +29292,6 @@
           "API-translation"
         ],
         "summary": "Get a specific key translation in the system",
-        "operationId": "getTranslationByKey",
         "security": [
           {
             "JWT": []
@@ -29950,7 +29370,6 @@
           "API-translation"
         ],
         "summary": "Add a new translation to system",
-        "operationId": "addTranslation",
         "security": [
           {
             "JWT": []
@@ -29991,7 +29410,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Translation"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -30024,7 +29443,6 @@
           "API-translation"
         ],
         "summary": "Delete a translation or translations in the system",
-        "operationId": "deleteTranslations",
         "security": [
           {
             "JWT": []
@@ -30100,7 +29518,6 @@
           "API-translation"
         ],
         "summary": "Update a translation from the system",
-        "operationId": "updateTranslation",
         "security": [
           {
             "JWT": []
@@ -30186,7 +29603,6 @@
           "API-user"
         ],
         "summary": "Get a user from the system",
-        "operationId": "getUser",
         "parameters": [
           {
             "schema": {
@@ -30251,7 +29667,6 @@
           "API-user"
         ],
         "summary": "Edit user information",
-        "operationId": "editUser",
         "security": [
           {
             "JWT": []
@@ -30325,7 +29740,6 @@
           "API-user"
         ],
         "summary": "Delete user account",
-        "operationId": "deleteUser",
         "security": [
           {
             "JWT": []
@@ -30401,7 +29815,6 @@
           "API-user"
         ],
         "summary": "Get all users in the system",
-        "operationId": "getUsers",
         "security": [
           {
             "JWT": []
@@ -30502,7 +29915,6 @@
           "API-user"
         ],
         "summary": "Add a customer to the system",
-        "operationId": "addCustomer",
         "security": [
           {
             "JWT": []
@@ -30543,7 +29955,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/User"
+                          "$ref": "#/components/schemas/InsertResult"
                         }
                       },
                       "required": [
@@ -30576,7 +29988,6 @@
           "API-user"
         ],
         "summary": "Delete customers from the system",
-        "operationId": "deleteCustomer",
         "security": [
           {
             "JWT": []
@@ -30652,7 +30063,6 @@
           "API-user"
         ],
         "summary": "Update a customer in the system",
-        "operationId": "updateCustomer",
         "security": [
           {
             "JWT": []

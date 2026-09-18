@@ -1,27 +1,26 @@
 import { z } from 'zod';
-import { registry } from '../registry';
-import { jsonResponse, listResponse } from '../common';
+import { registerRoute } from '../../utils/registry';
+import { SERVICE_TAGS } from '../../utils/tags';
+import { jsonResponse, listResponse } from '../../utils/common';
 import { CurrencySchema } from './schema';
 
 // GET /public/currencies
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/currencies',
-  tags: ['SERVICE-currency'],
+  tags: [SERVICE_TAGS.currency.name],
   summary: 'Get all currencies in the system',
-  operationId: 'getCurrencies',
   responses: listResponse(CurrencySchema),
 });
 
 // GET /public/currencies/exchange
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/currencies/exchange',
-  tags: ['SERVICE-currency'],
+  tags: [SERVICE_TAGS.currency.name],
   summary: 'Converts the sent rate to the desired rate',
   description:
     'TRY = Turkish Lira | USD = American Dollar | EUR = Euro | GBP = British Pound Sterling | CHF = Switzerland Frank | JPY = Japanese Yen | SAR = Saudi Riyal | NOK = Norwegian Krone | DKK = Danish Krone | AUD = Australian Dollar | CAD = Canada Dollar | SEK = Swedish Krone | SRU = Russian Ruble',
-  operationId: 'listCurrency',
   security: [{ JWT: [] }],
   request: {
     query: z.object({

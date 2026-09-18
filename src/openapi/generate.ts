@@ -1,6 +1,7 @@
 import { OpenApiGeneratorV31 } from '@asteasolutions/zod-to-openapi';
 import { writeFileSync } from 'node:fs';
 import { registry } from '../modules';
+import { OPENAPI_TAGS } from '../utils/tags';
 
 registry.registerComponent('securitySchemes', 'JWT', {
   type: 'http',
@@ -29,42 +30,7 @@ const document = generator.generateDocument({
     license: { name: 'MIT', url: 'https://opensource.org/licenses/MIT' },
     version: '1.0.11',
   },
-  tags: [
-    { name: 'API-authentication', description: 'API authentications process for users' },
-    { name: 'API-address', description: 'Addresses for the system' },
-    { name: 'API-agreement', description: 'User agreements for the system' },
-    { name: 'API-brand', description: 'Brands for the system' },
-    { name: 'API-cart', description: 'Carts for the system' },
-    { name: 'API-category', description: 'Categories for the system' },
-    { name: 'API-company', description: 'Company information for the User' },
-    { name: 'API-contact', description: 'Contact forms for users' },
-    { name: 'API-module', description: 'Modules for the system' },
-    { name: 'API-header-menu', description: 'Header menu of the storefront' },
-    { name: 'API-order', description: 'User order information' },
-    { name: 'API-page', description: 'Markdown pages for the storefront' },
-    { name: 'API-post', description: 'Posts for the system' },
-    { name: 'API-product', description: 'Products for the system' },
-    { name: 'API-product-variant', description: 'Variants for the products' },
-    { name: 'API-question', description: 'Questions for the product' },
-    { name: 'API-review', description: 'Reviews for the product' },
-    { name: 'API-traffic', description: 'Web site analysis for users' },
-    { name: 'API-translation', description: 'Translations for the system' },
-    { name: 'API-user', description: 'User process for users' },
-    { name: 'SERVICE-countries-cities-districts', description: 'Country State City for the User' },
-    { name: 'SERVICE-currency', description: 'Currencies for the system' },
-    { name: 'SERVICE-google', description: 'Google operations for the system' },
-    {
-      name: 'SERVICE-minio-bucket-S3',
-      description: 'Simple Storage Service for the bucket operations',
-    },
-    {
-      name: 'SERVICE-minio-object-S3',
-      description: 'Simple Storage Service for the object operations',
-    },
-    { name: 'SERVICE-message-netgsm', description: 'GSM service operations for the system' },
-    { name: 'SERVICE-payment-iyzico', description: 'Iyzico payment operations' },
-    { name: 'SERVICE-shipping-geliver', description: 'Shipping calculations for the system' },
-  ],
+  tags: OPENAPI_TAGS,
   externalDocs: {
     description: 'Find out more about Swagger',
     url: 'https://swagger.io',

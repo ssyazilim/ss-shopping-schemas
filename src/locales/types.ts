@@ -1,4 +1,4 @@
-export type ILocale = 'tr' | 'en' | 'ru' | 'ar' | 'fa';
+export type { ILocale } from '../modules/locale/schema';
 
 export type INotifications = {
   public_forms_validations_required: string;
@@ -10,6 +10,7 @@ export type INotifications = {
   public_forms_validations_phoneNumber: string;
   public_forms_validations_cardNumber: string;
   public_forms_validations_url: string;
+  public_forms_validations_noSpace: string;
   public_forms_validations_minLength: (min: number) => string;
   public_forms_validations_maxLength: (max: number) => string;
   public_forms_validations_minItems: (min: number) => string;

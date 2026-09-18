@@ -45,6 +45,13 @@ export const UpdateMongoSchema = z.object({
   matchedCount: z.number(),
 });
 
+export type IInsertMongo = z.infer<typeof InsertMongoSchema>;
+export const InsertMongoSchema = z.object({
+  acknowledged: z.boolean(),
+  insertedCount: z.number(),
+  insertedIds: z.record(z.string(), z.string()),
+});
+
 export type IDeleteMongo = z.infer<typeof DeleteMongoSchema>;
 export const DeleteMongoSchema = z.object({
   acknowledged: z.boolean(),

@@ -1,81 +1,54 @@
 import { z } from 'zod';
-import * as locales from '../../locales';
-import type { ILocale } from '../../locales';
+import { fields } from '../../utils/fields';
+import  { ILocale } from '../../locales';
+import { messages } from '../../locales';
 
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
-
-export const HEADER_MENU_LOCALES = ['tr', 'en', 'ru', 'ar', 'fa'] as const;
-
-export const HEADER_MENU_MAX_ITEMS = 6;
-
-export const HEADER_MENU_MAX_SUB_ITEMS = 6;
-
-export type IHeaderMenuRoute = z.infer<typeof HeaderMenuRouteSchema>;
-export const HeaderMenuRouteSchema = z.enum([
-  'index',
-  'products',
-  'posts',
-  'public',
-  'public-corporate',
-  'public-corporate-about-us',
-  'public-faq',
-  'public-agreements',
-  'public-contact',
-  'public-contact-simple',
-  'public-contact-career',
-  'public-payment',
-]);
-
-export const HEADER_MENU_ROUTES = HeaderMenuRouteSchema.options;
-
-const LOCALIZED_TEXT = (locale: ILocale = 'tr', max = 254) => {
+export const ADD_MENU_SUB_ITEM = (locale: ILocale = 'tr') => {
   const m = messages[locale];
-  const field = z
-    .string()
-    .min(1, { message: m.public_forms_validations_required })
-    .max(max, { message: m.public_forms_validations_maxLength(max) });
+  const f = fields(locale);
+  return z.object({
+    kind: z.enum(['static', 'page']),
+    route: f.text().refine((s) => !s.includes(' '), { message: m.public_forms_validations_email }),
+    labelKey: f
+      .text()
+      .refine((s) => !s.includes(' '), { message: m.public_forms_validations_email }),
+    descriptionKey: f.text(0, 65534).optional(),
+    pageKey: f
+      .text()
+      .refine((s) => !s.includes(' '), { message: m.public_forms_validations_email }),
+    order: z
+      .number({ message: m.public_forms_validations_mustNumber })
+      .int({ message: m.public_forms_validations_mustNumberInteger })
+      .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
+    disabled: z.boolean(),
+  }).meta({ id: 'HeaderMenuSubItem' });
+}
 
-  return z.object({ tr: field, en: field, ru: field, ar: field, fa: field });
-};
-
-export const ADD_HEADER_MENU_SUB_ITEM = (locale: ILocale = 'tr') =>
-  z
-    .object({
-      label: LOCALIZED_TEXT(locale),
-      description: LOCALIZED_TEXT(locale, 500),
-      href: HeaderMenuRouteSchema,
-      order: z.number(),
-      disabled: z.boolean(),
-    })
-    .meta({ id: 'HeaderMenuSubItem' });
-
-export const ADD_HEADER_MENU_ITEM = (locale: ILocale = 'tr') => {
+export const ADD_MENU_ITEM = (locale: ILocale = 'tr') => {
   const m = messages[locale];
+  const f = fields(locale);
   return z
     .object({
-      label: LOCALIZED_TEXT(locale),
       type: z.enum(['link', 'popover']),
-      href: z.union([HeaderMenuRouteSchema, z.literal('')]),
-      order: z.number(),
+      route: f
+        .text(0)
+        .refine((s) => !s.includes(' '), { message: m.public_forms_validations_email }),
+      labelKey: f
+        .text()
+        .refine((s) => !s.includes(' '), { message: m.public_forms_validations_email }),
+      pageKey: f
+        .text()
+        .refine((s) => !s.includes(' '), { message: m.public_forms_validations_email }),
+      order: z
+        .number({ message: m.public_forms_validations_mustNumber })
+        .int({ message: m.public_forms_validations_mustNumberInteger })
+        .nonnegative({ message: m.public_forms_validations_mustNumberPositive }),
       disabled: z.boolean(),
-      showNewsFeed: z.boolean(),
-      subItems: z.array(ADD_HEADER_MENU_SUB_ITEM(locale)).max(HEADER_MENU_MAX_SUB_ITEMS, {
-        message: m.public_forms_validations_maxItems(HEADER_MENU_MAX_SUB_ITEMS),
-      }),
+      subItems: z.array(ADD_MENU_SUB_ITEM()),
     })
     .meta({ id: 'HeaderMenuItem' });
-};
+}
 
 export const UPDATE_HEADER_MENU = (locale: ILocale = 'tr') => {
-  const m = messages[locale];
-  return z
-    .object({
-      items: z
-        .array(ADD_HEADER_MENU_ITEM(locale))
-        .min(1, { message: m.public_forms_validations_minItems(1) })
-        .max(HEADER_MENU_MAX_ITEMS, {
-          message: m.public_forms_validations_maxItems(HEADER_MENU_MAX_ITEMS),
-        }),
-    })
-    .meta({ id: 'UpdateHeaderMenu' });
-};
+  return z.object({ items: z.array(ADD_MENU_ITEM(locale)) }).meta({ id: 'UpdateHeaderMenu' });
+}

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import type { ILocale } from '../../locales';
 
 export const ADD_AGREEMENT = (locale: ILocale = 'tr') => {
@@ -15,6 +16,6 @@ export const ADD_AGREEMENT = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_AGREEMENT = (locale: ILocale = 'tr') =>
-  ADD_AGREEMENT(locale).partial().meta({ id: 'UpdateAgreement' });
+  deepPartial(ADD_AGREEMENT(locale)).meta({ id: 'UpdateAgreement' });
 
 export const ADD_AGREEMENTS = (locale: ILocale = 'tr') => z.array(ADD_AGREEMENT(locale));

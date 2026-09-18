@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import type { ILocale } from '../../locales';
 
 export const ADD_ADDRESS = (locale: ILocale = 'tr') => {
@@ -20,4 +21,4 @@ export const ADD_ADDRESS = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_ADDRESS = (locale: ILocale = 'tr') =>
-  ADD_ADDRESS(locale).partial().meta({ id: 'updateAddress' });
+  deepPartial(ADD_ADDRESS(locale)).meta({ id: 'updateAddress' });

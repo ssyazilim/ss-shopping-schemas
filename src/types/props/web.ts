@@ -3,6 +3,7 @@ import type { IAddress } from '../../modules/address/schema';
 import type { IBrand } from '../../modules/brand/schema';
 import type { ICategory, ICategoryMenu } from '../../modules/category/schema';
 import type { ICompany, IProductSettings, IShippingOptions } from '../../modules/company/schema';
+import type { IHeaderMenuItem } from '../../modules/header-menu/schema';
 import type { IOrder, IOrderBasketItem } from '../../modules/order/schema';
 import type { IPost } from '../../modules/post/schema';
 import type { IProduct } from '../../modules/product/schema';
@@ -10,7 +11,7 @@ import type { IQuestion } from '../../modules/question/schema';
 import type { IReview } from '../../modules/review/schema';
 import type { ICard } from '../../modules/payment-iyzico/schema';
 import type { IImageData } from '../common';
-import type { ILink, INavigation, ISecondaryNavigation } from '../menu';
+import type { INavigation, ISecondaryNavigation } from '../menu';
 import type { IInputType, IInputMode } from './admin';
 import type { IDealerPricesWithDesi } from '../../modules/geliver/schema';
 
@@ -412,7 +413,7 @@ export interface PPRadioListNoButton {
 
 export interface PPSelectCheck {
   data?: { name?: string; [key: string]: any }[];
-  modelValue?: string;
+  modelValue?: string | number;
   type?: string;
   labelTitle?: string;
   inputClass?: string;
@@ -546,8 +547,7 @@ export interface PPPrivateSidebarMobile {
 }
 
 export interface PPDefaultHeaderMobile {
-  resources?: ILink[];
-  solutions?: ILink[];
+  items?: IHeaderMenuItem[];
   isAuthenticated?: boolean;
   mobileMenuOpen?: boolean;
 }

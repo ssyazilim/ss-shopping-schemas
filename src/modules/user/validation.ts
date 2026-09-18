@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { fields } from '../fields';
-import * as locales from '../../locales';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
+import { messages } from '../../locales';
 import type { ILocale } from '../../locales';
 import { ADD_USER } from '../auth/validation';
 import { IMAGES } from '../product/validation';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
   const f = fields(locale);
@@ -22,11 +21,10 @@ export const ADD_CUSTOMER = (locale: ILocale = 'tr') => {
     .meta({ id: 'customer' });
 };
 export const ADD_CUSTOMERS = () => z.array(ADD_CUSTOMER());
-export const UPDATE_CUSTOMER = () => ADD_CUSTOMER().partial().meta({ id: 'updateCustomer' });
+export const UPDATE_CUSTOMER = () => deepPartial(ADD_CUSTOMER()).meta({ id: 'updateCustomer' });
 export const EDIT_USER = (locale: ILocale = 'tr') => {
   const f = fields(locale);
-  return ADD_USER(locale)
-    .partial()
+  return deepPartial(ADD_USER(locale))
     .extend({
       oldPassword: f.text(8, 64).optional(),
       profileImage: IMAGES(locale).shape.staticImages.optional(),

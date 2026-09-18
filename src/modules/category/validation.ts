@@ -1,14 +1,11 @@
 import { z } from 'zod';
-import { fields } from '../fields';
-import * as locales from '../../locales';
+import { deepPartial } from '../../utils/common';
+import { fields } from '../../utils/fields';
 import type { ILocale } from '../../locales';
 import { IMAGES } from '../product/validation';
 
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
-
 export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
   const f = fields(locale);
-  const m = messages[locale];
 
   return z
     .object({
@@ -21,6 +18,6 @@ export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
 };
 
 export const UPDATE_CATEGORY = (locale: ILocale = 'tr') =>
-  ADD_CATEGORY(locale).partial().meta({ id: 'UpdateCategory' });
+  deepPartial(ADD_CATEGORY(locale)).meta({ id: 'UpdateCategory' });
 
 export const ADD_CATEGORIES = (locale: ILocale = 'tr') => z.array(ADD_CATEGORY(locale));

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ANALYZE } from './validation';
 import { VisitorSchema, VisitorStatisticsSchema } from './schema';
 import {
@@ -9,39 +10,37 @@ import {
   DeleteModelSchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   DeleteResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 // POST /public/traffic/analyze
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/public/traffic/analyze',
-  tags: ['API-traffic'],
+  tags: [API_TAGS.traffic.name],
   summary: 'Analyze the web site traffic',
-  operationId: 'analyzeTraffic',
   request: { body: buildRequestBody(ANALYZE()) },
-  responses: jsonResponse(VisitorSchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // GET /admin/traffic/analyze-traffic
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/traffic/analyze-traffic',
-  tags: ['API-traffic'],
+  tags: [API_TAGS.traffic.name],
   summary: 'Get all visitors in the system',
-  operationId: 'getTrafficsAdmin',
   security: [{ JWT: [] }],
   request: { query: z.object({ ...DateRangeQuerySchema.shape }) },
   responses: listResponse(VisitorStatisticsSchema),
 });
 
 // GET /admin/traffic/analyze-organic-traffic
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/admin/traffic/analyze-organic-traffic',
-  tags: ['API-traffic'],
+  tags: [API_TAGS.traffic.name],
   summary: 'Get all organic visitors in the system',
-  operationId: 'getOrganicTrafficsAdmin',
   security: [{ JWT: [] }],
   request: {
     query: ListQuerySchema.extend({
@@ -60,12 +59,11 @@ registry.registerPath({
 });
 
 // DELETE /admin/traffic/analyze
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/traffic/analyze',
-  tags: ['API-traffic'],
+  tags: [API_TAGS.traffic.name],
   summary: 'Delete a customer traffic from the system',
-  operationId: 'deleteVisitor',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),

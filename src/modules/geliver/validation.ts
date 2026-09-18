@@ -1,9 +1,7 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
-import * as locales from '../../locales';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
+import { messages } from '../../locales';
 
 export const SHIPPING_ITEM = (locale: ILocale) => {
   const f = fields(locale);

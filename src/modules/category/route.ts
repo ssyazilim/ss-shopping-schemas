@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { registry } from '../registry';
+import { registerRoute } from '../../utils/registry';
+import { API_TAGS } from '../../utils/tags';
 import { ADD_CATEGORY, UPDATE_CATEGORY } from './validation';
 import { CategorySchema } from './schema';
 import {
@@ -8,52 +9,49 @@ import {
   DeleteModelSchema,
   jsonResponse,
   listResponse,
+  InsertResultSchema,
   DeleteResultSchema,
   UpdateResultSchema,
-} from '../common';
+} from '../../utils/common';
 
 // GET /public/categories
-registry.registerPath({
+registerRoute({
   method: 'get',
   path: '/public/categories',
-  tags: ['API-category'],
+  tags: [API_TAGS.category.name],
   summary: 'Get all categories in the system',
-  operationId: 'getCategories',
   request: { query: ListQuerySchema },
   responses: listResponse(CategorySchema),
 });
 
 // POST /admin/category
-registry.registerPath({
+registerRoute({
   method: 'post',
   path: '/admin/category',
-  tags: ['API-category'],
+  tags: [API_TAGS.category.name],
   summary: 'Add a new category to system',
-  operationId: 'addCategory',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(ADD_CATEGORY()) },
-  responses: jsonResponse(CategorySchema),
+  responses: jsonResponse(InsertResultSchema),
 });
 
 // DELETE /admin/category
-registry.registerPath({
+registerRoute({
   method: 'delete',
   path: '/admin/category',
-  tags: ['API-category'],
+  tags: [API_TAGS.category.name],
   summary: 'Delete a categories in the system',
-  operationId: 'deleteCategories',
   security: [{ JWT: [] }],
   request: { body: buildRequestBody(DeleteModelSchema) },
   responses: jsonResponse(DeleteResultSchema),
 });
 
 // PATCH /admin/category/{categoryId}
-registry.registerPath({
+registerRoute({
   method: 'patch',
   path: '/admin/category/{categoryId}',
-  tags: ['API-category'],
+  tags: [API_TAGS.category.name],
   summary: 'Update a category from the system',
-  operationId: 'updateCategory',
   security: [{ JWT: [] }],
   request: {
     params: z.object({ categoryId: z.string() }),

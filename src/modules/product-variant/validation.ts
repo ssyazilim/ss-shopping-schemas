@@ -1,10 +1,8 @@
 import { z } from 'zod';
-import { fields } from '../fields';
+import { fields } from '../../utils/fields';
 import { ILocale } from '../../locales';
-import * as locales from '../../locales';
+import { messages } from '../../locales';
 import { PRICE, IMAGES } from '../product/validation';
-
-const messages = { tr: locales.tr, en: locales.en, ru: locales.ru, ar: locales.ar, fa: locales.fa };
 
 export const VARIANTS_TYPE = (locale: ILocale = 'tr') => {
   const f = fields(locale);

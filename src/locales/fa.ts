@@ -10,6 +10,7 @@ export const notifications: INotifications = {
   public_forms_validations_phoneNumber: 'لطفاً یک شماره تلفن معتبر وارد کنید!',
   public_forms_validations_cardNumber: 'لطفاً یک شماره کارت معتبر وارد کنید!',
   public_forms_validations_url: 'لطفاً یک آدرس URL معتبر وارد کنید!',
+  public_forms_validations_noSpace: 'وارد کردن فاصله مجاز نیست!',
   public_forms_validations_minLength: (min: number) => `حداقل! ${min} کاراکتر`,
   public_forms_validations_maxLength: (max: number) => `حداکثر! ${max} کاراکتر`,
   public_forms_validations_minItems: (min: number) => `حداقل! ${min} مورد`,
