@@ -5,6 +5,10 @@ import { MongoSchema } from '../../types/common';
 import { UserSchema } from '../user/schema';
 import { ProductSchema } from '../product/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IQuestion = z.infer<typeof QuestionSchema>;
 export const QuestionSchema = UPDATE_QUESTION()
   .extend({
@@ -13,5 +17,9 @@ export const QuestionSchema = UPDATE_QUESTION()
   })
   .extend(MongoSchema.shape)
   .meta({ id: 'Question' });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_QUESTION: IQuestion = getDefaultsForSchema(QuestionSchema);

@@ -34,6 +34,7 @@ export const API_TAGS = {
 } as const;
 
 export const SERVICE_TAGS = {
+  content: { name: 'SERVICE-content', description: 'Tenant content files from GitLab' },
   countriesCitiesDistricts: {
     name: 'SERVICE-countries-cities-districts',
     description: 'Country State City API',

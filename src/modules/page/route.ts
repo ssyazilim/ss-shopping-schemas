@@ -1,18 +1,10 @@
 import { z } from 'zod';
-
 import { registerRoute } from '../../utils/registry';
 import { API_TAGS } from '../../utils/tags';
-import { ADD_PAGE, UPDATE_PAGE } from './validation';
-import { PageSchema, PageListItemSchema } from './schema';
+import { PageContentSchema, PageSchema } from './schema';
 import {
-  buildRequestBody,
-  DeleteModelSchema,
-  ListQuerySchema,
   jsonResponse,
   listResponse,
-  InsertResultSchema,
-  DeleteResultSchema,
-  UpdateResultSchema,
 } from '../../utils/common';
 
 // GET /public/pages
@@ -20,78 +12,26 @@ registerRoute({
   method: 'get',
   path: '/public/pages',
   tags: [API_TAGS.page.name],
-  summary: 'Get all pages of the storefront without markdown content',
-  responses: listResponse(PageListItemSchema),
+  summary: 'Get storefront pages that are not drafts, without markdown',
+  responses: listResponse(PageSchema),
 });
 
-// GET /public/page/{key}
+// GET /public/page?path=
 registerRoute({
   method: 'get',
-  path: '/public/page/{key}',
+  path: '/public/page',
   tags: [API_TAGS.page.name],
-  summary: 'Get a page with its markdown content by key',
-  request: {
-    params: z.object({ key: PageSchema.shape.key.meta({ examples: ['about-us'] }) }),
-  },
-  responses: jsonResponse(PageSchema),
+  summary: 'Get a storefront page by its path with the markdown from the content repository',
+  request: { query: z.object({ path: PageSchema.shape.path }) },
+  responses: jsonResponse(PageContentSchema),
 });
 
-// GET /admin/pages
-registerRoute({
-  method: 'get',
-  path: '/admin/pages',
-  tags: [API_TAGS.page.name],
-  summary: 'Get all pages in the system with pagination and search',
-  security: [{ JWT: [] }],
-  request: {
-    query: ListQuerySchema,
-  },
-  responses: listResponse(PageListItemSchema),
-});
-
-// GET /admin/page/{pageId}
-registerRoute({
-  method: 'get',
-  path: '/admin/page/{pageId}',
-  tags: [API_TAGS.page.name],
-  summary: 'Get a page from the system',
-  security: [{ JWT: [] }],
-  request: { params: z.object({ pageId: z.string() }) },
-  responses: jsonResponse(PageSchema),
-});
-
-// POST /admin/page
+// POST /admin/pages/sync
 registerRoute({
   method: 'post',
-  path: '/admin/page',
+  path: '/admin/pages/sync',
   tags: [API_TAGS.page.name],
-  summary: 'Add a new page to the system',
+  summary: 'Rebuild the stored pages from the content repository',
   security: [{ JWT: [] }],
-  request: { body: buildRequestBody(ADD_PAGE()) },
-  responses: jsonResponse(InsertResultSchema),
-});
-
-// DELETE /admin/page
-registerRoute({
-  method: 'delete',
-  path: '/admin/page',
-  tags: [API_TAGS.page.name],
-  summary: 'Delete a page or pages in the system',
-  security: [{ JWT: [] }],
-  request: { body: buildRequestBody(DeleteModelSchema) },
-  responses: jsonResponse(DeleteResultSchema),
-});
-
-// PATCH /admin/page/{pageId}
-registerRoute({
-  method: 'patch',
-  path: '/admin/page/{pageId}',
-  tags: [API_TAGS.page.name],
-  summary: 'Update a page from the system',
-  security: [{ JWT: [] }],
-  request: {
-    params: z.object({ pageId: z.string() }),
-    body: buildRequestBody(UPDATE_PAGE()),
-  },
-  responses: jsonResponse(UpdateResultSchema),
+  responses: listResponse(PageSchema),
 });

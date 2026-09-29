@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IGoogleCategory = z.infer<typeof GoogleCategorySchema>;
 export const GoogleCategorySchema = z
   .object({

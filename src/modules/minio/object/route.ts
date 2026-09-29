@@ -42,8 +42,8 @@ registerRoute({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      objectName: z.string().meta({ examples: ['1.jpg'] }),
+      bucketName: z.string(),
+      objectName: z.string(),
     }),
   },
   responses: jsonResponse(ObjectMetadataSchema),
@@ -58,8 +58,8 @@ registerRoute({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      objectName: z.string().meta({ examples: ['1.jpg'] }),
+      bucketName: z.string(),
+      objectName: z.string(),
     }),
   },
   responses: binaryResponse('Object stream as a file download'),
@@ -102,22 +102,12 @@ registerRoute({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      prefix: z
-        .string()
-        .optional()
-        .meta({ examples: [''], description: 'Where to start => .../../' }),
-      recursive: z
-        .boolean()
-        .optional()
-        .meta({ examples: [false], description: 'Include to the subfolders' }),
-      startAfter: z
-        .string()
-        .optional()
-        .meta({
-          examples: [''],
-          description: 'You can start from a point in an alphabetical directory => e.txt | k.txt',
-        }),
+      bucketName: z.string(),
+      prefix: z.string().optional().meta({ description: 'Where to start => .../../' }),
+      recursive: z.boolean().optional().meta({ description: 'Include to the subfolders' }),
+      startAfter: z.string().optional().meta({
+        description: 'You can start from a point in an alphabetical directory => e.txt | k.txt',
+      }),
     }),
   },
   responses: listResponse(z.union([ListObjectsSchema, ListPrefixesSchema])),
@@ -198,8 +188,8 @@ registerRoute({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      objectName: z.string().meta({ examples: ['1.jpg'] }),
+      bucketName: z.string(),
+      objectName: z.string(),
     }),
   },
   responses: listResponse(BucketTagSchema),
@@ -236,15 +226,9 @@ registerRoute({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      prefix: z
-        .string()
-        .optional()
-        .meta({ examples: [''], description: 'Where to start => .../../' }),
-      recursive: z
-        .boolean()
-        .optional()
-        .meta({ examples: [false], description: 'Include to the subfolders' }),
+      bucketName: z.string(),
+      prefix: z.string().optional().meta({ description: 'Where to start => .../../' }),
+      recursive: z.boolean().optional().meta({ description: 'Include to the subfolders' }),
     }),
   },
   responses: listResponse(IncompleteUploadSchema),
@@ -270,8 +254,8 @@ registerRoute({
   security: [{ JWT: [] }],
   request: {
     query: z.object({
-      bucketName: z.string().meta({ examples: ['test'] }),
-      objectName: z.string().meta({ examples: ['1.jpg'] }),
+      bucketName: z.string(),
+      objectName: z.string(),
       offset: z.coerce.number().meta({ examples: [0] }),
       length: z.coerce.number().meta({ examples: [1024] }),
     }),

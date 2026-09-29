@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ICurrency = z.infer<typeof CurrencySchema>;
 export const CurrencySchema = z
   .object({
@@ -24,6 +28,10 @@ export const CurrencyTCMBSchema = z.object({
   CrossRateUSD: z.string(),
   CrossRateOther: z.string(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const TR_CURRENCY = {
   name: 'TRY',

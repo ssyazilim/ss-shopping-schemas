@@ -2,6 +2,10 @@ import { z } from 'zod';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { MongoSchema } from '../../types/common';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ISocketVisitor = z.infer<typeof SocketVisitorSchema>;
 export const SocketVisitorSchema = z.object({
   socketId: z.string(),
@@ -76,6 +80,10 @@ export const VisitorStatisticsSchema = z
     topDevices: z.array(TopItemSchema),
   })
   .meta({ id: 'VisitorStatistics' });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_IP_ADDRESS: IIpDetails = getDefaultsForSchema(IpDetailsSchema);
 export const DEFAULT_VISITOR = { totalReferrer: 0, totalDirect: 0, totalBot: 0, total: 0 };

@@ -22,14 +22,8 @@ registerRoute({
   summary: 'Get all agreements in the system',
   request: {
     query: ListQuerySchema.extend({
-      include: z
-        .string()
-        .optional()
-        .meta({ examples: ['name,locale'] }),
-      exclude: z
-        .string()
-        .optional()
-        .meta({ examples: ['content'] }),
+      include: z.string().optional(),
+      exclude: z.string().optional(),
     }),
   },
   responses: listResponse(AgreementSchema),
@@ -43,8 +37,8 @@ registerRoute({
   summary: 'Get an agreement from the system',
   request: {
     params: z.object({
-      locale: z.string().meta({ examples: ['tr'] }),
-      name: z.string().meta({ examples: ['Gizlilik politikası'] }),
+      locale: z.string(),
+      name: z.string(),
     }),
   },
   responses: jsonResponse(AgreementSchema),

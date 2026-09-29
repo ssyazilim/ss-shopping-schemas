@@ -6,6 +6,10 @@ import { CategorySchema } from '../category/schema';
 import { UserSchema } from '../user/schema';
 import { VariantSchema } from '../product-variant/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ICartEntry = z.infer<typeof CartEntrySchema>;
 export const CartEntrySchema = z.object({
   _id: z.string(),

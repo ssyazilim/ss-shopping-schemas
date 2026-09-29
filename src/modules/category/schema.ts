@@ -4,6 +4,10 @@ import { MongoSchema } from '../../types/common';
 import { ImageSchema } from '../product/schema';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IParentId = z.infer<typeof IParentIdSchema>;
 export const IParentIdSchema = z.object({
   _id: z.string(),
@@ -51,5 +55,9 @@ export type ICategoryMenu = z.infer<typeof CategoryMenuBaseSchema> & {
 export const CategoryMenuSchema: z.ZodType<ICategoryMenu> = CategoryMenuBaseSchema.extend({
   subCategories: z.lazy(() => z.array(CategoryMenuSchema)),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_CATEGORY: ICategory = getDefaultsForSchema(CategorySchema);

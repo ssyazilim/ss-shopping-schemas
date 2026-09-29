@@ -1,7 +1,13 @@
 import { z } from 'zod';
 import { ADD_TRANSLATION } from './validation';
+import { MongoSchema, IMongoSchema } from '../../types/common';
+import { DEFAULT_LOCALES_WEB } from '../locale/schema';
+import { defaultTranslations } from './locales';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
-import { MongoSchema } from '../../types/common';
+
+/*************************
+ *       TYPES           *
+ *************************/
 
 export type ITranslation = z.infer<typeof TranslationSchema>;
 export const TranslationSchema = ADD_TRANSLATION()
@@ -16,4 +22,16 @@ export const TranslationKeySchema = z
   })
   .meta({ id: 'TranslationKey' });
 
-export const DEFAULT_TRANSLATION: ITranslation = getDefaultsForSchema(TranslationSchema);
+/*************************
+ *       CONSTANTS       *
+ *************************/
+
+export const DEFAULT_TRANSLATION = getDefaultsForSchema(TranslationSchema);
+export const DEFAULT_TRANSLATIONS: Omit<ITranslation, keyof IMongoSchema>[] =
+  DEFAULT_LOCALES_WEB.map(({ code, language, name, file }) => ({
+    code,
+    language,
+    name,
+    file,
+    translations: { ...defaultTranslations[code] },
+  }));

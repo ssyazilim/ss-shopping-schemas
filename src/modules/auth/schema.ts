@@ -2,6 +2,10 @@ import { z } from 'zod';
 import { ADD_USER, PASSWORD_RESET_COMPLETE } from './validation';
 import { UserSchema } from '../user/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IUserRegister = z.infer<ReturnType<typeof ADD_USER>>;
 export type IResetPasswordForm = z.infer<ReturnType<typeof PASSWORD_RESET_COMPLETE>>;
 

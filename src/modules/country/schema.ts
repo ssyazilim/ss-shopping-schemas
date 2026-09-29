@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ITimeZone = z.infer<typeof timeZoneSchema>;
 export const timeZoneSchema = z.object({
   abbreviation: z.string(),
@@ -65,6 +69,10 @@ export const UpdatedDataSchema = z.object({
   name: z.string(),
   country: z.string(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_COUNTRY: ICountry = {
   id: 225,

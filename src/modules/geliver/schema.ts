@@ -2,6 +2,10 @@ import { z } from 'zod';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { SHIPPING_RECIPIENT_ADDRESS } from './validation';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IGeliverShipmentRecipientAddress = z.infer<
   ReturnType<typeof SHIPPING_RECIPIENT_ADDRESS>
 >;
@@ -627,6 +631,10 @@ export const GeliverBuyTicketSchema = z.object({
   shipment: GeliverTicketSchema,
 });
 
+/*************************
+ *       CONSTANTS       *
+ *************************/
+
 export const DEFAULT_GELIVER_ADDRESS: IGeliverAddressAddResponse = getDefaultsForSchema(
   GeliverAddressAddResponseSchema,
 );
@@ -648,6 +656,11 @@ export const DEFAULT_GELIVER_PROVIDER: IGeliverAddProviderResponse = getDefaults
 export const DEFAULT_GELIVER_WEBHOOK: IGeliverAddWebHookResponse = getDefaultsForSchema(
   GeliverAddWebHookResponseSchema,
 );
+
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IGeliverResult = z.infer<typeof GeliverResultSchema>;
 export const GeliverResultSchema = z.object({ result: z.boolean() }).meta({ id: 'GeliverResult' });
 

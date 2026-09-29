@@ -20,6 +20,10 @@ import { VariantSchema } from '../product-variant/schema';
 import type { IVariant } from '../product-variant/schema';
 import type { IUser } from '../user/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IBuyerStore = z.infer<typeof AddOrderInformationsSchema>;
 export const AddOrderInformationsSchema = ADD_ORDER_INFORMATIONS();
 
@@ -125,6 +129,10 @@ export const OrderContextSchema = z.object({
   userAgent: z.string(),
   isTax: z.boolean(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export type IOrderStatuses = (typeof ORDER_STATUSES)[number];
 export const ORDER_STATUSES = [

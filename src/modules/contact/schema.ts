@@ -1,6 +1,10 @@
 import { z } from 'zod';
 import { FileTypeSchema } from '../../types/common';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IDefault = z.infer<typeof DefaultSchema>;
 export const DefaultSchema = z.object({
   mainBrand: z.string(),

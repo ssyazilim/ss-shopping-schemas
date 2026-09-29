@@ -51,7 +51,7 @@ export const UPDATE_VARIANT = (locale: ILocale = 'tr') => {
     .object({
       variantsType: VARIANTS_TYPE(locale),
       variant: VARIANT(locale).extend({
-        _id: f.text(24,24),
+        _id: f.text(24, 24),
       }),
     })
     .meta({ id: 'updateVariant' });
@@ -61,10 +61,8 @@ export const DELETE_FOR_VARIANT = (locale: ILocale = 'tr') => {
 
   return z
     .object({
-      selectedIds: z
-        .array(f.text(24,24))
-        .meta({ description: 'IDs to delete' }),
-      productId: f.text(24,24),
+      selectedIds: z.array(f.text(24, 24)).meta({ description: 'IDs to delete' }),
+      productId: f.text(24, 24),
       variantsType: VARIANTS_TYPE(),
     })
     .meta({ id: 'deleteForVariant' });

@@ -5,6 +5,10 @@ import { MongoSchema } from '../../types/common';
 import { UserSchema } from '../user/schema';
 import type { IUser } from '../user/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IComment = z.infer<typeof CommentSchema>;
 export const CommentSchema = COMMENT_POST()
   .extend({
@@ -54,6 +58,10 @@ export const PostTypeSchema = z.object({
   value: z.number(),
   translation: z.string(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_POST: IPost = getDefaultsForSchema(PostSchema) as IPost;
 export const DEFAULT_POST_COUNTS: IPostCounts = getDefaultsForSchema(PostCountsSchema);

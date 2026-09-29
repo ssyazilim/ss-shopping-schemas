@@ -22,10 +22,7 @@ registerRoute({
   security: [{ 'X-API-KEY': [] }],
   request: {
     query: ListQuerySchema.extend({
-      type: z
-        .string()
-        .optional()
-        .meta({ examples: ['payment'] }),
+      type: z.string().optional(),
     }),
   },
   responses: jsonResponse(encryptedPayload),

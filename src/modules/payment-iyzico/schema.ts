@@ -1,6 +1,10 @@
 import { z } from 'zod';
 import { MongoSchema } from '../../types/common';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 const IyzicoLocaleSchema = z.enum(['TR', 'EN']);
 const IyzicoCurrencySchema = z.enum(['TRY', 'EUR', 'USD', 'IRR', 'GBP', 'NOK', 'RUB', 'CHF']);
 const IyzicoPriceSchema = z.union([z.number(), z.string()]);

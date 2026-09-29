@@ -5,6 +5,10 @@ import { MongoSchema } from '../../types/common';
 import { PriceSchema, ProductSchema } from '../product/schema';
 import { ImageSchema } from '../product/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IVariant = z.infer<typeof VariantSchema>;
 export const VariantSchema = VARIANT()
   .extend({
@@ -54,5 +58,9 @@ export const InputValueSchema = z.object({
   field: z.string(),
   value: z.enum(['stockQuantity', 'sku', 'desi']),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_VARIANT: IVariant = getDefaultsForSchema(VariantSchema);

@@ -10,7 +10,7 @@ export const ADD_CATEGORY = (locale: ILocale = 'tr') => {
   return z
     .object({
       name: f.text(),
-      parentId: f.text(24,24).nullable(),
+      parentId: f.text(24, 24).nullable(),
       categoryI10n: z.string().optional(),
       images: IMAGES(locale),
     })

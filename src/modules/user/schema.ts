@@ -4,6 +4,10 @@ import { IpDetailsSchema } from '../traffic/schema';
 import { StaticImageSchema } from '../product/schema';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IUser = z.infer<typeof UserSchema>;
 export const UserSchema = z
   .object({
@@ -36,5 +40,17 @@ export const UserTokenSchema = z.object({
   iat: z.number(),
   exp: z.number(),
 });
+
+export type ICheckAdmin = z.infer<typeof CheckAdminSchema>;
+export const CheckAdminSchema = UserTokenSchema.pick({
+  _id: true,
+  name: true,
+  surname: true,
+  email: true,
+}).meta({ id: 'CheckAdmin' });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_USER: IUser = getDefaultsForSchema(UserSchema);

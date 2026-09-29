@@ -17,7 +17,7 @@ registerRoute({
   summary: 'Send a sms for specific turkish number',
   security: [{ 'X-API-KEY': [] }],
   request: { headers: apiKeyHeaders, body: buildRequestBody(SEND_SMS) },
-  responses: jsonResponse(z.string().meta({ examples: ['1234567890'] })),
+  responses: jsonResponse(z.string()),
 });
 
 // GET /admin/gsm/check-report

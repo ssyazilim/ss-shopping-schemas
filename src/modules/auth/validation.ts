@@ -83,8 +83,8 @@ export const PASSWORD_RESET_COMPLETE = (locale: ILocale = 'tr') => {
     .object({
       key: f.text(),
       email: f.email(),
-      newPassword: f.text(8,64),
-      rePassword: f.text(8,64),
+      newPassword: f.text(8, 64),
+      rePassword: f.text(8, 64),
     })
     .superRefine((data, ctx) => {
       if (data.newPassword !== data.rePassword) {

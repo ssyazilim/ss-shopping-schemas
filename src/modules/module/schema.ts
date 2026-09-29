@@ -3,6 +3,10 @@ import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 import { ADD_MODULE, MODULE_CONFIG } from './validation';
 import { MongoSchema } from '../../types/common';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IModuleConfig = z.infer<ReturnType<typeof MODULE_CONFIG>>;
 
 export type IAddModule = z.infer<ReturnType<typeof ADD_MODULE>>;
@@ -96,6 +100,10 @@ export type IYandexMetricaConfig = z.infer<typeof YandexMetricaSchema>;
 export const YandexMetricaSchema = z.object({
   metricaId: z.string(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_MODULE: IModule = getDefaultsForSchema(ModuleSchema);
 export const MODULE_REGISTRY: IModuleDefinition[] = [

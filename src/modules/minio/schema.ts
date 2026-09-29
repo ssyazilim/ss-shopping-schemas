@@ -2,6 +2,10 @@ import { z } from 'zod';
 import { DELETE_OBJECT } from './object/validation';
 import { getDefaultsForSchema } from '../../utils/getDefaultsForSchema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ILoader = z.infer<typeof LoaderSchema>;
 export const LoaderSchema = z.object({
   loading: z.boolean(),
@@ -284,6 +288,10 @@ export const RemoveObjectsResultSchema = z
   })
   .nullable()
   .meta({ id: 'RemoveObjectsResult' });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const MEDIA_TYPE_EXTENSIONS: Record<string, string[]> = {
   images: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'avif'],

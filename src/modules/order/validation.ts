@@ -8,7 +8,7 @@ export const ADD_ORDER_USER = (locale: ILocale = 'tr') => {
   const f = fields(locale);
 
   return z.object({
-    id: f.text(24,24).nullable(),
+    id: f.text(24, 24).nullable(),
     contactName: f.text(),
     phoneNumber: f.phone(),
     email: f.email(),
@@ -67,7 +67,7 @@ export const ADD_ORDER_BASKET_ITEM = (locale: ILocale = 'tr') => {
 
   return z.object({
     productId: f.text(24, 24),
-    variantId: f.text(24,24).nullable(),
+    variantId: f.text(24, 24).nullable(),
     quantity: z.number().int().min(1),
   });
 };
@@ -110,7 +110,7 @@ export const SAVE_ORDER = (locale: ILocale = 'tr') => {
       status: f.text(),
       orderId: f.text(),
       orderNumber: f.text(),
-      languageId: f.text(2,2),
+      languageId: f.text(2, 2),
       user: ADD_ORDER_USER(locale),
       payment: ADD_ORDER_PAYMENT(locale),
       buyer: ADD_ORDER_BUYER(locale),

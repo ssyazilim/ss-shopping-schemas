@@ -12,7 +12,7 @@ import type {
   IProductSettings,
 } from '../../modules/company/schema';
 import type { ICity, ICountry, IDistrict, IUpdatedData } from '../../modules/country/schema';
-import type { IHeaderMenuItem } from '../../modules/header-menu/schema';
+import type { IHeaderMenuItem, IHeaderMenuSubItem } from '../../modules/header-menu/schema';
 import type {
   IModule,
   ICrispConfig,
@@ -1030,6 +1030,26 @@ export interface PBucketSettings {
   tags?: IEditableTag[];
   encryption?: IEncryptionMode;
 }
+export interface PReOrder {
+  items?: IHeaderMenuItem[];
+}
+export interface PHeaderMenuAdd {
+  isAdd?: boolean;
+  headerMenu?: IHeaderMenuItem;
+  headerSubmenu?: IHeaderMenuSubItem;
+}
+export interface PMenuItem {
+  isAdd?: boolean;
+  rowData?: IHeaderMenuItem;
+}
+export interface PSubmenuItem {
+  isAdd?: boolean;
+  rowData?: IHeaderMenuSubItem;
+}
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_SELLER_DATA: PGoogle['sellerData'] = {
   name: '',

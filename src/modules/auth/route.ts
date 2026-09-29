@@ -69,7 +69,7 @@ registerRoute({
   tags: [API_TAGS.authentication.name],
   summary: 'User can be reset password using this api',
   request: { body: buildRequestBody(PASSWORD_RESET()) },
-  responses: jsonResponse(z.email().meta({ examples: ['test@ssyazilim.com'] })),
+  responses: jsonResponse(z.email()),
 });
 
 // POST /public/auth/password-reset-complete

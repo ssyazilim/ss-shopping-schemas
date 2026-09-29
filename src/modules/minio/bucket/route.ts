@@ -39,7 +39,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get bucket information in the system',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: jsonResponse(z.boolean()),
 });
 
@@ -50,7 +50,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Add bucket for the system',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: messageResponse(),
 });
 
@@ -61,7 +61,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Delete empty bucket for the system',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: messageResponse(),
 });
 
@@ -72,7 +72,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get Versioning state of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: jsonResponse(BucketVersioningSchema),
 });
 
@@ -83,7 +83,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get the region of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: jsonResponse(z.string()),
 });
 
@@ -105,7 +105,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get Lifecycle Configuration of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: jsonResponse(z.union([BucketLifecycleSchema, z.null()])),
 });
 
@@ -116,7 +116,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Delete Lifecycle Configuration of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: messageResponse(),
 });
 
@@ -138,7 +138,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get access policy of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: jsonResponse(z.string()),
 });
 
@@ -160,7 +160,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get default encryption configuration of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: jsonResponse(EncryptionConfigSchema),
 });
 
@@ -182,7 +182,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Remove default encryption configuration of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: messageResponse(),
 });
 
@@ -193,7 +193,7 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Get tags of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: listResponse(BucketTagSchema),
 });
 
@@ -215,6 +215,6 @@ registerRoute({
   tags: [SERVICE_TAGS.minioBucket.name],
   summary: 'Remove tags of a Bucket',
   security: [{ JWT: [] }],
-  request: { params: z.object({ bucketName: z.string().meta({ examples: ['test'] }) }) },
+  request: { params: z.object({ bucketName: z.string() }) },
   responses: messageResponse(),
 });

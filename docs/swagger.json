@@ -96,6 +96,10 @@
       "description": "User process"
     },
     {
+      "name": "SERVICE-content",
+      "description": "Tenant content files from GitLab"
+    },
+    {
       "name": "SERVICE-countries-cities-districts",
       "description": "Country State City API"
     },
@@ -3899,43 +3903,16 @@
           }
         }
       },
-      "HeaderMenu": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "object",
-            "properties": {
-              "types": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/HeaderMenuItem"
-                }
-              }
-            },
-            "required": [
-              "types"
-            ]
-          },
-          "_id": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "updatedAt": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "items",
-          "_id",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
       "HeaderMenuItem": {
         "type": "object",
         "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "user"
+            ]
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -3945,18 +3922,14 @@
           },
           "route": {
             "type": "string",
-            "minLength": 0,
+            "minLength": 1,
             "maxLength": 255
           },
           "labelKey": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
-          },
-          "pageKey": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
           },
           "order": {
             "type": "integer",
@@ -3973,10 +3946,9 @@
           }
         },
         "required": [
+          "role",
           "type",
-          "route",
           "labelKey",
-          "pageKey",
           "order",
           "disabled",
           "subItems"
@@ -3985,11 +3957,17 @@
       "HeaderMenuSubItem": {
         "type": "object",
         "properties": {
-          "kind": {
+          "role": {
             "type": "string",
             "enum": [
-              "static",
-              "page"
+              "admin",
+              "user"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "link"
             ]
           },
           "route": {
@@ -3997,20 +3975,23 @@
             "minLength": 1,
             "maxLength": 255
           },
+          "parentLabelKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
+          },
           "labelKey": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
           },
           "descriptionKey": {
             "type": "string",
-            "minLength": 0,
-            "maxLength": 65534
-          },
-          "pageKey": {
-            "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
           },
           "order": {
             "type": "integer",
@@ -4021,26 +4002,84 @@
           }
         },
         "required": [
-          "kind",
-          "route",
+          "role",
+          "type",
+          "parentLabelKey",
           "labelKey",
-          "pageKey",
           "order",
           "disabled"
         ]
       },
       "UpdateHeaderMenu": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "role": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "user"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "link",
+                "popover"
+              ]
+            },
+            "route": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "labelKey": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255,
+              "pattern": "^[a-z][a-zA-Z0-9_]*$"
+            },
+            "order": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "subItems": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/HeaderMenuSubItem"
+              }
+            },
+            "originalLabelKey": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          },
+          "required": [
+            "role",
+            "type",
+            "labelKey",
+            "order",
+            "disabled",
+            "subItems"
+          ]
+        }
+      },
+      "DeleteHeaderMenu": {
         "type": "object",
         "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HeaderMenuItem"
-            }
+          "labelKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "required": [
-          "items"
+          "labelKey"
         ]
       },
       "BucketListItem": {
@@ -6053,75 +6092,41 @@
           }
         }
       },
-      "PageListItem": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "slugKey": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "titleKey": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "descriptionKey": {
-            "type": "string",
-            "minLength": 0,
-            "maxLength": 255
-          },
-          "_id": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string"
-          },
-          "updatedAt": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "key",
-          "slugKey",
-          "titleKey",
-          "_id",
-          "createdAt",
-          "updatedAt"
-        ]
-      },
       "Page": {
         "type": "object",
         "properties": {
-          "key": {
+          "path": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^\\/(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*)?$"
           },
-          "slugKey": {
+          "filePath": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9._\\-/]+\\.md$"
           },
-          "titleKey": {
+          "title": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
           },
-          "descriptionKey": {
-            "type": "string",
-            "minLength": 0,
-            "maxLength": 255
-          },
-          "markdown": {
+          "description": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 65535
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
+          },
+          "draft": {
+            "type": "boolean",
+            "default": false
+          },
+          "sha": {
+            "type": "string",
+            "minLength": 40,
+            "maxLength": 64
           },
           "_id": {
             "type": "string"
@@ -6134,80 +6139,74 @@
           }
         },
         "required": [
-          "key",
-          "slugKey",
-          "titleKey",
-          "markdown",
+          "path",
+          "filePath",
+          "title",
+          "sha",
           "_id",
           "createdAt",
           "updatedAt"
         ]
       },
-      "AddPage": {
+      "PageContent": {
         "type": "object",
         "properties": {
-          "key": {
+          "path": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^\\/(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*)?$"
           },
-          "slugKey": {
+          "filePath": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9._\\-/]+\\.md$"
           },
-          "titleKey": {
+          "title": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
           },
-          "descriptionKey": {
+          "description": {
             "type": "string",
-            "minLength": 0,
-            "maxLength": 255
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": "^[a-z][a-zA-Z0-9_]*$"
+          },
+          "draft": {
+            "type": "boolean",
+            "default": false
+          },
+          "sha": {
+            "type": "string",
+            "minLength": 40,
+            "maxLength": 64
+          },
+          "_id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
           },
           "markdown": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 65535
+            "type": "string"
           }
         },
         "required": [
-          "key",
-          "slugKey",
-          "titleKey",
+          "path",
+          "filePath",
+          "title",
+          "sha",
+          "_id",
+          "createdAt",
+          "updatedAt",
           "markdown"
         ]
-      },
-      "UpdatePage": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "slugKey": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "titleKey": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "descriptionKey": {
-            "type": "string",
-            "minLength": 0,
-            "maxLength": 255
-          },
-          "markdown": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 65535
-          }
-        }
       },
       "IyzicoPaymentResult": {
         "type": "object",
@@ -12491,18 +12490,33 @@
         "properties": {
           "code": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "tr",
+              "en",
+              "ru",
+              "ar",
+              "fa"
+            ]
           },
           "language": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "tr-TR",
+              "en-US",
+              "ru-RU",
+              "ar-SA",
+              "fa-FA"
+            ]
           },
           "name": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "Türkçe",
+              "English",
+              "Русский",
+              "العربية",
+              "فارسی"
+            ]
           },
           "file": {
             "type": "string",
@@ -12562,18 +12576,33 @@
         "properties": {
           "code": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "tr",
+              "en",
+              "ru",
+              "ar",
+              "fa"
+            ]
           },
           "language": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "tr-TR",
+              "en-US",
+              "ru-RU",
+              "ar-SA",
+              "fa-FA"
+            ]
           },
           "name": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "Türkçe",
+              "English",
+              "Русский",
+              "العربية",
+              "فارسی"
+            ]
           },
           "file": {
             "type": "string",
@@ -12601,18 +12630,33 @@
         "properties": {
           "code": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "tr",
+              "en",
+              "ru",
+              "ar",
+              "fa"
+            ]
           },
           "language": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "tr-TR",
+              "en-US",
+              "ru-RU",
+              "ar-SA",
+              "fa-FA"
+            ]
           },
           "name": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 255
+            "enum": [
+              "Türkçe",
+              "English",
+              "Русский",
+              "العربية",
+              "فارسی"
+            ]
           },
           "file": {
             "type": "string",
@@ -12705,6 +12749,29 @@
         },
         "required": [
           "password"
+        ]
+      },
+      "CheckAdmin": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "_id",
+          "name",
+          "surname",
+          "email"
         ]
       },
       "customer": {
@@ -13211,10 +13278,7 @@
                         },
                         "data": {
                           "type": "string",
-                          "format": "email",
-                          "examples": [
-                            "test@ssyazilim.com"
-                          ]
+                          "format": "email"
                         }
                       },
                       "required": [
@@ -13808,10 +13872,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "name,locale"
-              ]
+              "type": "string"
             },
             "required": false,
             "name": "include",
@@ -13819,10 +13880,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "content"
-              ]
+              "type": "string"
             },
             "required": false,
             "name": "exclude",
@@ -13886,10 +13944,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "tr"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "locale",
@@ -13897,10 +13952,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "Gizlilik politikası"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "name",
@@ -15938,10 +15990,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "TR"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "countryCode",
@@ -16005,10 +16054,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "TR"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "countryCode",
@@ -16016,10 +16062,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "06"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "cityCode",
@@ -16083,10 +16126,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "TR"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "countryCode",
@@ -16150,10 +16190,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "TR"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "countryCode",
@@ -16161,10 +16198,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "06"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "cityCode",
@@ -16333,10 +16367,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "type": "number",
-                          "examples": [
-                            42.75
-                          ]
+                          "type": "number"
                         }
                       },
                       "required": [
@@ -16418,10 +16449,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "payment"
-              ]
+              "type": "string"
             },
             "required": false,
             "name": "type",
@@ -17320,10 +17348,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "type": "string",
-                          "examples": [
-                            "1234567890"
-                          ]
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -17551,6 +17576,47 @@
           "API-header-menu"
         ],
         "summary": "Get the header menu of the storefront",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5000,
+              "default": 25
+            },
+            "required": false,
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "updatedAt,desc"
+            },
+            "required": false,
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "required": false,
+            "name": "text",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -17567,7 +17633,10 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/HeaderMenu"
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/HeaderMenuItem"
+                          }
                         }
                       },
                       "required": [
@@ -17597,6 +17666,79 @@
       }
     },
     "/admin/header-menu": {
+      "post": {
+        "tags": [
+          "API-header-menu"
+        ],
+        "summary": "Add a new top level item to the header menu",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeaderMenuItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/HeaderMenuItem"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/HeaderMenuItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "Success message"
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/InsertResult"
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "API-header-menu"
@@ -17622,6 +17764,227 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateHeaderMenu"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "Success message"
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/UpdateResult"
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "API-header-menu"
+        ],
+        "summary": "Delete a top level header menu item by labelKey",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHeaderMenu"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHeaderMenu"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHeaderMenu"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "Success message"
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/DeleteResult"
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/header-menu/sub-item": {
+      "post": {
+        "tags": [
+          "API-header-menu"
+        ],
+        "summary": "Add a new sub item under a top level header menu item",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeaderMenuSubItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/HeaderMenuSubItem"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/HeaderMenuSubItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "Success message"
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/UpdateResult"
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "API-header-menu"
+        ],
+        "summary": "Delete a header menu sub item by labelKey",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHeaderMenu"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHeaderMenu"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteHeaderMenu"
               }
             }
           }
@@ -17744,10 +18107,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -17811,10 +18171,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -17874,10 +18231,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -17939,10 +18293,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18008,10 +18359,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18148,10 +18496,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18222,10 +18567,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18358,10 +18700,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18498,10 +18837,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18565,10 +18901,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18701,10 +19034,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18771,10 +19101,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18907,10 +19234,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18918,10 +19242,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "1.jpg"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "objectName",
@@ -18987,10 +19308,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -18998,10 +19316,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "1.jpg"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "objectName",
@@ -19179,10 +19494,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -19191,9 +19503,6 @@
           {
             "schema": {
               "type": "string",
-              "examples": [
-                ""
-              ],
               "description": "Where to start => .../../"
             },
             "required": false,
@@ -19204,9 +19513,6 @@
           {
             "schema": {
               "type": "boolean",
-              "examples": [
-                false
-              ],
               "description": "Include to the subfolders"
             },
             "required": false,
@@ -19217,9 +19523,6 @@
           {
             "schema": {
               "type": "string",
-              "examples": [
-                ""
-              ],
               "description": "You can start from a point in an alphabetical directory => e.txt | k.txt"
             },
             "required": false,
@@ -19748,10 +20051,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -19759,10 +20059,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "1.jpg"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "objectName",
@@ -19969,10 +20266,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -19981,9 +20275,6 @@
           {
             "schema": {
               "type": "string",
-              "examples": [
-                ""
-              ],
               "description": "Where to start => .../../"
             },
             "required": false,
@@ -19994,9 +20285,6 @@
           {
             "schema": {
               "type": "boolean",
-              "examples": [
-                false
-              ],
               "description": "Include to the subfolders"
             },
             "required": false,
@@ -20138,10 +20426,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "test"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "bucketName",
@@ -20149,10 +20434,7 @@
           },
           {
             "schema": {
-              "type": "string",
-              "examples": [
-                "1.jpg"
-              ]
+              "type": "string"
             },
             "required": true,
             "name": "objectName",
@@ -20847,7 +21129,7 @@
         "tags": [
           "API-page"
         ],
-        "summary": "Get all pages of the storefront without markdown content",
+        "summary": "Get storefront pages that are not drafts, without markdown",
         "responses": {
           "200": {
             "description": "OK",
@@ -20866,7 +21148,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/PageListItem"
+                            "$ref": "#/components/schemas/Page"
                           }
                         }
                       },
@@ -20896,25 +21178,23 @@
         }
       }
     },
-    "/public/page/{key}": {
+    "/public/page": {
       "get": {
         "tags": [
           "API-page"
         ],
-        "summary": "Get a page with its markdown content by key",
+        "summary": "Get a storefront page by its path with the markdown from the content repository",
         "parameters": [
           {
             "schema": {
               "type": "string",
               "minLength": 1,
               "maxLength": 255,
-              "examples": [
-                "about-us"
-              ]
+              "pattern": "^\\/(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*)?$"
             },
             "required": true,
-            "name": "key",
-            "in": "path"
+            "name": "path",
+            "in": "query"
           }
         ],
         "responses": {
@@ -20933,7 +21213,7 @@
                           "description": "Success message"
                         },
                         "data": {
-                          "$ref": "#/components/schemas/Page"
+                          "$ref": "#/components/schemas/PageContent"
                         }
                       },
                       "required": [
@@ -20962,56 +21242,15 @@
         }
       }
     },
-    "/admin/pages": {
-      "get": {
+    "/admin/pages/sync": {
+      "post": {
         "tags": [
           "API-page"
         ],
-        "summary": "Get all pages in the system with pagination and search",
+        "summary": "Rebuild the stored pages from the content repository",
         "security": [
           {
             "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
-            },
-            "required": false,
-            "name": "page",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 5000,
-              "default": 25
-            },
-            "required": false,
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "default": "updatedAt,desc"
-            },
-            "required": false,
-            "name": "sort",
-            "in": "query"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "default": ""
-            },
-            "required": false,
-            "name": "text",
-            "in": "query"
           }
         ],
         "responses": {
@@ -21032,305 +21271,8 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/PageListItem"
+                            "$ref": "#/components/schemas/Page"
                           }
-                        }
-                      },
-                      "required": [
-                        "message",
-                        "data"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "success"
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/page/{pageId}": {
-      "get": {
-        "tags": [
-          "API-page"
-        ],
-        "summary": "Get a page from the system",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "pageId",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "description": "Success message"
-                        },
-                        "data": {
-                          "$ref": "#/components/schemas/Page"
-                        }
-                      },
-                      "required": [
-                        "message",
-                        "data"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "success"
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "API-page"
-        ],
-        "summary": "Update a page from the system",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "name": "pageId",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePage"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePage"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePage"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "description": "Success message"
-                        },
-                        "data": {
-                          "$ref": "#/components/schemas/UpdateResult"
-                        }
-                      },
-                      "required": [
-                        "message",
-                        "data"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "success"
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/page": {
-      "post": {
-        "tags": [
-          "API-page"
-        ],
-        "summary": "Add a new page to the system",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddPage"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/AddPage"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/AddPage"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "description": "Success message"
-                        },
-                        "data": {
-                          "$ref": "#/components/schemas/InsertResult"
-                        }
-                      },
-                      "required": [
-                        "message",
-                        "data"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "success"
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "BAD_REQUEST",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "API-page"
-        ],
-        "summary": "Delete a page or pages in the system",
-        "security": [
-          {
-            "JWT": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteModel"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteModel"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "description": "Success message"
-                        },
-                        "data": {
-                          "$ref": "#/components/schemas/DeleteResult"
                         }
                       },
                       "required": [
@@ -29881,6 +29823,62 @@
                           "items": {
                             "$ref": "#/components/schemas/User"
                           }
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/user/check-admin": {
+      "get": {
+        "tags": [
+          "API-user"
+        ],
+        "summary": "Check administrator access and get the authenticated user",
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "Success message"
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/CheckAdmin"
                         }
                       },
                       "required": [

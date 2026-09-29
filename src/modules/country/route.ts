@@ -5,8 +5,8 @@ import { CountrySchema, CitySchema, DistrictSchema } from './schema';
 import { GeliverCitySchema, GeliverDistrictSchema } from '../geliver/schema';
 import { listResponse } from '../../utils/common';
 
-const countryCodeParam = z.string().meta({ examples: ['TR'] });
-const cityCodeParam = z.string().meta({ examples: ['06'] });
+const countryCodeParam = z.string();
+const cityCodeParam = z.string();
 
 // GET /public/countries
 registerRoute({

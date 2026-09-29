@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ILocales = z.infer<typeof LocalesSchema>;
 export const LocalesSchema = z.object({
   _id: z.string(),
@@ -23,10 +27,17 @@ const LOCALES_ADMIN = [
   { _id: '1', code: 'en', language: 'en-US', name: 'English', file: 'index.ts', dir: 'ltr' },
 ] as const;
 
-export const LOCALE_CODES = LOCALES_WEB.map((locale) => locale.code) as [ILocale, ...ILocale[]];
+export type ILC = (typeof LOCALES_WEB)[number]['code'];
+export type ILL = (typeof LOCALES_WEB)[number]['language'];
+export type ILN = (typeof LOCALES_WEB)[number]['name'];
 
-export const LocaleSchema = z.enum(LOCALE_CODES);
+/*************************
+ *       CONSTANTS       *
+ *************************/
+
+export const LOCALE_CODES = LOCALES_WEB.map((locale) => locale.code) as [ILC, ...ILC[]];
+export const LOCALE_LANGUAGES = LOCALES_WEB.map((locale) => locale.language) as [ILL, ...ILN[]];
+export const LOCALE_NAMES = LOCALES_WEB.map((locale) => locale.name) as [ILL, ...ILN[]];
 
 export const DEFAULT_LOCALES_WEB = [...LOCALES_WEB];
-
 export const DEFAULT_LOCALES_ADMIN = [...LOCALES_ADMIN];

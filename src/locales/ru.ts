@@ -11,10 +11,18 @@ export const notifications: INotifications = {
   public_forms_validations_cardNumber: 'Введите корректный номер карты!',
   public_forms_validations_url: 'Введите корректный URL!',
   public_forms_validations_noSpace: 'Пробелы не допускаются!',
+  public_forms_validations_routeKey:
+    'Используйте строчные латинские буквы (a-z) и цифры, разделяя части одним дефисом (например, about-us)!',
+  public_forms_validations_translationKey:
+    'Начните со строчной латинской буквы (a-z), затем используйте только буквы (a-z, A-Z), цифры или подчёркивания (например, page_about_title)!',
+  public_forms_validations_pagePath:
+    'Используйте только латинские буквы (a-z, A-Z), цифры, точки, подчёркивания, дефисы или косые черты (/); путь должен оканчиваться на .md (например, pages/about-us.md)!',
   public_forms_validations_minLength: (min: number) => `Минимум ${min} символов!`,
   public_forms_validations_maxLength: (max: number) => `Максимум ${max} символов!`,
   public_forms_validations_minItems: (min: number) => `Минимум ${min} записей!`,
   public_forms_validations_maxItems: (max: number) => `Максимум ${max} записей!`,
   public_forms_validations_minPriceGreaterThanMax:
     'Минимальное значение должно быть меньше максимального!',
+  public_forms_validations_localeMismatch:
+    'Код языка, локаль и отображаемое название не соответствуют друг другу!',
 };

@@ -33,5 +33,5 @@ registerRoute({
         .meta({ description: 'TRY, USD, EUR, GBP, CHF, JPY, SAR, NOK, DKK, AUD, CAD, SEK, SRU' }),
     }),
   },
-  responses: jsonResponse(z.number().meta({ examples: [42.75] })),
+  responses: jsonResponse(z.number()),
 });

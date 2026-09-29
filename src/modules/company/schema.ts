@@ -15,6 +15,10 @@ import {
 } from './validation';
 import { MongoSchema } from '../../types/common';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type ICompanyAddress = z.infer<typeof CompanyAddressSchema>;
 export const CompanyAddressSchema = ADD_COMPANY_ADDRESS();
 
@@ -80,6 +84,10 @@ export const SiteDataSchema = z.object({
   logo: z.string(),
   description: z.string(),
 });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_COMPANY: ICompany = {
   _id: '',

@@ -11,9 +11,13 @@ export type INotifications = {
   public_forms_validations_cardNumber: string;
   public_forms_validations_url: string;
   public_forms_validations_noSpace: string;
+  public_forms_validations_routeKey: string;
+  public_forms_validations_translationKey: string;
+  public_forms_validations_pagePath: string;
   public_forms_validations_minLength: (min: number) => string;
   public_forms_validations_maxLength: (max: number) => string;
   public_forms_validations_minItems: (min: number) => string;
   public_forms_validations_maxItems: (max: number) => string;
   public_forms_validations_minPriceGreaterThanMax: string;
+  public_forms_validations_localeMismatch: string;
 };

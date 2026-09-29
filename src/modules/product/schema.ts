@@ -7,6 +7,10 @@ import type { IBrand } from '../brand/schema';
 import type { ICategory } from '../category/schema';
 import type { IVariant } from '../product-variant/schema';
 
+/*************************
+ *       TYPES           *
+ *************************/
+
 export type IImage = z.infer<typeof ImageSchema>;
 export const ImageSchema = IMAGES().meta({ id: 'Image' });
 
@@ -132,6 +136,10 @@ export const BestProductsSchema = z
     order: z.object({ totalCount: z.number() }),
   })
   .meta({ id: 'BestProducts' });
+
+/*************************
+ *       CONSTANTS       *
+ *************************/
 
 export const DEFAULT_IMAGE: IImage = getDefaultsForSchema(ImageSchema);
 export const DEFAULT_PRICE: IPrice = getDefaultsForSchema(PriceSchema);

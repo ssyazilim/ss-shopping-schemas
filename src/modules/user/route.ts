@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { registerRoute } from '../../utils/registry';
 import { API_TAGS } from '../../utils/tags';
 import { ADD_CUSTOMER, DELETE_USER, EDIT_USER, UPDATE_CUSTOMER } from './validation';
-import { UserSchema } from './schema';
+import { CheckAdminSchema, UserSchema } from './schema';
 import {
   buildRequestBody,
   ListQuerySchema,
@@ -55,6 +55,16 @@ registerRoute({
   security: [{ JWT: [] }],
   request: { query: ListQuerySchema },
   responses: listResponse(UserSchema),
+});
+
+// GET /admin/user/check-admin
+registerRoute({
+  method: 'get',
+  path: '/admin/user/check-admin',
+  tags: [API_TAGS.user.name],
+  summary: 'Check administrator access and get the authenticated user',
+  security: [{ JWT: [] }],
+  responses: jsonResponse(CheckAdminSchema),
 });
 
 // POST /admin/user
